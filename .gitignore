@@ -7,4 +7,4 @@ target/
 !**/src/test/**/target/
 
 documentation/.SaluhudDatabaseUtils.vpp.lck
-documentation/.SaluhudDatabaseUtils.vpp.*
+documentation/SaluhudDatabaseUtils.vpp.*

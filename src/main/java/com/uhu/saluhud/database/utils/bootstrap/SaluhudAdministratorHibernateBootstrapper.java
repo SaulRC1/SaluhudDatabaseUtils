@@ -11,6 +11,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  */
 public final class SaluhudAdministratorHibernateBootstrapper extends SaluhudHibernateBootstrapper
 {
+    private static SaluhudAdministratorHibernateBootstrapper saluhudAdministratorHibernateBootstrapper 
+            = new SaluhudAdministratorHibernateBootstrapper();
+    
+    private SaluhudAdministratorHibernateBootstrapper()
+    {
+        
+    }
     
     @Override
     public SessionFactory getSessionFactoryInstance()

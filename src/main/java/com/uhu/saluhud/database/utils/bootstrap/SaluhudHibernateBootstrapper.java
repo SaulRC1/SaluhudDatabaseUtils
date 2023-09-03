@@ -1,5 +1,6 @@
 package com.uhu.saluhud.database.utils.bootstrap;
 
+import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -18,5 +19,18 @@ public abstract class SaluhudHibernateBootstrapper
     
     private SessionFactory sessionFactory;
     
-    public abstract SessionFactory getSessionFactoryInstance();    
+    public abstract SessionFactory getSessionFactoryInstance();
+
+    /**
+     * Will add all annotated classes to Hibernate's metadata.
+     * 
+     * <p>
+     * Annotated classes will always be inside the 
+     * {@link com.uhu.saluhud.database.utils.models} package and subpackages.
+     * </p>
+     */
+    protected void addAllAnnotatedClasses()
+    {
+        
+    }
 }

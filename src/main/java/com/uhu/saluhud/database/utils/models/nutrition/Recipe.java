@@ -6,6 +6,8 @@ package com.uhu.saluhud.database.utils.models.nutrition;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,16 +21,17 @@ import javax.persistence.Table;
 public class Recipe {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
-    private String ingredients_description;
+    @Column(name = "ingredients_description")
+    private String ingredientsDescription;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -44,20 +47,20 @@ public class Recipe {
      * @param id
      * @param name
      * @param description
-     * @param ingredients_description
+     * @param ingredientsDescription
      */
-    public Recipe(long id, String name, String description, String ingredients_description) {
+    public Recipe(Long id, String name, String description, String ingredientsDescription) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.ingredients_description = ingredients_description;
+        this.ingredientsDescription = ingredientsDescription;
     }
 
     /**
      *
      * @return Getter for the parameter "id"
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -81,15 +84,15 @@ public class Recipe {
      *
      * @return Getter for the parameter "ingredients_description"
      */
-    public String getIngredients_description() {
-        return ingredients_description;
+    public String getIngredientsDescription() {
+        return ingredientsDescription;
     }
 
     /**
      *
-     * @param id Setter for the parameter "name
+     * @param id Setter for the parameter "id"
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -111,10 +114,10 @@ public class Recipe {
 
     /**
      *
-     * @param ingredients_description Setter for the parameter
+     * @param ingredientsDescription Setter for the parameter
      * "ingredients_description"
      */
-    public void setIngredients_description(String ingredients_description) {
-        this.ingredients_description = ingredients_description;
+    public void setIngredientsDescription(String ingredientsDescription) {
+        this.ingredientsDescription = ingredientsDescription;
     }
 }

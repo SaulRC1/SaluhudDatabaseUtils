@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.bootstrap;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
 
 /**
  *
@@ -10,7 +10,13 @@ public final class SaluhudUserHibernateBootstrapper extends SaluhudHibernateBoot
 {
 
     @Override
-    public SessionFactory getSessionFactoryInstance()
+    public void closeSessionFactory()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void configureHibernateMetadata(MetadataSources metadataSources)
     {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

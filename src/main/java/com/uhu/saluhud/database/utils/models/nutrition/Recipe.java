@@ -90,14 +90,6 @@ public class Recipe {
 
     /**
      *
-     * @param id Setter for the parameter "id"
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     *
      * @param name Setter for the parameter "name"
      */
     public void setName(String name) {

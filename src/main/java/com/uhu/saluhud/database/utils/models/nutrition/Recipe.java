@@ -4,11 +4,14 @@
  */
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +24,7 @@ import javax.persistence.Table;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -32,6 +34,10 @@ public class Recipe {
 
     @Column(name = "ingredients_description")
     private String ingredientsDescription;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RECIPE_INGREDIENT")
+    private List<Ingredient> ingredients;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -49,7 +55,7 @@ public class Recipe {
      * @param description
      * @param ingredientsDescription
      */
-    public Recipe(Long id, String name, String description, String ingredientsDescription) {
+    public Recipe(long id, String name, String description, String ingredientsDescription) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -57,35 +63,47 @@ public class Recipe {
     }
 
     /**
+     * Getter for the parameter "id"
      *
-     * @return Getter for the parameter "id"
+     * @return The id of the recipe
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     /**
+     * Getter for the parameter "name"
      *
-     * @return Getter for the parameter "name"
+     * @return The name of the recipe
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Getter for the parameter "description"
      *
-     * @return Getter for the parameter "description"
+     * @return The description of description
      */
     public String getDescription() {
         return description;
     }
 
     /**
+     * Getter for the parameter "ingredients_description"
      *
-     * @return Getter for the parameter "ingredients_description"
+     * @return The description of the ingredients
      */
     public String getIngredientsDescription() {
         return ingredientsDescription;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     /**
@@ -111,5 +129,13 @@ public class Recipe {
      */
     public void setIngredientsDescription(String ingredientsDescription) {
         this.ingredientsDescription = ingredientsDescription;
+    }
+
+    /**
+     *
+     * @param ingredients
+     */
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

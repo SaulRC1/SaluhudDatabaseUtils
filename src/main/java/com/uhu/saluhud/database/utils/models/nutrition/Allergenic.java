@@ -2,8 +2,6 @@ package com.uhu.saluhud.database.utils.models.nutrition;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,8 +13,7 @@ import javax.persistence.Table;
 public class Allergenic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
@@ -35,7 +32,7 @@ public class Allergenic {
      * @param id
      * @param name
      */
-    public Allergenic(Long id, String name) {
+    public Allergenic(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -44,7 +41,7 @@ public class Allergenic {
      *
      * @return Getter for the parameter "id"
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

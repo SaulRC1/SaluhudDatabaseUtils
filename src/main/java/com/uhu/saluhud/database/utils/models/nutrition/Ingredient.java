@@ -45,12 +45,12 @@ public class Ingredient {
      * name, the kilocalories amount, the protein amount, the carbohydrates
      * amount and the fat amount
      *
-     * @param id
-     * @param name
-     * @param kilocalories
-     * @param proteinAmount
-     * @param carbohydratesAmount
-     * @param fatAmount
+     * @param id The id of the ingredient
+     * @param name The name of the ingredient
+     * @param kilocalories The amount of kilocalories of an ingredient
+     * @param proteinAmount The amount of protein of an ingredient
+     * @param carbohydratesAmount The carbohydrates of an ingredient
+     * @param fatAmount The amount of fat of an ingredient
      */
     public Ingredient(long id, String name, int kilocalories, int proteinAmount, int carbohydratesAmount, int fatAmount) {
         this.id = id;
@@ -63,89 +63,99 @@ public class Ingredient {
 
     /**
      * Getter for the parameter "id"
-     * 
-     * @return 
+     *
+     * @return The id of an ingredient
      */
     public long getId() {
         return id;
     }
 
     /**
+     * Getter for the parameter "name"
      *
-     * @return Getter for the parameter "name"
+     * @return The name of an ingredient
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Getter for the parameter "kilocalories"
      *
-     * @return Getter for the parameter "kilocalories"
+     * @return The number of kilocalories of an ingredient
      */
     public int getKilocalories() {
         return kilocalories;
     }
 
     /**
+     * Getter for the parameter "protein_amount"
      *
-     * @return Getter for the parameter "protein_amount"
+     * @return The amount of proteins of an ingredient
      */
     public int getProteinAmount() {
         return proteinAmount;
     }
 
     /**
+     * Getter for the parameter "carbohydrates_amount"
      *
-     * @return Getter for the parameter "carbohydrates_amount"
+     * @return The amount of carbohydrates of an ingredient
      */
     public int getCarbohydratesAmount() {
         return carbohydratesAmount;
     }
 
     /**
+     * Getter for the parameter "fat_amount"
      *
-     * @return Getter for the parameter "fat_amount"
+     * @return The amount of fat of an ingredient
      */
     public int getFatAmount() {
         return fatAmount;
     }
 
     /**
+     * Setter for the parameter "name"
      *
-     * @param name Setter for the parameter "name"
+     * @param name The new name of the ingredient
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+     * Setter for the parameter "kilocalories"
      *
-     * @param kilocalories Setter for the parameter "kilocalories"
+     * @param kilocalories The new amount of kilocaries of an ingredient
      */
     public void setKilocalories(int kilocalories) {
         this.kilocalories = kilocalories;
     }
 
     /**
+     * Setter for the parameter "protein_amount"
      *
-     * @param proteinAmount Setter for the parameter "protein_amount"
+     * @param proteinAmount The new amount of proteins of an ingredient
      */
     public void setProtein_amount(int proteinAmount) {
         this.proteinAmount = proteinAmount;
     }
 
     /**
+     * Setter for the parameter "carbohydrates_amount"
      *
-     * @param carbohydratesAmount Setter for the parameter
-     * "carbohydrates_amount"
+     * @param carbohydratesAmount The new amount of carbohydrates of an
+     * ingredient
      */
     public void setCarbohydrates_amount(int carbohydratesAmount) {
         this.carbohydratesAmount = carbohydratesAmount;
     }
 
     /**
+     * Setter for the parameter "fat_amount"
      *
-     * @param fatAmount Setter for the parameter "fat_amount"
+     * @param fatAmount The new amount of fats of an ingredient
      */
     public void setFat_amount(int fatAmount) {
         this.fatAmount = fatAmount;

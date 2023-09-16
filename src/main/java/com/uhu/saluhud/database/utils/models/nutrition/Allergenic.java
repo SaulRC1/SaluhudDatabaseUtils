@@ -29,8 +29,8 @@ public class Allergenic {
      * This is a parameterized constructor for the class. It takes, the id and
      * the name of an Allergenic
      *
-     * @param id
-     * @param name
+     * @param id The id of the Allergenic
+     * @param name The name of the Allergenic
      */
     public Allergenic(long id, String name) {
         this.id = id;
@@ -38,24 +38,27 @@ public class Allergenic {
     }
 
     /**
+     * Getter for the parameter "id"
      *
-     * @return Getter for the parameter "id"
+     * @return The id of the Allergenic
      */
     public long getId() {
         return id;
     }
 
     /**
+     * Getter for the parameter "name"
      *
-     * @return Getter for the parameter "name"
+     * @return The name of the Allergenic
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Setter for the parameter "name"
      *
-     * @param name Setter for the parameter "name"
+     * @param name The new name of the Allergenic
      */
     public void setName(String name) {
         this.name = name;

@@ -4,12 +4,12 @@
  */
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -37,7 +37,7 @@ public class Recipe {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RECIPE_INGREDIENT")
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     /**
      * This a default constructor for the class, with no parameters
@@ -50,16 +50,18 @@ public class Recipe {
      * This is a parameterized constructor for the class. It takes, the id, the
      * name, the description and the ingredients description of a Recipe
      *
-     * @param id
-     * @param name
-     * @param description
-     * @param ingredientsDescription
+     * @param id The id of the recipe
+     * @param name The name of the recipe
+     * @param description The description of the recipe
+     * @param ingredientsDescription The description of all ingredients of the
+     * recipe
      */
-    public Recipe(long id, String name, String description, String ingredientsDescription) {
+    public Recipe(long id, String name, String description, String ingredientsDescription, List<Ingredient> ingredients) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;
+        this.ingredients = ingredients;
     }
 
     /**
@@ -99,6 +101,7 @@ public class Recipe {
     }
 
     /**
+     * Getter fot the parameter "ingredients"
      *
      * @return
      */
@@ -107,33 +110,37 @@ public class Recipe {
     }
 
     /**
+     * Setter for the parameter "name"
      *
-     * @param name Setter for the parameter "name"
+     * @param name The new name of the recipe
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+     * Setter for the parameter "description"
      *
-     * @param description Setter for the parameter "description"
+     * @param description Tne new description of the recipe
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
+     * Setter for the parameter "ingredients_description"
      *
-     * @param ingredientsDescription Setter for the parameter
-     * "ingredients_description"
+     * @param ingredientsDescription The new ingredients description of the
+     * recipe
      */
     public void setIngredientsDescription(String ingredientsDescription) {
         this.ingredientsDescription = ingredientsDescription;
     }
 
     /**
+     * Setter for the parameter "ingredients"
      *
-     * @param ingredients
+     * @param ingredients The new list of ingredients of the recipe
      */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;

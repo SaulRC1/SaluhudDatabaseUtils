@@ -1,5 +1,8 @@
 package com.uhu.saluhud.database.utils.bootstrap;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -18,7 +21,7 @@ public final class SaluhudAdministratorHibernateBootstrapper extends SaluhudHibe
     private SaluhudAdministratorHibernateBootstrapper()
     {
         StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder()
-                .configure(this.getClass().getResource("hibernate_saluhud_admin.cfg.xml")).build();
+                .configure("hibernate_saluhud_admin.cfg.xml").build();
         
         MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
         
@@ -34,7 +37,21 @@ public final class SaluhudAdministratorHibernateBootstrapper extends SaluhudHibe
     @Override
     public void closeSessionFactory()
     {
-        this.getSessionFactory().close();
+        try
+        {
+            Logger.getLogger(SaluhudAdministratorHibernateBootstrapper.class.getName())
+                    .log(Level.INFO, "Closing {0} SessionFactory...", SaluhudAdministratorHibernateBootstrapper.class.getName());
+            
+            this.getSessionFactory().close();
+            
+            Logger.getLogger(SaluhudAdministratorHibernateBootstrapper.class.getName())
+                    .log(Level.INFO, "{0} SessionFactory closed.", SaluhudAdministratorHibernateBootstrapper.class.getName());
+        }
+        catch (HibernateException e)
+        {
+            Logger.getLogger(SaluhudAdministratorHibernateBootstrapper.class.getName())
+                    .log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     @Override

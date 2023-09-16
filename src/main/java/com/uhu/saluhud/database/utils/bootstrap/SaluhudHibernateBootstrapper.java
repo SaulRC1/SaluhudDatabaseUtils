@@ -22,6 +22,7 @@ public abstract class SaluhudHibernateBootstrapper
      * Annotated classes will always be inside the 
      * {@link com.uhu.saluhud.database.utils.models} package and subpackages.
      * </p>
+     * 
      * @param metadataSources Hibernate's {@link MetadataSources}
      */
     protected void addAllAnnotatedClasses(MetadataSources metadataSources)

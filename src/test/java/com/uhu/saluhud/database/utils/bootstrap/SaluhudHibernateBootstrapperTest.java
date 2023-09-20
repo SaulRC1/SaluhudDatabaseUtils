@@ -1,13 +1,8 @@
 package com.uhu.saluhud.database.utils.bootstrap;
 
-import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
@@ -25,12 +20,14 @@ public class SaluhudHibernateBootstrapperTest
         
         adminBootstrapper.closeSessionFactory();
         
-        /*SaluhudHibernateBootstrapper userBootstrapper =
-                SaluhudUserHibernateBootstrapper*/
+        SaluhudHibernateBootstrapper userBootstrapper =
+                SaluhudUserHibernateBootstrapper.getSaluhudUserHibernateBootstrapperInstance();
+        
+        userBootstrapper.closeSessionFactory();
     }
     
     @Test
-    public void test1()
+    public void testBootstrappingWithAdminCredentials()
     {
         SaluhudHibernateBootstrapper adminBootstrapper = 
                 SaluhudAdministratorHibernateBootstrapper.getSaluhudAdministratorHibernateBootstrapperInstance();
@@ -50,8 +47,22 @@ public class SaluhudHibernateBootstrapperTest
     }
     
     @Test
-    public void test2()
+    public void testBootstrappingWithUserCredentials()
     {
-        System.out.println("test2");
+        SaluhudHibernateBootstrapper userBootstrapper = 
+                SaluhudUserHibernateBootstrapper.getSaluhudUserHibernateBootstrapperInstance();
+        
+        SessionFactory adminSessionFactory = userBootstrapper.getSessionFactory();
+        
+        try (Session session = adminSessionFactory.openSession())
+        {   
+            session.beginTransaction();
+            
+            session.createNativeQuery("SELECT CURRENT_DATE").getResultList().get(0);
+        }
+        catch(Exception e)
+        {
+            fail();
+        }
     }
 }

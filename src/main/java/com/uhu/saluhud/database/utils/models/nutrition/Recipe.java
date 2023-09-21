@@ -5,7 +5,9 @@
 package com.uhu.saluhud.database.utils.models.nutrition;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,6 +41,14 @@ public class Recipe {
     @JoinTable(name = "RECIPE_INGREDIENT")
     private List<Ingredient> ingredients = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RECIPE_ALLERGENIC")
+    private Set<Allergenic> allergenics = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RECIPE_ELABOTARION_STEP")
+    private List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
+
     /**
      * This a default constructor for the class, with no parameters
      */
@@ -47,7 +57,7 @@ public class Recipe {
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the id, the
+     * This is a parameterized constructor for the class.It takes, the id, the
      * name, the description and the ingredients description of a Recipe
      *
      * @param id The id of the recipe
@@ -55,13 +65,20 @@ public class Recipe {
      * @param description The description of the recipe
      * @param ingredientsDescription The description of all ingredients of the
      * recipe
+     * @param ingredients The list of all ingredients of the recipe
+     * @param allergenics The set of all allergenics of the recipe
+     * @param elabotarionSteps The list of all steps of the recipe
      */
-    public Recipe(long id, String name, String description, String ingredientsDescription, List<Ingredient> ingredients) {
+    public Recipe(long id, String name, String description,
+            String ingredientsDescription, List<Ingredient> ingredients,
+            Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;
         this.ingredients = ingredients;
+        this.allergenics = allergenics;
+        this.elaborationSteps = elabotarionSteps;
     }
 
     /**
@@ -101,12 +118,30 @@ public class Recipe {
     }
 
     /**
-     * Getter fot the parameter "ingredients"
+     * Getter for the parameter "ingredients"
      *
-     * @return
+     * @return The list of ingredients of the recipe
      */
     public List<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    /**
+     * Getter for the parameter "allergenics"
+     *
+     * @return The set of allergenics of the recipe
+     */
+    public Set<Allergenic> getAllergenics() {
+        return allergenics;
+    }
+
+    /**
+     * Getter for the parameter "elaborationSteps"
+     *
+     * @return The list of the steps of the recipe
+     */
+    public List<RecipeElaborationStep> getElaborationSteps() {
+        return elaborationSteps;
     }
 
     /**
@@ -144,5 +179,23 @@ public class Recipe {
      */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    /**
+     * Setter for the parameter "allergenics"
+     *
+     * @param allergenics The new set of allergenics of the recipe
+     */
+    public void setAllergenics(Set<Allergenic> allergenics) {
+        this.allergenics = allergenics;
+    }
+
+    /**
+     * Setter for the parameter "elaborationSteps"
+     *
+     * @param elaborationSteps The new List of steps of the recipe
+     */
+    public void setElaborationSteps(List<RecipeElaborationStep> elaborationSteps) {
+        this.elaborationSteps = elaborationSteps;
     }
 }

@@ -4,8 +4,6 @@
  */
 package com.uhu.saluhud.database.utils.models.nutrition;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
@@ -39,15 +37,15 @@ public class Recipe {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RECIPE_INGREDIENT")
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Ingredient> ingredients;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RECIPE_ALLERGENIC")
-    private Set<Allergenic> allergenics = new HashSet<>();
+    private Set<Allergenic> allergenics;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "RECIPE_ELABOTARION_STEP")
-    private List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
+    private List<RecipeElaborationStep> elaborationSteps;
 
     /**
      * This a default constructor for the class, with no parameters

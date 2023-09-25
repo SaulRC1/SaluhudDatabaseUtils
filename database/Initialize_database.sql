@@ -23,24 +23,24 @@ CREATE TABLE INGREDIENT_ALLERGENIC (
     id_ingredient bigint,
     id_allergenic bigint,
     PRIMARY KEY (id_ingredient, id_allergenic),
-    FOREIGN KEY (id_ingredient) references INGREDIENT,
-    FOREIGN KEY (id_allergenic) references ALLERGENIC
+    FOREIGN KEY (id_ingredient) references INGREDIENT(id),
+    FOREIGN KEY (id_allergenic) references ALLERGENIC(id)
 );
 
 CREATE TABLE RECIPE_INGREDIENT (
     id_ingredient bigint,
     id_recipe bigint,
     PRIMARY KEY (id_ingredient, id_recipe),
-    FOREIGN KEY (id_ingredient) references INGREDIENT,
-    FOREIGN KEY (id_recipe) references RECIPE
+    FOREIGN KEY (id_ingredient) references INGREDIENT(id),
+    FOREIGN KEY (id_recipe) references RECIPE(id)
 );
 
 CREATE TABLE RECIPE_ALLERGENIC (
     id_recipe bigint,
     id_allergenic bigint,
     PRIMARY KEY (id_recipe, id_allergenic),
-    FOREIGN KEY (id_recipe) references RECIPE,
-    FOREIGN KEY (id_allergenic) references ALLERGENIC
+    FOREIGN KEY (id_recipe) references RECIPE(id),
+    FOREIGN KEY (id_allergenic) references ALLERGENIC(id)
 );
 
 CREATE TABLE RECIPE_ELABORATION_STEP (
@@ -48,7 +48,7 @@ CREATE TABLE RECIPE_ELABORATION_STEP (
     step_number smallint NOT NULL,
     step_description text NOT NULL,
     id_recipe bigint NOT NULL,
-    FOREIGN KEY (id_recipe) references RECIPE
+    FOREIGN KEY (id_recipe) references RECIPE(id)
 );
 
 -- Crea la tabla de datos de usuario de fitness

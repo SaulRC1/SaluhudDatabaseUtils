@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -30,7 +29,7 @@ public class RecipeElaborationStep {
     @Column(name = "step_number", nullable = false)
     private int stepNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RECIPE")
     private Recipe recipe;
 

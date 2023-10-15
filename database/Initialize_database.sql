@@ -44,7 +44,7 @@ CREATE TABLE RECIPE_ALLERGENIC (
 );
 
 CREATE TABLE RECIPE_ELABORATION_STEP (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_elaboration_step bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     step_number smallint NOT NULL,
     step_description text NOT NULL,
     id_recipe bigint NOT NULL,

@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * This class represent one step of the proccess of elaboration of the recipe
  */
 @Entity
-@Table(name = "RECIPE_ELABOTARION_STEP")
+@Table(name = "RECIPE_ELABORATION_STEP")
 public class RecipeElaborationStep {
 
     @Id

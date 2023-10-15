@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -35,16 +36,28 @@ public class Recipe {
     @Column(name = "ingredients_description")
     private String ingredientsDescription;
 
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable(name = "RECIPE_INGREDIENT")
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "RECIPE_INGREDIENT")
+    @JoinTable(name = "RECIPE_INGREDIENT",
+        joinColumns = @JoinColumn(name = "id_recipe"),
+        inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
     private List<Ingredient> ingredients;
 
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable(name = "RECIPE_ALLERGENIC")
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "RECIPE_ALLERGENIC")
+    @JoinTable(name = "RECIPE_ALLERGENIC",
+        joinColumns = @JoinColumn(name = "id_recipe"),
+        inverseJoinColumns = @JoinColumn(name = "id_allergenic"))
     private Set<Allergenic> allergenics;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "RECIPE_ELABOTARION_STEP")
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable(name = "RECIPE_ELABORATION_STEP")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RECIPE_ELABORATION_STEP",
+        joinColumns = @JoinColumn(name = "id_recipe"),
+        inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
     private List<RecipeElaborationStep> elaborationSteps;
 
     /**

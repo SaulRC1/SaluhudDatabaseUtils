@@ -1,7 +1,10 @@
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,10 +12,13 @@ import javax.persistence.Table;
  * This class represents the existent allergenics present in food.
  */
 @Entity
-@Table(name = "ALLERGENIC")
-public class Allergenic {
+@Table(name = "allergenic")
+public class Allergenic implements Serializable
+{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "name", unique = true, nullable = false)
@@ -21,7 +27,8 @@ public class Allergenic {
     /**
      * This a default constructor for the class, with no parameters
      */
-    public Allergenic() {
+    public Allergenic()
+    {
 
     }
 
@@ -32,7 +39,8 @@ public class Allergenic {
      * @param id The id of the Allergenic
      * @param name The name of the Allergenic
      */
-    public Allergenic(long id, String name) {
+    public Allergenic(long id, String name)
+    {
         this.id = id;
         this.name = name;
     }
@@ -42,7 +50,8 @@ public class Allergenic {
      *
      * @return The id of the Allergenic
      */
-    public long getId() {
+    public long getId()
+    {
         return id;
     }
 
@@ -51,7 +60,8 @@ public class Allergenic {
      *
      * @return The name of the Allergenic
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -60,7 +70,8 @@ public class Allergenic {
      *
      * @param name The new name of the Allergenic
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 }

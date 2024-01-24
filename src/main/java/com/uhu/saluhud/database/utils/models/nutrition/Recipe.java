@@ -1,14 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,10 +21,13 @@ import javax.persistence.Table;
  * of ingredients.
  */
 @Entity
-@Table(name = "RECIPE")
-public class Recipe {
+@Table(name = "recipe")
+public class Recipe implements Serializable
+{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "name", nullable = false)
@@ -36,34 +39,37 @@ public class Recipe {
     @Column(name = "ingredients_description")
     private String ingredientsDescription;
 
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //@JoinTable(name = "RECIPE_INGREDIENT")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade =
+            {
+                CascadeType.PERSIST, CascadeType.MERGE
+            })
     @JoinTable(name = "RECIPE_INGREDIENT",
-        joinColumns = @JoinColumn(name = "id_recipe"),
-        inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
+            joinColumns = @JoinColumn(name = "id_recipe"),
+            inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
     private List<Ingredient> ingredients;
 
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //@JoinTable(name = "RECIPE_ALLERGENIC")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade =
+            {
+                CascadeType.PERSIST, CascadeType.MERGE
+            })
     @JoinTable(name = "RECIPE_ALLERGENIC",
-        joinColumns = @JoinColumn(name = "id_recipe"),
-        inverseJoinColumns = @JoinColumn(name = "id_allergenic"))
+            joinColumns = @JoinColumn(name = "id_recipe"),
+            inverseJoinColumns = @JoinColumn(name = "id_allergenic"))
     private Set<Allergenic> allergenics;
 
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //@JoinTable(name = "RECIPE_ELABORATION_STEP")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "RECIPE_ELABORATION_STEP",
-        joinColumns = @JoinColumn(name = "id_recipe"),
-        inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
+            joinColumns = @JoinColumn(name = "id_recipe"),
+            inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
     private List<RecipeElaborationStep> elaborationSteps;
 
     /**
      * This a default constructor for the class, with no parameters
      */
-    public Recipe() {
+    public Recipe()
+    {
 
     }
 
@@ -82,7 +88,8 @@ public class Recipe {
      */
     public Recipe(long id, String name, String description,
             String ingredientsDescription, List<Ingredient> ingredients,
-            Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps) {
+            Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps)
+    {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -97,7 +104,8 @@ public class Recipe {
      *
      * @return The id of the recipe
      */
-    public long getId() {
+    public long getId()
+    {
         return id;
     }
 
@@ -106,7 +114,8 @@ public class Recipe {
      *
      * @return The name of the recipe
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -115,7 +124,8 @@ public class Recipe {
      *
      * @return The description of description
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -124,7 +134,8 @@ public class Recipe {
      *
      * @return The description of the ingredients
      */
-    public String getIngredientsDescription() {
+    public String getIngredientsDescription()
+    {
         return ingredientsDescription;
     }
 
@@ -133,7 +144,8 @@ public class Recipe {
      *
      * @return The list of ingredients of the recipe
      */
-    public List<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients()
+    {
         return ingredients;
     }
 
@@ -142,7 +154,8 @@ public class Recipe {
      *
      * @return The set of allergenics of the recipe
      */
-    public Set<Allergenic> getAllergenics() {
+    public Set<Allergenic> getAllergenics()
+    {
         return allergenics;
     }
 
@@ -151,7 +164,8 @@ public class Recipe {
      *
      * @return The list of the steps of the recipe
      */
-    public List<RecipeElaborationStep> getElaborationSteps() {
+    public List<RecipeElaborationStep> getElaborationSteps()
+    {
         return elaborationSteps;
     }
 
@@ -160,7 +174,8 @@ public class Recipe {
      *
      * @param name The new name of the recipe
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -169,7 +184,8 @@ public class Recipe {
      *
      * @param description Tne new description of the recipe
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
@@ -179,7 +195,8 @@ public class Recipe {
      * @param ingredientsDescription The new ingredients description of the
      * recipe
      */
-    public void setIngredientsDescription(String ingredientsDescription) {
+    public void setIngredientsDescription(String ingredientsDescription)
+    {
         this.ingredientsDescription = ingredientsDescription;
     }
 
@@ -188,7 +205,8 @@ public class Recipe {
      *
      * @param ingredients The new list of ingredients of the recipe
      */
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients)
+    {
         this.ingredients = ingredients;
     }
 
@@ -197,7 +215,8 @@ public class Recipe {
      *
      * @param allergenics The new set of allergenics of the recipe
      */
-    public void setAllergenics(Set<Allergenic> allergenics) {
+    public void setAllergenics(Set<Allergenic> allergenics)
+    {
         this.allergenics = allergenics;
     }
 
@@ -206,7 +225,8 @@ public class Recipe {
      *
      * @param elaborationSteps The new List of steps of the recipe
      */
-    public void setElaborationSteps(List<RecipeElaborationStep> elaborationSteps) {
+    public void setElaborationSteps(List<RecipeElaborationStep> elaborationSteps)
+    {
         this.elaborationSteps = elaborationSteps;
     }
 }

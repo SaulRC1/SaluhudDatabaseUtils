@@ -1,7 +1,10 @@
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,10 +15,13 @@ import javax.persistence.Table;
  * carbohydrates
  */
 @Entity
-@Table(name = "INGREDIENT")
-public class Ingredient {
+@Table(name = "ingredient")
+public class Ingredient implements Serializable
+{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "name", unique = true, nullable = false)
@@ -36,7 +42,8 @@ public class Ingredient {
     /**
      * This a default constructor for the class, with no parameters
      */
-    public Ingredient() {
+    public Ingredient()
+    {
 
     }
 
@@ -52,8 +59,29 @@ public class Ingredient {
      * @param carbohydratesAmount The carbohydrates of an ingredient
      * @param fatAmount The amount of fat of an ingredient
      */
-    public Ingredient(long id, String name, int kilocalories, int proteinAmount, int carbohydratesAmount, int fatAmount) {
+    public Ingredient(long id, String name, int kilocalories, int proteinAmount, int carbohydratesAmount, int fatAmount)
+    {
         this.id = id;
+        this.name = name;
+        this.kilocalories = kilocalories;
+        this.proteinAmount = proteinAmount;
+        this.carbohydratesAmount = carbohydratesAmount;
+        this.fatAmount = fatAmount;
+    }
+    
+    /**
+     * This is a parameterized constructor for the class. It takes, the
+     * name, the kilocalories amount, the protein amount, the carbohydrates
+     * amount and the fat amount
+     *
+     * @param name The name of the ingredient
+     * @param kilocalories The amount of kilocalories of an ingredient
+     * @param proteinAmount The amount of protein of an ingredient
+     * @param carbohydratesAmount The carbohydrates of an ingredient
+     * @param fatAmount The amount of fat of an ingredient
+     */
+    public Ingredient(String name, int kilocalories, int proteinAmount, int carbohydratesAmount, int fatAmount)
+    {
         this.name = name;
         this.kilocalories = kilocalories;
         this.proteinAmount = proteinAmount;
@@ -66,7 +94,8 @@ public class Ingredient {
      *
      * @return The id of an ingredient
      */
-    public long getId() {
+    public long getId()
+    {
         return id;
     }
 
@@ -75,7 +104,8 @@ public class Ingredient {
      *
      * @return The name of an ingredient
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -84,7 +114,8 @@ public class Ingredient {
      *
      * @return The number of kilocalories of an ingredient
      */
-    public int getKilocalories() {
+    public int getKilocalories()
+    {
         return kilocalories;
     }
 
@@ -93,7 +124,8 @@ public class Ingredient {
      *
      * @return The amount of proteins of an ingredient
      */
-    public int getProteinAmount() {
+    public int getProteinAmount()
+    {
         return proteinAmount;
     }
 
@@ -102,7 +134,8 @@ public class Ingredient {
      *
      * @return The amount of carbohydrates of an ingredient
      */
-    public int getCarbohydratesAmount() {
+    public int getCarbohydratesAmount()
+    {
         return carbohydratesAmount;
     }
 
@@ -111,7 +144,8 @@ public class Ingredient {
      *
      * @return The amount of fat of an ingredient
      */
-    public int getFatAmount() {
+    public int getFatAmount()
+    {
         return fatAmount;
     }
 
@@ -120,7 +154,8 @@ public class Ingredient {
      *
      * @param name The new name of the ingredient
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -129,7 +164,8 @@ public class Ingredient {
      *
      * @param kilocalories The new amount of kilocaries of an ingredient
      */
-    public void setKilocalories(int kilocalories) {
+    public void setKilocalories(int kilocalories)
+    {
         this.kilocalories = kilocalories;
     }
 
@@ -138,7 +174,8 @@ public class Ingredient {
      *
      * @param proteinAmount The new amount of proteins of an ingredient
      */
-    public void setProtein_amount(int proteinAmount) {
+    public void setProtein_amount(int proteinAmount)
+    {
         this.proteinAmount = proteinAmount;
     }
 
@@ -148,7 +185,8 @@ public class Ingredient {
      * @param carbohydratesAmount The new amount of carbohydrates of an
      * ingredient
      */
-    public void setCarbohydrates_amount(int carbohydratesAmount) {
+    public void setCarbohydrates_amount(int carbohydratesAmount)
+    {
         this.carbohydratesAmount = carbohydratesAmount;
     }
 
@@ -157,7 +195,50 @@ public class Ingredient {
      *
      * @param fatAmount The new amount of fats of an ingredient
      */
-    public void setFat_amount(int fatAmount) {
+    public void setFat_amount(int fatAmount)
+    {
         this.fatAmount = fatAmount;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString()
+    {
+        return "Ingredient[ id=" + this.id + " ]";
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    /**
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Ingredient))
+        {
+            return false;
+        }
+        Ingredient other = (Ingredient) obj;
+        if (this.id != other.id)
+        {
+            return false;
+        }
+        return true;
     }
 }

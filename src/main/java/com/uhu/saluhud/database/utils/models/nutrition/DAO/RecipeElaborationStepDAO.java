@@ -2,7 +2,6 @@ package com.uhu.saluhud.database.utils.models.nutrition.DAO;
 
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
@@ -12,48 +11,71 @@ import org.hibernate.Transaction;
 public class RecipeElaborationStepDAO
 {
 
-    private final SessionFactory sessionFactory;
+    private final Session session;
 
-    public RecipeElaborationStepDAO(SessionFactory sessionFactory)
+    public RecipeElaborationStepDAO(Session session)
     {
-        this.sessionFactory = sessionFactory;
+        this.session = session;
     }
 
     public void saveRecipeElaborationStep(RecipeElaborationStep step)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.save(step);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public RecipeElaborationStep getRecipeElaborationStepById(long id)
     {
-        try ( Session session = sessionFactory.openSession())
+        RecipeElaborationStep selectedRecipeElaborationStep;
+        Transaction tx = session.beginTransaction();
+        try
         {
-            return session.get(RecipeElaborationStep.class, id);
+            selectedRecipeElaborationStep = session.get(RecipeElaborationStep.class, id);
+            tx.commit();
+            if (selectedRecipeElaborationStep == null)
+            {
+                return null;
+            } else
+            {
+                return selectedRecipeElaborationStep;
+            }
+        } catch (Exception e)
+        {
+            tx.rollback();
+            return null;
         }
     }
 
     public void updateRecipeElaborationStep(RecipeElaborationStep step)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.update(step);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public void deleteRecipeElaborationStep(RecipeElaborationStep step)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.delete(step);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 }

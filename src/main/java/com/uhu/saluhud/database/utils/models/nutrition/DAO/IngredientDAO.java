@@ -2,8 +2,8 @@ package com.uhu.saluhud.database.utils.models.nutrition.DAO;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -12,48 +12,90 @@ import org.hibernate.Transaction;
 public class IngredientDAO
 {
 
-    private final SessionFactory sessionFactory;
+    private final Session session;
 
-    public IngredientDAO(SessionFactory sessionFactory)
+    public IngredientDAO(Session session)
     {
-        this.sessionFactory = sessionFactory;
+        this.session = session;
     }
 
     public void saveIngredient(Ingredient ingredient)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.save(ingredient);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public Ingredient getIngredientById(long id)
     {
-        try ( Session session = sessionFactory.openSession())
+        Ingredient selectedIngredient;
+        Transaction tx = session.beginTransaction();
+        try
         {
-            return session.get(Ingredient.class, id);
+            selectedIngredient = session.get(Ingredient.class, id);
+            tx.commit();
+            return selectedIngredient;
+        } catch (Exception e)
+        {
+            tx.rollback();
+            return null;
+        }
+    }
+
+    public Ingredient getIngredientByName(String name)
+    {
+        Ingredient selectedIngredient;
+        Transaction tx = session.beginTransaction();
+        try
+        {
+            Query query = this.session.createNativeQuery("SELECT * FROM INGREDIENT I WHERE I.name = :name", Ingredient.class);
+            query.setParameter("name", name);
+            selectedIngredient = (Ingredient) query.getSingleResult();
+            tx.commit();
+            if (selectedIngredient == null)
+            {
+                return null;
+            } else
+            {              
+                return selectedIngredient;
+            }
+
+        } catch (Exception e)
+        {
+            tx.rollback();
+            return null;
         }
     }
 
     public void updateIngredient(Ingredient ingredient)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.update(ingredient);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public void deleteIngredient(Ingredient ingredient)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.delete(ingredient);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 }

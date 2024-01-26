@@ -1,16 +1,11 @@
 package com.uhu.saluhud.database.utils.models.nutrition;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +19,7 @@ public class RecipeElaborationStep implements Serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_elaboration_step")
+    @Column(name = "id")
     private long id;
 
     @Column(name = "step_description", nullable = false)
@@ -33,9 +28,7 @@ public class RecipeElaborationStep implements Serializable
     @Column(name = "step_number", nullable = false)
     private int stepNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "elaborationSteps")
-    private List<Recipe> recipes;
-
+    
     /**
      * This a default constructor for the class, with no parameters
      */
@@ -46,20 +39,30 @@ public class RecipeElaborationStep implements Serializable
 
     /**
      * This is a parameterized constructor for the class. It takes, the id, the
-     * step description, the step number and the recipe
+     * step description and the step number
      *
      * @param id The id of the Step
      * @param stepDescription The description of the Step
      * @param stepNumber The number of the Step
-     * @param recipe The recipes which the Step belongs to
      */
-    public RecipeElaborationStep(long id, String stepDescription,
-            int stepNumber, List<Recipe> recipe)
+    public RecipeElaborationStep(long id, String stepDescription, int stepNumber)
     {
         this.id = id;
         this.stepDescription = stepDescription;
         this.stepNumber = stepNumber;
-        this.recipes = recipe;
+    }
+    
+    /**
+     * This is a parameterized constructor for the class. It takes, the
+     * step description and the step number
+     *
+     * @param stepDescription The description of the Step
+     * @param stepNumber The number of the Step
+     */
+    public RecipeElaborationStep(String stepDescription, int stepNumber)
+    {
+        this.stepDescription = stepDescription;
+        this.stepNumber = stepNumber;
     }
 
     /**
@@ -110,25 +113,5 @@ public class RecipeElaborationStep implements Serializable
     public void setStepNumber(int stepNumber)
     {
         this.stepNumber = stepNumber;
-    }
-
-    /**
-     * Getter for the parameter "recipe"
-     *
-     * @return The recipes which the Step belongs to
-     */
-    public List<Recipe> getRecipes()
-    {
-        return recipes;
-    }
-
-    /**
-     * Setter for the parameter "recipe"
-     *
-     * @param recipes The new list of recipes which the step belongs now
-     */
-    public void setRecipe(List<Recipe> recipes)
-    {
-        this.recipes = recipes;
     }
 }

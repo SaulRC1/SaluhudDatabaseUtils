@@ -2,7 +2,6 @@ package com.uhu.saluhud.database.utils.models.nutrition.DAO;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
@@ -12,48 +11,71 @@ import org.hibernate.Transaction;
 public class RecipeDAO
 {
 
-    private final SessionFactory sessionFactory;
+    private final Session session;
 
-    public RecipeDAO(SessionFactory sessionFactory)
+    public RecipeDAO(Session session)
     {
-        this.sessionFactory = sessionFactory;
+        this.session = session;
     }
 
     public void saveRecipe(Recipe recipe)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.save(recipe);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public void updateRecipe(Recipe recipe)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.update(recipe);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public void deleteRecipe(Recipe recipe)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.delete(recipe);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
-    
+
     public Recipe getRecipeById(long id)
     {
-        try ( Session session = sessionFactory.openSession())
+        Recipe selectedRecipe;
+        Transaction tx = session.beginTransaction();
+        try
         {
-            return session.get(Recipe.class, id);
+            selectedRecipe = session.get(Recipe.class, id);
+            tx.commit();
+            if (selectedRecipe == null)
+            {
+                return null;
+            } else
+            {
+                return selectedRecipe;
+            }
+        } catch (Exception e)
+        {
+            tx.rollback();
+            return null;
         }
     }
 }

@@ -44,12 +44,18 @@ CREATE TABLE RECIPE_ALLERGENIC (
 );
 
 CREATE TABLE RECIPE_ELABORATION_STEP (
-    id_elaboration_step bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     step_number smallint NOT NULL,
-    step_description text NOT NULL,
-    id_recipe bigint NOT NULL,
-    FOREIGN KEY (id_recipe) references RECIPE(id)
+    step_description text NOT NULL
 );
+
+CREATE TABLE RECIPE_RECIPE_ELABORATION_STEP (
+    id_elaboration_step bigint,
+    id_recipe bigint,
+    PRIMARY KEY (id_elaboration_step, id_recipe),
+    FOREIGN KEY (id_elaboration_step) references RECIPE_ELABORATION_STEP(id),
+    FOREIGN KEY (id_recipe) references RECIPE(id)
+)
 
 -- Crea la tabla de datos de usuario de fitness
 CREATE TABLE SALUHUD_USER_FITNESS_DATA (

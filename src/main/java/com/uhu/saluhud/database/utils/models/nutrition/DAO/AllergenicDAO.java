@@ -2,7 +2,6 @@ package com.uhu.saluhud.database.utils.models.nutrition.DAO;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
@@ -12,48 +11,65 @@ import org.hibernate.Transaction;
 public class AllergenicDAO
 {
 
-    private final SessionFactory sessionFactory;
+    private final Session session;
 
-    public AllergenicDAO(SessionFactory sessionFactory)
+    public AllergenicDAO(Session session)
     {
-        this.sessionFactory = sessionFactory;
+        this.session = session;
     }
 
     public void saveAllergenic(Allergenic allergenic)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.save(allergenic);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public Allergenic getAllergenicById(long id)
     {
-        try ( Session session = sessionFactory.openSession())
+        Allergenic selectedAllergenic;
+        Transaction tx = session.beginTransaction();
+        try
         {
-            return session.get(Allergenic.class, id);
+            selectedAllergenic = session.get(Allergenic.class, id);
+            tx.commit();
+            return selectedAllergenic;
+        } catch (Exception e)
+        {
+            tx.rollback();
+            return null;
         }
     }
 
     public void updateAllergenic(Allergenic allergenic)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.update(allergenic);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 
     public void deleteAllergenic(Allergenic allergenic)
     {
-        try ( Session session = sessionFactory.openSession())
+        Transaction tx = session.beginTransaction();
+        try
         {
-            Transaction tx = session.beginTransaction();
             session.delete(allergenic);
             tx.commit();
+        } catch (Exception e)
+        {
+            tx.rollback();
         }
     }
 }

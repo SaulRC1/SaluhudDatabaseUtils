@@ -46,6 +46,17 @@ public class Allergenic implements Serializable
     }
 
     /**
+     * This is a parameterized constructor for the class.It takes, the name of
+     * an Allergenic
+     *
+     * @param name The name of the Allergenic
+     */
+    public Allergenic(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * Getter for the parameter "id"
      *
      * @return The id of the Allergenic

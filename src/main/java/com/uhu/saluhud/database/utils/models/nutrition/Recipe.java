@@ -60,7 +60,7 @@ public class Recipe implements Serializable
     private Set<Allergenic> allergenics;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "RECIPE_ELABORATION_STEP",
+    @JoinTable(name = "RECIPE_RECIPE_ELABORATION_STEP",
             joinColumns = @JoinColumn(name = "id_recipe"),
             inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
     private List<RecipeElaborationStep> elaborationSteps;
@@ -91,6 +91,30 @@ public class Recipe implements Serializable
             Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps)
     {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.ingredientsDescription = ingredientsDescription;
+        this.ingredients = ingredients;
+        this.allergenics = allergenics;
+        this.elaborationSteps = elabotarionSteps;
+    }
+
+    /**
+     * This is a parameterized constructor for the class.It takes, the
+     * name, the description and the ingredients description of a Recipe
+     *
+     * @param name The name of the recipe
+     * @param description The description of the recipe
+     * @param ingredientsDescription The description of all ingredients of the
+     * recipe
+     * @param ingredients The list of all ingredients of the recipe
+     * @param allergenics The set of all allergenics of the recipe
+     * @param elabotarionSteps The list of all steps of the recipe
+     */
+    public Recipe(String name, String description,
+            String ingredientsDescription, List<Ingredient> ingredients,
+            Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps)
+    {
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;

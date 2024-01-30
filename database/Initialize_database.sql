@@ -19,14 +19,6 @@ CREATE TABLE RECIPE (
     ingredients_description text
 );
 
-CREATE TABLE INGREDIENT_ALLERGENIC (
-    id_ingredient bigint,
-    id_allergenic bigint,
-    PRIMARY KEY (id_ingredient, id_allergenic),
-    FOREIGN KEY (id_ingredient) references INGREDIENT(id),
-    FOREIGN KEY (id_allergenic) references ALLERGENIC(id)
-);
-
 CREATE TABLE RECIPE_INGREDIENT (
     id_ingredient bigint,
     id_recipe bigint,
@@ -56,6 +48,30 @@ CREATE TABLE RECIPE_RECIPE_ELABORATION_STEP (
     FOREIGN KEY (id_elaboration_step) references RECIPE_ELABORATION_STEP(id),
     FOREIGN KEY (id_recipe) references RECIPE(id)
 )
+
+CREATE TABLE FORUM (
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name text NOT NULL,
+    description text NOT NULL
+);
+
+CREATE TABLE FORUM_THREAD (
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_forum bigint NOT NULL,
+    title text NOT NULL,
+    author text NOT NULL,
+    created_date timestamp NOT NULL,
+    FOREIGN KEY (id_forum) references FORUM(id)
+);
+
+CREATE TABLE FORUM_MESSAGE (
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_forum_thread bigint NOT NULL,
+    author text NOT NULL,
+    message_date timestamp NOT NULL,
+    message_content text NOT NULL,
+    FOREIGN KEY (id_forum_thread) references FORUM_THREAD(id)
+);
 
 -- Crea la tabla de datos de usuario de fitness
 CREATE TABLE SALUHUD_USER_FITNESS_DATA (

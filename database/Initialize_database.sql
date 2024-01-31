@@ -73,12 +73,11 @@ CREATE TABLE FORUM_MESSAGE (
     FOREIGN KEY (id_forum_thread) references FORUM_THREAD(id)
 );
 
--- Crea la tabla de datos de usuario de fitness
 CREATE TABLE SALUHUD_USER_FITNESS_DATA (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     weight real,
     height real,
-    biological_sex BIOLOGICAL_SEX,
+    biological_sex text,
     age smallint,
     body_composition text,
     recommended_daily_water_liters smallint,
@@ -88,14 +87,34 @@ CREATE TABLE SALUHUD_USER_FITNESS_DATA (
     body_mass_index text
 );
 
--- Crea la tabla de datos personales del usuario
 CREATE TABLE SALUHUD_USER_PERSONAL_DATA (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_fitness_data_id bigint NOT NULL,
     name text NOT NULL,
     surname text,
-    phone_number text UNIQUE,
-    FOREIGN KEY (user_fitness_data_id) REFERENCES SALUHUD_USER_FITNESS_DATA(id)
+    phone_number text UNIQUE
+);
+
+CREATE TABLE SALUHUD_USER (
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username text NOT NULL,
+    password text NOT NULL,
+    email text NOT NULL UNIQUE
+);
+
+CREATE TABLE SALUHUD_USER_PERSONAL_DATA_SALUHUD_USER (
+    id_saluhud_user bigint,
+    id_user_personal_data bigint NOT NULL UNIQUE,
+    PRIMARY KEY (id_saluhud_user),
+    FOREIGN KEY (id_user_personal_data) references SALUHUD_USER_PERSONAL_DATA(id),
+    FOREIGN KEY (id_saluhud_user) references SALUHUD_USER(id)
+);
+
+CREATE TABLE SALUHUD_USER_SALUHUD_USER_FITNESS_DATA (
+    id_saluhud_user bigint,
+    id_user_fitness_data bigint NOT NULL UNIQUE,
+    PRIMARY KEY (id_saluhud_user),
+    FOREIGN KEY (id_user_fitness_data) references SALUHUD_USER_FITNESS_DATA(id),
+    FOREIGN KEY (id_saluhud_user) references SALUHUD_USER(id)
 );
 
 -- Crea la tabla del historial de sueño

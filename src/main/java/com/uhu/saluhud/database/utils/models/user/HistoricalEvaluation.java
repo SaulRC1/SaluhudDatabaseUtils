@@ -4,7 +4,7 @@ package com.uhu.saluhud.database.utils.models.user;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class HistoricalEvaluation
+public enum HistoricalEvaluation
 {
-
+    EXCELLENT, WELL, MININUM, FAILED;
 }

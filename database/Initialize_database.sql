@@ -137,16 +137,14 @@ CREATE TABLE SLEEP_HISTORICAL_ENTRY (
 
 -- Crea la tabla del historial de pasos diarios
 CREATE TABLE DAILY_STEPS_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id bigint NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER_PERSONAL_DATA(id)
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
 );
 
 -- Crea la tabla de entrada del historial de pasos diarios
 CREATE TABLE DAILY_STEPS_HISTORICAL_ENTRY (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     daily_steps_historical_id bigint NOT NULL,
-    date date NOT NULL,
+    entry_date date NOT NULL,
     done_steps smallint NOT NULL,
     kilo_calories_burned real NOT NULL,
     steps_evaluation HISTORICAL_EVALUATION NOT NULL,
@@ -170,6 +168,9 @@ CREATE TABLE WEIGHT_HISTORICAL_ENTRY (
     kilo_calories_objective_entry real NOT NULL,
     FOREIGN KEY (weight_historical_id) REFERENCES WEIGHT_HISTORICAL(id)
 );
+
+CREATE TYPE HISTORICAL_EVALUATION AS
+ENUM('EXCELLENT','WELL', 'MINIMUN', 'FAILED');
 
 INSERT INTO ALLERGENIC(name) VALUES ('GLUTEN');
 INSERT INTO ALLERGENIC(name) VALUES ('CRUSTACEAN');

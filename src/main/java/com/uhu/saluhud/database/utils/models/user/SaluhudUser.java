@@ -77,8 +77,8 @@ public class SaluhudUser implements Serializable
      * @param username the username used to logging in the app
      * @param password the password of the user
      * @param email the email of the user
-     * @param userPersonalData
-     * @param userFitnessData
+     * @param userPersonalData the personal data of the user
+     * @param userFitnessData the fitness data of the user
      */
     public SaluhudUser(String username, String password, String email, 
             SaluhudUserPersonalData userPersonalData, SaluhudUserFitnessData userFitnessData)
@@ -159,4 +159,44 @@ public class SaluhudUser implements Serializable
     {
         this.email = email;
     }
+
+    /**
+     * Getter for the parameter "personalData"
+     * 
+     * @return the personal data of the user
+     */
+    public SaluhudUserPersonalData getPersonalData()
+    {
+        return personalData;
+    }
+
+    /**
+     * Setter for the parameter "personalData"
+     * 
+     * @param personalData the new personal data of the user
+     */
+    public void setPersonalData(SaluhudUserPersonalData personalData)
+    {
+        this.personalData = personalData;
+    }
+
+    /**
+     * Getter for the parameter "fitnessData"
+     * 
+     * @return the fitness data of the user
+     */
+    public SaluhudUserFitnessData getFitnessData()
+    {
+        return fitnessData;
+    }
+
+    /**
+     * Setter for the parameter "fitnessData"
+     * 
+     * @param fitnessData the fitness data of the user
+     */
+    public void setFitnessData(SaluhudUserFitnessData fitnessData)
+    {
+        this.fitnessData = fitnessData;
+    }  
 }

@@ -48,6 +48,13 @@
             <scope>test</scope>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/io.hypersistence/hypersistence-utils-hibernate-55 -->
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-55</artifactId>
+            <version>3.7.1</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>

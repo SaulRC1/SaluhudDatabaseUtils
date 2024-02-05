@@ -15,3 +15,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON SALUHUD_USER_PERSONAL_DATA_SALUHUD_USER 
 GRANT SELECT, INSERT, UPDATE, DELETE ON SALUHUD_USER_SALUHUD_USER_FITNESS_DATA TO saluhud_admin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON daily_steps_historical TO saluhud_admin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON daily_steps_historical_entry TO saluhud_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON sleep_historical TO saluhud_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON sleep_historical_entry TO saluhud_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON weight_historical TO saluhud_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON weight_historical_entry TO saluhud_admin;

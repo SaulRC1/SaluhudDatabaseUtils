@@ -113,7 +113,7 @@ public class DailyStepsHistoricalEntry implements Serializable
     /**
      * Getter for the parameter "doneSteps"
      *
-     * @return the donde steps of the entry
+     * @return the done steps of the entry
      */
     public int getDoneSteps()
     {

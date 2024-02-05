@@ -119,16 +119,14 @@ CREATE TABLE SALUHUD_USER_SALUHUD_USER_FITNESS_DATA (
 
 -- Crea la tabla del historial de sueño
 CREATE TABLE SLEEP_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id bigint NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER_PERSONAL_DATA(id)
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
 );
 
 -- Crea la tabla de entrada del historial de sueño
 CREATE TABLE SLEEP_HISTORICAL_ENTRY (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     sleep_historical_id bigint NOT NULL,
-    date date NOT NULL,
+    entry_date date NOT NULL,
     hours_slept smallint NOT NULL,
     minutes_slept smallint NOT NULL,
     sleep_evaluation HISTORICAL_EVALUATION NOT NULL,
@@ -153,16 +151,14 @@ CREATE TABLE DAILY_STEPS_HISTORICAL_ENTRY (
 
 -- Crea la tabla del historial de peso
 CREATE TABLE WEIGHT_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id bigint NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER_PERSONAL_DATA(id)
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
 );
 
 -- Crea la tabla de entrada del historial de peso
 CREATE TABLE WEIGHT_HISTORICAL_ENTRY ( 
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     weight_historical_id bigint NOT NULL,
-    date date NOT NULL,
+    entry_date date NOT NULL,
     weight_entry real NOT NULL,
     height_entry real NOT NULL,
     kilo_calories_objective_entry real NOT NULL,

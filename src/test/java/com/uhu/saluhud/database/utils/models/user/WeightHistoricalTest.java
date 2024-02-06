@@ -2,6 +2,7 @@ package com.uhu.saluhud.database.utils.models.user;
 
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
+import com.uhu.saluhud.database.utils.models.user.DAO.SaluhudUserDAO;
 import com.uhu.saluhud.database.utils.models.user.DAO.WeightHistoricalDAO;
 import com.uhu.saluhud.database.utils.models.user.DAO.WeightHistoricalEntryDAO;
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class WeightHistoricalTest
         {
             WeightHistoricalDAO weightHistoricalDAO = new WeightHistoricalDAO(session);
             WeightHistoricalEntryDAO weightHistoricalEntryDAO = new WeightHistoricalEntryDAO(session);
+            SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
             
             WeightHistorical weightHistorical = new WeightHistorical();
             LocalDate now = LocalDate.now(); 
@@ -39,6 +41,10 @@ public class WeightHistoricalTest
             
             weightHistorical.setEntries(entries);
             
+            SaluhudUser user = saluhudUserDAO.getUserById(7);
+            weightHistorical.setUser(user);
+            
+            saluhudUserDAO.saveUser(user);
             weightHistoricalDAO.saveWeightHistorical(weightHistorical);
             weightHistoricalEntryDAO.saveWeightHistoricalEntry(entry);
             adminBootstrapper.closeSessionFactory();

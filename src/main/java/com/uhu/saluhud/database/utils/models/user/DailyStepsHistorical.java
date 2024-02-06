@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +30,10 @@ public class DailyStepsHistorical implements Serializable
 
     @OneToMany(mappedBy = "dailyStepsHistorical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DailyStepsHistoricalEntry> entries;
+    
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private SaluhudUser user;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -40,11 +46,14 @@ public class DailyStepsHistorical implements Serializable
      * This is a parameterized constructor for the class.It takes, a list of
      * daily steps entries
      *
-     * @param entries
+     * @param entries the list of daily steps entries
+     * @param user the user which the historical belongs to
      */
-    public DailyStepsHistorical(List<DailyStepsHistoricalEntry> entries)
+    public DailyStepsHistorical(List<DailyStepsHistoricalEntry> entries, 
+            SaluhudUser user)
     {
         this.entries = entries;
+        this.user = user;
     }
 
     /**
@@ -76,4 +85,24 @@ public class DailyStepsHistorical implements Serializable
     {
         this.entries = entries;
     }
+
+    /**
+     * Getter for the parameter "entries"
+     * 
+     * @return the user which the historical belongs to
+     */
+    public SaluhudUser getUser()
+    {
+        return user;
+    }
+
+    /**
+     * Setter for the parameter "user"
+     * 
+     * @param user the new user which the historical belongs to
+     */
+    public void setUser(SaluhudUser user)
+    {
+        this.user = user;
+    }   
 }

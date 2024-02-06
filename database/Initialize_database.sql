@@ -119,7 +119,9 @@ CREATE TABLE SALUHUD_USER_SALUHUD_USER_FITNESS_DATA (
 
 -- Crea la tabla del historial de sueño
 CREATE TABLE SLEEP_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id bigint NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER(id)
 );
 
 -- Crea la tabla de entrada del historial de sueño
@@ -135,7 +137,9 @@ CREATE TABLE SLEEP_HISTORICAL_ENTRY (
 
 -- Crea la tabla del historial de pasos diarios
 CREATE TABLE DAILY_STEPS_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id bigint NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER(id)
 );
 
 -- Crea la tabla de entrada del historial de pasos diarios
@@ -151,7 +155,9 @@ CREATE TABLE DAILY_STEPS_HISTORICAL_ENTRY (
 
 -- Crea la tabla del historial de peso
 CREATE TABLE WEIGHT_HISTORICAL (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id bigint NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES SALUHUD_USER(id)
 );
 
 -- Crea la tabla de entrada del historial de peso
@@ -166,7 +172,7 @@ CREATE TABLE WEIGHT_HISTORICAL_ENTRY (
 );
 
 CREATE TYPE HISTORICAL_EVALUATION AS
-ENUM('EXCELLENT','WELL', 'MINIMUN', 'FAILED');
+ENUM('EXCELLENT','WELL', 'MINIMUM', 'FAILED');
 
 INSERT INTO ALLERGENIC(name) VALUES ('GLUTEN');
 INSERT INTO ALLERGENIC(name) VALUES ('CRUSTACEAN');

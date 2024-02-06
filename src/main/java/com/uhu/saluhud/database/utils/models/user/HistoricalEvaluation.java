@@ -6,5 +6,5 @@ package com.uhu.saluhud.database.utils.models.user;
  */
 public enum HistoricalEvaluation
 {
-    EXCELLENT, WELL, MININUM, FAILED;
+    EXCELLENT, WELL, MINIMUM, FAILED;
 }

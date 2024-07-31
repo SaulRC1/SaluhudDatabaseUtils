@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.reflections.Reflections;

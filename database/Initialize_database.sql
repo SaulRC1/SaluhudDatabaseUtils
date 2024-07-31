@@ -96,7 +96,7 @@ CREATE TABLE SALUHUD_USER_PERSONAL_DATA (
 
 CREATE TABLE SALUHUD_USER (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    username text NOT NULL,
+    username text NOT NULL UNIQUE,
     password text NOT NULL,
     email text NOT NULL UNIQUE
 );

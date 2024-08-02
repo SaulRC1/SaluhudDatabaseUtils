@@ -2,9 +2,9 @@ package com.uhu.saluhud.database.utils.models.user;
 
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.models.user.DAO.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.DAO.SleepHistoricalDAO;
-import com.uhu.saluhud.database.utils.models.user.DAO.SleepHistoricalEntryDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

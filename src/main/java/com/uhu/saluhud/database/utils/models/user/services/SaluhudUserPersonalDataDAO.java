@@ -1,6 +1,6 @@
-package com.uhu.saluhud.database.utils.models.user.DAO;
+package com.uhu.saluhud.database.utils.models.user.services;
 
-import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
+import com.uhu.saluhud.database.utils.models.user.SaluhudUserPersonalData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Session;
@@ -10,17 +10,17 @@ import org.hibernate.Transaction;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class SaluhudUserDAO
+public class SaluhudUserPersonalDataDAO
 {
 
     private final Session session;
 
-    public SaluhudUserDAO(Session session)
+    public SaluhudUserPersonalDataDAO(Session session)
     {
         this.session = session;
     }
 
-    public void saveUser(SaluhudUser user)
+    public void saveUser(SaluhudUserPersonalData user)
     {
         Transaction tx = session.beginTransaction();
         try
@@ -30,11 +30,11 @@ public class SaluhudUserDAO
         } catch (Exception e)
         {
             tx.rollback();
-            Logger.getLogger(SaluhudUserDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
+            Logger.getLogger(SaluhudUserPersonalDataDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
         }
     }
 
-    public void updateUser(SaluhudUser user)
+    public void updateUser(SaluhudUserPersonalData user)
     {
         Transaction tx = session.beginTransaction();
         try
@@ -44,11 +44,11 @@ public class SaluhudUserDAO
         } catch (Exception e)
         {
             tx.rollback();
-            Logger.getLogger(SaluhudUserDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
+            Logger.getLogger(SaluhudUserPersonalDataDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
         }
     }
 
-    public void deleteUser(SaluhudUser user)
+    public void deleteUser(SaluhudUserPersonalData user)
     {
         Transaction tx = session.beginTransaction();
         try
@@ -58,17 +58,17 @@ public class SaluhudUserDAO
         } catch (Exception e)
         {
             tx.rollback();
-            Logger.getLogger(SaluhudUserDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
+            Logger.getLogger(SaluhudUserPersonalDataDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
         }
     }
 
-    public SaluhudUser getUserById(long id)
+    public SaluhudUserPersonalData getSaluhudUserFitnessDataById(long id)
     {
-        SaluhudUser selectedUser;
+        SaluhudUserPersonalData selectedUser;
         Transaction tx = session.beginTransaction();
         try
         {
-            selectedUser = session.get(SaluhudUser.class, id);
+            selectedUser = session.get(SaluhudUserPersonalData.class, id);
             tx.commit();
             if (selectedUser == null)
             {
@@ -80,7 +80,7 @@ public class SaluhudUserDAO
         } catch (Exception e)
         {
             tx.rollback();
-            Logger.getLogger(SaluhudUserDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
+            Logger.getLogger(SaluhudUserPersonalDataDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
             return null;
         }
     }

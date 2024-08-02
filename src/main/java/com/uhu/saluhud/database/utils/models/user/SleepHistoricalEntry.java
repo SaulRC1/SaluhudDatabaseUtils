@@ -1,6 +1,5 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import jakarta.persistence.Column;
@@ -13,8 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+
 
 /**
  * This class represents one entry in the sleep historical stored in the
@@ -24,7 +22,7 @@ import org.hibernate.annotations.TypeDef;
  */
 @Entity
 @Table(name = "sleep_historical_entry")
-@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
+
 public class SleepHistoricalEntry implements Serializable
 {
 
@@ -43,7 +41,6 @@ public class SleepHistoricalEntry implements Serializable
     private double minutesSlept;
 
     @Enumerated(EnumType.STRING)
-    @Type(type = "pgsql_enum")
     @Column(name = "sleep_evaluation", nullable = false)
     private HistoricalEvaluation sleepEvaluation;
 

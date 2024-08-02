@@ -3,13 +3,13 @@ package com.uhu.saluhud.database.utils.models.nutrition.test;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.models.nutrition.DAO.AllergenicDAO;
-import com.uhu.saluhud.database.utils.models.nutrition.DAO.IngredientDAO;
-import com.uhu.saluhud.database.utils.models.nutrition.DAO.RecipeDAO;
-import com.uhu.saluhud.database.utils.models.nutrition.DAO.RecipeElaborationStepDAO;
+import com.uhu.saluhud.database.utils.models.nutrition.services.RecipeService;
+import com.uhu.saluhud.database.utils.models.nutrition.services.RecipeElaborationStepService;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
+import com.uhu.saluhud.database.utils.models.nutrition.services.AllergenicService;
+import com.uhu.saluhud.database.utils.models.nutrition.services.IngredientService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -34,10 +34,10 @@ public class SaluhudRecipeElaborationStepsTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            RecipeElaborationStepDAO recipeElaborationStepDAO = new RecipeElaborationStepDAO(session);
-            RecipeDAO recipeDAO = new RecipeDAO(session);
-            IngredientDAO ingredientDAO = new IngredientDAO(session);
-            AllergenicDAO allergenicDAO = new AllergenicDAO(session);
+            RecipeElaborationStepService recipeElaborationStepService = new RecipeElaborationStepService(session);
+            RecipeService recipeService = new RecipeService(session);
+            IngredientService ingredientService = new IngredientService(session);
+            AllergenicService allergenicService = new AllergenicService(session);
                         
             List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
             List<Ingredient> ingredients = new ArrayList<>();
@@ -48,9 +48,9 @@ public class SaluhudRecipeElaborationStepsTest
             Allergenic leche = new Allergenic("Leche");
             RecipeElaborationStep batirHuevos = new RecipeElaborationStep("Batir los huevos bien, a mano o con la batidora durante 5 min", 1); 
             
-            ingredientDAO.saveIngredient(harina);
-            ingredientDAO.saveIngredient(huevo);
-            allergenicDAO.saveAllergenic(leche);
+            ingredientService.saveIngredient(harina);
+            ingredientService.saveIngredient(huevo);
+            allergenicService.saveAllergenic(leche);
                         
             ingredients.add(huevo);
             ingredients.add(harina);
@@ -59,8 +59,8 @@ public class SaluhudRecipeElaborationStepsTest
             
             Recipe Bizcocho = new Recipe("Bizcocho", "Bizcocho de limón al horno", "Huevos, harina, sal, azucar, agua, aceite", ingredients, allergenics, elaborationSteps);
                     
-            recipeElaborationStepDAO.saveRecipeElaborationStep(batirHuevos);
-            recipeDAO.saveRecipe(Bizcocho);     
+            recipeElaborationStepService.saveRecipeElaborationStep(batirHuevos);
+            recipeService.saveRecipe(Bizcocho);     
             
             adminBootstrapper.closeSessionFactory();
         }

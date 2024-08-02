@@ -1,4 +1,4 @@
-package com.uhu.saluhud.database.utils.models.user.DAO;
+package com.uhu.saluhud.database.utils.models.user.services;
 
 import com.uhu.saluhud.database.utils.models.user.WeightHistorical;
 import java.util.logging.Level;

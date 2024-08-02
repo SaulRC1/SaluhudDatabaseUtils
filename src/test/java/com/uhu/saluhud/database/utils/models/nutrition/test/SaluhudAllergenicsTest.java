@@ -3,7 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition.test;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.models.nutrition.DAO.AllergenicDAO;
+import com.uhu.saluhud.database.utils.models.nutrition.services.AllergenicService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -24,13 +24,13 @@ public class SaluhudAllergenicsTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            AllergenicDAO allergenicDAO = new AllergenicDAO(session);
+            AllergenicService allergenicService = new AllergenicService(session);
             Allergenic pescado = new Allergenic("Pescado");
             Allergenic leche = new Allergenic("Leche");
             
-            allergenicDAO.saveAllergenic(pescado);
-            allergenicDAO.saveAllergenic(leche);
-            allergenicDAO.deleteAllergenic(leche);
+            allergenicService.saveAllergenic(pescado);
+            allergenicService.saveAllergenic(leche);
+            allergenicService.deleteAllergenic(leche);
             adminBootstrapper.closeSessionFactory();
         }
     }

@@ -2,9 +2,9 @@ package com.uhu.saluhud.database.utils.models.user;
 
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.models.user.DAO.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.DAO.SaluhudUserFitnessDataDAO;
-import com.uhu.saluhud.database.utils.models.user.DAO.SaluhudUserPersonalDataDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserFitnessDataDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserPersonalDataDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;

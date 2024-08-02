@@ -1,6 +1,5 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import jakarta.persistence.Column;
@@ -13,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.Type;
 
 /**
  * This class represents one entry in the historical daily steps stored in the
@@ -23,7 +21,6 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name = "daily_steps_historical_entry")
-@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
 public class DailyStepsHistoricalEntry implements Serializable
 {
 
@@ -42,7 +39,6 @@ public class DailyStepsHistoricalEntry implements Serializable
     private double kiloCaloriesBurned;
 
     @Enumerated(EnumType.STRING)
-    @Type(type = "pgsql_enum")
     @Column(name = "steps_evaluation", nullable = false)
     private HistoricalEvaluation stepEvaluation;
 

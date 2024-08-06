@@ -2,8 +2,8 @@ package com.uhu.saluhud.database.utils.models.user;
 
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalDAO;
-import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalEntryDAO;
+import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalService;
+import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalEntryService;
 import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class DailyStepsHistoricalTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            DailyStepsHistoricalDAO dailyStepsHistoricalDAO = new DailyStepsHistoricalDAO(session);
-            DailyStepsHistoricalEntryDAO dailyStepsHistoricalEntryDAO = new DailyStepsHistoricalEntryDAO(session);
+            DailyStepsHistoricalService dailyStepsHistoricalService = new DailyStepsHistoricalService();
+            DailyStepsHistoricalEntryService dailyStepsHistoricalEntryService = new DailyStepsHistoricalEntryService();
             SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
             LocalDate now = LocalDate.now();
             
@@ -46,8 +46,8 @@ public class DailyStepsHistoricalTest
             dailyStepsHistorical.setUser(user);
                        
             saluhudUserDAO.saveUser(user);
-            dailyStepsHistoricalDAO.saveDailyStepsHistorical(dailyStepsHistorical);
-            dailyStepsHistoricalEntryDAO.saveDailyStepsHistoricalEntry(entry);
+            dailyStepsHistoricalService.saveDailyStepsHistorical(dailyStepsHistorical);
+            dailyStepsHistoricalEntryService.saveDailyStepsHistoricalEntry(entry);
                       
             adminBootstrapper.closeSessionFactory();
         }

@@ -20,7 +20,7 @@ public class DailyStepsHistoricalService {
     @Autowired
     private DailyStepsHistoricalRepository dailyStepsHistoricalRepository;
 
-    private static final Logger logger = Logger.getLogger(DailyStepsHistoricalEntryService.class.getName());
+    private static final Logger logger = Logger.getLogger(DailyStepsHistoricalService.class.getName());
 
     /**
      * Guarda un nuevo historico de pasos diarios.

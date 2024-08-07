@@ -24,7 +24,7 @@ public class SaluhudAllergenicsTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            AllergenicService allergenicService = new AllergenicService(session);
+            AllergenicService allergenicService = new AllergenicService();
             Allergenic pescado = new Allergenic("Pescado");
             Allergenic leche = new Allergenic("Leche");
             

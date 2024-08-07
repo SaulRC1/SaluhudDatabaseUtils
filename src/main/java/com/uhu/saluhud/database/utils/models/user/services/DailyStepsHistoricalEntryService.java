@@ -105,7 +105,7 @@ public class DailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de pasos en el rango de fechas especificado.
      */
-    public Integer findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate) {
+    public int findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalStepsInDateRange(startDate, endDate);
     }
 
@@ -116,7 +116,7 @@ public class DailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de calorías quemadas en el rango de fechas especificado.
      */
-    public Double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate) {
+    public double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalCaloriesBurnedInDateRange(startDate, endDate);
     }
 

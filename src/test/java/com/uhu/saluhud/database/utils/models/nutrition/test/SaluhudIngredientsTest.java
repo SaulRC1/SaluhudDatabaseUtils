@@ -26,7 +26,7 @@ public class SaluhudIngredientsTest
 
         try ( Session session = adminSessionFactory.openSession())
         {
-            IngredientService ingredientService = new IngredientService(session);
+            IngredientService ingredientService = new IngredientService();
 
             Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
             Ingredient carneDeRes = new Ingredient("Carne de Res", 250, 26, 0, 17);

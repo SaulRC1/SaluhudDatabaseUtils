@@ -34,10 +34,10 @@ public class SaluhudRecipeElaborationStepsTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            RecipeElaborationStepService recipeElaborationStepService = new RecipeElaborationStepService(session);
-            RecipeService recipeService = new RecipeService(session);
-            IngredientService ingredientService = new IngredientService(session);
-            AllergenicService allergenicService = new AllergenicService(session);
+            RecipeElaborationStepService recipeElaborationStepService = new RecipeElaborationStepService();
+            RecipeService recipeService = new RecipeService();
+            IngredientService ingredientService = new IngredientService();
+            AllergenicService allergenicService = new AllergenicService();
                         
             List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
             List<Ingredient> ingredients = new ArrayList<>();

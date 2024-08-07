@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.services;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.models.repositories.nutrition.AllergenicRepository;
+import com.uhu.saluhud.database.utils.models.nutrition.repositories.AllergenicRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;

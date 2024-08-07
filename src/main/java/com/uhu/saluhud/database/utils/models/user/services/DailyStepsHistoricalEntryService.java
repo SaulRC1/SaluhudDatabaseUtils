@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.models.user.services;
 
-import com.uhu.saluhud.database.utils.models.repositories.user.DailyStepsHistoricalEntryRepository;
+import com.uhu.saluhud.database.utils.models.user.repositories.DailyStepsHistoricalEntryRepository;
 import com.uhu.saluhud.database.utils.models.user.DailyStepsHistoricalEntry;
 import com.uhu.saluhud.database.utils.models.user.HistoricalEvaluation;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.models.user.services;
 
-import com.uhu.saluhud.database.utils.models.repositories.user.SleepHistoricalRepository;
+import com.uhu.saluhud.database.utils.models.user.repositories.SleepHistoricalRepository;
 import com.uhu.saluhud.database.utils.models.user.SleepHistorical;
 import java.time.LocalDate;
 import java.util.List;

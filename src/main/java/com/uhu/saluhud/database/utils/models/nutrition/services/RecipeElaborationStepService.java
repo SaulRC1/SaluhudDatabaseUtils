@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.services;
 
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
-import com.uhu.saluhud.database.utils.models.repositories.nutrition.RecipeElaborationStepRepository;
+import com.uhu.saluhud.database.utils.models.nutrition.repositories.RecipeElaborationStepRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;

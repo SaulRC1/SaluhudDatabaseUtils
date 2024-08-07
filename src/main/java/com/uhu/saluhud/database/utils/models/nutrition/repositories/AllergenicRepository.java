@@ -1,4 +1,4 @@
-package com.uhu.saluhud.database.utils.models.repositories.nutrition;
+package com.uhu.saluhud.database.utils.models.nutrition.repositories;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import org.springframework.data.jpa.repository.JpaRepository;

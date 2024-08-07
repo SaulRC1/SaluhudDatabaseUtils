@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.models.user.services;
 
-import com.uhu.saluhud.database.utils.models.repositories.user.DailyStepsHistoricalRepository;
+import com.uhu.saluhud.database.utils.models.user.repositories.DailyStepsHistoricalRepository;
 import com.uhu.saluhud.database.utils.models.user.DailyStepsHistorical;
 import java.util.List;
 import java.util.Optional;

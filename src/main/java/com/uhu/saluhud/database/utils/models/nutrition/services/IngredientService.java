@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.services;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
-import com.uhu.saluhud.database.utils.models.repositories.nutrition.IngredientRepository;
+import com.uhu.saluhud.database.utils.models.nutrition.repositories.IngredientRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;

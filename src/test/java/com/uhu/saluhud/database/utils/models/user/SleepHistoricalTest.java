@@ -3,7 +3,7 @@ package com.uhu.saluhud.database.utils.models.user;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryDAO;
+//import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryDAO;
 import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class SleepHistoricalTest
         try ( Session session = adminSessionFactory.openSession())
         {
             SleepHistoricalService sleepHistoricalDAO = new SleepHistoricalService();
-            SleepHistoricalEntryDAO sleepHistoricalEntryDAO = new SleepHistoricalEntryDAO(session);
+            //SleepHistoricalEntryDAO sleepHistoricalEntryDAO = new SleepHistoricalEntryDAO(session);
             SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
             
             SleepHistorical sleepHistorical = new SleepHistorical();
@@ -47,7 +47,7 @@ public class SleepHistoricalTest
                        
             saluhudUserDAO.saveUser(user);
             sleepHistoricalDAO.saveSleepHistorical(sleepHistorical);
-            sleepHistoricalEntryDAO.saveSleepHistoricalEntry(entry);
+            //sleepHistoricalEntryDAO.saveSleepHistoricalEntry(entry);
             adminBootstrapper.closeSessionFactory();
         }
     }

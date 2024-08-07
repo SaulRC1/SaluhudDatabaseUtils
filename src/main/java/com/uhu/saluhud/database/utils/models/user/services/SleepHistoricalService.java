@@ -98,7 +98,7 @@ public class SleepHistoricalService {
      * @return The total sleep hours for the specified user within the specified
      * date range.
      */
-    public Double findTotalSleepHoursByUserIdAndDateRange(long userId, LocalDate startDate, LocalDate endDate) {
+    public double findTotalSleepHoursByUserIdAndDateRange(long userId, LocalDate startDate, LocalDate endDate) {
         return sleepHistoricalRepository.findTotalSleepHoursByUserIdAndDateRange(userId, startDate, endDate);
     }
 

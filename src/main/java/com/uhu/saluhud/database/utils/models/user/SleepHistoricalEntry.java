@@ -119,6 +119,15 @@ public class SleepHistoricalEntry implements Serializable
 
     /**
      * Setter for the parameter "hoursSlept"
+     * 
+     * @param hoursSlept the number of hours slept
+     */
+    public void setHoursSlept(int hoursSlept) {
+        this.hoursSlept = hoursSlept;
+    }
+
+    /**
+     * Setter for the parameter "hoursSlept"
      *
      * @param hoursSlept the new amount of hours slept by the user
      */
@@ -142,7 +151,7 @@ public class SleepHistoricalEntry implements Serializable
      *
      * @param minutesSlept the new amount of minutes slept by the user
      */
-    public void setminutesSlept(double minutesSlept)
+    public void setMinutesSlept(double minutesSlept)
     {
         this.minutesSlept = minutesSlept;
     }
@@ -162,7 +171,7 @@ public class SleepHistoricalEntry implements Serializable
      *
      * @param sleepEvaluation the new sleep evaluation of the entry
      */
-    public void setStepEvaluation(HistoricalEvaluation sleepEvaluation)
+    public void setSleepEvaluation(HistoricalEvaluation sleepEvaluation)
     {
         this.sleepEvaluation = sleepEvaluation;
     }

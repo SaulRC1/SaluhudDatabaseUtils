@@ -43,7 +43,7 @@ public class WeightHistoricalEntryDAO
         } catch (Exception e)
         {
             tx.rollback();
-            Logger.getLogger(SleepHistoricalEntryDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
+            Logger.getLogger(WeightHistoricalEntryDAO.class.getName()).log(Level.SEVERE, null, e.getCause());
         }
     }
 

@@ -29,5 +29,5 @@ public interface SleepHistoricalRepository extends JpaRepository<SleepHistorical
     List<SleepHistorical> findByMinEntries(@Param("minEntries") int minEntries);
 
     @Query("SELECT SUM(e.sleepHours) FROM SleepHistorical s JOIN s.entries e WHERE s.user.id = :userId AND e.entryDate BETWEEN :startDate AND :endDate")
-    Double findTotalSleepHoursByUserIdAndDateRange(@Param("userId") Long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    double findTotalSleepHoursByUserIdAndDateRange(@Param("userId") Long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

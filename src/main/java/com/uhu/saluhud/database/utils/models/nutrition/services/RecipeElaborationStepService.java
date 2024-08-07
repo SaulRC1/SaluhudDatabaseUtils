@@ -3,6 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition.services;
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
 import com.uhu.saluhud.database.utils.models.repositories.nutrition.RecipeElaborationStepRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +47,17 @@ public class RecipeElaborationStepService {
      */
     public void updateRecipeElaborationStep(RecipeElaborationStep step) {
         try {
-            this.recipeElaborationStepRepository.save(step);
+            Optional<RecipeElaborationStep> result = this.recipeElaborationStepRepository.findById(step.getId());
+
+            if (result.isPresent()) {
+                RecipeElaborationStep existingStep = result.get();
+                existingStep.setStepNumber(step.getStepNumber());
+                existingStep.setStepDescription(step.getStepDescription());
+
+                this.recipeElaborationStepRepository.save(existingStep);
+            }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error updating recipe elaboration step", e);
+            logger.log(Level.SEVERE, "Error updating RecipeElaborationStep", e);
             throw e;
         }
     }

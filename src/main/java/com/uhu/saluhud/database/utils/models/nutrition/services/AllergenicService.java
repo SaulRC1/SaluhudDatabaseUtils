@@ -3,6 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition.services;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.models.repositories.nutrition.AllergenicRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,16 @@ public class AllergenicService {
     @Transactional
     public void updateAllergenic(Allergenic allergenic) {
         try {
-            this.allergenicRepository.save(allergenic);
+            Optional<Allergenic> result = this.allergenicRepository.findById(allergenic.getId());
+
+            if (result.isPresent()) {
+                Allergenic existingAllergenic = result.get();
+                existingAllergenic.setName(allergenic.getName());
+
+                this.allergenicRepository.save(existingAllergenic);
+            }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error updating allergenic", e);
+            logger.log(Level.SEVERE, "Error updating Allergenic", e);
             throw e;
         }
     }

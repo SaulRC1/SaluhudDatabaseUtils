@@ -4,6 +4,7 @@ import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.models.repositories.nutrition.RecipeRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,22 @@ public class RecipeService {
     @Transactional
     public void updateRecipe(Recipe recipe) {
         try {
-            recipeRepository.save(recipe);
+            Optional<Recipe> result = this.recipeRepository.findById(recipe.getId());
+
+            if (result.isPresent()) {
+                Recipe existingRecipe = result.get();
+                existingRecipe.setName(recipe.getName());
+                existingRecipe.setDescription(recipe.getDescription());
+                existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
+                existingRecipe.setIngredients(recipe.getIngredients());
+                existingRecipe.setAllergenics(recipe.getAllergenics());
+                existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
+
+                this.recipeRepository.save(existingRecipe);
+            }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error updating Recipe", e);
-            throw e; // Re-throw the exception to trigger rollback
+            throw e;
         }
     }
 

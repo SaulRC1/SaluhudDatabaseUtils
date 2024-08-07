@@ -3,8 +3,8 @@ package com.uhu.saluhud.database.utils.models.user;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalDAO;
 import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class SleepHistoricalTest
         SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
         try ( Session session = adminSessionFactory.openSession())
         {
-            SleepHistoricalDAO sleepHistoricalDAO = new SleepHistoricalDAO(session);
+            SleepHistoricalService sleepHistoricalDAO = new SleepHistoricalService();
             SleepHistoricalEntryDAO sleepHistoricalEntryDAO = new SleepHistoricalEntryDAO(session);
             SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
             

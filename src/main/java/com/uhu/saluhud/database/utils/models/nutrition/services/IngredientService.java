@@ -3,6 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition.services;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.repositories.nutrition.IngredientRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,9 +147,20 @@ public class IngredientService {
     @Transactional
     public void updateIngredient(Ingredient ingredient) {
         try {
-            this.ingredientRepository.save(ingredient);
+            Optional<Ingredient> result = this.ingredientRepository.findById(ingredient.getId());
+
+            if (result.isPresent()) {
+                Ingredient existingIngredient = result.get();
+                existingIngredient.setName(ingredient.getName());
+                existingIngredient.setKilocalories(ingredient.getKilocalories());
+                existingIngredient.setProtein_amount(ingredient.getProteinAmount());
+                existingIngredient.setCarbohydrates_amount(ingredient.getCarbohydratesAmount());
+                existingIngredient.setFat_amount(ingredient.getFatAmount());
+
+                this.ingredientRepository.save(existingIngredient);
+            }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error updating ingredient", e);
+            logger.log(Level.SEVERE, "Error updating Ingredient", e);
             throw e;
         }
     }

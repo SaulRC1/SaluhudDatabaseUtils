@@ -17,6 +17,6 @@ public interface RecipeElaborationStepRepository extends JpaRepository<RecipeEla
     @Query("SELECT i FROM RecipeElaborationStep i WHERE i.id = :id")
     RecipeElaborationStep findOne(@Param("id") long id);
 
-    @Query("SELECT i FROM RecipeElaborationStep i WHERE i.step_number = :stepNumber")
+    @Query("SELECT i FROM RecipeElaborationStep i WHERE i.stepNumber = :stepNumber")
     RecipeElaborationStep findByStepNumber(@Param("stepNumber") int stepNumber);
 }

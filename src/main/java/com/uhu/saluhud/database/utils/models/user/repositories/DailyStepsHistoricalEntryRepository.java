@@ -18,21 +18,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DailyStepsHistoricalEntryRepository extends JpaRepository<DailyStepsHistoricalEntry, Long> {
 
-    @Query("SELECT d FROM daily_steps_historical_Entry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
+    @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
     List<DailyStepsHistoricalEntry> findEntriesByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query("SELECT d FROM daily_steps_historical_entry d WHERE d.stepEvaluation = :evaluation")
+    @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.stepEvaluation = :evaluation")
     List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(@Param("evaluation") HistoricalEvaluation evaluation);
 
-    @Query("SELECT SUM(d.doneSteps) FROM daily_steps_historical_entry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
+    @Query("SELECT SUM(d.doneSteps) FROM DailyStepsHistoricalEntry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
     int findTotalStepsInDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query("SELECT SUM(d.kiloCaloriesBurned) FROM daily_steps_historical_entry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
+    @Query("SELECT SUM(d.kiloCaloriesBurned) FROM DailyStepsHistoricalEntry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
     double findTotalCaloriesBurnedInDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query("SELECT d FROM daily_steps_historical_entry d WHERE d.dailyStepsHistorical.id = :historicalId")
+    @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.dailyStepsHistorical.id = :historicalId")
     List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(@Param("historicalId") Long historicalId);
 
-    @Query("SELECT d FROM daily_steps_historical_entry d WHERE d.doneSteps > :steps")
+    @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.doneSteps > :steps")
     List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(@Param("steps") int steps);
 }

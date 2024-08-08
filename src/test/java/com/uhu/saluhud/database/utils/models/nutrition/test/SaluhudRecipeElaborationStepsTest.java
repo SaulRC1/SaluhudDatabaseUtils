@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -20,11 +21,14 @@ import org.junit.jupiter.api.Test;
  */
 public class SaluhudRecipeElaborationStepsTest {
 
+    @Autowired
+    private RecipeElaborationStepService recipeElaborationStepService;
+    
+    @Autowired
+    private RecipeService recipeService;
+    
     @Test
     public void testRecipeElaborationStepsTestCRUD() {
-
-        RecipeElaborationStepService recipeElaborationStepService = new RecipeElaborationStepService();
-        RecipeService recipeService = new RecipeService();
         IngredientService ingredientService = new IngredientService();
         AllergenicService allergenicService = new AllergenicService();
 

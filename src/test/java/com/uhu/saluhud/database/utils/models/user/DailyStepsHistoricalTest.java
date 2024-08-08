@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -14,12 +15,17 @@ import org.junit.jupiter.api.Test;
  */
 public class DailyStepsHistoricalTest {
 
+    @Autowired
+    private DailyStepsHistoricalService dailyStepsHistoricalService;
+
+    @Autowired
+    private DailyStepsHistoricalEntryService dailyStepsHistoricalEntryService;
+
+    @Autowired
+    private SaluhudUserService saluhudUserService;
+
     @Test
     public void testDailyStepsHistoricalCRUD() {
-
-        DailyStepsHistoricalService dailyStepsHistoricalService = new DailyStepsHistoricalService();
-        DailyStepsHistoricalEntryService dailyStepsHistoricalEntryService = new DailyStepsHistoricalEntryService();
-        SaluhudUserService saluhudUserService = new SaluhudUserService();
         LocalDate now = LocalDate.now();
 
         HistoricalEvaluation stepsEvaluation = HistoricalEvaluation.EXCELLENT;

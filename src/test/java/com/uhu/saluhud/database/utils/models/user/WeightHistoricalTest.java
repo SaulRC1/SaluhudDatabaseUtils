@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -14,12 +15,17 @@ import org.junit.jupiter.api.Test;
  */
 public class WeightHistoricalTest {
 
+    @Autowired
+    private WeightHistoricalService weightHistoricalService;
+
+    @Autowired
+    private WeightHistoricalEntryService weightHistoricalEntryService;
+
+    @Autowired
+    private SaluhudUserService saluhudUserService;
+
     @Test
     public void testWeightHistoricalCRUD() {
-
-        WeightHistoricalService weightHistoricalService = new WeightHistoricalService();
-        WeightHistoricalEntryService weightHistoricalEntryService = new WeightHistoricalEntryService();
-        SaluhudUserService saluhudUserService = new SaluhudUserService();
 
         WeightHistorical weightHistorical = new WeightHistorical();
         LocalDate now = LocalDate.now();

@@ -3,6 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition.test;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.models.nutrition.services.AllergenicService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -10,10 +11,11 @@ import org.junit.jupiter.api.Test;
  */
 public class SaluhudAllergenicsTest {
 
+    @Autowired
+    private AllergenicService allergenicService;
+
     @Test
     public void testAllergenicCRUD() {
-
-        AllergenicService allergenicService = new AllergenicService();
         Allergenic pescado = new Allergenic("Pescado");
         Allergenic leche = new Allergenic("Leche");
 

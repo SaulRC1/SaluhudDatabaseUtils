@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -14,12 +15,17 @@ import org.junit.jupiter.api.Test;
  */
 public class SleepHistoricalTest {
 
+    @Autowired
+    private SleepHistoricalService sleepHistoricalService;
+
+    @Autowired
+    private SleepHistoricalEntryService sleepHistoricalEntryService;
+
+    @Autowired
+    private SaluhudUserService saluhudUserService;
+
     @Test
     public void testSleepHistoricalCRUD() {
-
-        SleepHistoricalService sleepHistoricalDAO = new SleepHistoricalService();
-        SleepHistoricalEntryService sleepHistoricalEntryDAO = new SleepHistoricalEntryService();
-        SaluhudUserService saluhudUserService = new SaluhudUserService();
 
         SleepHistorical sleepHistorical = new SleepHistorical();
         LocalDate now = LocalDate.now();
@@ -35,7 +41,7 @@ public class SleepHistoricalTest {
         sleepHistorical.setUser(user);
 
         saluhudUserService.saveUser(user);
-        sleepHistoricalDAO.saveSleepHistorical(sleepHistorical);
-        sleepHistoricalEntryDAO.saveSleepHistoricalEntry(entry);
+        sleepHistoricalService.saveSleepHistorical(sleepHistorical);
+        sleepHistoricalEntryService.saveSleepHistoricalEntry(entry);
     }
 }

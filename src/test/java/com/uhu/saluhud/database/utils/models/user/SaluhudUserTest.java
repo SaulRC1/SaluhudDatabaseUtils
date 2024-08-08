@@ -4,6 +4,7 @@ import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserFitnessDat
 import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserPersonalDataService;
 import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -11,12 +12,17 @@ import org.junit.jupiter.api.Test;
  */
 public class SaluhudUserTest {
 
+    @Autowired
+    private SaluhudUserService saluhudUserService;
+
+    @Autowired
+    private SaluhudUserFitnessDataService saluhudUserFitnessDataService;
+
+    @Autowired
+    private SaluhudUserPersonalDataService saluhudPersonalDataService;
+
     @Test
     public void testUserCRUD() {
-
-        SaluhudUserService saluhudUserService = new SaluhudUserService();
-        SaluhudUserFitnessDataService saluhudUserFitnessDataService = new SaluhudUserFitnessDataService();
-        SaluhudUserPersonalDataService saluhudPersonalDataService = new SaluhudUserPersonalDataService();
 
         SaluhudUserPersonalData userPersonalData = new SaluhudUserPersonalData("Saul", "Rodríguez", 123456789);
         SaluhudUserFitnessData userFitnessData = new SaluhudUserFitnessData(90, 170, "Men", 22, "Hectomorfo", 2, 8, 10000, 2100, "10%");

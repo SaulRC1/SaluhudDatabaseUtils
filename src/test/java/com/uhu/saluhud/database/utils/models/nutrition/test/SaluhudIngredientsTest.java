@@ -1,13 +1,10 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.services.IngredientService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -15,11 +12,11 @@ import org.junit.jupiter.api.Test;
  */
 public class SaluhudIngredientsTest {
 
+    @Autowired
+    private IngredientService ingredientService;
+
     @Test
     public void testIngredientCRUD() {
-
-        IngredientService ingredientService = new IngredientService();
-
         Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
         Ingredient carneDeRes = new Ingredient("Carne de Res", 250, 26, 0, 17);
         Ingredient huevo = new Ingredient("Huevo", 68, 6, 0, 5);

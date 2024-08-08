@@ -1,7 +1,5 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.models.nutrition.services.RecipeService;
 import com.uhu.saluhud.database.utils.models.nutrition.services.RecipeElaborationStepService;
@@ -14,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 /**

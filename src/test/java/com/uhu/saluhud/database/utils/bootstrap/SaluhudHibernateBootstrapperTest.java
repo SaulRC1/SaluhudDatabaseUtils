@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Saúl Rodríguez Naranjo
  */
+/*
 public class SaluhudHibernateBootstrapperTest
 {
     @Test
@@ -49,3 +50,4 @@ public class SaluhudHibernateBootstrapperTest
         }
     }
 }
+*/

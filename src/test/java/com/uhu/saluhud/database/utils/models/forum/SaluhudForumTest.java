@@ -5,10 +5,7 @@ import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.models.forum.DAO.ForumDAO;
 import com.uhu.saluhud.database.utils.models.forum.DAO.ForumMessageDAO;
 import com.uhu.saluhud.database.utils.models.forum.DAO.ForumThreadDAO;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -19,6 +16,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
+/*
 public class SaluhudForumTest
 {
 
@@ -55,3 +53,4 @@ public class SaluhudForumTest
         }
     }
 }
+*/

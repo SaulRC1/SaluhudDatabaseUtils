@@ -1,53 +1,40 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalDAO;
-import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalEntryDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
+import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalEntryService;
+import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class WeightHistoricalTest
-{
+public class WeightHistoricalTest {
 
     @Test
-    public void testWeightHistoricalCRUD()
-    {
-        SaluhudHibernateBootstrapper adminBootstrapper
-                = SaluhudAdministratorHibernateBootstrapper.getSaluhudAdministratorHibernateBootstrapperInstance();
+    public void testWeightHistoricalCRUD() {
 
-        SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
-        try ( Session session = adminSessionFactory.openSession())
-        {
-            WeightHistoricalDAO weightHistoricalDAO = new WeightHistoricalDAO(session);
-            WeightHistoricalEntryDAO weightHistoricalEntryDAO = new WeightHistoricalEntryDAO(session);
-            SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
-            
-            WeightHistorical weightHistorical = new WeightHistorical();
-            LocalDate now = LocalDate.now(); 
-            
-            List<WeightHistoricalEntry> entries = new ArrayList<>();
-            WeightHistoricalEntry entry = new WeightHistoricalEntry(now, 75, 181, 2200, weightHistorical);
-            entries.add(entry);
-            
-            weightHistorical.setEntries(entries);
-            
-            SaluhudUser user = saluhudUserDAO.getUserById(7);
-            weightHistorical.setUser(user);
-            
-            saluhudUserDAO.saveUser(user);
-            weightHistoricalDAO.saveWeightHistorical(weightHistorical);
-            weightHistoricalEntryDAO.saveWeightHistoricalEntry(entry);
-            adminBootstrapper.closeSessionFactory();
-        }
+        WeightHistoricalService weightHistoricalService = new WeightHistoricalService();
+        WeightHistoricalEntryService weightHistoricalEntryService = new WeightHistoricalEntryService();
+        SaluhudUserService saluhudUserService = new SaluhudUserService();
+
+        WeightHistorical weightHistorical = new WeightHistorical();
+        LocalDate now = LocalDate.now();
+
+        List<WeightHistoricalEntry> entries = new ArrayList<>();
+        WeightHistoricalEntry entry = new WeightHistoricalEntry(now, 75, 181, 2200, weightHistorical);
+        entries.add(entry);
+
+        weightHistorical.setEntries(entries);
+
+        SaluhudUser user = saluhudUserService.getUserById(7);
+        weightHistorical.setUser(user);
+
+        saluhudUserService.saveUser(user);
+        weightHistoricalService.saveWeightHistorical(weightHistorical);
+        weightHistoricalEntryService.saveWeightHistoricalEntry(entry);
     }
 }

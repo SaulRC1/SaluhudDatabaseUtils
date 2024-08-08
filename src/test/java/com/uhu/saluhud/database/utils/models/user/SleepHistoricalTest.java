@@ -2,8 +2,8 @@ package com.uhu.saluhud.database.utils.models.user;
 
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudAdministratorHibernateBootstrapper;
 import com.uhu.saluhud.database.utils.bootstrap.SaluhudHibernateBootstrapper;
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserDAO;
-import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryDAO;
+import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
+import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryService;
 import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,39 +16,30 @@ import org.junit.jupiter.api.Test;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class SleepHistoricalTest
-{
+public class SleepHistoricalTest {
 
     @Test
-    public void testSleepHistoricalCRUD()
-    {
-        SaluhudHibernateBootstrapper adminBootstrapper
-                = SaluhudAdministratorHibernateBootstrapper.getSaluhudAdministratorHibernateBootstrapperInstance();
+    public void testSleepHistoricalCRUD() {
 
-        SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
-        try ( Session session = adminSessionFactory.openSession())
-        {
-            SleepHistoricalService sleepHistoricalDAO = new SleepHistoricalService();
-            SleepHistoricalEntryDAO sleepHistoricalEntryDAO = new SleepHistoricalEntryDAO(session);
-            SaluhudUserDAO saluhudUserDAO = new SaluhudUserDAO(session);
-            
-            SleepHistorical sleepHistorical = new SleepHistorical();
-            LocalDate now = LocalDate.now();           
-            HistoricalEvaluation sleepEvaluation = HistoricalEvaluation.MINIMUM;
-            
-            List<SleepHistoricalEntry> entries = new ArrayList<>();           
-            SleepHistoricalEntry entry = new SleepHistoricalEntry(now, 6, 23, sleepEvaluation, sleepHistorical);
-            entries.add(entry);
-            
-            sleepHistorical.setEntries(entries);
-            
-            SaluhudUser user = saluhudUserDAO.getUserById(7);
-            sleepHistorical.setUser(user);
-                       
-            saluhudUserDAO.saveUser(user);
-            sleepHistoricalDAO.saveSleepHistorical(sleepHistorical);
-            sleepHistoricalEntryDAO.saveSleepHistoricalEntry(entry);
-            adminBootstrapper.closeSessionFactory();
-        }
+        SleepHistoricalService sleepHistoricalDAO = new SleepHistoricalService();
+        SleepHistoricalEntryService sleepHistoricalEntryDAO = new SleepHistoricalEntryService();
+        SaluhudUserService saluhudUserService = new SaluhudUserService();
+
+        SleepHistorical sleepHistorical = new SleepHistorical();
+        LocalDate now = LocalDate.now();
+        HistoricalEvaluation sleepEvaluation = HistoricalEvaluation.MINIMUM;
+
+        List<SleepHistoricalEntry> entries = new ArrayList<>();
+        SleepHistoricalEntry entry = new SleepHistoricalEntry(now, 6, 23, sleepEvaluation, sleepHistorical);
+        entries.add(entry);
+
+        sleepHistorical.setEntries(entries);
+
+        SaluhudUser user = saluhudUserService.getUserById(7);
+        sleepHistorical.setUser(user);
+
+        saluhudUserService.saveUser(user);
+        sleepHistoricalDAO.saveSleepHistorical(sleepHistorical);
+        sleepHistoricalEntryDAO.saveSleepHistoricalEntry(entry);
     }
 }

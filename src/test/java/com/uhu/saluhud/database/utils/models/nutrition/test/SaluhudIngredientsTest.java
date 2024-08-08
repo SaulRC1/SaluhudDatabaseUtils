@@ -13,42 +13,31 @@ import org.junit.jupiter.api.Test;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class SaluhudIngredientsTest
-{
+public class SaluhudIngredientsTest {
 
     @Test
-    public void testIngredientCRUD()
-    {
-        SaluhudHibernateBootstrapper adminBootstrapper
-                = SaluhudAdministratorHibernateBootstrapper.getSaluhudAdministratorHibernateBootstrapperInstance();
+    public void testIngredientCRUD() {
 
-        SessionFactory adminSessionFactory = adminBootstrapper.getSessionFactory();
+        IngredientService ingredientService = new IngredientService();
 
-        try ( Session session = adminSessionFactory.openSession())
-        {
-            IngredientService ingredientService = new IngredientService();
+        Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
+        Ingredient carneDeRes = new Ingredient("Carne de Res", 250, 26, 0, 17);
+        Ingredient huevo = new Ingredient("Huevo", 68, 6, 0, 5);
+        Ingredient lechuga = new Ingredient("Lechuga", 5, 1, 2, 0);
 
-            Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
-            Ingredient carneDeRes = new Ingredient("Carne de Res", 250, 26, 0, 17);
-            Ingredient huevo = new Ingredient("Huevo", 68, 6, 0, 5);
-            Ingredient lechuga = new Ingredient("Lechuga", 5, 1, 2, 0);
+        ingredientService.saveIngredient(harina);
+        ingredientService.saveIngredient(carneDeRes);
+        ingredientService.saveIngredient(huevo);
+        ingredientService.saveIngredient(lechuga);
 
-            ingredientService.saveIngredient(harina);
-            ingredientService.saveIngredient(carneDeRes);
-            ingredientService.saveIngredient(huevo);
-            ingredientService.saveIngredient(lechuga);
-            
-            Ingredient ingredientSelectedById = ingredientService.getIngredientById(harina.getId());
-            assertEquals(ingredientSelectedById.getName(), "Harina");
+        Ingredient ingredientSelectedById = ingredientService.getIngredientById(harina.getId());
+        assertEquals(ingredientSelectedById.getName(), "Harina");
 
-            Ingredient ingredientSelectedByName = ingredientService.getIngredientByName("Huevo");
-            assertEquals(ingredientSelectedByName.getName(), "Huevo");
+        Ingredient ingredientSelectedByName = ingredientService.getIngredientByName("Huevo");
+        assertEquals(ingredientSelectedByName.getName(), "Huevo");
 
-            harina.setCarbohydrates_amount(75);
-            ingredientService.updateIngredient(harina);
-            ingredientService.deleteIngredient(lechuga);
-            
-            adminBootstrapper.closeSessionFactory();
-        }
+        harina.setCarbohydrates_amount(75);
+        ingredientService.updateIngredient(harina);
+        ingredientService.deleteIngredient(lechuga);
     }
 }

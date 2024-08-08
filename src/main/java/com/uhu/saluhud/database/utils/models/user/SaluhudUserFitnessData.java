@@ -196,7 +196,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @return the daily kilocalorie objective for the user
      */
-    public int getdailyKilocalorieObjective()
+    public int getDailyKilocaloriesObjective()
     {
         return dailyKilocaloriesObjective;
     }

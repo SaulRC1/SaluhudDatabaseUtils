@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration(proxyBeanMethods = false)
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.uhu.saluhud.database.utils.models",
+        basePackages = "com.uhu.saluhud.database.utils.repositories.saluhud.admin",
         entityManagerFactoryRef = "saluhudAdminEntityManagerFactory",
         transactionManagerRef = "saluhudAdminTransactionManager"
 )

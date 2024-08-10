@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.models.nutrition.services.AllergenicService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.AllergenicService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

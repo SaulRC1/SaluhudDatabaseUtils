@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
-import com.uhu.saluhud.database.utils.models.nutrition.services.IngredientService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.IngredientService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

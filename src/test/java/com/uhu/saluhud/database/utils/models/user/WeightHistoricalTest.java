@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
-import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalEntryService;
-import com.uhu.saluhud.database.utils.models.user.services.WeightHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.WeightHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.WeightHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

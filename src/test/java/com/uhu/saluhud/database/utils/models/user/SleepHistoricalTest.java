@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
-import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalEntryService;
-import com.uhu.saluhud.database.utils.models.user.services.SleepHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SleepHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SleepHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

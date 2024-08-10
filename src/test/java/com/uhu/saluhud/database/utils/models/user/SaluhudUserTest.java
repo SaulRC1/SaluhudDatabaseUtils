@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserFitnessDataService;
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserPersonalDataService;
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserFitnessDataService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserPersonalDataService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

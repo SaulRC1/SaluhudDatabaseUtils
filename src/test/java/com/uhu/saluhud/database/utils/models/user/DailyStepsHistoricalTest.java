@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalService;
-import com.uhu.saluhud.database.utils.models.user.services.DailyStepsHistoricalEntryService;
-import com.uhu.saluhud.database.utils.models.user.services.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.DailyStepsHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.DailyStepsHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

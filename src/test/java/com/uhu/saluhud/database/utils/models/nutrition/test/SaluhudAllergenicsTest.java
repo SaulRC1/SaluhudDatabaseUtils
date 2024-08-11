@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.AllergenicService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminAllergenicService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SaluhudAllergenicsTest {
 
     @Autowired
-    private AllergenicService allergenicService;
+    private SaluhudAdminAllergenicService allergenicService;
 
     @Test
     public void testAllergenicCRUD() {

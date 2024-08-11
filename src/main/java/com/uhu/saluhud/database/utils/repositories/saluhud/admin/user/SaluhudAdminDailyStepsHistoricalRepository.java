@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface DailyStepsHistoricalRepository extends JpaRepository<DailyStepsHistorical, Long> {
+public interface SaluhudAdminDailyStepsHistoricalRepository extends JpaRepository<DailyStepsHistorical, Long> {
 
     @Query("SELECT d FROM DailyStepsHistorical d WHERE d.user.id = :userId")
     List<DailyStepsHistorical> findAllByUserId(@Param("userId") Long userId);

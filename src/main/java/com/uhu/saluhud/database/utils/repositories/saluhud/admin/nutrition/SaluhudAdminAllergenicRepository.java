@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface AllergenicRepository extends JpaRepository<Allergenic, Long> {
+public interface SaluhudAdminAllergenicRepository extends JpaRepository<Allergenic, Long> {
 
     @Query("SELECT i FROM Allergenic i WHERE i.id = :id")
     Allergenic findOne(@Param("id") long id);

@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
 import com.uhu.saluhud.database.utils.models.user.SaluhudUserPersonalData;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudUserPersonalDataRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -9,18 +8,19 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminUserPersonalDataRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class SaluhudUserPersonalDataService {
+public class SaluhudAdminUserPersonalDataService {
 
     @Autowired
-    private SaluhudUserPersonalDataRepository personalDataRepository;
+    private SaluhudAdminUserPersonalDataRepository personalDataRepository;
 
-    private static final Logger logger = Logger.getLogger(SaluhudUserPersonalDataService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminUserPersonalDataService.class.getName());
 
     /**
      * Find all personal data records.

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface RecipeElaborationStepRepository extends JpaRepository<RecipeElaborationStep, Long> {
+public interface SaluhudAdminRecipeElaborationStepRepository extends JpaRepository<RecipeElaborationStep, Long> {
 
     @Query("SELECT i FROM RecipeElaborationStep i WHERE i.id = :id")
     RecipeElaborationStep findOne(@Param("id") long id);

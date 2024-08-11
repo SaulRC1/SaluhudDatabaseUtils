@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.AllergenicRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -9,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminAllergenicRepository;
 
 /**
  * Service class for managing allergenics.
@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class AllergenicService {
+public class SaluhudAdminAllergenicService {
 
     @Autowired
-    private AllergenicRepository allergenicRepository;
+    private SaluhudAdminAllergenicRepository allergenicRepository;
 
-    private static final Logger logger = Logger.getLogger(AllergenicService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminAllergenicService.class.getName());
 
     public List<Allergenic> findAllAllergenics() {
         return this.allergenicRepository.findAll();

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
+public interface SaluhudAdminIngredientRepository extends JpaRepository<Ingredient, Long> {
     
     @Query("SELECT i FROM Ingredient i WHERE i.id = :id")
     Ingredient findOne(@Param("id") long id);

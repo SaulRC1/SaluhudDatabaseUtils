@@ -2,7 +2,6 @@ package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.RecipeRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeRepository;
 
 /**
  * Service class for managing recipes.
@@ -17,12 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class RecipeService {
+public class SaluhudAdminRecipeService {
 
     @Autowired
-    private RecipeRepository recipeRepository;
+    private SaluhudAdminRecipeRepository recipeRepository;
 
-    private static final Logger logger = Logger.getLogger(RecipeService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminRecipeService.class.getName());
 
     public List<Recipe> findAllRecipes() {
         return this.recipeRepository.findAll();

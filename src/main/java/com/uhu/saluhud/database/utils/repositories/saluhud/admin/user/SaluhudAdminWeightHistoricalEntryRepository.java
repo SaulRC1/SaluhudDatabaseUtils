@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface WeightHistoricalEntryRepository extends JpaRepository<WeightHistoricalEntry, Long> {
+public interface SaluhudAdminWeightHistoricalEntryRepository extends JpaRepository<WeightHistoricalEntry, Long> {
 
     List<WeightHistoricalEntry> findByWeightHistoricalId(Long weightHistoricalId);
 

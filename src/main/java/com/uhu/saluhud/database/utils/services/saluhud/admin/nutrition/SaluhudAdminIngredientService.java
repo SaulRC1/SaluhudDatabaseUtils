@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.IngredientRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -9,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminIngredientRepository;
 
 /**
  * Service class for managing ingredients.
@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class IngredientService {
+public class SaluhudAdminIngredientService {
 
     @Autowired
-    private IngredientRepository ingredientRepository;
+    private SaluhudAdminIngredientRepository ingredientRepository;
 
-    private static final Logger logger = Logger.getLogger(IngredientService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminIngredientService.class.getName());
 
     /**
      * Finds all ingredients.

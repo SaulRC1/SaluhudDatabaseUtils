@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SleepHistoricalEntryRepository extends JpaRepository<SleepHistoricalEntry, Long> {
+public interface SaluhudAdminSleepHistoricalEntryRepository extends JpaRepository<SleepHistoricalEntry, Long> {
 
     @Query("SELECT s FROM SleepHistoricalEntry s WHERE s.entryDate BETWEEN :startDate AND :endDate")
     List<SleepHistoricalEntry> findEntriesByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);

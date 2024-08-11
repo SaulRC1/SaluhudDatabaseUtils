@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SleepHistoricalRepository extends JpaRepository<SleepHistorical, Long> {
+public interface SaluhudAdminSleepHistoricalRepository extends JpaRepository<SleepHistorical, Long> {
 
     @Query("SELECT s FROM SleepHistorical s WHERE s.user = :userId")
     SleepHistorical findByUserId(@Param("userId") Long userId);

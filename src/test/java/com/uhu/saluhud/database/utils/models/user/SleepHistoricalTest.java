@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SleepHistoricalEntryService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SleepHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminSleepHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminSleepHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SleepHistoricalTest {
 
     @Autowired
-    private SleepHistoricalService sleepHistoricalService;
+    private SaluhudAdminSleepHistoricalService sleepHistoricalService;
 
     @Autowired
-    private SleepHistoricalEntryService sleepHistoricalEntryService;
+    private SaluhudAdminSleepHistoricalEntryService sleepHistoricalEntryService;
 
     @Autowired
-    private SaluhudUserService saluhudUserService;
+    private SaluhudAdminUserService saluhudUserService;
 
     @Test
     public void testSleepHistoricalCRUD() {

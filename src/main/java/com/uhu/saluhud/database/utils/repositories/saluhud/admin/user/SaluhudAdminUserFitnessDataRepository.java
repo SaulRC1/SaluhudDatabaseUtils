@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SaluhudUserFitnessDataRepository extends JpaRepository<SaluhudUserFitnessData, Long> {
+public interface SaluhudAdminUserFitnessDataRepository extends JpaRepository<SaluhudUserFitnessData, Long> {
 
     List<SaluhudUserFitnessData> findByBiologicalSex(String biologicalSex);
 

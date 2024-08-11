@@ -1,6 +1,5 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SleepHistoricalRepository;
 import com.uhu.saluhud.database.utils.models.user.SleepHistorical;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,18 +9,19 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminSleepHistoricalRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class SleepHistoricalService {
+public class SaluhudAdminSleepHistoricalService {
 
     @Autowired
-    private SleepHistoricalRepository sleepHistoricalRepository;
+    private SaluhudAdminSleepHistoricalRepository sleepHistoricalRepository;
 
-    private static final Logger logger = Logger.getLogger(SleepHistoricalService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminSleepHistoricalService.class.getName());
 
     /**
      * Find all SleepHistorical records.

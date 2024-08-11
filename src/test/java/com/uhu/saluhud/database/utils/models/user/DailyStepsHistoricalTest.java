@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.DailyStepsHistoricalService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.DailyStepsHistoricalEntryService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DailyStepsHistoricalTest {
 
     @Autowired
-    private DailyStepsHistoricalService dailyStepsHistoricalService;
+    private SaluhudAdminDailyStepsHistoricalService dailyStepsHistoricalService;
 
     @Autowired
-    private DailyStepsHistoricalEntryService dailyStepsHistoricalEntryService;
+    private SaluhudAdminDailyStepsHistoricalEntryService dailyStepsHistoricalEntryService;
 
     @Autowired
-    private SaluhudUserService saluhudUserService;
+    private SaluhudAdminUserService saluhudUserService;
 
     @Test
     public void testDailyStepsHistoricalCRUD() {

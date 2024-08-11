@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface DailyStepsHistoricalEntryRepository extends JpaRepository<DailyStepsHistoricalEntry, Long> {
+public interface SaluhudAdminDailyStepsHistoricalEntryRepository extends JpaRepository<DailyStepsHistoricalEntry, Long> {
 
     @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.entryDate BETWEEN :startDate AND :endDate")
     List<DailyStepsHistoricalEntry> findEntriesByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);

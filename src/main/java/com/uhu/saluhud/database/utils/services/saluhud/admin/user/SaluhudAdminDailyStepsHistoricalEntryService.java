@@ -1,6 +1,5 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.DailyStepsHistoricalEntryRepository;
 import com.uhu.saluhud.database.utils.models.user.DailyStepsHistoricalEntry;
 import com.uhu.saluhud.database.utils.models.user.HistoricalEvaluation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,18 +10,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalEntryRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class DailyStepsHistoricalEntryService {
+public class SaluhudAdminDailyStepsHistoricalEntryService {
 
     @Autowired
-    private DailyStepsHistoricalEntryRepository dailyStepsHistoricalEntryRepository;
+    private SaluhudAdminDailyStepsHistoricalEntryRepository dailyStepsHistoricalEntryRepository;
 
-    private static final Logger logger = Logger.getLogger(DailyStepsHistoricalEntryService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminDailyStepsHistoricalEntryService.class.getName());
 
     /**
      * Guarda una nueva entrada de pasos diarios.

@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserFitnessDataService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserPersonalDataService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserFitnessDataService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserPersonalDataService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SaluhudUserTest {
 
     @Autowired
-    private SaluhudUserService saluhudUserService;
+    private SaluhudAdminUserService saluhudUserService;
 
     @Autowired
-    private SaluhudUserFitnessDataService saluhudUserFitnessDataService;
+    private SaluhudAdminUserFitnessDataService saluhudUserFitnessDataService;
 
     @Autowired
-    private SaluhudUserPersonalDataService saluhudPersonalDataService;
+    private SaluhudAdminUserPersonalDataService saluhudPersonalDataService;
 
     @Test
     public void testUserCRUD() {

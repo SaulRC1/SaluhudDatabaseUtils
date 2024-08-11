@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
 import com.uhu.saluhud.database.utils.models.user.SaluhudUserFitnessData;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudUserFitnessDataRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -9,18 +8,19 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminUserFitnessDataRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class SaluhudUserFitnessDataService {
+public class SaluhudAdminUserFitnessDataService {
 
     @Autowired
-    private SaluhudUserFitnessDataRepository fitnessDataRepository;
+    private SaluhudAdminUserFitnessDataRepository fitnessDataRepository;
 
-    private static final Logger logger = Logger.getLogger(SaluhudUserFitnessDataService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminUserFitnessDataService.class.getName());
 
     /**
      * Find all fitness data records.

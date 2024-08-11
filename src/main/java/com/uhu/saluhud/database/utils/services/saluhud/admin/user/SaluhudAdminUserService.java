@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
 import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudUserRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -9,18 +8,19 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminUserRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class SaluhudUserService {
+public class SaluhudAdminUserService {
 
     @Autowired
-    private SaluhudUserRepository saluhudUserRepository;
+    private SaluhudAdminUserRepository saluhudUserRepository;
 
-    private static final Logger logger = Logger.getLogger(SaluhudUserService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminUserService.class.getName());
 
     /**
      * Retrieve all SaluhudUsers.

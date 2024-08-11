@@ -2,7 +2,6 @@ package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
 import com.uhu.saluhud.database.utils.models.user.HistoricalEvaluation;
 import com.uhu.saluhud.database.utils.models.user.SleepHistoricalEntry;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SleepHistoricalEntryRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -10,17 +9,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminSleepHistoricalEntryRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class SleepHistoricalEntryService {
+public class SaluhudAdminSleepHistoricalEntryService {
 
     @Autowired
-    private SleepHistoricalEntryRepository sleepHistoricalEntryRepository;
+    private SaluhudAdminSleepHistoricalEntryRepository sleepHistoricalEntryRepository;
 
-    private static final Logger logger = Logger.getLogger(SleepHistoricalEntryService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminSleepHistoricalEntryService.class.getName());
 
     /**
      * Finds all SleepHistoricalEntry records within a given date range.

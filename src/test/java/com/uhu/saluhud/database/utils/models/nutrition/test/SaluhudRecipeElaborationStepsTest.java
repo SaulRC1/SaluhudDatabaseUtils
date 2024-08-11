@@ -1,13 +1,13 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.RecipeService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.RecipeElaborationStepService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminRecipeService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminRecipeElaborationStepService;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.AllergenicService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.IngredientService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminAllergenicService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,15 +22,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SaluhudRecipeElaborationStepsTest {
 
     @Autowired
-    private RecipeElaborationStepService recipeElaborationStepService;
+    private SaluhudAdminRecipeElaborationStepService recipeElaborationStepService;
     
     @Autowired
-    private RecipeService recipeService;
+    private SaluhudAdminRecipeService recipeService;
     
     @Test
     public void testRecipeElaborationStepsTestCRUD() {
-        IngredientService ingredientService = new IngredientService();
-        AllergenicService allergenicService = new AllergenicService();
+        SaluhudAdminIngredientService ingredientService = new SaluhudAdminIngredientService();
+        SaluhudAdminAllergenicService allergenicService = new SaluhudAdminAllergenicService();
 
         List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();

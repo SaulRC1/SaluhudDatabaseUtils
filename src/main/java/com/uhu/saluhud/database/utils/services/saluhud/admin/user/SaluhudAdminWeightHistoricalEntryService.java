@@ -1,7 +1,6 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.user;
 
 import com.uhu.saluhud.database.utils.models.user.WeightHistoricalEntry;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.WeightHistoricalEntryRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -9,17 +8,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminWeightHistoricalEntryRepository;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class WeightHistoricalEntryService {
+public class SaluhudAdminWeightHistoricalEntryService {
 
     @Autowired
-    private WeightHistoricalEntryRepository weightHistoricalEntryRepository;
+    private SaluhudAdminWeightHistoricalEntryRepository weightHistoricalEntryRepository;
 
-    private static final Logger logger = Logger.getLogger(WeightHistoricalEntryService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminWeightHistoricalEntryService.class.getName());
 
     /**
      * Find all weight historical entries.

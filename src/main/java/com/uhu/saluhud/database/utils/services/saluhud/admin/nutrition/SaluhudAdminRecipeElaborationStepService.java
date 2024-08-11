@@ -1,13 +1,13 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
-import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.RecipeElaborationStepRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeElaborationStepRepository;
 
 /**
  * Service class for managing recipe elaboration steps.
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-public class RecipeElaborationStepService {
+public class SaluhudAdminRecipeElaborationStepService {
 
     @Autowired
-    private RecipeElaborationStepRepository recipeElaborationStepRepository;
+    private SaluhudAdminRecipeElaborationStepRepository recipeElaborationStepRepository;
 
-    private static final Logger logger = Logger.getLogger(RecipeElaborationStepService.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudAdminRecipeElaborationStepService.class.getName());
 
     /**
      * Finds all recipe elaboration steps.

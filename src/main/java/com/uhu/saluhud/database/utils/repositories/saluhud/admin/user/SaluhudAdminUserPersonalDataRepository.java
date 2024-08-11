@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SaluhudUserPersonalDataRepository extends JpaRepository<SaluhudUserPersonalData, Long> {
+public interface SaluhudAdminUserPersonalDataRepository extends JpaRepository<SaluhudUserPersonalData, Long> {
 
     List<SaluhudUserPersonalData> findByName(String name);
 

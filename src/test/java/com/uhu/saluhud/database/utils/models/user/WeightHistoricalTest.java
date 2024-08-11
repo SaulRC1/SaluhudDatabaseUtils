@@ -1,8 +1,8 @@
 package com.uhu.saluhud.database.utils.models.user;
 
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudUserService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.WeightHistoricalEntryService;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.user.WeightHistoricalService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminWeightHistoricalEntryService;
+import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminWeightHistoricalService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class WeightHistoricalTest {
 
     @Autowired
-    private WeightHistoricalService weightHistoricalService;
+    private SaluhudAdminWeightHistoricalService weightHistoricalService;
 
     @Autowired
-    private WeightHistoricalEntryService weightHistoricalEntryService;
+    private SaluhudAdminWeightHistoricalEntryService weightHistoricalEntryService;
 
     @Autowired
-    private SaluhudUserService saluhudUserService;
+    private SaluhudAdminUserService saluhudUserService;
 
     @Test
     public void testWeightHistoricalCRUD() {

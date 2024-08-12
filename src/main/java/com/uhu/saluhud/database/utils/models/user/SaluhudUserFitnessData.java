@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the fitness information of an user stored in the
@@ -53,6 +54,10 @@ public class SaluhudUserFitnessData implements Serializable
 
     @Column(name = "body_mass_index")
     private String bodyMassIndex;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -312,4 +317,15 @@ public class SaluhudUserFitnessData implements Serializable
     {
         this.bodyMassIndex = bodyMassIndex;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

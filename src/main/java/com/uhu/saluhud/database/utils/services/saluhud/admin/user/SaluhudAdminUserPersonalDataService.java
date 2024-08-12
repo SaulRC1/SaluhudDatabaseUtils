@@ -53,6 +53,7 @@ public class SaluhudAdminUserPersonalDataService {
      * @param name the name to search for.
      * @return a list of personal data records matching the specified name.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserPersonalData> findPersonalDataByName(String name) {
         try {
             return this.personalDataRepository.findByName(name);
@@ -68,6 +69,7 @@ public class SaluhudAdminUserPersonalDataService {
      * @param surname the surname to search for.
      * @return a list of personal data records matching the specified surname.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserPersonalData> findPersonalDataBySurname(String surname) {
         try {
             return this.personalDataRepository.findBySurname(surname);
@@ -83,6 +85,7 @@ public class SaluhudAdminUserPersonalDataService {
      * @param phoneNumber the phone number to search for.
      * @return the personal data record, or null if not found.
      */
+    @Transactional(readOnly = true)
     public SaluhudUserPersonalData findPersonalDataByPhoneNumber(int phoneNumber) {
         try {
             Optional<SaluhudUserPersonalData> result = this.personalDataRepository.findByPhoneNumber(phoneNumber);
@@ -153,6 +156,7 @@ public class SaluhudAdminUserPersonalDataService {
      * @param phoneNumber the phone number to check.
      * @return true if a record exists, false otherwise.
      */
+    @Transactional(readOnly = true)
     public boolean existsByPhoneNumber(int phoneNumber) {
         try {
             return this.personalDataRepository.existsByPhoneNumber(phoneNumber);

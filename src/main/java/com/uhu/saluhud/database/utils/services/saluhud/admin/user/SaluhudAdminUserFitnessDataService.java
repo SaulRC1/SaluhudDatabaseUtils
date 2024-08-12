@@ -54,6 +54,7 @@ public class SaluhudAdminUserFitnessDataService {
      * @return A list of fitness data records matching the specified biological
      * sex.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByBiologicalSex(String biologicalSex) {
         try {
             return this.fitnessDataRepository.findByBiologicalSex(biologicalSex);
@@ -69,6 +70,7 @@ public class SaluhudAdminUserFitnessDataService {
      * @param bodyMassIndex The body mass index to search for.
      * @return A list of fitness data records matching the specified BMI.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByBodyMassIndex(String bodyMassIndex) {
         try {
             return this.fitnessDataRepository.findByBodyMassIndex(bodyMassIndex);
@@ -85,6 +87,7 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxWeight The maximum weight.
      * @return A list of fitness data records within the specified weight range.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByWeightRange(double minWeight, double maxWeight) {
         try {
             return this.fitnessDataRepository.findByWeightRange(minWeight, maxWeight);
@@ -101,6 +104,7 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxHeight The maximum height.
      * @return A list of fitness data records within the specified height range.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByHeightRange(double minHeight, double maxHeight) {
         try {
             return this.fitnessDataRepository.findByHeightRange(minHeight, maxHeight);
@@ -117,6 +121,7 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxAge The maximum age.
      * @return A list of fitness data records within the specified age range.
      */
+    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByAgeRange(int minAge, int maxAge) {
         try {
             return this.fitnessDataRepository.findByAgeRange(minAge, maxAge);

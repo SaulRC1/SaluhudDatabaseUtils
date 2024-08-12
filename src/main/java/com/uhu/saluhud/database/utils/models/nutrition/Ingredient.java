@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  *
@@ -38,6 +39,10 @@ public class Ingredient implements Serializable
 
     @Column(name = "fat_amount", nullable = false)
     private int fatAmount;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -241,4 +246,15 @@ public class Ingredient implements Serializable
         }
         return true;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

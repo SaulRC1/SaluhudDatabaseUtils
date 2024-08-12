@@ -54,6 +54,7 @@ public class SaluhudAdminWeightHistoricalService {
      * @param user The user whose weight historical records are to be found.
      * @return A list of weight historical records for the specified user.
      */
+    @Transactional(readOnly = true)
     public List<WeightHistorical> findWeightHistoricalsByUser(SaluhudUser user) {
         try {
             return this.weightHistoricalRepository.findByUser(user);
@@ -70,6 +71,7 @@ public class SaluhudAdminWeightHistoricalService {
      * found.
      * @return The weight historical record, or null if not found.
      */
+    @Transactional(readOnly = true)
     public WeightHistorical findWeightHistoricalByUserId(long userId) {
         try {
             return this.weightHistoricalRepository.findByUserId(userId);
@@ -86,6 +88,7 @@ public class SaluhudAdminWeightHistoricalService {
      * @return A list of weight historical records containing the specified
      * entry.
      */
+    @Transactional(readOnly = true)
     public List<WeightHistorical> findWeightHistoricalsByEntryId(long entryId) {
         try {
             return this.weightHistoricalRepository.findByEntryId(entryId);

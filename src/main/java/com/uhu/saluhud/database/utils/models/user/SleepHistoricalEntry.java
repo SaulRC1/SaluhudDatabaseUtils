@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 
 /**
@@ -47,6 +48,10 @@ public class SleepHistoricalEntry implements Serializable
     @ManyToOne
     @JoinColumn(name = "sleep_historical_id", nullable = false)
     private SleepHistorical sleepHistorical;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -185,4 +190,15 @@ public class SleepHistoricalEntry implements Serializable
     {
         return sleepHistorical;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

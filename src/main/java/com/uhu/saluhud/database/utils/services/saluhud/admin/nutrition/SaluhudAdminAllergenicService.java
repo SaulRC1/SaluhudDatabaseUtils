@@ -80,6 +80,7 @@ public class SaluhudAdminAllergenicService {
      * @param name the name of the allergenic
      * @return the allergenic if exists
      */
+    @Transactional(readOnly = true)
     public Allergenic getAllergenicByName(String name) {
         Allergenic selectedAllergenic;
         try {

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the forum messages in the database
@@ -38,6 +39,10 @@ public class ForumMessage implements Serializable
     @ManyToOne
     @JoinColumn(name = "id_forum_thread", nullable = false)
     private ForumThread forumThread;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -154,4 +159,15 @@ public class ForumMessage implements Serializable
     {
         this.forumThread = forumThread;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

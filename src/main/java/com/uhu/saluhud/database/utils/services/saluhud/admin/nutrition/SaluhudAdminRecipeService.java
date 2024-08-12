@@ -86,6 +86,7 @@ public class SaluhudAdminRecipeService {
      * @param id
      * @return
      */
+    @Transactional(readOnly = true)
     public Recipe getRecipeById(long id) {
         Recipe selectedRecipe;
         try {
@@ -108,6 +109,7 @@ public class SaluhudAdminRecipeService {
      * @param name The name of the recipe.
      * @return The recipe found, if any.
      */
+    @Transactional(readOnly = true)
     public Recipe getRecipeByName(String name) {
         Recipe selectedRecipe;
         try {
@@ -130,6 +132,7 @@ public class SaluhudAdminRecipeService {
      * @param ingredient The specific ingredient.
      * @return List of recipes containing the ingredient.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByIngredient(Ingredient ingredient) {
         return recipeRepository.findByIngredient(ingredient);
     }
@@ -140,6 +143,7 @@ public class SaluhudAdminRecipeService {
      * @param allergenId The ID of the allergenic.
      * @return List of recipes containing the allergenic.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByAllergenic(Long allergenId) {
         return recipeRepository.findByAllergenic(allergenId);
     }
@@ -151,6 +155,7 @@ public class SaluhudAdminRecipeService {
      * @return List of recipes containing the keyword in the ingredients
      * description.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientsDescriptionContaining(String keyword) {
         return recipeRepository.findByIngredientsDescriptionContaining(keyword);
     }
@@ -161,6 +166,7 @@ public class SaluhudAdminRecipeService {
      * @param keyword The keyword to search for.
      * @return List of recipes containing the keyword in the description.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByDescriptionContaining(String keyword) {
         return recipeRepository.findByDescriptionContaining(keyword);
     }
@@ -171,6 +177,7 @@ public class SaluhudAdminRecipeService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return List of recipes that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientMaxKilocalories(int maxKilocalories) {
         return recipeRepository.findByIngredientMaxKilocalories(maxKilocalories);
     }
@@ -181,6 +188,7 @@ public class SaluhudAdminRecipeService {
      * @param minProteinAmount The minimum amount of protein.
      * @return List of recipes that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientMinProteinAmount(int minProteinAmount) {
         return recipeRepository.findByIngredientMinProteinAmount(minProteinAmount);
     }

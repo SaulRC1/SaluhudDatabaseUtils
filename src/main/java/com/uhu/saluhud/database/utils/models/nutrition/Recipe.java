@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  *
@@ -64,6 +65,10 @@ public class Recipe implements Serializable
             joinColumns = @JoinColumn(name = "id_recipe"),
             inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
     private List<RecipeElaborationStep> elaborationSteps;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -253,4 +258,15 @@ public class Recipe implements Serializable
     {
         this.elaborationSteps = elaborationSteps;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeElaborationStepRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service class for managing recipe elaboration steps.
@@ -99,6 +100,7 @@ public class SaluhudAdminRecipeElaborationStepService {
      * @param number The step number of the recipe elaboration step.
      * @return The recipe elaboration step if found, or null if not found.
      */
+    @Transactional(readOnly = true)
     public RecipeElaborationStep getStepByNumber(int number) {
         RecipeElaborationStep selectedStep;
         try {

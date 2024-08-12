@@ -48,6 +48,7 @@ public class SaluhudAdminSleepHistoricalService {
      * @param userId The ID of the user.
      * @return The SleepHistorical associated with the specified user.
      */
+    @Transactional(readOnly = true)
     public SleepHistorical findByUserId(long userId) {
         return sleepHistoricalRepository.findByUserId(userId);
     }
@@ -60,6 +61,7 @@ public class SaluhudAdminSleepHistoricalService {
      * @return A list of SleepHistoricals with entries within the specified date
      * range.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistorical> findWithEntriesInDateRange(LocalDate startDate, LocalDate endDate) {
         return sleepHistoricalRepository.findWithEntriesInDateRange(startDate, endDate);
     }
@@ -74,6 +76,7 @@ public class SaluhudAdminSleepHistoricalService {
      * @return A list of SleepHistoricals for the specified user with entries
      * within the specified date range.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistorical> findByUserIdWithEntriesInDateRange(long userId, LocalDate startDate, LocalDate endDate) {
         return sleepHistoricalRepository.findByUserIdWithEntriesInDateRange(userId, startDate, endDate);
     }
@@ -85,6 +88,7 @@ public class SaluhudAdminSleepHistoricalService {
      * @return A list of SleepHistoricals with at least the specified number of
      * entries.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistorical> findByMinEntries(int minEntries) {
         return sleepHistoricalRepository.findByMinEntries(minEntries);
     }
@@ -98,6 +102,7 @@ public class SaluhudAdminSleepHistoricalService {
      * @return The total sleep hours for the specified user within the specified
      * date range.
      */
+    @Transactional(readOnly = true)
     public double findTotalSleepHoursByUserIdAndDateRange(long userId, LocalDate startDate, LocalDate endDate) {
         return sleepHistoricalRepository.findTotalSleepHoursByUserIdAndDateRange(userId, startDate, endDate);
     }

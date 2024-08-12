@@ -53,6 +53,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param weightHistoricalId The ID of the weight historical.
      * @return A list of weight historical entries.
      */
+    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByWeightHistoricalId(Long weightHistoricalId) {
         try {
             return this.weightHistoricalEntryRepository.findByWeightHistoricalId(weightHistoricalId);
@@ -68,6 +69,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param entryDate The date of the entries.
      * @return A list of weight historical entries.
      */
+    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByDate(LocalDate entryDate) {
         try {
             return this.weightHistoricalEntryRepository.findByEntryDate(entryDate);
@@ -86,6 +88,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return A list of weight historical entries.
      */
+    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByDateRangeAndWeightHistoricalId(Long weightHistoricalId, LocalDate startDate, LocalDate endDate) {
         try {
             return this.weightHistoricalEntryRepository.findByDateRangeAndWeightHistoricalId(weightHistoricalId, startDate, endDate);
@@ -102,6 +105,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param weightHistoricalId The ID of the weight historical.
      * @return The most recent weight historical entry.
      */
+    @Transactional(readOnly = true)
     public WeightHistoricalEntry findMostRecentEntryByWeightHistoricalId(Long weightHistoricalId) {
         try {
             return this.weightHistoricalEntryRepository.findMostRecentEntryByWeightHistoricalId(weightHistoricalId);

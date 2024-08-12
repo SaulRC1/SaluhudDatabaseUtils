@@ -38,6 +38,7 @@ public class SaluhudAdminIngredientService {
      * @param id The ID of the ingredient.
      * @return The ingredient if found, or null if not found.
      */
+    @Transactional(readOnly = true)
     public Ingredient getIngredientById(long id) {
         Ingredient selectedIngredient;
         try {
@@ -55,6 +56,7 @@ public class SaluhudAdminIngredientService {
      * @param name The name of the ingredient.
      * @return The ingredient if found, or null if not found.
      */
+    @Transactional(readOnly = true)
     public Ingredient getIngredientByName(String name) {
         Ingredient selectedIngredient;
         try {
@@ -73,6 +75,7 @@ public class SaluhudAdminIngredientService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByMaxKilocalories(int maxKilocalories) {
         return ingredientRepository.findByMaxKilocalories(maxKilocalories);
     }
@@ -83,6 +86,7 @@ public class SaluhudAdminIngredientService {
      * @param minProteinAmount The minimum amount of protein.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByMinProteinAmount(int minProteinAmount) {
         return ingredientRepository.findByMinProteinAmount(minProteinAmount);
     }
@@ -93,6 +97,7 @@ public class SaluhudAdminIngredientService {
      * @param minCarbohydratesAmount The minimum amount of carbohydrates.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByMinCarbohydratesAmount(int minCarbohydratesAmount) {
         return ingredientRepository.findByMinCarbohydratesAmount(minCarbohydratesAmount);
     }
@@ -103,6 +108,7 @@ public class SaluhudAdminIngredientService {
      * @param minFatAmount The minimum amount of fat.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByMinFatAmount(int minFatAmount) {
         return ingredientRepository.findByMinFatAmount(minFatAmount);
     }
@@ -114,6 +120,7 @@ public class SaluhudAdminIngredientService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByKilocaloriesRange(int minKilocalories, int maxKilocalories) {
         return ingredientRepository.findByKilocaloriesRange(minKilocalories, maxKilocalories);
     }
@@ -125,6 +132,7 @@ public class SaluhudAdminIngredientService {
      * @param maxProtein The maximum amount of protein.
      * @return A list of ingredients that meet the criteria.
      */
+    @Transactional(readOnly = true)
     public List<Ingredient> findByProteinRange(int minProtein, int maxProtein) {
         return ingredientRepository.findByProteinRange(minProtein, maxProtein);
     }

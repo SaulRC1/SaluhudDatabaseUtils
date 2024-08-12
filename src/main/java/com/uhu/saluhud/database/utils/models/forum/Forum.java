@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the forum in the database, composed of a list of forum
@@ -29,6 +30,10 @@ public class Forum implements Serializable
 
     @Column(name = "description", nullable = false)
     private String description;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -100,4 +105,15 @@ public class Forum implements Serializable
     {
         this.description = description;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

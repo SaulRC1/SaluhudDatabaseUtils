@@ -84,6 +84,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return Lista de entradas en el rango de fechas especificado.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findEntriesByDateRange(startDate, endDate);
     }
@@ -94,6 +95,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param evaluation La evaluación de pasos.
      * @return Lista de entradas con la evaluación especificada.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(HistoricalEvaluation evaluation) {
         return dailyStepsHistoricalEntryRepository.findEntriesByStepEvaluation(evaluation);
     }
@@ -105,6 +107,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de pasos en el rango de fechas especificado.
      */
+    @Transactional(readOnly = true)
     public int findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalStepsInDateRange(startDate, endDate);
     }
@@ -116,6 +119,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de calorías quemadas en el rango de fechas especificado.
      */
+    @Transactional(readOnly = true)
     public double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalCaloriesBurnedInDateRange(startDate, endDate);
     }
@@ -126,6 +130,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param historicalId El ID del historial de pasos diarios.
      * @return Lista de entradas para el historial especificado.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(Long historicalId) {
         return dailyStepsHistoricalEntryRepository.findEntriesByDailyStepsHistoricalId(historicalId);
     }
@@ -137,6 +142,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @return Lista de entradas con un número de pasos mayor al valor
      * especificado.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(int steps) {
         return dailyStepsHistoricalEntryRepository.findEntriesWithStepsGreaterThan(steps);
     }

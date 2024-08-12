@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the personal information of an user stored in the
@@ -32,6 +33,10 @@ public class SaluhudUserPersonalData implements Serializable
 
     @Column(name = "phone_number", unique = true)
     private int phoneNumber;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -125,4 +130,15 @@ public class SaluhudUserPersonalData implements Serializable
     {
         this.phoneNumber = phoneNumber;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

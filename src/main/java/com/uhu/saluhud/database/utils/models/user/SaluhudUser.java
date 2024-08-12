@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the users stored in the database
@@ -47,6 +48,10 @@ public class SaluhudUser implements Serializable
             joinColumns = @JoinColumn(name = "id_saluhud_user"),
             inverseJoinColumns = @JoinColumn(name = "id_user_fitness_data"))
     private SaluhudUserFitnessData fitnessData;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -198,5 +203,16 @@ public class SaluhudUser implements Serializable
     public void setFitnessData(SaluhudUserFitnessData fitnessData)
     {
         this.fitnessData = fitnessData;
-    }  
+    }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

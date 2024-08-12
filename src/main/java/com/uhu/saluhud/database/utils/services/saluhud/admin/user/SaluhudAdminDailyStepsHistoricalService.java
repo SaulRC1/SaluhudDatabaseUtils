@@ -93,6 +93,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      * @param userId El ID del usuario.
      * @return Lista de historiales de pasos diarios del usuario.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistorical> findAllByUserId(Long userId) {
         return dailyStepsHistoricalRepository.findAllByUserId(userId);
     }
@@ -104,6 +105,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      * @return Lista de historiales de pasos diarios con al menos minEntries
      * entradas.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistorical> findAllWithMinEntries(int minEntries) {
         return dailyStepsHistoricalRepository.findAllWithMinEntries(minEntries);
     }
@@ -116,6 +118,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      * @return Lista de historiales de pasos diarios del usuario con sus
      * entradas.
      */
+    @Transactional(readOnly = true)
     public List<DailyStepsHistorical> findAllWithEntriesByUserId(Long userId) {
         return dailyStepsHistoricalRepository.findAllWithEntriesByUserId(userId);
     }
@@ -127,6 +130,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      * @param userId El ID del usuario.
      * @return El número de historiales de pasos diarios del usuario.
      */
+    @Transactional(readOnly = true)
     public int countByUserId(Long userId) {
         return dailyStepsHistoricalRepository.countByUserId(userId);
     }

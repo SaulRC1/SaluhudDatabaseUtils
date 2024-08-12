@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  *
@@ -27,7 +28,10 @@ public class RecipeElaborationStep implements Serializable
 
     @Column(name = "step_number", nullable = false)
     private int stepNumber;
-
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
     
     /**
      * This a default constructor for the class, with no parameters
@@ -114,4 +118,15 @@ public class RecipeElaborationStep implements Serializable
     {
         this.stepNumber = stepNumber;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

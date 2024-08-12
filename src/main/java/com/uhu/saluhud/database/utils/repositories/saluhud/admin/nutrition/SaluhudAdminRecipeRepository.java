@@ -2,8 +2,10 @@ package com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition;
 
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
+import jakarta.persistence.LockModeType;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -16,27 +18,35 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SaluhudAdminRecipeRepository extends JpaRepository<Recipe, Long> {
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Recipe i WHERE i.id = :id")
     Recipe findOne(@Param("id") long id);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Recipe i WHERE i.name = :name")
     Recipe findByName(@Param("name") String name);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r WHERE :ingredient MEMBER OF r.ingredients")
     List<Recipe> findByIngredient(@Param("ingredient") Ingredient ingredient);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r JOIN r.allergenics a WHERE a.id = :allergenId")
     List<Recipe> findByAllergenic(@Param("allergenId") Long allergenId);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r WHERE r.ingredientsDescription LIKE %:keyword%")
     List<Recipe> findByIngredientsDescriptionContaining(@Param("keyword") String keyword);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r WHERE r.description LIKE %:keyword%")
     List<Recipe> findByDescriptionContaining(@Param("keyword") String keyword);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT DISTINCT r FROM Recipe r JOIN r.ingredients i WHERE i.kilocalories <= :maxKilocalories")
     List<Recipe> findByIngredientMaxKilocalories(@Param("maxKilocalories") int maxKilocalories);
 
+    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT DISTINCT r FROM Recipe r JOIN r.ingredients i WHERE i.proteinAmount >= :minProteinAmount")
     List<Recipe> findByIngredientMinProteinAmount(@Param("minProteinAmount") int minProteinAmount);
 }

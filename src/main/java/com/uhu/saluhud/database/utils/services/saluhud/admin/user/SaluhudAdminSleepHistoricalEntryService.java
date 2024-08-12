@@ -30,6 +30,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records within the specified date
      * range.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findEntriesByDateRange(startDate, endDate);
@@ -46,6 +47,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records associated with the given
      * SleepHistorical ID.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(Long historicalId) {
         try {
             return sleepHistoricalEntryRepository.findEntriesBySleepHistoricalId(historicalId);
@@ -62,6 +64,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records with the specified sleep
      * evaluation.
      */
+    @Transactional(readOnly = true)
     public List<SleepHistoricalEntry> findEntriesBySleepEvaluation(HistoricalEvaluation evaluation) {
         try {
             return sleepHistoricalEntryRepository.findEntriesBySleepEvaluation(evaluation);
@@ -78,6 +81,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return The total hours slept within the specified date range.
      */
+    @Transactional(readOnly = true)
     public Integer findTotalHoursSleptInDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findTotalHoursSleptInDateRange(startDate, endDate);
@@ -94,6 +98,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return The total minutes slept within the specified date range.
      */
+    @Transactional(readOnly = true)
     public Double findTotalMinutesSleptInDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findTotalMinutesSleptInDateRange(startDate, endDate);

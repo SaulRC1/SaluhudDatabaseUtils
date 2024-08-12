@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the weight historical stored in the database.
@@ -34,6 +35,10 @@ public class WeightHistorical implements Serializable
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private SaluhudUser user;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -103,5 +108,16 @@ public class WeightHistorical implements Serializable
     public void setUser(SaluhudUser user)
     {
         this.user = user;
-    }   
+    }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

@@ -57,6 +57,7 @@ public class SaluhudAdminUserService {
      * @param username the username of the user to find.
      * @return the found user, or null if not found.
      */
+    @Transactional(readOnly = true)
     public SaluhudUser getUserByUsername(String username) {
         try {
             return saluhudUserRepository.findByUsername(username).orElse(null);
@@ -72,6 +73,7 @@ public class SaluhudAdminUserService {
      * @param email the email of the user to find.
      * @return the found user, or null if not found.
      */
+    @Transactional(readOnly = true)
     public SaluhudUser getUserByEmail(String email) {
         try {
             return saluhudUserRepository.findByEmail(email).orElse(null);
@@ -87,6 +89,7 @@ public class SaluhudAdminUserService {
      * @param email the email to check.
      * @return true if the user exists, false otherwise.
      */
+    @Transactional(readOnly = true)
     public boolean userExistsByEmail(String email) {
         try {
             return saluhudUserRepository.existsByEmail(email);

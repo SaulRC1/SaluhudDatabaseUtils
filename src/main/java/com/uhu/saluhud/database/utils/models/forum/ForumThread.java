@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the forum threads in the database
@@ -44,6 +45,10 @@ public class ForumThread implements Serializable
 
     @OneToMany(mappedBy = "forumThread", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ForumMessage> forumMessages;
+    
+    @Version
+    @Column(name = "entity_version")
+    private Long version;
 
     /**
      * This a default constructor for the class, with no parameters
@@ -181,4 +186,15 @@ public class ForumThread implements Serializable
     {
         this.forumMessages = forumMessages;
     }
+
+    public Long getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Long version)
+    {
+        this.version = version;
+    }
+    
 }

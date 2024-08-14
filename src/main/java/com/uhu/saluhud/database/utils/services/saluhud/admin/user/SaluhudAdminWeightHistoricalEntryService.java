@@ -39,7 +39,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
     public WeightHistoricalEntry findWeightHistoricalEntryById(long id) {
         try {
             Optional<WeightHistoricalEntry> result = this.weightHistoricalEntryRepository.findById(id);
-            return result.orElse(null);
+            return result.orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding weight historical entry by ID", e);
             throw e;

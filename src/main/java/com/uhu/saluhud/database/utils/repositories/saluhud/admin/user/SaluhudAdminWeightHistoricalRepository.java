@@ -23,9 +23,9 @@ public interface SaluhudAdminWeightHistoricalRepository extends JpaRepository<We
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT w FROM WeightHistorical w WHERE w.user.id = :userId")
-    WeightHistorical findByUserId(@Param("userId") Long userId);
+    WeightHistorical findByUserId(@Param("userId") long userId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT w FROM WeightHistorical w JOIN w.entries e WHERE e.id = :entryId")
-    List<WeightHistorical> findByEntryId(@Param("entryId") Long entryId);
+    List<WeightHistorical> findByEntryId(@Param("entryId") long entryId);
 }

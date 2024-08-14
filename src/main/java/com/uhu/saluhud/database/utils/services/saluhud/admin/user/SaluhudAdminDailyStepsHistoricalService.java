@@ -83,7 +83,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      * @param id El ID del historial de pasos diarios.
      * @return El historial de pasos diarios, si se encuentra.
      */
-    public Optional<DailyStepsHistorical> findById(Long id) {
+    public Optional<DailyStepsHistorical> findById(long id) {
         return dailyStepsHistoricalRepository.findById(id);
     }
 

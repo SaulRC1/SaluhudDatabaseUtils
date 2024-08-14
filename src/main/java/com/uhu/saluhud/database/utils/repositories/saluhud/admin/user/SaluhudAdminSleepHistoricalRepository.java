@@ -20,7 +20,7 @@ public interface SaluhudAdminSleepHistoricalRepository extends JpaRepository<Sle
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistorical s WHERE s.user = :userId")
-    SleepHistorical findByUserId(@Param("userId") Long userId);
+    SleepHistorical findByUserId(@Param("userId") long userId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistorical s JOIN s.entries e WHERE e.entryDate BETWEEN :startDate AND :endDate")
@@ -28,7 +28,7 @@ public interface SaluhudAdminSleepHistoricalRepository extends JpaRepository<Sle
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistorical s JOIN s.entries e WHERE s.user = :userId AND e.entryDate BETWEEN :startDate AND :endDate")
-    List<SleepHistorical> findByUserIdWithEntriesInDateRange(@Param("userId") Long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<SleepHistorical> findByUserIdWithEntriesInDateRange(@Param("userId") long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistorical s WHERE SIZE(s.entries) >= :minEntries")

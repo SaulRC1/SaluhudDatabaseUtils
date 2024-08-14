@@ -43,4 +43,8 @@ public interface SaluhudAdminDailyStepsHistoricalEntryRepository extends JpaRepo
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistoricalEntry d WHERE d.doneSteps > :steps")
     List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(@Param("steps") int steps);
+    
+    @Lock(LockModeType.OPTIMISTIC)
+    @Query("SELECT e FROM DailyStepsHistoricalEntry e WHERE e.dailyStepsHistorical.user.username = :username")
+    List<DailyStepsHistoricalEntry> findAllByUserUsername(@Param("username") String username);
 }

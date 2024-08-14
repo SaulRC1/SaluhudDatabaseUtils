@@ -48,7 +48,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * SleepHistorical ID.
      */
     @Transactional(readOnly = true)
-    public List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(Long historicalId) {
+    public List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(long historicalId) {
         try {
             return sleepHistoricalEntryRepository.findEntriesBySleepHistoricalId(historicalId);
         } catch (Exception e) {

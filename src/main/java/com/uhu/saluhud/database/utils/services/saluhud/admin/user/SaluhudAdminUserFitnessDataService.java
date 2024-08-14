@@ -40,7 +40,7 @@ public class SaluhudAdminUserFitnessDataService {
     public SaluhudUserFitnessData findFitnessDataById(long id) {
         try {
             Optional<SaluhudUserFitnessData> result = this.fitnessDataRepository.findById(id);
-            return result.orElse(null);
+            return result.orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding fitness data by ID", e);
             throw e;

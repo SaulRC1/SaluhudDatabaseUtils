@@ -44,7 +44,7 @@ public class SaluhudAdminUserService {
      */
     public SaluhudUser getUserById(long id) {
         try {
-            return saluhudUserRepository.findById(id).orElse(null);
+            return saluhudUserRepository.findById(id).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by ID", e);
             throw e;
@@ -60,7 +60,7 @@ public class SaluhudAdminUserService {
     @Transactional(readOnly = true)
     public SaluhudUser getUserByUsername(String username) {
         try {
-            return saluhudUserRepository.findByUsername(username).orElse(null);
+            return saluhudUserRepository.findByUsername(username).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by username", e);
             throw e;
@@ -76,7 +76,7 @@ public class SaluhudAdminUserService {
     @Transactional(readOnly = true)
     public SaluhudUser getUserByEmail(String email) {
         try {
-            return saluhudUserRepository.findByEmail(email).orElse(null);
+            return saluhudUserRepository.findByEmail(email).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by email", e);
             throw e;

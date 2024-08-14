@@ -140,9 +140,6 @@ CREATE TABLE SLEEP_HISTORICAL (
     FOREIGN KEY (user_id) REFERENCES SALUHUD_USER(id)
 );
 
-CREATE TYPE HISTORICAL_EVALUATION AS
-ENUM('EXCELLENT','WELL', 'MINIMUM', 'FAILED');
-
 -- Crea la tabla de entrada del historial de sueño
 CREATE TABLE SLEEP_HISTORICAL_ENTRY (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -150,7 +147,7 @@ CREATE TABLE SLEEP_HISTORICAL_ENTRY (
     entry_date date NOT NULL,
     hours_slept smallint NOT NULL,
     minutes_slept smallint NOT NULL,
-    sleep_evaluation HISTORICAL_EVALUATION NOT NULL,
+    sleep_evaluation VARCHAR(255) NOT NULL,
     entity_version bigint,
     FOREIGN KEY (sleep_historical_id) REFERENCES SLEEP_HISTORICAL(id)
 );
@@ -170,7 +167,7 @@ CREATE TABLE DAILY_STEPS_HISTORICAL_ENTRY (
     entry_date date NOT NULL,
     done_steps smallint NOT NULL,
     kilo_calories_burned real NOT NULL,
-    steps_evaluation HISTORICAL_EVALUATION NOT NULL,
+    steps_evaluation VARCHAR(255) NOT NULL,
     entity_version bigint,
     FOREIGN KEY (daily_steps_historical_id) REFERENCES DAILY_STEPS_HISTORICAL(id)
 );

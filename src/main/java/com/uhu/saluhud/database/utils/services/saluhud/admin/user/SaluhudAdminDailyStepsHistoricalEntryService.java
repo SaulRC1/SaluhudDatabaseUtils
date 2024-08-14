@@ -131,7 +131,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @return Lista de entradas para el historial especificado.
      */
     @Transactional(readOnly = true)
-    public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(Long historicalId) {
+    public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(long historicalId) {
         return dailyStepsHistoricalEntryRepository.findEntriesByDailyStepsHistoricalId(historicalId);
     }
 
@@ -145,5 +145,18 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
     @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(int steps) {
         return dailyStepsHistoricalEntryRepository.findEntriesWithStepsGreaterThan(steps);
+    }
+
+    /**
+     * Encuentra todas las entradas históricas de pasos diarios por nombre de
+     * usuario.
+     *
+     * @param username El nombre de usuario.
+     * @return Lista de entradas históricas de pasos diarios para el usuario
+     * especificado.
+     */
+    @Transactional(readOnly = true)
+    public List<DailyStepsHistoricalEntry> findAllByUserUsername(String username) {
+        return dailyStepsHistoricalEntryRepository.findAllByUserUsername(username);
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface SaluhudAdminWeightHistoricalEntryRepository extends JpaRepository<WeightHistoricalEntry, Long> {
 
     @Lock(LockModeType.OPTIMISTIC)
-    List<WeightHistoricalEntry> findByWeightHistoricalId(Long weightHistoricalId);
+    List<WeightHistoricalEntry> findByWeightHistoricalId(long weightHistoricalId);
 
     @Lock(LockModeType.OPTIMISTIC)
     List<WeightHistoricalEntry> findByEntryDate(LocalDate entryDate);
@@ -28,11 +28,11 @@ public interface SaluhudAdminWeightHistoricalEntryRepository extends JpaReposito
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT e FROM WeightHistoricalEntry e WHERE e.weightHistorical.id = :weightHistoricalId AND e.entryDate BETWEEN :startDate AND :endDate")
     List<WeightHistoricalEntry> findByDateRangeAndWeightHistoricalId(
-            @Param("weightHistoricalId") Long weightHistoricalId,
+            @Param("weightHistoricalId") long weightHistoricalId,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT e FROM WeightHistoricalEntry e WHERE e.weightHistorical.id = :weightHistoricalId ORDER BY e.entryDate DESC")
-    WeightHistoricalEntry findMostRecentEntryByWeightHistoricalId(@Param("weightHistoricalId") Long weightHistoricalId);
+    WeightHistoricalEntry findMostRecentEntryByWeightHistoricalId(@Param("weightHistoricalId") long weightHistoricalId);
 }

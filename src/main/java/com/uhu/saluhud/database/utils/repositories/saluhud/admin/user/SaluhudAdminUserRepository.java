@@ -29,9 +29,9 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
-    List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") Long fitnessDataId);
+    List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") long fitnessDataId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT u FROM SaluhudUser u WHERE u.personalData.id = :personalDataId")
-    List<SaluhudUser> findByPersonalDataId(@Param("personalDataId") Long personalDataId);
+    List<SaluhudUser> findByPersonalDataId(@Param("personalDataId") long personalDataId);
 }

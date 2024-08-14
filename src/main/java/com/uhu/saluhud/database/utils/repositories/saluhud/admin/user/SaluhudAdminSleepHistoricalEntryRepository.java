@@ -26,7 +26,7 @@ public interface SaluhudAdminSleepHistoricalEntryRepository extends JpaRepositor
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistoricalEntry s WHERE s.sleepHistorical.id = :historicalId")
-    List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(@Param("historicalId") Long historicalId);
+    List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(@Param("historicalId") long historicalId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT s FROM SleepHistoricalEntry s WHERE s.sleepEvaluation = :evaluation")

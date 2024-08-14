@@ -40,7 +40,7 @@ public class SaluhudAdminUserPersonalDataService {
     public SaluhudUserPersonalData findPersonalDataById(long id) {
         try {
             Optional<SaluhudUserPersonalData> result = this.personalDataRepository.findById(id);
-            return result.orElse(null);
+            return result.orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding personal data by ID", e);
             throw e;
@@ -89,7 +89,7 @@ public class SaluhudAdminUserPersonalDataService {
     public SaluhudUserPersonalData findPersonalDataByPhoneNumber(int phoneNumber) {
         try {
             Optional<SaluhudUserPersonalData> result = this.personalDataRepository.findByPhoneNumber(phoneNumber);
-            return result.orElse(null);
+            return result.orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding personal data by phone number", e);
             throw e;

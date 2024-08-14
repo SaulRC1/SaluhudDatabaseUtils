@@ -20,7 +20,7 @@ public interface SaluhudAdminDailyStepsHistoricalRepository extends JpaRepositor
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d WHERE d.user.id = :userId")
-    List<DailyStepsHistorical> findAllByUserId(@Param("userId") Long userId);
+    List<DailyStepsHistorical> findAllByUserId(@Param("userId") long userId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d WHERE SIZE(d.entries) >= :minEntries")
@@ -28,9 +28,9 @@ public interface SaluhudAdminDailyStepsHistoricalRepository extends JpaRepositor
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d JOIN FETCH d.entries WHERE d.user.id = :userId")
-    List<DailyStepsHistorical> findAllWithEntriesByUserId(@Param("userId") Long userId);
+    List<DailyStepsHistorical> findAllWithEntriesByUserId(@Param("userId") long userId);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT COUNT(d) FROM DailyStepsHistorical d WHERE d.user.id = :userId")
-    int countByUserId(@Param("userId") Long userId);
+    int countByUserId(@Param("userId") long userId);
 }

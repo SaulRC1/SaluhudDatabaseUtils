@@ -129,7 +129,6 @@ public class SaluhudAdminUserService {
                 existingUser.setUsername(user.getUsername());
                 existingUser.setPassword(user.getPassword());
                 existingUser.setEmail(user.getEmail());
-                existingUser.setPersonalData(user.getPersonalData());
                 existingUser.setFitnessData(user.getFitnessData());
 
                 saluhudUserRepository.save(existingUser);
@@ -151,6 +150,39 @@ public class SaluhudAdminUserService {
             saluhudUserRepository.delete(user);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting user", e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Check if a personal data record exists by phone number.
+     *
+     * @param phoneNumber the phone number to check.
+     * @return true if a record exists, false otherwise.
+     */
+    @Transactional(readOnly = true)
+    public boolean existsByPhoneNumber(int phoneNumber) {
+        try {
+            return this.saluhudUserRepository.existsByPhoneNumber(phoneNumber);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error checking existence by phone number", e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Find personal data by phone number.
+     *
+     * @param phoneNumber the phone number to search for.
+     * @return the personal data record, or null if not found.
+     */
+    @Transactional(readOnly = true)
+    public SaluhudUser findPersonalDataByPhoneNumber(int phoneNumber) {
+        try {
+            Optional<SaluhudUser> result = this.saluhudUserRepository.findByPhoneNumber(phoneNumber);
+            return result.orElseThrow();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error finding personal data by phone number", e);
             throw e;
         }
     }

@@ -20,8 +20,7 @@ import org.springframework.data.annotation.Version;
  */
 @Entity
 @Table(name = "saluhud_user")
-public class SaluhudUser implements Serializable
-{
+public class SaluhudUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +35,22 @@ public class SaluhudUser implements Serializable
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "SALUHUD_USER_PERSONAL_DATA_SALUHUD_USER",
-            joinColumns = @JoinColumn(name = "id_saluhud_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_user_personal_data"))
-    private SaluhudUserPersonalData personalData;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "surname", nullable = true)
+    private String surname;
+
+    @Column(name = "phone_number", nullable = true, unique = true)
+    private int phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "SALUHUD_USER_SALUHUD_USER_FITNESS_DATA",
             joinColumns = @JoinColumn(name = "id_saluhud_user"),
             inverseJoinColumns = @JoinColumn(name = "id_user_fitness_data"))
     private SaluhudUserFitnessData fitnessData;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -56,52 +58,75 @@ public class SaluhudUser implements Serializable
     /**
      * This a default constructor for the class, with no parameters
      */
-    public SaluhudUser()
-    {
+    public SaluhudUser() {
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the username,
+     * This is a parameterized constructor for the class. It takes, the username,
      * his password and his email.
      *
      * @param username the username used to logging in the app
      * @param password the password of the user
      * @param email the email of the user
+     * @param name the name of the user
      */
-    public SaluhudUser(String username, String password, String email)
-    {
+    public SaluhudUser(String username, String password, String email, String name) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.name = name;
     }
-
+    
     /**
-     * This is a parameterized constructor for the class.It takes, the username,
-     * his password and his email.
+     * This is a parameterized constructor for the class. It takes, the username,
+     * his password, his email, name, surname and phone number.
      *
      * @param username the username used to logging in the app
      * @param password the password of the user
      * @param email the email of the user
-     * @param userPersonalData the personal data of the user
+     * @param name the name of the user
+     * @param surname the surname of the user
+     * @param phoneNumber the phone number of the user
+     */
+    public SaluhudUser(String username, String password, String email, 
+            String name, String surname, int phoneNumber) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * This is a parameterized constructor for the class.It takes, the username,
+     * his password, his email, name, surname, phone number and his fitness data.
+     *
+     * @param username the username used to logging in the app
+     * @param password the password of the user
+     * @param email the email of the user
+     * @param name the name of the user
+     * @param surname the surname of the user
+     * @param phoneNumber the phone number of the user
      * @param userFitnessData the fitness data of the user
      */
     public SaluhudUser(String username, String password, String email, 
-            SaluhudUserPersonalData userPersonalData, SaluhudUserFitnessData userFitnessData)
-    {
+            String name, String surname, int phoneNumber, SaluhudUserFitnessData userFitnessData) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.personalData = userPersonalData;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
         this.fitnessData = userFitnessData;
     }
-    
+
     /**
      * Getter for the parameter "id"
      *
      * @return the id of the user
      */
-    public long getId()
-    {
+    public long getId() {
         return id;
     }
 
@@ -110,8 +135,7 @@ public class SaluhudUser implements Serializable
      *
      * @return the username of the user
      */
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
@@ -120,8 +144,7 @@ public class SaluhudUser implements Serializable
      *
      * @param username the new username
      */
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -130,8 +153,7 @@ public class SaluhudUser implements Serializable
      *
      * @return the password of the user
      */
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
@@ -140,8 +162,7 @@ public class SaluhudUser implements Serializable
      *
      * @param password the new password
      */
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -150,8 +171,7 @@ public class SaluhudUser implements Serializable
      *
      * @return the email of the user
      */
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
@@ -160,59 +180,101 @@ public class SaluhudUser implements Serializable
      *
      * @param email the new email of the user
      */
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Getter for the parameter "personalData"
-     * 
-     * @return the personal data of the user
-     */
-    public SaluhudUserPersonalData getPersonalData()
-    {
-        return personalData;
-    }
-
-    /**
-     * Setter for the parameter "personalData"
-     * 
-     * @param personalData the new personal data of the user
-     */
-    public void setPersonalData(SaluhudUserPersonalData personalData)
-    {
-        this.personalData = personalData;
-    }
-
-    /**
      * Getter for the parameter "fitnessData"
-     * 
+     *
      * @return the fitness data of the user
      */
-    public SaluhudUserFitnessData getFitnessData()
-    {
+    public SaluhudUserFitnessData getFitnessData() {
         return fitnessData;
     }
 
     /**
      * Setter for the parameter "fitnessData"
-     * 
+     *
      * @param fitnessData the fitness data of the user
      */
-    public void setFitnessData(SaluhudUserFitnessData fitnessData)
-    {
+    public void setFitnessData(SaluhudUserFitnessData fitnessData) {
         this.fitnessData = fitnessData;
     }
 
-    public Long getVersion()
+    /**
+     * Getter for the parameter "name"
+     *
+     * @return the name of the user
+     */
+    public String getName()
     {
+        return name;
+    }
+
+    /**
+     * Getter for the parameter "surname"
+     *
+     * @return the surname of the user
+     */
+    public String getSurname()
+    {
+        return surname;
+    }
+
+    /**
+     * Getter for the parameter "phoneNumber"
+     *
+     * @return the phone number of the user
+     */
+    public int getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    /**
+     * Setter for the parameter "name"
+     *
+     * @param name the new name of the user
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * Setter for the parameter "surname"
+     *
+     * @param surname the new surname of the user
+     */
+    public void setSurname(String surname)
+    {
+        this.surname = surname;
+    }
+
+    /**
+     * Setter for the parameter "phoneNumber"
+     *
+     * @param phoneNumber the new phone number of the user
+     */
+    public void setPhoneNumber(int phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(Long version)
-    {
+    /**
+     *
+     * @param version
+     */
+    public void setVersion(Long version) {
         this.version = version;
     }
-    
 }

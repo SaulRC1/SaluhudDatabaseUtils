@@ -26,12 +26,18 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Lock(LockModeType.OPTIMISTIC)
     boolean existsByEmail(String email);
+    
+    @Lock(LockModeType.OPTIMISTIC)
+    Optional<SaluhudUser> findByPhoneNumber(int phoneNumber);
+
+    @Lock(LockModeType.OPTIMISTIC)
+    boolean existsByPhoneNumber(int phoneNumber);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
     List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") long fitnessDataId);
-
+ 
     @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT u FROM SaluhudUser u WHERE u.personalData.id = :personalDataId")
-    List<SaluhudUser> findByPersonalDataId(@Param("personalDataId") long personalDataId);
+    @Query("SELECT p FROM SaluhudUser p WHERE p.phoneNumber > :phoneNumber")
+    List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") int phoneNumber);
 }

@@ -56,33 +56,6 @@ CREATE TABLE RECIPE_RECIPE_ELABORATION_STEP (
     FOREIGN KEY (id_recipe) references RECIPE(id)
 );
 
-CREATE TABLE FORUM (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name text NOT NULL,
-    description text NOT NULL,
-    entity_version bigint
-);
-
-CREATE TABLE FORUM_THREAD (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    id_forum bigint NOT NULL,
-    title text NOT NULL,
-    author text NOT NULL,
-    created_date timestamp NOT NULL,
-    entity_version bigint,
-    FOREIGN KEY (id_forum) references FORUM(id)
-);
-
-CREATE TABLE FORUM_MESSAGE (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    id_forum_thread bigint NOT NULL,
-    author text NOT NULL,
-    message_date timestamp NOT NULL,
-    message_content text NOT NULL,
-    entity_version bigint,
-    FOREIGN KEY (id_forum_thread) references FORUM_THREAD(id)
-);
-
 CREATE TABLE SALUHUD_USER_FITNESS_DATA (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     weight real,
@@ -98,29 +71,15 @@ CREATE TABLE SALUHUD_USER_FITNESS_DATA (
     entity_version bigint
 );
 
-CREATE TABLE SALUHUD_USER_PERSONAL_DATA (
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name text NOT NULL,
-    surname text,
-    phone_number text UNIQUE,
-    entity_version bigint
-);
-
 CREATE TABLE SALUHUD_USER (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     username text NOT NULL UNIQUE,
     password text NOT NULL,
     email text NOT NULL UNIQUE,
+    name text NOT NULL,
+    surname text,
+    phone_number text UNIQUE,
     entity_version bigint
-);
-
-CREATE TABLE SALUHUD_USER_PERSONAL_DATA_SALUHUD_USER (
-    id_saluhud_user bigint,
-    id_user_personal_data bigint NOT NULL UNIQUE,
-    entity_version bigint,
-    PRIMARY KEY (id_saluhud_user),
-    FOREIGN KEY (id_user_personal_data) references SALUHUD_USER_PERSONAL_DATA(id),
-    FOREIGN KEY (id_saluhud_user) references SALUHUD_USER(id)
 );
 
 CREATE TABLE SALUHUD_USER_SALUHUD_USER_FITNESS_DATA (

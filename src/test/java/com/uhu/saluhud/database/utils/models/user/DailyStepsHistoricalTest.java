@@ -1,5 +1,6 @@
 package com.uhu.saluhud.database.utils.models.user;
 
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalService;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalEntryService;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
@@ -8,11 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
+@DataJpaTest
+@TestPropertySource(locations = {"classpath:datasources/saluhud-admin-datasource.properties"})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.user")
+@ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
 public class DailyStepsHistoricalTest {
 
     @Autowired

@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminWeightHistoricalEntryRepository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
+@Service
 public class SaluhudAdminWeightHistoricalEntryService {
 
     @Autowired

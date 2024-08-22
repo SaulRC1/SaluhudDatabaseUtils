@@ -1,5 +1,6 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminRecipeService;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminRecipeElaborationStepService;
@@ -14,11 +15,22 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.util.Assert;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
+@DataJpaTest
+@TestPropertySource(locations = { "classpath:datasources/saluhud-admin-datasource.properties" })
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
+@ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
 public class SaluhudRecipeElaborationStepsTest {
 
     @Autowired
@@ -27,10 +39,14 @@ public class SaluhudRecipeElaborationStepsTest {
     @Autowired
     private SaluhudAdminRecipeService recipeService;
     
+    @Autowired
+    private SaluhudAdminIngredientService ingredientService;
+    
+    @Autowired
+    private SaluhudAdminAllergenicService allergenicService;
+    
     @Test
     public void testRecipeElaborationStepsTestCRUD() {
-        SaluhudAdminIngredientService ingredientService = new SaluhudAdminIngredientService();
-        SaluhudAdminAllergenicService allergenicService = new SaluhudAdminAllergenicService();
 
         List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
@@ -54,5 +70,8 @@ public class SaluhudRecipeElaborationStepsTest {
 
         recipeElaborationStepService.saveRecipeElaborationStep(batirHuevos);
         recipeService.saveRecipe(Bizcocho);
+        
+        Assert.isTrue(this.recipeElaborationStepService.findAllSteps().contains(batirHuevos), "");
+        Assert.isTrue(this.recipeService.findAllRecipes().contains(Bizcocho), "");
     }
 }

@@ -1,15 +1,27 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.util.Assert;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
+@DataJpaTest
+@TestPropertySource(locations = { "classpath:datasources/saluhud-admin-datasource.properties" })
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
+@ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
 public class SaluhudIngredientsTest {
 
     @Autowired
@@ -36,5 +48,7 @@ public class SaluhudIngredientsTest {
         harina.setCarbohydrates_amount(75);
         ingredientService.updateIngredient(harina);
         ingredientService.deleteIngredient(lechuga);
+        Assert.isTrue(!this.ingredientService.findAllIngredients().contains(lechuga), "");
+        Assert.isTrue(harina.getCarbohydratesAmount() == 75, "");
     }
 }

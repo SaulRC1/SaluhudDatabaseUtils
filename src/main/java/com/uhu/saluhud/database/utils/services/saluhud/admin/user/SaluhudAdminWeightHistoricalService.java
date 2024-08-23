@@ -144,7 +144,10 @@ public class SaluhudAdminWeightHistoricalService {
     @Transactional
     public void deleteWeightHistorical(WeightHistorical weightHistorical) {
         try {
-            this.weightHistoricalRepository.delete(weightHistorical);
+            if (this.weightHistoricalRepository.existsById(weightHistorical.getId())) {
+                this.weightHistoricalRepository.delete(weightHistorical);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting weight historical", e);
             throw e;

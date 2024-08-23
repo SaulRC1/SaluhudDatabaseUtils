@@ -24,7 +24,7 @@ public interface SaluhudAdminRecipeRepository extends JpaRepository<Recipe, Long
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Recipe i WHERE i.name = :name")
-    Recipe findByName(@Param("name") String name);
+    List<Recipe> findByName(@Param("name") String name);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r WHERE :ingredient MEMBER OF r.ingredients")

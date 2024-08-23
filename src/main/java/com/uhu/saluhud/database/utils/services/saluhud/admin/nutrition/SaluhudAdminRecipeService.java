@@ -74,7 +74,10 @@ public class SaluhudAdminRecipeService {
     @Transactional
     public void deleteRecipe(Recipe recipe) {
         try {
-            this.recipeRepository.delete(recipe);
+            if (this.recipeRepository.existsById(recipe.getId())) {
+                this.recipeRepository.delete(recipe);
+            }
+            
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting recipe", e);
             throw e;
@@ -106,18 +109,18 @@ public class SaluhudAdminRecipeService {
     /**
      * Finds a recipe by its name.
      *
-     * @param name The name of the recipe.
-     * @return The recipe found, if any.
+     * @param name The name of the recipes.
+     * @return The recipes found, if any.
      */
     @Transactional(readOnly = true)
-    public Recipe getRecipeByName(String name) {
-        Recipe selectedRecipe;
+    public List<Recipe> getRecipeByName(String name) {
+        List<Recipe> selectedRecipes;
         try {
-            selectedRecipe = this.recipeRepository.findByName(name);
-            if (selectedRecipe == null) {
+            selectedRecipes = this.recipeRepository.findByName(name);
+            if (selectedRecipes == null) {
                 return null;
             } else {
-                return selectedRecipe;
+                return selectedRecipes;
             }
 
         } catch (Exception e) {

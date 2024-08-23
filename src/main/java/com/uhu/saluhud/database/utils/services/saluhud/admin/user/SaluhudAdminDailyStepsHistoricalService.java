@@ -24,6 +24,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
 
     /**
      * Guarda un nuevo historico de pasos diarios.
+     *
      * @param dailyStepsHistorical El historico de pasos diarios a guardar.
      */
     @Transactional
@@ -33,6 +34,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
 
     /**
      * Actualiza un historico de pasos diarios existente.
+     *
      * @param dailyStepsHistorical El historico de pasos diarios a actualizar.
      */
     @Transactional
@@ -42,26 +44,31 @@ public class SaluhudAdminDailyStepsHistoricalService {
 
             result = this.dailyStepsHistoricalRepository.findById(dailyStepsHistorical.getId());
 
-            if (result.get() != null) {
-                result.get().setUser(dailyStepsHistorical.getUser());
-                result.get().setEntries(dailyStepsHistorical.getEntries());
+            if (result.isPresent()) {
+                DailyStepsHistorical existingDailySteps = result.get();
+                existingDailySteps.setUser(dailyStepsHistorical.getUser());
+                existingDailySteps.setEntries(dailyStepsHistorical.getEntries());
 
-                this.dailyStepsHistoricalRepository.save(result.get());
+                this.dailyStepsHistoricalRepository.save(existingDailySteps);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error updating DailyStepsHistoricalEntry", e);
-            throw e; 
+            throw e;
         }
     }
 
     /**
      * Elimina una entrada de pasos diarios por su ID.
+     *
      * @param dailyStepsHistorical El historico de pasos diarios a eliminar.
      */
     @Transactional
     public void deleteDailyStepsHistorical(DailyStepsHistorical dailyStepsHistorical) {
         try {
-            this.dailyStepsHistoricalRepository.delete(dailyStepsHistorical);
+            if (this.dailyStepsHistoricalRepository.existsById(dailyStepsHistorical.getId())) {
+                this.dailyStepsHistoricalRepository.delete(dailyStepsHistorical);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting DailyStepsHistoricalEntry", e);
             throw e;

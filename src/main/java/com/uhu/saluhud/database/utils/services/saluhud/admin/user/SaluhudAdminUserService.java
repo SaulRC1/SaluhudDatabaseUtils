@@ -147,13 +147,16 @@ public class SaluhudAdminUserService {
     @Transactional
     public void deleteUser(SaluhudUser user) {
         try {
-            saluhudUserRepository.delete(user);
+            if (this.saluhudUserRepository.existsById(user.getId())) {
+                saluhudUserRepository.delete(user);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting user", e);
             throw e;
         }
     }
-    
+
     /**
      * Check if a personal data record exists by phone number.
      *
@@ -169,7 +172,7 @@ public class SaluhudAdminUserService {
             throw e;
         }
     }
-    
+
     /**
      * Find personal data by phone number.
      *

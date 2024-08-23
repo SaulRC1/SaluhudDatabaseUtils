@@ -49,7 +49,7 @@ public class DailyStepsHistorical implements Serializable
 
     /**
      * This is a parameterized constructor for the class.It takes, a list of
-     * daily steps entries
+     * daily steps entries and the user which the historical belongs to
      *
      * @param entries the list of daily steps entries
      * @param user the user which the historical belongs to

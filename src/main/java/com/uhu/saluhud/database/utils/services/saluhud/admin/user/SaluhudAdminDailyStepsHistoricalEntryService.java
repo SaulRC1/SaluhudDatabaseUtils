@@ -46,14 +46,15 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
             Optional<DailyStepsHistoricalEntry> result;
             result = this.dailyStepsHistoricalEntryRepository.findById(dailyStepsHistoricalEntry.getId());
 
-            if (!result.isEmpty()) {
-                result.get().setDailyStepsHistorical(dailyStepsHistoricalEntry.getDailyStepsHistorical());
-                result.get().setDoneSteps(dailyStepsHistoricalEntry.getDoneSteps());
-                result.get().setEntryDate(dailyStepsHistoricalEntry.getEntryDate());
-                result.get().setKiloCaloriesBurned(dailyStepsHistoricalEntry.getKiloCaloriesBurned());
-                result.get().setStepEvaluation(dailyStepsHistoricalEntry.getStepEvaluation());
+            if (result.isPresent()) {
+                DailyStepsHistoricalEntry existingDailyStepsEntry = result.get();
+                existingDailyStepsEntry.setDailyStepsHistorical(dailyStepsHistoricalEntry.getDailyStepsHistorical());
+                existingDailyStepsEntry.setDoneSteps(dailyStepsHistoricalEntry.getDoneSteps());
+                existingDailyStepsEntry.setEntryDate(dailyStepsHistoricalEntry.getEntryDate());
+                existingDailyStepsEntry.setKiloCaloriesBurned(dailyStepsHistoricalEntry.getKiloCaloriesBurned());
+                existingDailyStepsEntry.setStepEvaluation(dailyStepsHistoricalEntry.getStepEvaluation());
 
-                this.dailyStepsHistoricalEntryRepository.save(result.get());
+                this.dailyStepsHistoricalEntryRepository.save(existingDailyStepsEntry);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error updating DailyStepsHistoricalEntry", e);
@@ -70,7 +71,10 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
     @Transactional
     public void deleteDailyStepsHistorical(DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         try {
-            this.dailyStepsHistoricalEntryRepository.delete(dailyStepsHistoricalEntry);
+            if (this.dailyStepsHistoricalEntryRepository.existsById(dailyStepsHistoricalEntry.getId())) {
+                this.dailyStepsHistoricalEntryRepository.delete(dailyStepsHistoricalEntry);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting DailyStepsHistoricalEntry", e);
             throw e;

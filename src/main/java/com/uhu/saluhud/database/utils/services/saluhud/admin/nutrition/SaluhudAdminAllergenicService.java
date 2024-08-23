@@ -67,7 +67,10 @@ public class SaluhudAdminAllergenicService {
     @Transactional
     public void deleteAllergenic(Allergenic allergenic) {
         try {
-            this.allergenicRepository.delete(allergenic);
+            if (this.allergenicRepository.existsById(allergenic.getId())) {
+                this.allergenicRepository.delete(allergenic);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting allergenic", e);
             throw e;

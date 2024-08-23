@@ -148,7 +148,10 @@ public class SaluhudAdminSleepHistoricalService {
     @Transactional
     public void deleteSleepHistorical(SleepHistorical sleepHistorical) {
         try {
-            sleepHistoricalRepository.delete(sleepHistorical);
+            if (this.sleepHistoricalRepository.existsById(sleepHistorical.getId())) {
+                this.sleepHistoricalRepository.delete(sleepHistorical);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting SleepHistorical", e);
             throw e;

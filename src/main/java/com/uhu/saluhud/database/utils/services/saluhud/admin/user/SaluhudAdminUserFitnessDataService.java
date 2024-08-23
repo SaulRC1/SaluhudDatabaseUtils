@@ -185,7 +185,10 @@ public class SaluhudAdminUserFitnessDataService {
     @Transactional
     public void deleteFitnessData(SaluhudUserFitnessData fitnessData) {
         try {
-            this.fitnessDataRepository.delete(fitnessData);
+            if (this.fitnessDataRepository.existsById(fitnessData.getId())) {
+                this.fitnessDataRepository.delete(fitnessData);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting fitness data", e);
             throw e;

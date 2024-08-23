@@ -70,7 +70,10 @@ public class SaluhudAdminRecipeElaborationStepService {
      */
     public void deleteRecipeElaborationStep(RecipeElaborationStep step) {
         try {
-            this.recipeElaborationStepRepository.delete(step);
+            if (this.recipeElaborationStepRepository.existsById(step.getId())) {
+                this.recipeElaborationStepRepository.delete(step);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting recipe elaboration step", e);
             throw e;

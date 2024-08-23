@@ -181,7 +181,10 @@ public class SaluhudAdminIngredientService {
     @Transactional
     public void deleteIngredient(Ingredient ingredient) {
         try {
-            this.ingredientRepository.delete(ingredient);
+            if (this.ingredientRepository.existsById(ingredient.getId())) {
+                this.ingredientRepository.delete(ingredient);
+            }
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting ingredient", e);
             throw e;

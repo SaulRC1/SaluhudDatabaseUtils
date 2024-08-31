@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -31,20 +32,25 @@ public class DailyStepsHistoricalEntry implements Serializable
     private long id;
 
     @Column(name = "entry_date", nullable = false)
+    @NotNull
     private LocalDate entryDate;
 
     @Column(name = "done_steps", nullable = false)
+    @NotNull
     private int doneSteps;
 
     @Column(name = "kilo_calories_burned", nullable = false)
+    @NotNull
     private double kiloCaloriesBurned;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "steps_evaluation", nullable = false)
+    @NotNull
     private HistoricalEvaluation stepEvaluation;
 
     @ManyToOne
     @JoinColumn(name = "daily_steps_historical_id", nullable = false)
+    @NotNull
     private DailyStepsHistorical dailyStepsHistorical;
     
     @Version

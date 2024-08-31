@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -24,9 +26,11 @@ public class RecipeElaborationStep implements Serializable
     private long id;
 
     @Column(name = "step_description", nullable = false)
+    @NotBlank
     private String stepDescription;
 
     @Column(name = "step_number", nullable = false)
+    @NotNull
     private int stepNumber;
     
     @Version

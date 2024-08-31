@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -32,12 +34,16 @@ public class Recipe implements Serializable
     private long id;
 
     @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 60)
     private String name;
 
     @Column(name = "description")
+    @Size(min = 2, max = 250)
     private String description;
 
     @Column(name = "ingredients_description")
+    @Size(min = 2, max = 250)
     private String ingredientsDescription;
 
     @ManyToMany(fetch = FetchType.EAGER,

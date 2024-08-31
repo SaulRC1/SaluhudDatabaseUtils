@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -33,6 +34,7 @@ public class WeightHistorical implements Serializable
     private List<WeightHistoricalEntry> entries;
     
     @OneToOne
+    @NotNull
     @JoinColumn(name = "user_id", nullable = false)
     private SaluhudUser user;
     

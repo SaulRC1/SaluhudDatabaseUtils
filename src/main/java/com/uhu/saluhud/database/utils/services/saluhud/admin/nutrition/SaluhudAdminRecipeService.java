@@ -51,12 +51,24 @@ public class SaluhudAdminRecipeService {
 
             if (result.isPresent()) {
                 Recipe existingRecipe = result.get();
-                existingRecipe.setName(recipe.getName());
-                existingRecipe.setDescription(recipe.getDescription());
-                existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
-                existingRecipe.setIngredients(recipe.getIngredients());
-                existingRecipe.setAllergenics(recipe.getAllergenics());
-                existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
+                if (!recipe.getName().isBlank()) {
+                    existingRecipe.setName(recipe.getName());
+                }
+                if (!recipe.getDescription().isBlank()) {
+                    existingRecipe.setDescription(recipe.getDescription());
+                }
+                if (!recipe.getIngredientsDescription().isBlank()) {
+                    existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
+                }
+                if (!recipe.getIngredients().isEmpty()) {
+                    existingRecipe.setIngredients(recipe.getIngredients());
+                }
+                if (!recipe.getAllergenics().isEmpty()) {
+                    existingRecipe.setAllergenics(recipe.getAllergenics());
+                }
+                if (!recipe.getElaborationSteps().isEmpty()) {
+                    existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
+                }
 
                 this.recipeRepository.save(existingRecipe);
             }
@@ -77,7 +89,7 @@ public class SaluhudAdminRecipeService {
             if (this.recipeRepository.existsById(recipe.getId())) {
                 this.recipeRepository.delete(recipe);
             }
-            
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting recipe", e);
             throw e;

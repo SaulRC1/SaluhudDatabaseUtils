@@ -7,6 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -26,18 +30,28 @@ public class Ingredient implements Serializable
     private long id;
 
     @Column(name = "name", unique = true, nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 60)
     private String name;
 
     @Column(name = "kilocalories", nullable = false)
+    @NotNull
+    @Range(min = 0, max = 9999)
     private int kilocalories;
 
     @Column(name = "protein_amount", nullable = false)
+    @NotNull
+    @Range(min = 0, max = 9999)
     private int proteinAmount;
 
     @Column(name = "carbohydrates_amount", nullable = false)
+    @NotNull
+    @Range(min = 0, max = 9999)
     private int carbohydratesAmount;
 
     @Column(name = "fat_amount", nullable = false)
+    @NotNull
+    @Range(min = 0, max = 9999)
     private int fatAmount;
     
     @Version

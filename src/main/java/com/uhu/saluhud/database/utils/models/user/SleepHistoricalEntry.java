@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Version;
 
 
@@ -33,20 +35,27 @@ public class SleepHistoricalEntry implements Serializable
     private long id;
 
     @Column(name = "entry_date", nullable = false)
+    @NotNull
     private LocalDate entryDate;
 
     @Column(name = "hours_slept", nullable = false)
+    @NotNull
+    @Range(min = 5, max = 15)
     private int hoursSlept;
 
     @Column(name = "minutes_slept", nullable = false)
+    @NotNull
+    @Range(min = 300, max = 900)
     private double minutesSlept;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sleep_evaluation", nullable = false)
+    @NotNull
     private HistoricalEvaluation sleepEvaluation;
 
     @ManyToOne
     @JoinColumn(name = "sleep_historical_id", nullable = false)
+    @NotNull
     private SleepHistorical sleepHistorical;
     
     @Version

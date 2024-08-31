@@ -52,8 +52,13 @@ public class SaluhudAdminRecipeElaborationStepService {
 
             if (result.isPresent()) {
                 RecipeElaborationStep existingStep = result.get();
-                existingStep.setStepNumber(step.getStepNumber());
-                existingStep.setStepDescription(step.getStepDescription());
+                if (step.getStepNumber() > 0) {
+                    existingStep.setStepNumber(step.getStepNumber());
+                }
+
+                if (!step.getStepDescription().isBlank()) {
+                    existingStep.setStepDescription(step.getStepDescription());
+                }
 
                 this.recipeElaborationStepRepository.save(existingStep);
             }

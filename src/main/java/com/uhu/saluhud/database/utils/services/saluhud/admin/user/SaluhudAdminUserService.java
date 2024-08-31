@@ -164,7 +164,7 @@ public class SaluhudAdminUserService {
      * @return true if a record exists, false otherwise.
      */
     @Transactional(readOnly = true)
-    public boolean existsByPhoneNumber(int phoneNumber) {
+    public boolean existsByPhoneNumber(String phoneNumber) {
         try {
             return this.saluhudUserRepository.existsByPhoneNumber(phoneNumber);
         } catch (Exception e) {
@@ -180,7 +180,7 @@ public class SaluhudAdminUserService {
      * @return the personal data record, or null if not found.
      */
     @Transactional(readOnly = true)
-    public SaluhudUser findPersonalDataByPhoneNumber(int phoneNumber) {
+    public SaluhudUser findPersonalDataByPhoneNumber(String phoneNumber) {
         try {
             Optional<SaluhudUser> result = this.saluhudUserRepository.findByPhoneNumber(phoneNumber);
             return result.orElseThrow();

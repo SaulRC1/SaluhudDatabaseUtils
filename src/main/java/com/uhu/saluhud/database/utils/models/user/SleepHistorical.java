@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -34,6 +35,7 @@ public class SleepHistorical implements Serializable
     
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @NotNull
     private SaluhudUser user;
     
     @Version

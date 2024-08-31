@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -23,6 +24,7 @@ public class Allergenic implements Serializable
     private long id;
 
     @Column(name = "name", unique = true, nullable = false)
+    @NotBlank
     private String name;
     
     @Version

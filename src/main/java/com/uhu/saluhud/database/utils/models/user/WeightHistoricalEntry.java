@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -29,19 +31,27 @@ public class WeightHistoricalEntry implements Serializable
     private long id;
 
     @Column(name = "entry_date", nullable = false)
+    @NotNull
     private LocalDate entryDate;
 
     @Column(name = "weight_entry", nullable = false)
+    @NotNull
+    @Range(min = 40, max = 200)
     private double weightEntry;
 
     @Column(name = "height_entry", nullable = false)
+    @NotNull
+    @Range(min = 120, max = 240)
     private double heightEntry;
 
     @Column(name = "kilo_calories_objective_entry", nullable = false)
+    @NotNull
+    @Range(min = 1500, max = 4000)
     private double kilocaloriesObjectiveEntry;
 
     @ManyToOne
     @JoinColumn(name = "weight_historical_id", nullable = false)
+    @NotNull
     private WeightHistorical weightHistorical;
     
     @Version

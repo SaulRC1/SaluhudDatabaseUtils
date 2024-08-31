@@ -11,6 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import java.util.Objects;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -28,22 +33,32 @@ public class SaluhudUser implements Serializable {
     private long id;
 
     @Column(name = "username", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 32)
     private String username;
 
     @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 32)
     private String password;
 
     @Column(name = "email", nullable = false, unique = true)
+    @NotBlank
+    @Email
     private String email;
 
     @Column(name = "name", nullable = false)
+    @Size(min = 2, max = 40)
+    @NotBlank
     private String name;
 
     @Column(name = "surname", nullable = true)
+    @Size(min = 2, max = 40)
     private String surname;
 
     @Column(name = "phone_number", nullable = true, unique = true)
-    private int phoneNumber;
+    @Pattern(regexp = "\\+\\d{2}\\d{9}")
+    private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "SALUHUD_USER_SALUHUD_USER_FITNESS_DATA",
@@ -62,8 +77,8 @@ public class SaluhudUser implements Serializable {
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the username,
-     * his password and his email.
+     * This is a parameterized constructor for the class. It takes, the
+     * username, his password and his email.
      *
      * @param username the username used to logging in the app
      * @param password the password of the user
@@ -76,10 +91,10 @@ public class SaluhudUser implements Serializable {
         this.email = email;
         this.name = name;
     }
-    
+
     /**
-     * This is a parameterized constructor for the class. It takes, the username,
-     * his password, his email, name, surname and phone number.
+     * This is a parameterized constructor for the class. It takes, the
+     * username, his password, his email, name, surname and phone number.
      *
      * @param username the username used to logging in the app
      * @param password the password of the user
@@ -88,8 +103,8 @@ public class SaluhudUser implements Serializable {
      * @param surname the surname of the user
      * @param phoneNumber the phone number of the user
      */
-    public SaluhudUser(String username, String password, String email, 
-            String name, String surname, int phoneNumber) {
+    public SaluhudUser(String username, String password, String email,
+            String name, String surname, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -100,7 +115,8 @@ public class SaluhudUser implements Serializable {
 
     /**
      * This is a parameterized constructor for the class.It takes, the username,
-     * his password, his email, name, surname, phone number and his fitness data.
+     * his password, his email, name, surname, phone number and his fitness
+     * data.
      *
      * @param username the username used to logging in the app
      * @param password the password of the user
@@ -110,8 +126,8 @@ public class SaluhudUser implements Serializable {
      * @param phoneNumber the phone number of the user
      * @param userFitnessData the fitness data of the user
      */
-    public SaluhudUser(String username, String password, String email, 
-            String name, String surname, int phoneNumber, SaluhudUserFitnessData userFitnessData) {
+    public SaluhudUser(String username, String password, String email,
+            String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -207,8 +223,7 @@ public class SaluhudUser implements Serializable {
      *
      * @return the name of the user
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -217,8 +232,7 @@ public class SaluhudUser implements Serializable {
      *
      * @return the surname of the user
      */
-    public String getSurname()
-    {
+    public String getSurname() {
         return surname;
     }
 
@@ -227,8 +241,7 @@ public class SaluhudUser implements Serializable {
      *
      * @return the phone number of the user
      */
-    public int getPhoneNumber()
-    {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -237,8 +250,7 @@ public class SaluhudUser implements Serializable {
      *
      * @param name the new name of the user
      */
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -247,8 +259,7 @@ public class SaluhudUser implements Serializable {
      *
      * @param surname the new surname of the user
      */
-    public void setSurname(String surname)
-    {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -257,8 +268,7 @@ public class SaluhudUser implements Serializable {
      *
      * @param phoneNumber the new phone number of the user
      */
-    public void setPhoneNumber(int phoneNumber)
-    {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -276,5 +286,22 @@ public class SaluhudUser implements Serializable {
      */
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SaluhudUser that = (SaluhudUser) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

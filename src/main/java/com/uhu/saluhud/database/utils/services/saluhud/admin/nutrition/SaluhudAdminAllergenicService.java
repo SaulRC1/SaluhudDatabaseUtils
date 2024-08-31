@@ -49,7 +49,9 @@ public class SaluhudAdminAllergenicService {
 
             if (result.isPresent()) {
                 Allergenic existingAllergenic = result.get();
-                existingAllergenic.setName(allergenic.getName());
+                if (!allergenic.getName().isBlank()) {
+                    existingAllergenic.setName(allergenic.getName());
+                }
 
                 this.allergenicRepository.save(existingAllergenic);
             }

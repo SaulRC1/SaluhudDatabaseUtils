@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Version;
 
 /**
@@ -32,27 +34,34 @@ public class SaluhudUserFitnessData implements Serializable
     private double height;
 
     @Column(name = "biological_sex")
+    @Size(min = 2, max = 40)
     private String biologicalSex;
 
     @Column(name = "age")
     private int age;
 
     @Column(name = "body_composition")
+    @Size(min = 2, max = 40)
     private String bodyComposition;
 
     @Column(name = "recommended_daily_water_liters")
+    @Range(min = 2, max = 6)
     private int recommendedDailyWaterLiters;
 
     @Column(name = "recommended_sleep_hours")
+    @Range(min = 6, max = 12)
     private int recommendedSleepHours;
 
     @Column(name = "recommended_daily_steps")
+    @Range(min = 5000, max = 100000)
     private int recommendedDailySteps;
 
     @Column(name = "daily_kilocalories_objective")
+    @Range(min = 1500, max = 5000)
     private int dailyKilocaloriesObjective;
 
     @Column(name = "body_mass_index")
+    @Size(min = 2, max = 40)
     private String bodyMassIndex;
     
     @Version

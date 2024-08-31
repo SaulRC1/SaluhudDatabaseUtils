@@ -159,11 +159,21 @@ public class SaluhudAdminIngredientService {
 
             if (result.isPresent()) {
                 Ingredient existingIngredient = result.get();
-                existingIngredient.setName(ingredient.getName());
-                existingIngredient.setKilocalories(ingredient.getKilocalories());
-                existingIngredient.setProtein_amount(ingredient.getProteinAmount());
-                existingIngredient.setCarbohydrates_amount(ingredient.getCarbohydratesAmount());
-                existingIngredient.setFat_amount(ingredient.getFatAmount());
+                if (!ingredient.getName().isBlank()) {
+                    existingIngredient.setName(ingredient.getName());
+                }
+                if (ingredient.getKilocalories() > 0) {
+                    existingIngredient.setKilocalories(ingredient.getKilocalories());
+                }
+                if (ingredient.getProteinAmount() > 0) {
+                    existingIngredient.setProtein_amount(ingredient.getProteinAmount());
+                }
+                if (ingredient.getCarbohydratesAmount() > 0) {
+                    existingIngredient.setCarbohydrates_amount(ingredient.getCarbohydratesAmount());
+                }
+                if (ingredient.getFatAmount() > 0) {
+                    existingIngredient.setFat_amount(ingredient.getFatAmount());
+                }
 
                 this.ingredientRepository.save(existingIngredient);
             }

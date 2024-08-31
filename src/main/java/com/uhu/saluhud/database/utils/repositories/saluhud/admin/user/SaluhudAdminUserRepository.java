@@ -28,10 +28,10 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     boolean existsByEmail(String email);
     
     @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByPhoneNumber(int phoneNumber);
+    Optional<SaluhudUser> findByPhoneNumber(String phoneNumber);
 
     @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByPhoneNumber(int phoneNumber);
+    boolean existsByPhoneNumber(String phoneNumber);
 
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
@@ -39,5 +39,5 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
  
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT p FROM SaluhudUser p WHERE p.phoneNumber > :phoneNumber")
-    List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") int phoneNumber);
+    List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") String phoneNumber);
 }

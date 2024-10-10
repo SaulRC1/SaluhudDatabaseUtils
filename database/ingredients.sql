@@ -184,13 +184,13 @@ INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de cerdo de capa blanca, jamón, partes grasa y magra, crudo', 129, 23, 1, 3);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de cerdo de capa blanca, lomo, parte magra, crudo', 124, 24, 1, 2);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de cerdo de capa blanca, lomo, partes grasa y magra, crudo', 142, 24, 2, 4);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, cadera, partes magra y grasa, crudo', 288, 21, 0, 19);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, costillar, partes magra y grasa, crudo', 288, 22, 0, 20);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, lomo, partes magra y grasa, crudo', 288, 26, 0, 21);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, rabo, partes magra y grasa, crudo', 288, 24, 0, 18);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, carrillera, partes magra y grasa, crudo', 288, 22, 0, 20);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, redondo, partes magra y grasa, crudo', 288, 28, 0, 21);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne de vacuno, solomillo, partes magra y grasa, crudo', 288, 26, 0, 20);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carne picada', 244, 15, 0, 20);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carpa, al horno', 149, 20, 0, 7);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Carpa, cruda', 116, 17, 0, 4);
@@ -441,7 +441,6 @@ INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Ketchup', 104, 3, 21, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Kiwi', 52, 1, 10, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Lacón', 214, 19, 9, 10);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Langosta', 91, 18, 0, 2);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Langostino', 112, 24, 1, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Lasaña', 138, 6, 10, 7);
@@ -694,7 +693,7 @@ INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Preparado lácteo con omega 3', 53, 3, 5, 1);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Pudding de pasas', 297, 4, 47, 9);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Puerro, crudo y congelado', 24, 1, 3, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Puerro, en conserva', 26, 2, 4, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Pulmón, de cerdo, crudo', 82, 14, 0, 2);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Pulmón, de cordero, crudo', 91, 16, 0, 2);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Pulmón, de ternera, crudo', 88, 16, 0, 2);
@@ -896,8 +895,8 @@ INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vaca/buey, parte s/e, estofado', 196, 30, 0, 8);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vaca/buey, solomillo, a la plancha', 167, 28, 0, 5);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vaca/buey, solomillo, crudo', 136, 23, 0, 4);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
-INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('', 0, 0, 0, 0);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vacuno, hígado, crudo', 132, 21, 2, 5);
+INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vacuno, mollejas, crudas', 128, 22, 1, 3);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vainilla', 53, 0, 12, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vermut, s/e', 140, 0, 13, 0);
 INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('Vieira', 86, 19, 0, 0);

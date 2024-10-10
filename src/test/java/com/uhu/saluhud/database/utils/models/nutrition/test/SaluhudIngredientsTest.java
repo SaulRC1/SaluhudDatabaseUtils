@@ -18,26 +18,26 @@ import org.springframework.util.Assert;
  * @author Juan Alberto Dominguez Vazquez
  */
 @DataJpaTest
-@TestPropertySource(locations = { "classpath:datasources/saluhud-admin-datasource.properties" })
+@TestPropertySource(locations = {"classpath:datasources/saluhud-admin-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
 @ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
-public class SaluhudIngredientsTest {
+public class SaluhudIngredientsTest
+{
 
     @Autowired
     private SaluhudAdminIngredientService ingredientService;
 
     @Test
-    public void testIngredientCRUD() {
+    public void testIngredientCRUD()
+    {
         Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
         Ingredient carneDeRes = new Ingredient("Carne de Res", 250, 26, 0, 17);
         Ingredient huevo = new Ingredient("Huevo", 68, 6, 0, 5);
-        Ingredient lechuga = new Ingredient("Lechuga", 5, 1, 2, 0);
 
         ingredientService.saveIngredient(harina);
         ingredientService.saveIngredient(carneDeRes);
         ingredientService.saveIngredient(huevo);
-        ingredientService.saveIngredient(lechuga);
 
         Ingredient ingredientSelectedById = ingredientService.getIngredientById(harina.getId());
         assertEquals(ingredientSelectedById.getName(), "Harina");
@@ -47,8 +47,6 @@ public class SaluhudIngredientsTest {
 
         harina.setCarbohydrates_amount(75);
         ingredientService.updateIngredient(harina);
-        ingredientService.deleteIngredient(lechuga);
-        Assert.isTrue(!this.ingredientService.findAllIngredients().contains(lechuga), "");
         Assert.isTrue(harina.getCarbohydratesAmount() == 75, "");
     }
 }

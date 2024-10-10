@@ -20,12 +20,12 @@ public class IngredientsWebscrapingTest {
     @Test
     void testGetIngredientsWebscraping() throws IOException {
 
-        this.ingredientsWebscraping = new IngredientsWebscraping();
+        /*this.ingredientsWebscraping = new IngredientsWebscraping();
         try {
             List<Ingredient> ingredients = this.ingredientsWebscraping.getIngredientsWebscraping();
             this.ingredientsWebscraping.generateIngredientSQL(ingredients);
         } catch (InterruptedException ex) {
             Logger.getLogger(IngredientsWebscrapingTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 }

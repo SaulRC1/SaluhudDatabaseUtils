@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminUserFitnessDataRepository;
+import jakarta.validation.Valid;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminUserFitnessDataService {
 
     @Autowired
@@ -54,7 +56,6 @@ public class SaluhudAdminUserFitnessDataService {
      * @return A list of fitness data records matching the specified biological
      * sex.
      */
-    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByBiologicalSex(String biologicalSex) {
         try {
             return this.fitnessDataRepository.findByBiologicalSex(biologicalSex);
@@ -70,7 +71,6 @@ public class SaluhudAdminUserFitnessDataService {
      * @param bodyMassIndex The body mass index to search for.
      * @return A list of fitness data records matching the specified BMI.
      */
-    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByBodyMassIndex(String bodyMassIndex) {
         try {
             return this.fitnessDataRepository.findByBodyMassIndex(bodyMassIndex);
@@ -87,7 +87,6 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxWeight The maximum weight.
      * @return A list of fitness data records within the specified weight range.
      */
-    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByWeightRange(double minWeight, double maxWeight) {
         try {
             return this.fitnessDataRepository.findByWeightRange(minWeight, maxWeight);
@@ -104,7 +103,6 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxHeight The maximum height.
      * @return A list of fitness data records within the specified height range.
      */
-    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByHeightRange(double minHeight, double maxHeight) {
         try {
             return this.fitnessDataRepository.findByHeightRange(minHeight, maxHeight);
@@ -121,7 +119,6 @@ public class SaluhudAdminUserFitnessDataService {
      * @param maxAge The maximum age.
      * @return A list of fitness data records within the specified age range.
      */
-    @Transactional(readOnly = true)
     public List<SaluhudUserFitnessData> findFitnessDataByAgeRange(int minAge, int maxAge) {
         try {
             return this.fitnessDataRepository.findByAgeRange(minAge, maxAge);
@@ -136,8 +133,8 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to save.
      */
-    @Transactional
-    public void saveFitnessData(SaluhudUserFitnessData fitnessData) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             this.fitnessDataRepository.save(fitnessData);
         } catch (Exception e) {
@@ -151,8 +148,8 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to update.
      */
-    @Transactional
-    public void updateFitnessData(SaluhudUserFitnessData fitnessData) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             Optional<SaluhudUserFitnessData> result = this.fitnessDataRepository.findById(fitnessData.getId());
 
@@ -182,8 +179,8 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to delete.
      */
-    @Transactional
-    public void deleteFitnessData(SaluhudUserFitnessData fitnessData) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             if (this.fitnessDataRepository.existsById(fitnessData.getId())) {
                 this.fitnessDataRepository.delete(fitnessData);

@@ -9,8 +9,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 /**
@@ -28,6 +30,8 @@ public class SaluhudAllergenicsTest {
     private SaluhudAdminAllergenicService allergenicService;
 
     @Test
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Rollback
     public void testAllergenicCRUD() {
         Allergenic pescado = new Allergenic("Pescado");
         Allergenic leche = new Allergenic("Leche");

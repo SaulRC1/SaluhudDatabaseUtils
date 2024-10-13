@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -36,6 +38,8 @@ public class DailyStepsHistoricalTest {
     private SaluhudAdminUserService saluhudUserService;
 
     @Test
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Rollback
     public void testDailyStepsHistoricalCRUD() {
         LocalDate now = LocalDate.now();
 
@@ -48,7 +52,8 @@ public class DailyStepsHistoricalTest {
 
         dailyStepsHistorical.setEntries(historicalEntries);
 
-        SaluhudUser user = new SaluhudUser("Juan2k2", "1235", "juan2@gmail.com", "Juan");
+        SaluhudUser user = new SaluhudUser("Juan2k2", "1235Password%%", "juan2@gmail.com", "Juan");
+        user.setPassword(user.getRawPassword());
         dailyStepsHistorical.setUser(user);
 
         saluhudUserService.saveUser(user);

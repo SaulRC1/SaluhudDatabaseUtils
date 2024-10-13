@@ -11,12 +11,14 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminDailyStepsHistoricalEntryRepository;
+import jakarta.validation.Valid;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminDailyStepsHistoricalEntryService {
 
     @Autowired
@@ -29,8 +31,8 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      *
      * @param dailyStepsHistoricalEntry La entrada de pasos diarios a guardar.
      */
-    @Transactional
-    public void saveDailyStepsHistoricalEntry(DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         this.dailyStepsHistoricalEntryRepository.save(dailyStepsHistoricalEntry);
     }
 
@@ -40,8 +42,8 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param dailyStepsHistoricalEntry La entrada de pasos diarios a
      * actualizar.
      */
-    @Transactional
-    public void updateDailyStepsHistoricalEntry(DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         try {
             Optional<DailyStepsHistoricalEntry> result;
             result = this.dailyStepsHistoricalEntryRepository.findById(dailyStepsHistoricalEntry.getId());
@@ -68,8 +70,8 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param dailyStepsHistoricalEntry La entrada del historico de pasos
      * diarios a eliminar.
      */
-    @Transactional
-    public void deleteDailyStepsHistorical(DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteDailyStepsHistorical(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         try {
             if (this.dailyStepsHistoricalEntryRepository.existsById(dailyStepsHistoricalEntry.getId())) {
                 this.dailyStepsHistoricalEntryRepository.delete(dailyStepsHistoricalEntry);
@@ -88,7 +90,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return Lista de entradas en el rango de fechas especificado.
      */
-    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findEntriesByDateRange(startDate, endDate);
     }
@@ -99,8 +100,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param evaluation La evaluación de pasos.
      * @return Lista de entradas con la evaluación especificada.
      */
-    @Transactional(readOnly = true)
-    public List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(HistoricalEvaluation evaluation) {
+    public List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(@Valid HistoricalEvaluation evaluation) {
         return dailyStepsHistoricalEntryRepository.findEntriesByStepEvaluation(evaluation);
     }
 
@@ -111,7 +111,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de pasos en el rango de fechas especificado.
      */
-    @Transactional(readOnly = true)
     public int findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalStepsInDateRange(startDate, endDate);
     }
@@ -123,7 +122,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param endDate La fecha de fin.
      * @return El total de calorías quemadas en el rango de fechas especificado.
      */
-    @Transactional(readOnly = true)
     public double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate) {
         return dailyStepsHistoricalEntryRepository.findTotalCaloriesBurnedInDateRange(startDate, endDate);
     }
@@ -134,7 +132,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param historicalId El ID del historial de pasos diarios.
      * @return Lista de entradas para el historial especificado.
      */
-    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(long historicalId) {
         return dailyStepsHistoricalEntryRepository.findEntriesByDailyStepsHistoricalId(historicalId);
     }
@@ -146,7 +143,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @return Lista de entradas con un número de pasos mayor al valor
      * especificado.
      */
-    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(int steps) {
         return dailyStepsHistoricalEntryRepository.findEntriesWithStepsGreaterThan(steps);
     }
@@ -159,7 +155,6 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @return Lista de entradas históricas de pasos diarios para el usuario
      * especificado.
      */
-    @Transactional(readOnly = true)
     public List<DailyStepsHistoricalEntry> findAllByUserUsername(String username) {
         return dailyStepsHistoricalEntryRepository.findAllByUserUsername(username);
     }

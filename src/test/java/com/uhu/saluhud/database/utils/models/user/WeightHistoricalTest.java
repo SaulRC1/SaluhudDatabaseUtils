@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -36,6 +38,8 @@ public class WeightHistoricalTest {
     private SaluhudAdminUserService saluhudUserService;
 
     @Test
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Rollback
     public void testWeightHistoricalCRUD() {
 
         WeightHistorical weightHistorical = new WeightHistorical();
@@ -47,7 +51,8 @@ public class WeightHistoricalTest {
 
         weightHistorical.setEntries(entries);
 
-        SaluhudUser user2 = new SaluhudUser("Juan2k", "1235", "juan@gmail.com", "Juan");
+        SaluhudUser user2 = new SaluhudUser("Juan2k", "1235Password%%", "juan@gmail.com", "Juan");
+        user2.setPassword(user2.getRawPassword());
         saluhudUserService.saveUser(user2);
         weightHistorical.setUser(user2);
 

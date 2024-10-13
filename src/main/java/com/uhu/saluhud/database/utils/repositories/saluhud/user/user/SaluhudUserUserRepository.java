@@ -1,4 +1,4 @@
-package com.uhu.saluhud.database.utils.repositories.saluhud.admin.user;
+package com.uhu.saluhud.database.utils.repositories.saluhud.user.user;
 
 import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
 import jakarta.persistence.LockModeType;
@@ -11,41 +11,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * This is the saluhud user repository to implement basic CRUD operations
- *
- * @author Juan Alberto Domínguez Vázquez
+ * {@link JpaRepository} for operations against the database regarding {@link SaluhudUser}
+ * and with database user "SaluhudUser" (mobile app) permissions.
+ * 
+ * @author SaulRC1
  */
 @Repository
-public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, Long> {
-
+public interface SaluhudUserUserRepository extends JpaRepository<SaluhudUser, Long>
+{
     @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByUsername(String username);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByEmail(String email);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByEmail(String email);
+    boolean existsByEmailIgnoreCase(String email); //Emails are case insensitive
     
+    @Override
     @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByPhoneNumber(String phoneNumber);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByPhoneNumber(String phoneNumber);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
-    List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") long fitnessDataId);
- 
-    @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT p FROM SaluhudUser p WHERE p.phoneNumber > :phoneNumber")
-    List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") String phoneNumber);
+    public <S extends SaluhudUser> S save(S entity);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -58,18 +41,6 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public SaluhudUser getReferenceById(Long id);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAllInBatch();
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAllByIdInBatch(Iterable<Long> ids);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAllInBatch(Iterable<SaluhudUser> entities);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -101,26 +72,6 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAll();
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAll(Iterable<? extends SaluhudUser> entities);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAllById(Iterable<? extends Long> ids);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void delete(SaluhudUser entity);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public void deleteById(Long id);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
@@ -130,10 +81,6 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public Optional<SaluhudUser> findById(Long id);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> S save(S entity);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)

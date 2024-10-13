@@ -77,7 +77,7 @@ public class SaluhudAdminDataSourceConfig
         return saluhudAdminEntityManagerFactoryBean;
     }
 
-    @Primary
+    //@Primary
     @Bean(name = "saluhudAdminTransactionManager")
     public PlatformTransactionManager saluhudAdminTransactionManager()
     {

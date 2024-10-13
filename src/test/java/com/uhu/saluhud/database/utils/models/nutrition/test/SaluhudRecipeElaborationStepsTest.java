@@ -18,8 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 /**
@@ -46,6 +48,8 @@ public class SaluhudRecipeElaborationStepsTest {
     private SaluhudAdminAllergenicService allergenicService;
     
     @Test
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Rollback
     public void testRecipeElaborationStepsTestCRUD() {
 
         List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();

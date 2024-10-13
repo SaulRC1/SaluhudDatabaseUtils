@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeElaborationStepRepository;
+import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminRecipeElaborationStepService {
 
     @Autowired
@@ -37,7 +39,8 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to save.
      */
-    public void saveRecipeElaborationStep(RecipeElaborationStep step) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         this.recipeElaborationStepRepository.save(step);
     }
 
@@ -46,7 +49,8 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to update.
      */
-    public void updateRecipeElaborationStep(RecipeElaborationStep step) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         try {
             Optional<RecipeElaborationStep> result = this.recipeElaborationStepRepository.findById(step.getId());
 
@@ -73,7 +77,8 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to delete.
      */
-    public void deleteRecipeElaborationStep(RecipeElaborationStep step) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         try {
             if (this.recipeElaborationStepRepository.existsById(step.getId())) {
                 this.recipeElaborationStepRepository.delete(step);

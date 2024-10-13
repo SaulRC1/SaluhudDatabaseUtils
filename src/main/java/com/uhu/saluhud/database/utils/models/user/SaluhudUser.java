@@ -11,12 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.util.Objects;
-import org.springframework.data.annotation.Version;
 
 /**
  * This class represents the users stored in the database
@@ -32,32 +32,46 @@ public class SaluhudUser implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     @NotBlank
+    @Pattern(regexp = "^\\w+$")
     @Size(min = 2, max = 32)
     private String username;
 
     @Column(name = "password", nullable = false)
-    @NotBlank
-    @Size(min = 5, max = 32)
     private String password;
+    
+    @NotBlank
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\\-_]).{8,32}$")
+    @Size(min = 8, max = 32)
+    @Transient //This raw password will be not persisted
+    //The raw password without any hashing/encryption, it will only be used for
+    //validation of the real password before encypting and persisting it into the
+    //database
+    private String rawPassword; 
 
     @Column(name = "email", nullable = false, unique = true)
     @NotBlank
-    @Email
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
+    @Size(min = 6, max = 200) //Minimum possible size is of 6 characters taking
+                              //into account the regular expression  
     private String email;
 
     @Column(name = "name", nullable = false)
-    @Size(min = 2, max = 40)
+    @Size(min = 1, max = 200)
+    @Pattern(regexp = "^[a-zA-Zà-üÀ-Ü\\s]+$")
     @NotBlank
     private String name;
 
     @Column(name = "surname", nullable = true)
-    @Size(min = 2, max = 40)
+    @Size(min = 1, max = 200)
+    @Pattern(regexp = "^[a-zA-Zà-üÀ-Ü\\s]+$")
     private String surname;
 
     @Column(name = "phone_number", nullable = true, unique = true)
-    @Pattern(regexp = "\\+\\d{2}\\d{9}")
+    //This pattern accepts phone number having the following format: +34 xxxx or
+    //+1-939 xxxx (being x any possible number)
+    @Pattern(regexp = "^\\+(\\d{1,3}|\\d{1,3}-\\d{1,3})\\s\\d{4,32}$")
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -81,13 +95,13 @@ public class SaluhudUser implements Serializable {
      * username, his password and his email.
      *
      * @param username the username used to logging in the app
-     * @param password the password of the user
+     * @param rawPassword The raw password of the user (without any encryption)
      * @param email the email of the user
      * @param name the name of the user
      */
-    public SaluhudUser(String username, String password, String email, String name) {
+    public SaluhudUser(String username, String rawPassword, String email, String name) {
         this.username = username;
-        this.password = password;
+        this.rawPassword = rawPassword;
         this.email = email;
         this.name = name;
     }
@@ -97,16 +111,16 @@ public class SaluhudUser implements Serializable {
      * username, his password, his email, name, surname and phone number.
      *
      * @param username the username used to logging in the app
-     * @param password the password of the user
+     * @param rawPassword the raw password of the user (without any encryption)
      * @param email the email of the user
      * @param name the name of the user
      * @param surname the surname of the user
      * @param phoneNumber the phone number of the user
      */
-    public SaluhudUser(String username, String password, String email,
+    public SaluhudUser(String username, String rawPassword, String email,
             String name, String surname, String phoneNumber) {
         this.username = username;
-        this.password = password;
+        this.rawPassword = rawPassword;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -119,17 +133,17 @@ public class SaluhudUser implements Serializable {
      * data.
      *
      * @param username the username used to logging in the app
-     * @param password the password of the user
+     * @param rawPassword the raw password of the user (without any encryption)
      * @param email the email of the user
      * @param name the name of the user
      * @param surname the surname of the user
      * @param phoneNumber the phone number of the user
      * @param userFitnessData the fitness data of the user
      */
-    public SaluhudUser(String username, String password, String email,
+    public SaluhudUser(String username, String rawPassword, String email,
             String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData) {
         this.username = username;
-        this.password = password;
+        this.rawPassword = rawPassword;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -174,7 +188,7 @@ public class SaluhudUser implements Serializable {
     }
 
     /**
-     * Setter for the parameter "username"
+     * Setter for the parameter "password"
      *
      * @param password the new password
      */
@@ -303,5 +317,26 @@ public class SaluhudUser implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    /**
+     * Returns the raw password (the password without any encryption). It will
+     * return null if the entity has been retrieved from the database.
+     * 
+     * @return the password without any encryption or null
+     */
+    public String getRawPassword()
+    {
+        return rawPassword;
+    }
+
+    /**
+     * Sets the raw password of this user (the password without any encryption)
+     * 
+     * @param rawPassword User's password without any encryption 
+     */
+    public void setRawPassword(String rawPassword)
+    {
+        this.rawPassword = rawPassword;
     }
 }

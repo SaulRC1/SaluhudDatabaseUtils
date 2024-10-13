@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,10 +54,11 @@ public class SaluhudUserDataSourceConfig
     }
 
     @Bean(name = "saluhudUserTransactionManager")
-    public PlatformTransactionManager saluhudUserTransactionManager()
+    public PlatformTransactionManager saluhudUserTransactionManager(
+            @Qualifier("saluhudUserEntityManagerFactory") LocalContainerEntityManagerFactoryBean saluhudUserEntityManagerFactory)
     {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(saluhudUserEntityManagerFactory().getObject());
+        jpaTransactionManager.setEntityManagerFactory(saluhudUserEntityManagerFactory.getObject());
 
         return jpaTransactionManager;
     }

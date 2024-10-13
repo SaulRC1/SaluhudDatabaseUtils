@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminWeightHistoricalEntryRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminWeightHistoricalEntryService {
 
     @Autowired
@@ -55,7 +57,6 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param weightHistoricalId The ID of the weight historical.
      * @return A list of weight historical entries.
      */
-    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByWeightHistoricalId(Long weightHistoricalId) {
         try {
             return this.weightHistoricalEntryRepository.findByWeightHistoricalId(weightHistoricalId);
@@ -71,7 +72,6 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param entryDate The date of the entries.
      * @return A list of weight historical entries.
      */
-    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByDate(LocalDate entryDate) {
         try {
             return this.weightHistoricalEntryRepository.findByEntryDate(entryDate);
@@ -90,7 +90,6 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return A list of weight historical entries.
      */
-    @Transactional(readOnly = true)
     public List<WeightHistoricalEntry> findEntriesByDateRangeAndWeightHistoricalId(Long weightHistoricalId, LocalDate startDate, LocalDate endDate) {
         try {
             return this.weightHistoricalEntryRepository.findByDateRangeAndWeightHistoricalId(weightHistoricalId, startDate, endDate);
@@ -107,7 +106,6 @@ public class SaluhudAdminWeightHistoricalEntryService {
      * @param weightHistoricalId The ID of the weight historical.
      * @return The most recent weight historical entry.
      */
-    @Transactional(readOnly = true)
     public WeightHistoricalEntry findMostRecentEntryByWeightHistoricalId(Long weightHistoricalId) {
         try {
             return this.weightHistoricalEntryRepository.findMostRecentEntryByWeightHistoricalId(weightHistoricalId);
@@ -122,8 +120,8 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to save.
      */
-    @Transactional
-    public void saveWeightHistoricalEntry(WeightHistoricalEntry weightHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             this.weightHistoricalEntryRepository.save(weightHistoricalEntry);
         } catch (Exception e) {
@@ -137,8 +135,8 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to update.
      */
-    @Transactional
-    public void updateWeightHistoricalEntry(WeightHistoricalEntry weightHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             Optional<WeightHistoricalEntry> result = this.weightHistoricalEntryRepository.findById(weightHistoricalEntry.getId());
 
@@ -162,8 +160,8 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to delete.
      */
-    @Transactional
-    public void deleteWeightHistoricalEntry(WeightHistoricalEntry weightHistoricalEntry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             if (this.weightHistoricalEntryRepository.existsById(weightHistoricalEntry.getId())) {
                 this.weightHistoricalEntryRepository.delete(weightHistoricalEntry);

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeRepository;
+import jakarta.validation.Valid;
 
 /**
  * Service class for managing recipes.
@@ -17,6 +18,7 @@ import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.Saluh
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminRecipeService {
 
     @Autowired
@@ -34,8 +36,8 @@ public class SaluhudAdminRecipeService {
      * @param recipe The recipe to save.
      * @return The saved recipe.
      */
-    @Transactional
-    public Recipe saveRecipe(Recipe recipe) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public Recipe saveRecipe(@Valid Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
@@ -44,8 +46,8 @@ public class SaluhudAdminRecipeService {
      *
      * @param recipe The recipe to update.
      */
-    @Transactional
-    public void updateRecipe(Recipe recipe) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateRecipe(@Valid Recipe recipe) {
         try {
             Optional<Recipe> result = this.recipeRepository.findById(recipe.getId());
 
@@ -83,8 +85,8 @@ public class SaluhudAdminRecipeService {
      *
      * @param recipe The recipe receta to delete.
      */
-    @Transactional
-    public void deleteRecipe(Recipe recipe) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteRecipe(@Valid Recipe recipe) {
         try {
             if (this.recipeRepository.existsById(recipe.getId())) {
                 this.recipeRepository.delete(recipe);
@@ -101,7 +103,6 @@ public class SaluhudAdminRecipeService {
      * @param id
      * @return
      */
-    @Transactional(readOnly = true)
     public Recipe getRecipeById(long id) {
         Recipe selectedRecipe;
         try {
@@ -124,7 +125,6 @@ public class SaluhudAdminRecipeService {
      * @param name The name of the recipes.
      * @return The recipes found, if any.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> getRecipeByName(String name) {
         List<Recipe> selectedRecipes;
         try {
@@ -147,8 +147,7 @@ public class SaluhudAdminRecipeService {
      * @param ingredient The specific ingredient.
      * @return List of recipes containing the ingredient.
      */
-    @Transactional(readOnly = true)
-    public List<Recipe> findByIngredient(Ingredient ingredient) {
+    public List<Recipe> findByIngredient(@Valid Ingredient ingredient) {
         return recipeRepository.findByIngredient(ingredient);
     }
 
@@ -158,7 +157,6 @@ public class SaluhudAdminRecipeService {
      * @param allergenId The ID of the allergenic.
      * @return List of recipes containing the allergenic.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> findByAllergenic(Long allergenId) {
         return recipeRepository.findByAllergenic(allergenId);
     }
@@ -170,7 +168,6 @@ public class SaluhudAdminRecipeService {
      * @return List of recipes containing the keyword in the ingredients
      * description.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientsDescriptionContaining(String keyword) {
         return recipeRepository.findByIngredientsDescriptionContaining(keyword);
     }
@@ -181,7 +178,6 @@ public class SaluhudAdminRecipeService {
      * @param keyword The keyword to search for.
      * @return List of recipes containing the keyword in the description.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> findByDescriptionContaining(String keyword) {
         return recipeRepository.findByDescriptionContaining(keyword);
     }
@@ -192,7 +188,6 @@ public class SaluhudAdminRecipeService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return List of recipes that meet the criteria.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientMaxKilocalories(int maxKilocalories) {
         return recipeRepository.findByIngredientMaxKilocalories(maxKilocalories);
     }
@@ -203,7 +198,6 @@ public class SaluhudAdminRecipeService {
      * @param minProteinAmount The minimum amount of protein.
      * @return List of recipes that meet the criteria.
      */
-    @Transactional(readOnly = true)
     public List<Recipe> findByIngredientMinProteinAmount(int minProteinAmount) {
         return recipeRepository.findByIngredientMinProteinAmount(minProteinAmount);
     }

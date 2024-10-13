@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminWeightHistoricalRepository;
+import jakarta.validation.Valid;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminWeightHistoricalService {
 
     @Autowired
@@ -54,8 +56,7 @@ public class SaluhudAdminWeightHistoricalService {
      * @param user The user whose weight historical records are to be found.
      * @return A list of weight historical records for the specified user.
      */
-    @Transactional(readOnly = true)
-    public List<WeightHistorical> findWeightHistoricalsByUser(SaluhudUser user) {
+    public List<WeightHistorical> findWeightHistoricalsByUser(@Valid SaluhudUser user) {
         try {
             return this.weightHistoricalRepository.findByUser(user);
         } catch (Exception e) {
@@ -71,7 +72,6 @@ public class SaluhudAdminWeightHistoricalService {
      * found.
      * @return The weight historical record, or null if not found.
      */
-    @Transactional(readOnly = true)
     public WeightHistorical findWeightHistoricalByUserId(long userId) {
         try {
             return this.weightHistoricalRepository.findByUserId(userId);
@@ -88,7 +88,6 @@ public class SaluhudAdminWeightHistoricalService {
      * @return A list of weight historical records containing the specified
      * entry.
      */
-    @Transactional(readOnly = true)
     public List<WeightHistorical> findWeightHistoricalsByEntryId(long entryId) {
         try {
             return this.weightHistoricalRepository.findByEntryId(entryId);
@@ -103,8 +102,8 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to save.
      */
-    @Transactional
-    public void saveWeightHistorical(WeightHistorical weightHistorical) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             this.weightHistoricalRepository.save(weightHistorical);
         } catch (Exception e) {
@@ -118,8 +117,8 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to update.
      */
-    @Transactional
-    public void updateWeightHistorical(WeightHistorical weightHistorical) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             Optional<WeightHistorical> result = this.weightHistoricalRepository.findById(weightHistorical.getId());
 
@@ -141,8 +140,8 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to delete.
      */
-    @Transactional
-    public void deleteWeightHistorical(WeightHistorical weightHistorical) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             if (this.weightHistoricalRepository.existsById(weightHistorical.getId())) {
                 this.weightHistoricalRepository.delete(weightHistorical);

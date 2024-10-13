@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 /**
@@ -30,28 +32,17 @@ public class SaluhudUserTest {
 
     @Autowired
     private SaluhudAdminUserFitnessDataService saluhudUserFitnessDataService;
-
-    @AfterEach
-    public void setUp() {
-        // Elimina todos los usuarios de la base de datos despues de cada prueba
-        List<SaluhudUser> users = saluhudUserService.findAllUsers();
-        for (SaluhudUser user : users) {
-            saluhudUserService.deleteUser(user);
-        }
-
-        // Elimina todos los datos de fitness asociados
-        List<SaluhudUserFitnessData> fitnessDataList = saluhudUserFitnessDataService.findAllFitnessData();
-        for (SaluhudUserFitnessData fitnessData : fitnessDataList) {
-            saluhudUserFitnessDataService.deleteFitnessData(fitnessData);
-        }
-    }
     
     @Test
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Rollback
     public void testUserCRUD() {
 
         SaluhudUserFitnessData userFitnessData = new SaluhudUserFitnessData(90, 170, "Men", 22, "Hectomorfo", 2, 8, 10000, 2100, "10%");
-        SaluhudUser user = new SaluhudUser("SaulRC1", "1235", "saul@gmail.com", "Saul", "Rodriguez", "+3412345678", userFitnessData);
-        SaluhudUser user2 = new SaluhudUser("Juan2k", "1235", "juan@gmail.com", "Juan");
+        SaluhudUser user = new SaluhudUser("SaulRC1", "1235Password%%", "saul@gmail.com", "Saul", "Rodriguez", "+34 12345678", userFitnessData);
+        user.setPassword(user.getRawPassword());
+        SaluhudUser user2 = new SaluhudUser("Juan2k", "1235Password%%", "juan@gmail.com", "Juan");
+        user2.setPassword(user2.getRawPassword());
 
         saluhudUserService.saveUser(user);
         saluhudUserFitnessDataService.saveFitnessData(userFitnessData);

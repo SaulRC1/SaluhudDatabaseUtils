@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminUserRepository;
+import jakarta.validation.Valid;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminUserService {
 
     @Autowired
@@ -57,7 +59,6 @@ public class SaluhudAdminUserService {
      * @param username the username of the user to find.
      * @return the found user, or null if not found.
      */
-    @Transactional(readOnly = true)
     public SaluhudUser getUserByUsername(String username) {
         try {
             return saluhudUserRepository.findByUsername(username).orElseThrow();
@@ -73,7 +74,6 @@ public class SaluhudAdminUserService {
      * @param email the email of the user to find.
      * @return the found user, or null if not found.
      */
-    @Transactional(readOnly = true)
     public SaluhudUser getUserByEmail(String email) {
         try {
             return saluhudUserRepository.findByEmail(email).orElseThrow();
@@ -89,7 +89,6 @@ public class SaluhudAdminUserService {
      * @param email the email to check.
      * @return true if the user exists, false otherwise.
      */
-    @Transactional(readOnly = true)
     public boolean userExistsByEmail(String email) {
         try {
             return saluhudUserRepository.existsByEmail(email);
@@ -104,8 +103,8 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to save.
      */
-    @Transactional
-    public void saveUser(SaluhudUser user) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveUser(@Valid SaluhudUser user) {
         try {
             saluhudUserRepository.save(user);
         } catch (Exception e) {
@@ -119,8 +118,8 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to update.
      */
-    @Transactional
-    public void updateUser(SaluhudUser user) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateUser(@Valid SaluhudUser user) {
         try {
             Optional<SaluhudUser> result = saluhudUserRepository.findById(user.getId());
 
@@ -144,8 +143,8 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to delete.
      */
-    @Transactional
-    public void deleteUser(SaluhudUser user) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteUser(@Valid SaluhudUser user) {
         try {
             if (this.saluhudUserRepository.existsById(user.getId())) {
                 saluhudUserRepository.delete(user);
@@ -163,7 +162,6 @@ public class SaluhudAdminUserService {
      * @param phoneNumber the phone number to check.
      * @return true if a record exists, false otherwise.
      */
-    @Transactional(readOnly = true)
     public boolean existsByPhoneNumber(String phoneNumber) {
         try {
             return this.saluhudUserRepository.existsByPhoneNumber(phoneNumber);
@@ -179,7 +177,6 @@ public class SaluhudAdminUserService {
      * @param phoneNumber the phone number to search for.
      * @return the personal data record, or null if not found.
      */
-    @Transactional(readOnly = true)
     public SaluhudUser findPersonalDataByPhoneNumber(String phoneNumber) {
         try {
             Optional<SaluhudUser> result = this.saluhudUserRepository.findByPhoneNumber(phoneNumber);

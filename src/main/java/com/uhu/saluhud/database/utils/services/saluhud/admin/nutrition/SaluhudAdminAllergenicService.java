@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminAllergenicRepository;
+import jakarta.validation.Valid;
 
 /**
  * Service class for managing allergenics.
@@ -16,6 +17,7 @@ import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.Saluh
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminAllergenicService {
 
     @Autowired
@@ -32,8 +34,8 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic The allergenic to save.
      */
-    @Transactional
-    public void saveAllergenic(Allergenic allergenic) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveAllergenic(@Valid Allergenic allergenic) {
         this.allergenicRepository.save(allergenic);
     }
 
@@ -42,8 +44,8 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic the allergenic that is going to be update.
      */
-    @Transactional
-    public void updateAllergenic(Allergenic allergenic) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateAllergenic(@Valid Allergenic allergenic) {
         try {
             Optional<Allergenic> result = this.allergenicRepository.findById(allergenic.getId());
 
@@ -66,8 +68,8 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic the allergenic to delete.
      */
-    @Transactional
-    public void deleteAllergenic(Allergenic allergenic) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteAllergenic(@Valid Allergenic allergenic) {
         try {
             if (this.allergenicRepository.existsById(allergenic.getId())) {
                 this.allergenicRepository.delete(allergenic);
@@ -85,7 +87,6 @@ public class SaluhudAdminAllergenicService {
      * @param name the name of the allergenic
      * @return the allergenic if exists
      */
-    @Transactional(readOnly = true)
     public Allergenic getAllergenicByName(String name) {
         Allergenic selectedAllergenic;
         try {

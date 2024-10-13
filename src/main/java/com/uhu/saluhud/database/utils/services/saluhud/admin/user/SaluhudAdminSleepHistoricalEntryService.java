@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.user.SaluhudAdminSleepHistoricalEntryRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class SaluhudAdminSleepHistoricalEntryService {
 
     @Autowired
@@ -32,7 +34,6 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records within the specified date
      * range.
      */
-    @Transactional(readOnly = true)
     public List<SleepHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findEntriesByDateRange(startDate, endDate);
@@ -49,7 +50,6 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records associated with the given
      * SleepHistorical ID.
      */
-    @Transactional(readOnly = true)
     public List<SleepHistoricalEntry> findEntriesBySleepHistoricalId(long historicalId) {
         try {
             return sleepHistoricalEntryRepository.findEntriesBySleepHistoricalId(historicalId);
@@ -66,8 +66,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @return A list of SleepHistoricalEntry records with the specified sleep
      * evaluation.
      */
-    @Transactional(readOnly = true)
-    public List<SleepHistoricalEntry> findEntriesBySleepEvaluation(HistoricalEvaluation evaluation) {
+    public List<SleepHistoricalEntry> findEntriesBySleepEvaluation(@Valid HistoricalEvaluation evaluation) {
         try {
             return sleepHistoricalEntryRepository.findEntriesBySleepEvaluation(evaluation);
         } catch (Exception e) {
@@ -83,7 +82,6 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return The total hours slept within the specified date range.
      */
-    @Transactional(readOnly = true)
     public Integer findTotalHoursSleptInDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findTotalHoursSleptInDateRange(startDate, endDate);
@@ -100,7 +98,6 @@ public class SaluhudAdminSleepHistoricalEntryService {
      * @param endDate The end date of the range.
      * @return The total minutes slept within the specified date range.
      */
-    @Transactional(readOnly = true)
     public Double findTotalMinutesSleptInDateRange(LocalDate startDate, LocalDate endDate) {
         try {
             return sleepHistoricalEntryRepository.findTotalMinutesSleptInDateRange(startDate, endDate);
@@ -115,8 +112,8 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to save.
      */
-    @Transactional
-    public void saveSleepHistoricalEntry(SleepHistoricalEntry entry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void saveSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             sleepHistoricalEntryRepository.save(entry);
         } catch (Exception e) {
@@ -130,8 +127,8 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to update.
      */
-    @Transactional
-    public void updateSleepHistoricalEntry(SleepHistoricalEntry entry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void updateSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             Optional<SleepHistoricalEntry> result = sleepHistoricalEntryRepository.findById(entry.getId());
 
@@ -155,8 +152,8 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to delete.
      */
-    @Transactional
-    public void deleteSleepHistoricalEntry(SleepHistoricalEntry entry) {
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public void deleteSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             if (this.sleepHistoricalEntryRepository.existsById(entry.getId())) {
                 this.sleepHistoricalEntryRepository.delete(entry);

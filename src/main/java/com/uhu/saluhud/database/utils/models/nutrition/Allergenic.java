@@ -6,9 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * This class represents the existent allergenics present in food.
@@ -26,7 +28,10 @@ public class Allergenic implements Serializable
     @Column(name = "name", unique = true, nullable = false)
     @NotBlank
     private String name;
-    
+
+    @ManyToMany(mappedBy = "allergens")
+    private List<Ingredient> ingredients;
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -93,14 +98,42 @@ public class Allergenic implements Serializable
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     *
+     * @param version
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
+    /**
+     * Getter for the parameters "ingredients"
+     *
+     * @return the ingredients that contain the allergen
+     */
+    public List<Ingredient> getIngredients()
+    {
+        return ingredients;
+    }
+
+    /**
+     * Setter for the parameters "ingredients"
+     * 
+     * @param ingredients the new list of ingredients that contain the allergen
+     */
+    public void setIngredients(List<Ingredient> ingredients)
+    {
+        this.ingredients = ingredients;
+    }
+
 }

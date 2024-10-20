@@ -22,8 +22,11 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, Long> {
-
+public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, Long>
+{
+    @Lock(LockModeType.OPTIMISTIC)
+    Optional<SaluhudUser> findByEmailIgnoreCase(String email); //Emails are case insensitive
+    
     @Lock(LockModeType.OPTIMISTIC)
     Optional<SaluhudUser> findByUsername(String username);
 
@@ -31,8 +34,8 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     Optional<SaluhudUser> findByEmail(String email);
 
     @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByEmail(String email);
-    
+    boolean existsByEmailIgnoreCase(String email);
+
     @Lock(LockModeType.OPTIMISTIC)
     Optional<SaluhudUser> findByPhoneNumber(String phoneNumber);
 
@@ -42,7 +45,7 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
     List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") long fitnessDataId);
- 
+
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT p FROM SaluhudUser p WHERE p.phoneNumber > :phoneNumber")
     List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") String phoneNumber);
@@ -158,5 +161,5 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> Optional<S> findOne(Example<S> example);
-    
+
 }

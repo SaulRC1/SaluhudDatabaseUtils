@@ -1,16 +1,22 @@
 package com.uhu.saluhud.database.utils.models.nutrition;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.Set;
 import org.hibernate.validator.constraints.Range;
 
 /**
@@ -53,7 +59,19 @@ public class Ingredient implements Serializable
     @NotNull
     @Range(min = 0, max = 9999)
     private int fatAmount;
-    
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade
+            = {
+                CascadeType.PERSIST, CascadeType.MERGE
+            })
+    @JoinTable(
+            name = "INGREDIENT_ALLERGENIC",
+            joinColumns = @JoinColumn(name = "id_ingredient"),
+            inverseJoinColumns = @JoinColumn(name = "id_allergenic")
+    )
+    private Set<Allergenic> allergens;
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -87,11 +105,11 @@ public class Ingredient implements Serializable
         this.carbohydratesAmount = carbohydratesAmount;
         this.fatAmount = fatAmount;
     }
-    
+
     /**
-     * This is a parameterized constructor for the class. It takes, the
-     * name, the kilocalories amount, the protein amount, the carbohydrates
-     * amount and the fat amount
+     * This is a parameterized constructor for the class. It takes, the name,
+     * the kilocalories amount, the protein amount, the carbohydrates amount and
+     * the fat amount
      *
      * @param name The name of the ingredient
      * @param kilocalories The amount of kilocalories of an ingredient
@@ -106,6 +124,28 @@ public class Ingredient implements Serializable
         this.proteinAmount = proteinAmount;
         this.carbohydratesAmount = carbohydratesAmount;
         this.fatAmount = fatAmount;
+    }
+
+    /**
+     * This is a parameterized constructor for the class. It takes, the name,
+     * the kilocalories amount, the protein amount, the carbohydrates amount,
+     * the fat amount and his allergens
+     *
+     * @param name The name of the ingredient
+     * @param kilocalories The amount of kilocalories of an ingredient
+     * @param proteinAmount The amount of protein of an ingredient
+     * @param carbohydratesAmount The carbohydrates of an ingredient
+     * @param fatAmount The amount of fat of an ingredient
+     * @param allergens The set of allergens of an ingredient
+     */
+    public Ingredient(String name, int kilocalories, int proteinAmount, int carbohydratesAmount, int fatAmount, Set<Allergenic> allergens)
+    {
+        this.name = name;
+        this.kilocalories = kilocalories;
+        this.proteinAmount = proteinAmount;
+        this.carbohydratesAmount = carbohydratesAmount;
+        this.fatAmount = fatAmount;
+        this.allergens = allergens;
     }
 
     /**
@@ -249,26 +289,52 @@ public class Ingredient implements Serializable
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Ingredient))
-        {
+        if (!(obj instanceof Ingredient)) {
             return false;
         }
         Ingredient other = (Ingredient) obj;
-        if (this.id != other.id)
-        {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     *
+     * @param version
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
+    /**
+     * Getter for the parameter "allergens"
+     *
+     * @return the allergens of the ingredient
+     */
+    public Set<Allergenic> getAllergens()
+    {
+        return allergens;
+    }
+
+    /**
+     * Setter for the parameter "allergens"
+     *
+     * @param allergens the new allergens of the ingredient
+     */
+    public void setAllergens(Set<Allergenic> allergens)
+    {
+        this.allergens = allergens;
+    }
+
 }

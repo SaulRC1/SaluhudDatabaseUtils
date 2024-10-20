@@ -76,7 +76,7 @@ public class SaluhudAdminUserService {
      */
     public SaluhudUser getUserByEmail(String email) {
         try {
-            return saluhudUserRepository.findByEmail(email).orElseThrow();
+            return saluhudUserRepository.findByEmailIgnoreCase(email).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by email", e);
             throw e;
@@ -91,7 +91,7 @@ public class SaluhudAdminUserService {
      */
     public boolean userExistsByEmail(String email) {
         try {
-            return saluhudUserRepository.existsByEmail(email);
+            return saluhudUserRepository.existsByEmailIgnoreCase(email);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error checking if user exists by email", e);
             throw e;

@@ -1064,465 +1064,444 @@ CREATE TABLE INGREDIENT_ALLERGIC (
     FOREIGN KEY (id_allergenic) REFERENCES ALLERGENIC(id) ON DELETE CASCADE
 );
 
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(464, 5, 'Aceite de cacahuete', 'PEANUT'),
-(465, 6, 'Aceite de coco', 'SOYA_BEAN'),
-(466, 6, 'Aceite de colza', 'SOYA_BEAN'),
-(467, 5, 'Aceite de germen de trigo', 'GLUTEN'),
-(468, 2, 'Aceite de girasol', 'CRUSTACEAN'),
-(469, 6, 'Aceite de grano de uva', 'SOYA_BEAN'),
-(470, 4, 'Aceite de hígado de bacalao', 'FISH'),
-(471, 5, 'Aceite de lino', 'PEANUT'),
-(472, 12, 'Aceite de nuez', 'NUTS'),
-(473, 6, 'Aceite de oliva', 'SOYA_BEAN'),
-(474, 6, 'Aceite de oliva virgen extra', 'SOYA_BEAN'),
-(475, 6, 'Aceite de oliva virgen extra, producción ecológica', 'SOYA_BEAN'),
-(476, 6, 'Aceite de palma', 'SOYA_BEAN'),
-(477, 6, 'Aceite de sésamo', 'SESAME_SEED'),
-(478, 6, 'Aceite de soja', 'SOYA_BEAN'),
-(479, 4, 'Aceituna', 'FISH'),
-(480, 4, 'Aceituna negra, con hueso', 'FISH'),
-(481, 7, 'Acelga, cruda', 'CELERY'),
-(482, 7, 'Acelga, en conserva', 'CELERY'),
-(483, 7, 'Acelgas, hervidas', 'CELERY'),
-(484, 11, 'Achicoria, cruda', 'LUPIN_BEAN'),
-(485, 10, 'Agua de la red', 'SULFUR_DIOXIDE_AND_SULPHITES'),
-(486, 10, 'Agua mineral, mineralización débil', 'SULFUR_DIOXIDE_AND_SULPHITES'),
-(487, 10, 'Agua, con gas, embotellada', 'SULFUR_DIOXIDE_AND_SULPHITES'),
-(496, 3, 'Albondigas en conserva', 'EGG'),
-(497, 7, 'Alcachofa, cruda', 'CELERY'),
-(498, 7, 'Alcachofas en conserva', 'CELERY'),
-(501, 2, 'Almeja', 'CRUSTACEAN'),
-(502, 2, 'Almejas en conserva', 'CRUSTACEAN'),
-(503, 12, 'Almendra, cruda', 'NUTS'),
-(504, 12, 'Almendra, cruda, con cáscara', 'NUTS'),
-(505, 12, 'Almendra, frita, salada', 'NUTS'),
-(506, 12, 'Almendra, tostada', 'NUTS'),
-(508, 5, 'Almidón de maíz', 'PEANUT'),
-(509, 5, 'Almidón de trigo', 'GLUTEN'),
-(510, 11, 'Altramuz', 'LUPIN_BEAN'),
-(514, 12, 'Anacardo, crudo', 'NUTS'),
-(515, 2, 'Anchoas en aceite vegetal', 'CRUSTACEAN'),
-(516, 4, 'Anguila, al horno', 'FISH'),
-(517, 4, 'Anguila, cruda', 'FISH'),
-(518, 4, 'Anguila, hervida', 'FISH'),
-(519, 4, 'Angula, cruda', 'FISH'),
-(521, 5, 'Aperitivos de trigo', 'GLUTEN'),
-(522, 7, 'Apio, crudo', 'CELERY'),
-(523, 7, 'Apio, en conserva en salmuera', 'CELERY'),
-(525, 4, 'Arenque, ahumado', 'FISH'),
-(526, 4, 'Arenque, salado', 'FISH'),
-(528, 3, 'Arroz con leche', 'EGG'),
-(533, 4, 'Atún en aceite de oliva Isabel', 'FISH'),
-(534, 4, 'Atún en aceite vegetal', 'FISH'),
-(535, 4, 'Atún en escabeche', 'FISH'),
-(536, 4, 'Atún, al horno', 'FISH'),
-(537, 4, 'Atún, al natural', 'FISH'),
-(538, 4, 'Atún, crudo', 'FISH'),
-(539, 4, 'Atún, plancha', 'FISH'),
-(540, 12, 'Avellana', 'NUTS'),
-(541, 12, 'Avellana, cruda, con cáscara', 'NUTS'),
-(547, 4, 'Bacaladilla', 'FISH'),
-(548, 4, 'Bacalao, ahumado', 'FISH'),
-(549, 4, 'Bacalao, crudo', 'FISH'),
-(550, 4, 'Bacalao, fresco, al horno', 'FISH'),
-(551, 4, 'Bacalao, frito', 'FISH'),
-(552, 4, 'Bacalao, salado, crudo', 'FISH'),
-(553, 4, 'Bacalao, salado, remojado, crudo', 'FISH'),
-(562, 5, 'Barrita cereales maíz y trigo', 'GLUTEN');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(563, 5, 'Barrita cereales trigo y chocolate', 'PEANUT'),
-(564, 6, 'Batido de chocolate', 'SOYA_BEAN'),
-(565, 6, 'Batido de fresa', 'SOYA_BEAN'),
-(566, 6, 'Batido de soja', 'SOYA_BEAN'),
-(567, 6, 'Batido fermentado de soja', 'SOYA_BEAN'),
-(568, 3, 'Batido lácteo de cacao, bajo en calorías', 'EGG'),
-(569, 3, 'Batido lácteo, de fresa, bajo en calorías', 'EGG'),
-(573, 2, 'Berberechos', 'CRUSTACEAN'),
-(574, 2, 'Berberechos en conserva', 'CRUSTACEAN'),
-(578, 4, 'Besugo', 'FISH'),
-(582, 2, 'Bogavante', 'CRUSTACEAN'),
-(583, 2, 'Bogavante, hervido', 'CRUSTACEAN'),
-(584, 5, 'Bollería, genérico', 'GLUTEN'),
-(587, 4, 'Bonito del norte, al vapor', 'FISH'),
-(588, 6, 'Bonito del norte, enlatado en aceite de soja', 'SOYA_BEAN'),
-(589, 6, 'Bonito en aceite vegetal', 'SOYA_BEAN'),
-(591, 4, 'Boquerón', 'FISH'),
-(592, 4, 'Boquerón, frito', 'FISH'),
-(594, 4, 'Breca, cruda', 'FISH'),
-(598, 4, 'Caballa, al horno', 'FISH'),
-(599, 4, 'Caballa, cruda', 'FISH'),
-(607, 5, 'Cacahuete, crudo, con cáscara', 'PEANUT'),
-(608, 5, 'Cacahuete, frito, salado', 'PEANUT'),
-(609, 5, 'Cacahuete, tostado, salado', 'PEANUT'),
-(612, 3, 'Café, con leche', 'EGG'),
-(632, 2, 'Cangrejo', 'CRUSTACEAN'),
-(633, 2, 'Cangrejo de río crudo', 'CRUSTACEAN'),
-(634, 2, 'Cangrejo, en conserva', 'CRUSTACEAN'),
-(652, 12, 'Castaña, cruda', 'NUTS'),
-(653, 12, 'Castaña, tostada', 'NUTS'),
-(656, 5, 'Cebada, cruda', 'GLUTEN'),
-(662, 5, 'Centeno, crudo', 'GLUTEN'),
-(663, 2, 'Centollo, crudo', 'CRUSTACEAN');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(673, 5, 'Cereales base trigo y chocolate', 'GLUTEN'),
-(673, 12, 'Cereales base trigo y chocolate', 'NUTS'),
-(674, 5, 'Cereales desayuno base de arroz chocolateado', 'GLUTEN'),
-(675, 5, 'Cereales desayuno base de arroz y miel', 'GLUTEN'),
-(676, 5, 'Cereales desayuno base de arroz, trigo y fruta', 'GLUTEN'),
-(677, 5, 'Cereales desayuno base de maíz y miel', 'GLUTEN'),
-(678, 5, 'Cereales desayuno base de maíz y trigo', 'GLUTEN'),
-(679, 5, 'Cereales desayuno base de maíz, trigo y avena', 'GLUTEN'),
-(680, 5, 'Cereales desayuno base de trigo azucarado', 'GLUTEN'),
-(681, 5, 'Cereales desayuno base de trigo y arroz', 'GLUTEN'),
-(682, 5, 'Cereales desayuno base de trigo y frutas', 'GLUTEN'),
-(683, 5, 'Cereales desayuno base de trigo y miel', 'GLUTEN'),
-(684, 5, 'Cereales desayuno base de trigo, avena, maiz y miel', 'GLUTEN'),
-(685, 5, 'Cereales desayuno base de trigo, avena, maíz, miel y nueces', 'GLUTEN'),
-(685, 12, 'Cereales desayuno base de trigo, avena, maíz, miel y nueces', 'NUTS'),
-(686, 5, 'Cereales desayuno base muesli', 'GLUTEN'),
-(687, 5, 'Cereales desayuno, maíz azucarado', 'GLUTEN'),
-(688, 5, 'Cereales para el desayuno, ricos en fibra, tipo "all-bran"', 'GLUTEN'),
-(705, 3, 'Chocolate blanco', 'EGG'),
-(705, 12, 'Chocolate blanco', 'NUTS'),
-(706, 3, 'Chocolate con leche', 'EGG'),
-(707, 3, 'Chocolate con leche y almendras', 'EGG'),
-(707, 12, 'Chocolate con leche y almendras', 'NUTS'),
-(708, 3, 'Chocolate con leche y arroz', 'EGG'),
-(709, 3, 'Chocolate con nueces de macadamia', 'EGG'),
-(709, 12, 'Chocolate con nueces de macadamia', 'NUTS'),
-(710, 12, 'Chocolate negro, con almendras', 'NUTS'),
-(718, 2, 'Cigala', 'CRUSTACEAN'),
-(721, 12, 'Coco, desecado', 'NUTS'),
-(722, 12, 'Coco, fresco', 'NUTS'),
-(732, 3, 'Conejo de granja, carne, cruda', 'EGG'),
-(755, 12, 'Crema de almendras', 'NUTS'),
-(756, 5, 'Crema de cacahuete', 'PEANUT'),
-(757, 12, 'Crema de chocolate con avellanas', 'NUTS'),
-(758, 3, 'Crema de chocolate y nata', 'EGG'),
-(760, 12, 'Crema de coco', 'NUTS'),
-(762, 3, 'Crema inglesa', 'EGG'),
-(763, 3, 'Crema pastelera', 'EGG');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(765, 5, 'Croissant', 'GLUTEN'),
-(765, 3, 'Croissant', 'EGG'),
-(765, 12, 'Croissant', 'NUTS'),
-(766, 5, 'Croissant de chocolate', 'GLUTEN'),
-(766, 3, 'Croissant de chocolate', 'EGG'),
-(766, 12, 'Croissant de chocolate', 'NUTS'),
-(767, 3, 'Croquetas de pollo', 'EGG'),
-(768, 7, 'Cuajada', 'LACTOSE'),
-(773, 5, 'Donut', 'GLUTEN'),
-(773, 3, 'Donut', 'EGG'),
-(774, 5, 'Donut, de chocolate', 'GLUTEN'),
-(774, 3, 'Donut, de chocolate', 'EGG'),
-(781, 5, 'Ensaimada', 'GLUTEN'),
-(781, 3, 'Ensaimada', 'EGG'),
-(783, 3, 'Ensaladilla rusa', 'EGG'),
-(790, 5, 'Fabada', 'GLUTEN'),
-(792, 3, 'Flamenquín', 'EGG'),
-(793, 3, 'Flan de huevo', 'EGG'),
-(794, 3, 'Flan de huevo, bajo en calorías', 'EGG'),
-(803, 5, 'Galleta ,tipo "digestiva", con chocolate', 'GLUTEN'),
-(804, 5, 'Galleta salada', 'GLUTEN'),
-(805, 5, 'Galleta, barquillo, con jalea de frutas', 'GLUTEN'),
-(806, 5, 'Galleta, cubierta de chocolate', 'GLUTEN'),
-(807, 5, 'Galleta, genérico', 'GLUTEN'),
-(808, 5, 'Galleta, tipo "Digestiva"', 'GLUTEN'),
-(809, 5, 'Galletas integrales', 'GLUTEN'),
-(810, 5, 'Galletas saladas, con queso', 'GLUTEN'),
-(812, 5, 'Galletas, con chocolate, tipo "cookies"', 'GLUTEN'),
-(813, 5, 'Galletas, de mantequilla', 'GLUTEN'),
-(813, 3, 'Galletas, de mantequilla', 'EGG'),
-(822, 3, 'Gazpacho', 'EGG'),
-(823, 7, 'Gelatina', 'LACTOSE'),
-(826, 5, 'Gofio', 'GLUTEN'),
-(855, 3, 'Helado de chocolate', 'EGG'),
-(855, 7, 'Helado de chocolate', 'LACTOSE'),
-(856, 3, 'Helado de fresa', 'EGG'),
-(856, 7, 'Helado de fresa', 'LACTOSE'),
-(857, 3, 'Helado de nata', 'EGG'),
-(857, 7, 'Helado de nata', 'LACTOSE'),
-(864, 7, 'Horchata', 'LACTOSE'),
-(865, 3, 'Huevo de codorniz, entero, crudo', 'EGG');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(866, 3, 'Huevo de gallina fresco', 'EGG'),
-(867, 3, 'Huevo de gallina, clara, cruda', 'EGG'),
-(868, 3, 'Huevo de gallina, escalfado', 'EGG'),
-(869, 3, 'Huevo de gallina, frito', 'EGG'),
-(870, 3, 'Huevo de gallina, hervido, duro', 'EGG'),
-(871, 3, 'Huevo de gallina, pasado por agua', 'EGG'),
-(872, 3, 'Huevo de gallina, revuelto, con mantequilla', 'EGG'),
-(873, 3, 'Huevo de gallina, yema, cruda', 'EGG'),
-(874, 3, 'Huevo de gallina, yema, desecada', 'EGG'),
-(875, 3, 'Huevo de pato, crudo', 'EGG'),
-(876, 3, 'Huevo de pavo, entero, crudo', 'EGG'),
-(879, 1, 'Jamón asado', 'GLUTEN'),
-(880, 1, 'Jamón cocido, categoría s/e', 'GLUTEN'),
-(881, 1, 'Jamón cocido, enlatado', 'GLUTEN'),
-(884, 1, 'Jamón serrano', 'GLUTEN'),
-(894, 1, 'Kebab', 'GLUTEN'),
-(895, 7, 'Kefir', 'LACTOSE'),
-(896, 5, 'Ketchup', 'SOYA_BEAN'),
-(901, 1, 'Lasaña', 'GLUTEN'),
-(903, 7, 'Leche condensada, entera, con azúcar', 'LACTOSE'),
-(905, 7, 'Leche de cabra', 'LACTOSE'),
-(907, 7, 'Leche de oveja', 'LACTOSE'),
-(908, 7, 'Leche de vaca, desnatada, condensada, con azúcar', 'LACTOSE'),
-(909, 7, 'Leche de vaca, entera', 'LACTOSE'),
-(910, 7, 'Leche en polvo, semidesnatada', 'LACTOSE'),
-(911, 7, 'Leche fermentada, bifidobacterium, entera, natural', 'LACTOSE'),
-(913, 7, 'Leche merengada', 'LACTOSE'),
-(914, 7, 'Leche, desnatada, pasteurizada', 'LACTOSE'),
-(915, 7, 'Leche, semidesnatada, pasteurizada', 'LACTOSE'),
-(917, 6, 'Lecitina de soja', 'SOYA_BEAN'),
-(946, 5, 'Magdalena', 'GLUTEN'),
-(946, 3, 'Magdalena', 'EGG'),
-(958, 5, 'Masa de hojaldre, cruda', 'GLUTEN'),
-(959, 3, 'Mayonesa con aceite de girasol', 'EGG'),
-(960, 3, 'Mayonesa, aceite de oliva', 'EGG'),
-(961, 3, 'Mayonesa, aceite de soja', 'EGG'),
-(961, 6, 'Mayonesa, aceite de soja', 'SOYA_BEAN'),
-(962, 3, 'Mayonesa, baja en calorías', 'EGG'),
-(963, 13, 'Mejillon', 'MOLLUSK'),
-(964, 13, 'Mejillón, en conserva, al natural', 'MOLLUSK'),
-(965, 13, 'Mejillón, en escabeche', 'MOLLUSK'),
-(966, 13, 'Mejillón, hervido', 'MOLLUSK');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(976, 1, 'Merluza, rebozada, frita', 'GLUTEN'),
-(976, 3, 'Merluza, rebozada, frita', 'EGG'),
-(990, 6, 'Miso', 'SOYA_BEAN'),
-(993, 1, 'Morcilla', 'GLUTEN'),
-(994, 1, 'Morcilla, frita', 'GLUTEN'),
-(995, 1, 'Mortadela', 'GLUTEN'),
-(996, 8, 'Mostaza', 'MUSTARD'),
-(997, 7, 'Mousse de chocolate', 'LACTOSE'),
-(998, 7, 'Mousse de queso fresco, con frutas', 'LACTOSE'),
-(999, 7, 'Mousse de queso fresco, desnatado, azucarado', 'LACTOSE'),
-(1000, 7, 'Mousse de queso fresco, desnatado, con frutas', 'LACTOSE'),
-(1001, 7, 'Mousse de yogur, con frutas', 'LACTOSE'),
-(1002, 7, 'Mousse de yogur, natural', 'LACTOSE'),
-(1003, 1, 'Muesli', 'GLUTEN'),
-(1007, 1, 'Napolitana, rellena con crema de cacao', 'GLUTEN'),
-(1009, 7, 'Nata montada', 'LACTOSE'),
-(1010, 7, 'Nata, líquida, para cocinar, 18% de grasa', 'LACTOSE'),
-(1011, 7, 'Natillas sabor vainilla', 'LACTOSE'),
-(1012, 13, 'Nécora', 'CRUSTACEAN'),
-(1028, 12, 'Nuez', 'NUTS'),
-(1029, 12, 'Nuez moscada', 'NUTS'),
-(1030, 12, 'Nuez, cruda, con cáscara', 'NUTS'),
-(1033, 13, 'Ostra, cruda', 'MOLLUSK'),
-(1034, 1, 'Paella', 'GLUTEN'),
-(1035, 1, 'Paella marinera', 'GLUTEN'),
-(1036, 1, 'Palmera', 'GLUTEN'),
-(1040, 1, 'Pan blanco, de barra', 'GLUTEN'),
-(1041, 1, 'Pan blanco, de barra, sin sal', 'GLUTEN'),
-(1042, 1, 'Pan blanco, de molde, tostado', 'GLUTEN'),
-(1043, 1, 'Pan blanco, frito', 'GLUTEN'),
-(1044, 1, 'Pan blanco, tipo "baguette"', 'GLUTEN'),
-(1045, 1, 'Pan blanco, tostado', 'GLUTEN'),
-(1046, 1, 'Pan blanco, tostado sin sal', 'GLUTEN'),
-(1047, 1, 'Pan de avena', 'GLUTEN'),
-(1048, 1, 'Pan de cebada', 'GLUTEN'),
-(1049, 1, 'Pan de centeno', 'GLUTEN'),
-(1050, 1, 'Pan de leche', 'GLUTEN'),
-(1051, 1, 'Pan de maíz', 'GLUTEN'),
-(1052, 1, 'Pan integral', 'GLUTEN'),
-(1053, 1, 'Pan integral, de molde, tostado', 'GLUTEN'),
-(1054, 1, 'Pan integral, sin sal', 'GLUTEN'),
-(1055, 1, 'Pan integral, tostado', 'GLUTEN'),
-(1056, 1, 'Pan rallado', 'GLUTEN'),
-(1057, 1, 'Pan tostado integral', 'GLUTEN'),
-(1058, 1, 'Pan, tipo hamburguesa', 'GLUTEN'),
-(1063, 1, 'Pasta alimenticia, con huevo, cruda', 'GLUTEN'),
-(1063, 3, 'Pasta alimenticia, con huevo, cruda', 'EGG'),
-(1064, 1, 'Pasta alimenticia, con huevo, hervida', 'GLUTEN'),
-(1064, 3, 'Pasta alimenticia, con huevo, hervida', 'EGG'),
-(1065, 1, 'Pasta alimenticia, con vegetales, cruda', 'GLUTEN'),
-(1066, 1, 'Pasta alimenticia, cruda', 'GLUTEN'),
-(1067, 1, 'Pasta alimenticia, integral, cruda', 'GLUTEN');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(1068, 1, 'Pasta alimenticia, integral, hervida', 'GLUTEN'),
-(1069, 1, 'Pasta alimenticia, rellena con carne, hervida', 'GLUTEN'),
-(1069, 3, 'Pasta alimenticia, rellena con carne, hervida', 'EGG'),
-(1071, 9, 'Pasta de sésamo', 'SESAME_SEED'),
-(1072, 1, 'Pastas de te', 'GLUTEN'),
-(1073, 1, 'Pastel', 'GLUTEN'),
-(1074, 1, 'Pastel con fruta confitada', 'GLUTEN'),
-(1075, 1, 'Pastel de chocolate', 'GLUTEN'),
-(1075, 7, 'Pastel de chocolate', 'LACTOSE'),
-(1076, 1, 'Pastel de manzana', 'GLUTEN'),
-(1085, 7, 'Pate de higado de cerdo, 30% de grasa', 'LACTOSE'),
-(1086, 7, 'Paté de pimienta', 'LACTOSE'),
-(1090, 7, 'Pavo, fiambre', 'LACTOSE'),
-(1091, 7, 'Pavo, fiambre, bajo en grasa', 'LACTOSE'),
-(1095, 10, 'Pepinillos en vinagre', 'SULFUR_DIOXIDE_AND_SULPHITES'),
-(1107, 7, 'Petit líquido, sabor fresa', 'LACTOSE'),
-(1108, 7, 'Petit suïsse, cereales y fruta', 'LACTOSE'),
-(1109, 7, 'Petit suisse, chocolate', 'LACTOSE'),
-(1110, 7, 'Petit suisse, fresa', 'LACTOSE'),
-(1111, 7, 'Petit Suisse, natural azucarado', 'LACTOSE'),
-(1125, 12, 'Piñon', 'NUTS'),
-(1126, 12, 'Piñón, crudo, con cáscara', 'NUTS'),
-(1130, 12, 'Pistacho', 'NUTS'),
-(1131, 1, 'Pizza, precocinada', 'GLUTEN'),
-(1131, 7, 'Pizza, precocinada', 'LACTOSE'),
-(1135, 1, 'Pollo empanado, frito', 'GLUTEN'),
-(1148, 7, 'Preparado lácteo con omega 3', 'LACTOSE'),
-(1149, 1, 'Pudding de pasas', 'GLUTEN'),
-(1149, 7, 'Pudding de pasas', 'LACTOSE'),
-(1156, 7, 'Puré de patata y queso, en copos', 'LACTOSE'),
-(1160, 7, 'Puré, de patata, con leche', 'LACTOSE'),
-(1161, 7, 'Queso afuegal pitu', 'LACTOSE'),
-(1162, 7, 'Queso ahumado de aliva', 'LACTOSE'),
-(1163, 7, 'Queso azul', 'LACTOSE'),
-(1164, 7, 'Queso brie', 'LACTOSE'),
-(1165, 7, 'Queso cabra, curado', 'LACTOSE'),
-(1166, 7, 'Queso cabrales', 'LACTOSE'),
-(1167, 7, 'Queso Camembert 20-30% MG/ES', 'LACTOSE'),
-(1168, 7, 'Queso camembert 60% mg/es', 'LACTOSE');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(1169, 7, 'Queso cantabria', 'LACTOSE'),
-(1170, 7, 'Queso casín', 'LACTOSE'),
-(1171, 7, 'Queso Castellano', 'LACTOSE'),
-(1172, 7, 'Queso cebreiro', 'LACTOSE'),
-(1173, 7, 'Queso Cheddar', 'LACTOSE'),
-(1174, 7, 'Queso curado, genérico', 'LACTOSE'),
-(1175, 7, 'Queso de aracena', 'LACTOSE'),
-(1176, 7, 'Queso de arzúa', 'LACTOSE'),
-(1177, 7, 'Queso de bola', 'LACTOSE'),
-(1178, 7, 'Queso de cádiz', 'LACTOSE'),
-(1179, 7, 'Queso de Castilla-La Mancha, oveja y cabra', 'LACTOSE'),
-(1180, 7, 'Queso de Castilla-La Mancha, oveja, vaca y cabra', 'LACTOSE'),
-(1181, 7, 'Queso de castilla-león, oveja y vaca', 'LACTOSE'),
-(1182, 7, 'Queso de murcia, al vino', 'LACTOSE'),
-(1183, 7, 'Queso de tenerife', 'LACTOSE'),
-(1184, 7, 'Queso de tiétar', 'LACTOSE'),
-(1185, 7, 'Queso edam', 'LACTOSE'),
-(1186, 7, 'Queso emmental', 'LACTOSE'),
-(1187, 7, 'Queso en porciones', 'LACTOSE'),
-(1188, 7, 'Queso flor de guía', 'LACTOSE'),
-(1189, 7, 'Queso fresco de burgos', 'LACTOSE'),
-(1190, 7, 'Queso fresco, cabra', 'LACTOSE'),
-(1191, 7, 'Queso fresco, desnatado, con frutas', 'LACTOSE'),
-(1192, 7, 'Queso fundido, extragraso (>60% MG/ES)', 'LACTOSE'),
-(1193, 7, 'Queso gata-hurdes', 'LACTOSE'),
-(1194, 7, 'Queso gaztazarra', 'LACTOSE'),
-(1195, 7, 'Queso Gouda', 'LACTOSE'),
-(1196, 7, 'Queso grazalema', 'LACTOSE'),
-(1197, 7, 'Queso Gruyer', 'LACTOSE'),
-(1198, 7, 'Queso herreño', 'LACTOSE'),
-(1199, 7, 'Queso Ibores', 'LACTOSE'),
-(1200, 7, 'Queso Mahón', 'LACTOSE'),
-(1201, 7, 'Queso majorero', 'LACTOSE'),
-(1202, 7, 'Queso manchego', 'LACTOSE'),
-(1203, 7, 'Queso manchego, en aceite', 'LACTOSE'),
-(1204, 7, 'Queso mozzarella', 'LACTOSE'),
-(1205, 7, 'Queso munster', 'LACTOSE'),
-(1206, 7, 'Queso para untar', 'LACTOSE'),
-(1207, 7, 'Queso para untar, con finas hierbas', 'LACTOSE'),
-(1208, 7, 'Queso para untar, con salmón', 'LACTOSE'),
-(1209, 7, 'Queso para untar, natural, bajo en calorías', 'LACTOSE'),
-(1210, 7, 'Queso parmesano', 'LACTOSE'),
-(1211, 7, 'Queso pasiego', 'LACTOSE'),
-(1212, 7, 'Queso pedroches', 'LACTOSE'),
-(1213, 7, 'Queso peñamellera', 'LACTOSE'),
-(1214, 7, 'Queso picón', 'LACTOSE'),
-(1215, 7, 'Queso porrúa', 'LACTOSE'),
-(1216, 7, 'Queso Raclette', 'LACTOSE'),
-(1217, 7, 'Queso rallado, genérico', 'LACTOSE'),
-(1218, 7, 'Queso roquefort', 'LACTOSE'),
-(1219, 7, 'Queso San Simón', 'LACTOSE'),
-(1220, 7, 'Queso semicurado, genérico', 'LACTOSE'),
-(1221, 7, 'Queso serrat', 'LACTOSE'),
-(1222, 7, 'Queso servilleta', 'LACTOSE'),
-(1223, 7, 'Queso Tetilla', 'LACTOSE'),
-(1224, 7, 'Queso tierno, genérico', 'LACTOSE'),
-(1225, 7, 'Queso torta del casar', 'LACTOSE'),
-(1226, 7, 'Queso tupí', 'LACTOSE'),
-(1227, 7, 'Queso Zamorano', 'LACTOSE'),
-(1228, 1, 'Quinoa, cruda', 'GLUTEN'),
-(1256, 1, 'Rosquilla', 'GLUTEN'),
-(1256, 7, 'Rosquilla', 'LACTOSE'),
-(1260, 7, 'Salami', 'LACTOSE'),
-(1263, 7, 'Salchicha, tipo "frankfurt"', 'LACTOSE'),
-(1265, 7, 'Salchicha, tipo viena', 'LACTOSE'),
-(1266, 7, 'Salchichón', 'LACTOSE'),
-(1269, 7, 'Salmón ahumado', 'LACTOSE');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(1274, 7, 'Salsa al roquefort', 'LACTOSE'),
-(1276, 7, 'Salsa bechamel', 'LACTOSE'),
-(1278, 7, 'Salsa carbonara', 'LACTOSE'),
-(1279, 7, 'Salsa de queso', 'LACTOSE'),
-(1280, 6, 'Salsa de soja', 'SOYA_BEAN'),
-(1285, 1, 'San jacobo, congelado', 'GLUTEN'),
-(1285, 7, 'San jacobo, congelado', 'LACTOSE'),
-(1293, 1, 'Seitán', 'GLUTEN'),
-(1295, 1, 'Sémola de trigo, cruda', 'GLUTEN'),
-(1296, 1, 'Sémola de trigo, hervida', 'GLUTEN'),
-(1298, 9, 'Sésamo, semilla', 'SESAME_SEED'),
-(1305, 1, 'Sobao', 'GLUTEN'),
-(1305, 7, 'Sobao', 'LACTOSE'),
-(1306, 7, 'Sobrasada', 'LACTOSE'),
-(1310, 6, 'Soja, frita', 'SOYA_BEAN'),
-(1312, 6, 'Soja, seca, cruda', 'SOYA_BEAN'),
-(1313, 6, 'Soja, seca, remojada, hervida', 'SOYA_BEAN'),
-(1320, 7, 'Té, infusión, con leche', 'LACTOSE'),
-(1330, 6, 'Tofu', 'SOYA_BEAN'),
-(1332, 7, 'Tomate frito', 'LACTOSE'),
-(1337, 1, 'Torta de aceite', 'GLUTEN'),
-(1338, 7, 'Tortilla, a la francesa', 'EGG'),
-(1341, 7, 'Trucha, ahumada', 'LACTOSE'),
-(1343, 12, 'Turrón, tipo Alicante', 'NUTS'),
-(1366, 7, 'Yogur griego', 'LACTOSE'),
-(1367, 7, 'Yogur líquido, "tipo actimel"', 'LACTOSE'),
-(1368, 7, 'Yogur líquido, aromatizado sabor s/e', 'LACTOSE'),
-(1369, 7, 'Yogur líquido, con frutas s/e', 'LACTOSE'),
-(1370, 7, 'Yogur líquido, entero, con cereales', 'LACTOSE');
-
-INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES
-(1371, 7, 'Yogur líquido, natural, azucarado', 'LACTOSE'),
-(1372, 7, 'Yogur, búlgaro', 'LACTOSE'),
-(1373, 7, 'Yogur, desnatado, aromatizado sabor s/e', 'LACTOSE'),
-(1374, 7, 'Yogur, desnatado, con cereales', 'LACTOSE'),
-(1375, 7, 'Yogur, desnatado, con cereales, manzana y ciruela', 'LACTOSE'),
-(1376, 7, 'Yogur, desnatado, con cereza y frambuesa', 'LACTOSE'),
-(1377, 7, 'Yogur, desnatado, con ciruela, albaricoque y fibra', 'LACTOSE'),
-(1378, 7, 'Yogur, desnatado, con fresa, grosella y fibra', 'LACTOSE'),
-(1379, 7, 'Yogur, desnatado, con frutas', 'LACTOSE'),
-(1380, 7, 'Yogur, desnatado, con frutas del bosque', 'LACTOSE'),
-(1381, 7, 'Yogur, desnatado, con frutas tropicales', 'LACTOSE'),
-(1382, 7, 'Yogur, desnatado, con manzana', 'LACTOSE'),
-(1383, 7, 'Yogur, desnatado, con melocotón y maracuyá', 'LACTOSE'),
-(1384, 7, 'Yogur, desnatado, con melocotón, frambuesa y fibra', 'LACTOSE'),
-(1385, 7, 'Yogur, desnatado, con piña y pomelo', 'LACTOSE'),
-(1386, 7, 'Yogur, desnatado, sabor natural', 'LACTOSE'),
-(1387, 7, 'Yogur, desnatado, sabor natural, azucarado', 'LACTOSE'),
-(1388, 7, 'Yogur, desnatado, sabor vainilla', 'LACTOSE'),
-(1389, 7, 'Yogur, enriquecido, con frutas', 'LACTOSE'),
-(1390, 7, 'Yogur, enriquecido, natural', 'LACTOSE'),
-(1391, 7, 'Yogur, enriquecido, natural, azucarado', 'LACTOSE'),
-(1392, 7, 'Yogur, enriquecido, natural, con nata', 'LACTOSE'),
-(1393, 7, 'Yogur, enriquecido, sabor, s/e', 'LACTOSE'),
-(1394, 7, 'Yogur, entero, con cereales y fresas', 'LACTOSE'),
-(1395, 7, 'Yogur, entero, con fresas', 'LACTOSE'),
-(1396, 7, 'Yogur, entero, con frutas del bosque', 'LACTOSE'),
-(1397, 7, 'Yogur, líquido, desnatado, natural', 'LACTOSE'),
-(1398, 7, 'Yogur, líquido, entero, con fresas', 'LACTOSE'),
-(1399, 7, 'Yogur, líquido, entero, con frutas', 'LACTOSE'),
-(1400, 7, 'Yogur, líquido, entero, sabor fresa', 'LACTOSE'),
-(1401, 7, 'Yogur, líquido, entero, sabor fresa y plátano', 'LACTOSE'),
-(1402, 7, 'Yogur, líquido, entero, sabor frutas del bosque', 'LACTOSE'),
-(1403, 7, 'Yogur, líquido, entero, sabor piña y coco', 'LACTOSE'),
-(1404, 13, 'Zamburiñas', 'MOLLUSK');
-
-
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (464, 5, 'Aceite de cacahuete', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (465, 6, 'Aceite de coco', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (466, 6, 'Aceite de colza', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (467, 5, 'Aceite de germen de trigo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (468, 2, 'Aceite de girasol', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (469, 6, 'Aceite de grano de uva', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (470, 4, 'Aceite de hígado de bacalao', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (471, 5, 'Aceite de lino', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (472, 12, 'Aceite de nuez', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (473, 6, 'Aceite de oliva', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (474, 6, 'Aceite de oliva virgen extra', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (475, 6, 'Aceite de oliva virgen extra, producción ecológica', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (476, 6, 'Aceite de palma', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (477, 6, 'Aceite de sésamo', 'SESAME_SEED');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (478, 6, 'Aceite de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (479, 4, 'Aceituna', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (480, 4, 'Aceituna negra, con hueso', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (481, 7, 'Acelga, cruda', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (482, 7, 'Acelga, en conserva', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (483, 7, 'Acelgas, hervidas', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (484, 11, 'Achicoria, cruda', 'LUPIN_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (485, 10, 'Agua de la red', 'SULFUR_DIOXIDE_AND_SULPHITES');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (486, 10, 'Agua mineral, mineralización débil', 'SULFUR_DIOXIDE_AND_SULPHITES');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (487, 10, 'Agua, con gas, embotellada', 'SULFUR_DIOXIDE_AND_SULPHITES');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (496, 3, 'Albondigas en conserva', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (497, 7, 'Alcachofa, cruda', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (498, 7, 'Alcachofas en conserva', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (501, 2, 'Almeja', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (502, 2, 'Almejas en conserva', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (503, 12, 'Almendra, cruda', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (504, 12, 'Almendra, cruda, con cáscara', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (505, 12, 'Almendra, frita, salada', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (506, 12, 'Almendra, tostada', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (508, 5, 'Almidón de maíz', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (509, 5, 'Almidón de trigo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (510, 11, 'Altramuz', 'LUPIN_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (514, 12, 'Anacardo, crudo', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (515, 2, 'Anchoas en aceite vegetal', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (516, 4, 'Anguila, al horno', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (517, 4, 'Anguila, cruda', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (518, 4, 'Anguila, hervida', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (519, 4, 'Angula, cruda', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (521, 5, 'Aperitivos de trigo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (522, 7, 'Apio, crudo', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (523, 7, 'Apio, en conserva en salmuera', 'CELERY');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (525, 4, 'Arenque, ahumado', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (526, 4, 'Arenque, salado', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (528, 3, 'Arroz con leche', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (533, 4, 'Atún en aceite de oliva Isabel', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (534, 4, 'Atún en aceite vegetal', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (535, 4, 'Atún en escabeche', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (536, 4, 'Atún, al horno', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (537, 4, 'Atún, al natural', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (538, 4, 'Atún, crudo', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (539, 4, 'Atún, plancha', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (540, 12, 'Avellana', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (541, 12, 'Avellana, cruda, con cáscara', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (547, 4, 'Bacaladilla', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (548, 4, 'Bacalao, ahumado', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (549, 4, 'Bacalao, crudo', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (550, 4, 'Bacalao, fresco, al horno', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (551, 4, 'Bacalao, frito', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (552, 4, 'Bacalao, salado, crudo', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (553, 4, 'Bacalao, salado, remojado, crudo', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (562, 5, 'Barrita cereales maíz y trigo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (563, 5, 'Barrita cereales trigo y chocolate', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (564, 6, 'Batido de chocolate', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (565, 6, 'Batido de fresa', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (566, 6, 'Batido de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (567, 6, 'Batido fermentado de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (568, 3, 'Batido lácteo de cacao, bajo en calorías', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (569, 3, 'Batido lácteo, de fresa, bajo en calorías', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (573, 2, 'Berberechos', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (574, 2, 'Berberechos en conserva', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (578, 4, 'Besugo', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (582, 2, 'Bogavante', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (583, 2, 'Bogavante, hervido', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (584, 5, 'Bollería, genérico', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (587, 4, 'Bonito del norte, al vapor', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (588, 6, 'Bonito del norte, enlatado en aceite de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (589, 6, 'Bonito en aceite vegetal', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (591, 4, 'Boquerón', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (592, 4, 'Boquerón, frito', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (594, 4, 'Breca, cruda', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (598, 4, 'Caballa, al horno', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (599, 4, 'Caballa, cruda', 'FISH');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (607, 5, 'Cacahuete, crudo, con cáscara', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (608, 5, 'Cacahuete, frito, salado', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (609, 5, 'Cacahuete, tostado, salado', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (612, 3, 'Café, con leche', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (632, 2, 'Cangrejo', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (633, 2, 'Cangrejo de río crudo', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (634, 2, 'Cangrejo, en conserva', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (652, 12, 'Castaña, cruda', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (653, 12, 'Castaña, tostada', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (656, 5, 'Cebada, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (662, 5, 'Centeno, crudo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (663, 2, 'Centollo, crudo', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (673, 5, 'Cereales base trigo y chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (673, 12, 'Cereales base trigo y chocolate', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (674, 5, 'Cereales desayuno base de arroz chocolateado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (675, 5, 'Cereales desayuno base de arroz y miel', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (676, 5, 'Cereales desayuno base de arroz, trigo y fruta', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (677, 5, 'Cereales desayuno base de maíz y miel', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (678, 5, 'Cereales desayuno base de maíz y trigo', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (679, 5, 'Cereales desayuno base de maíz, trigo y avena', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (680, 5, 'Cereales desayuno base de trigo azucarado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (681, 5, 'Cereales desayuno base de trigo y arroz', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (682, 5, 'Cereales desayuno base de trigo y frutas', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (683, 5, 'Cereales desayuno base de trigo y miel', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (684, 5, 'Cereales desayuno base de trigo, avena, maiz y miel', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (685, 5, 'Cereales desayuno base de trigo, avena, maíz, miel y nueces', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (685, 12, 'Cereales desayuno base de trigo, avena, maíz, miel y nueces', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (686, 5, 'Cereales desayuno base muesli', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (687, 5, 'Cereales desayuno, maíz azucarado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (688, 5, 'Cereales para el desayuno, ricos en fibra, tipo "all-bran"', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (705, 3, 'Chocolate blanco', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (705, 12, 'Chocolate blanco', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (706, 3, 'Chocolate con leche', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (707, 3, 'Chocolate con leche y almendras', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (707, 12, 'Chocolate con leche y almendras', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (708, 3, 'Chocolate con leche y arroz', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (709, 3, 'Chocolate con nueces de macadamia', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (709, 12, 'Chocolate con nueces de macadamia', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (710, 12, 'Chocolate negro, con almendras', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (718, 2, 'Cigala', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (721, 12, 'Coco, desecado', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (722, 12, 'Coco, fresco', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (732, 3, 'Conejo de granja, carne, cruda', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (755, 12, 'Crema de almendras', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (756, 5, 'Crema de cacahuete', 'PEANUT');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (757, 12, 'Crema de chocolate con avellanas', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (758, 3, 'Crema de chocolate y nata', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (760, 12, 'Crema de coco', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (762, 3, 'Crema inglesa', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES(763, 3, 'Crema pastelera', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (765, 5, 'Croissant', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (765, 3, 'Croissant', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (765, 12, 'Croissant', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (766, 5, 'Croissant de chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (766, 3, 'Croissant de chocolate', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (766, 12, 'Croissant de chocolate', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (767, 3, 'Croquetas de pollo', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (768, 7, 'Cuajada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (773, 5, 'Donut', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (773, 3, 'Donut', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (774, 5, 'Donut, de chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (774, 3, 'Donut, de chocolate', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (781, 5, 'Ensaimada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (781, 3, 'Ensaimada', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (783, 3, 'Ensaladilla rusa', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (790, 5, 'Fabada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (792, 3, 'Flamenquín', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (793, 3, 'Flan de huevo', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (794, 3, 'Flan de huevo, bajo en calorías', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (803, 5, 'Galleta ,tipo "digestiva", con chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (804, 5, 'Galleta salada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (805, 5, 'Galleta, barquillo, con jalea de frutas', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (806, 5, 'Galleta, cubierta de chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (807, 5, 'Galleta, genérico', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (808, 5, 'Galleta, tipo "Digestiva"', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (809, 5, 'Galletas integrales', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (810, 5, 'Galletas saladas, con queso', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (812, 5, 'Galletas, con chocolate, tipo "cookies"', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (813, 5, 'Galletas, de mantequilla', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (813, 3, 'Galletas, de mantequilla', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (822, 3, 'Gazpacho', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (823, 7, 'Gelatina', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (826, 5, 'Gofio', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (855, 3, 'Helado de chocolate', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (855, 7, 'Helado de chocolate', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (856, 3, 'Helado de fresa', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (856, 7, 'Helado de fresa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (857, 3, 'Helado de nata', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (857, 7, 'Helado de nata', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (864, 7, 'Horchata', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (865, 3, 'Huevo de codorniz, entero, crudo', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (866, 3, 'Huevo de gallina fresco', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (867, 3, 'Huevo de gallina, clara, cruda', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (868, 3, 'Huevo de gallina, escalfado', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (869, 3, 'Huevo de gallina, frito', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (870, 3, 'Huevo de gallina, hervido, duro', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (871, 3, 'Huevo de gallina, pasado por agua', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (872, 3, 'Huevo de gallina, revuelto, con mantequilla', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (873, 3, 'Huevo de gallina, yema, cruda', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (874, 3, 'Huevo de gallina, yema, desecada', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (875, 3, 'Huevo de pato, crudo', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (876, 3, 'Huevo de pavo, entero, crudo', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (879, 1, 'Jamón asado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (880, 1, 'Jamón cocido, categoría s/e', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (881, 1, 'Jamón cocido, enlatado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (884, 1, 'Jamón serrano', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (894, 1, 'Kebab', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (895, 7, 'Kefir', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (896, 5, 'Ketchup', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (901, 1, 'Lasaña', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (903, 7, 'Leche condensada, entera, con azúcar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (905, 7, 'Leche de cabra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (907, 7, 'Leche de oveja', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (908, 7, 'Leche de vaca, desnatada, condensada, con azúcar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (909, 7, 'Leche de vaca, entera', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (910, 7, 'Leche en polvo, semidesnatada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (911, 7, 'Leche fermentada, bifidobacterium, entera, natural', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (913, 7, 'Leche merengada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (914, 7, 'Leche, desnatada, pasteurizada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (915, 7, 'Leche, semidesnatada, pasteurizada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (917, 6, 'Lecitina de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (946, 5, 'Magdalena', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (946, 3, 'Magdalena', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (958, 5, 'Masa de hojaldre, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (959, 3, 'Mayonesa con aceite de girasol', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (960, 3, 'Mayonesa, aceite de oliva', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (961, 3, 'Mayonesa, aceite de soja', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (961, 6, 'Mayonesa, aceite de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (962, 3, 'Mayonesa, baja en calorías', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (963, 13, 'Mejillon', 'MOLLUSK');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (964, 13, 'Mejillón, en conserva, al natural', 'MOLLUSK');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (965, 13, 'Mejillón, en escabeche', 'MOLLUSK');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (966, 13, 'Mejillón, hervido', 'MOLLUSK');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (976, 1, 'Merluza, rebozada, frita', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (976, 3, 'Merluza, rebozada, frita', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (990, 6, 'Miso', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (993, 1, 'Morcilla', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (994, 1, 'Morcilla, frita', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (995, 1, 'Mortadela', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (996, 8, 'Mostaza', 'MUSTARD');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (997, 7, 'Mousse de chocolate', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (998, 7, 'Mousse de queso fresco, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (999, 7, 'Mousse de queso fresco, desnatado, azucarado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1000, 7, 'Mousse de queso fresco, desnatado, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1001, 7, 'Mousse de yogur, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1002, 7, 'Mousse de yogur, natural', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1003, 1, 'Muesli', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1007, 1, 'Napolitana, rellena con crema de cacao', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1009, 7, 'Nata montada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1010, 7, 'Nata, líquida, para cocinar, 18% de grasa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1011, 7, 'Natillas sabor vainilla', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1012, 13, 'Nécora', 'CRUSTACEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1028, 12, 'Nuez', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1029, 12, 'Nuez moscada', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1030, 12, 'Nuez, cruda, con cáscara', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1033, 13, 'Ostra, cruda', 'MOLLUSK');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1034, 1, 'Paella', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1035, 1, 'Paella marinera', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1036, 1, 'Palmera', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1040, 1, 'Pan blanco, de barra', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1041, 1, 'Pan blanco, de barra, sin sal', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1042, 1, 'Pan blanco, de molde, tostado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1043, 1, 'Pan blanco, frito', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1044, 1, 'Pan blanco, tipo "baguette"', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1045, 1, 'Pan blanco, tostado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1046, 1, 'Pan blanco, tostado sin sal', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1047, 1, 'Pan de avena', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1048, 1, 'Pan de cebada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1049, 1, 'Pan de centeno', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1050, 1, 'Pan de leche', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1051, 1, 'Pan de maíz', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1052, 1, 'Pan integral', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1053, 1, 'Pan integral, de molde, tostado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1054, 1, 'Pan integral, sin sal', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1055, 1, 'Pan integral, tostado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1056, 1, 'Pan rallado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1057, 1, 'Pan tostado integral', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1058, 1, 'Pan, tipo hamburguesa', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1063, 1, 'Pasta alimenticia, con huevo, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1063, 3, 'Pasta alimenticia, con huevo, cruda', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1064, 1, 'Pasta alimenticia, con huevo, hervida', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1064, 3, 'Pasta alimenticia, con huevo, hervida', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1065, 1, 'Pasta alimenticia, con vegetales, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1066, 1, 'Pasta alimenticia, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1067, 1, 'Pasta alimenticia, integral, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1068, 1, 'Pasta alimenticia, integral, hervida', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1069, 1, 'Pasta alimenticia, rellena con carne, hervida', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1069, 3, 'Pasta alimenticia, rellena con carne, hervida', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1071, 9, 'Pasta de sésamo', 'SESAME_SEED');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1072, 1, 'Pastas de te', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1073, 1, 'Pastel', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1074, 1, 'Pastel con fruta confitada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1075, 1, 'Pastel de chocolate', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1075, 7, 'Pastel de chocolate', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1076, 1, 'Pastel de manzana', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1085, 7, 'Pate de higado de cerdo, 30% de grasa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1086, 7, 'Paté de pimienta', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1090, 7, 'Pavo, fiambre', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1091, 7, 'Pavo, fiambre, bajo en grasa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1095, 10, 'Pepinillos en vinagre', 'SULFUR_DIOXIDE_AND_SULPHITES');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1107, 7, 'Petit líquido, sabor fresa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1108, 7, 'Petit suïsse, cereales y fruta', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1109, 7, 'Petit suisse, chocolate', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1110, 7, 'Petit suisse, fresa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1111, 7, 'Petit Suisse, natural azucarado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1125, 12, 'Piñon', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1126, 12, 'Piñón, crudo, con cáscara', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1130, 12, 'Pistacho', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1131, 1, 'Pizza, precocinada', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1131, 7, 'Pizza, precocinada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1135, 1, 'Pollo empanado, frito', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1148, 7, 'Preparado lácteo con omega 3', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1149, 1, 'Pudding de pasas', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1149, 7, 'Pudding de pasas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1156, 7, 'Puré de patata y queso, en copos', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1160, 7, 'Puré, de patata, con leche', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1161, 7, 'Queso afuegal pitu', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1162, 7, 'Queso ahumado de aliva', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1163, 7, 'Queso azul', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1164, 7, 'Queso brie', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1165, 7, 'Queso cabra, curado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1166, 7, 'Queso cabrales', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1167, 7, 'Queso Camembert 20-30% MG/ES', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1168, 7, 'Queso camembert 60% mg/es', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1169, 7, 'Queso cantabria', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1170, 7, 'Queso casín', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1171, 7, 'Queso Castellano', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1172, 7, 'Queso cebreiro', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1173, 7, 'Queso Cheddar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1174, 7, 'Queso curado, genérico', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1175, 7, 'Queso de aracena', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1176, 7, 'Queso de arzúa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1177, 7, 'Queso de bola', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1178, 7, 'Queso de cádiz', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1179, 7, 'Queso de Castilla-La Mancha, oveja y cabra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1180, 7, 'Queso de Castilla-La Mancha, oveja, vaca y cabra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1181, 7, 'Queso de castilla-león, oveja y vaca', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1182, 7, 'Queso de murcia, al vino', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1183, 7, 'Queso de tenerife', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1184, 7, 'Queso de tiétar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1185, 7, 'Queso edam', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1186, 7, 'Queso emmental', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1187, 7, 'Queso en porciones', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1188, 7, 'Queso flor de guía', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1189, 7, 'Queso fresco de burgos', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1190, 7, 'Queso fresco, cabra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1191, 7, 'Queso fresco, desnatado, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1192, 7, 'Queso fundido, extragraso (>60% MG/ES)', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1193, 7, 'Queso gata-hurdes', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1194, 7, 'Queso gaztazarra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1195, 7, 'Queso Gouda', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1196, 7, 'Queso grazalema', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1197, 7, 'Queso Gruyer', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1198, 7, 'Queso herreño', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1199, 7, 'Queso Ibores', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1200, 7, 'Queso Mahón', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1201, 7, 'Queso majorero', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1202, 7, 'Queso manchego', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1203, 7, 'Queso manchego, en aceite', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1204, 7, 'Queso mozzarella', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1205, 7, 'Queso munster', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1206, 7, 'Queso para untar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1207, 7, 'Queso para untar, con finas hierbas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1208, 7, 'Queso para untar, con salmón', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1209, 7, 'Queso para untar, natural, bajo en calorías', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1210, 7, 'Queso parmesano', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1211, 7, 'Queso pasiego', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1212, 7, 'Queso pedroches', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1213, 7, 'Queso peñamellera', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1214, 7, 'Queso picón', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1215, 7, 'Queso porrúa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1216, 7, 'Queso Raclette', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1217, 7, 'Queso rallado, genérico', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1218, 7, 'Queso roquefort', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1219, 7, 'Queso San Simón', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1220, 7, 'Queso semicurado, genérico', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1221, 7, 'Queso serrat', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1222, 7, 'Queso servilleta', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1223, 7, 'Queso Tetilla', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1224, 7, 'Queso tierno, genérico', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1225, 7, 'Queso torta del casar', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1226, 7, 'Queso tupí', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1227, 7, 'Queso Zamorano', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1228, 1, 'Quinoa, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1256, 1, 'Rosquilla', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1256, 7, 'Rosquilla', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1260, 7, 'Salami', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1263, 7, 'Salchicha, tipo "frankfurt"', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1265, 7, 'Salchicha, tipo viena', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1266, 7, 'Salchichón', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1269, 7, 'Salmón ahumado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1274, 7, 'Salsa al roquefort', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1276, 7, 'Salsa bechamel', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1278, 7, 'Salsa carbonara', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1279, 7, 'Salsa de queso', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1280, 6, 'Salsa de soja', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1285, 1, 'San jacobo, congelado', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1285, 7, 'San jacobo, congelado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1293, 1, 'Seitán', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1295, 1, 'Sémola de trigo, cruda', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1296, 1, 'Sémola de trigo, hervida', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1298, 9, 'Sésamo, semilla', 'SESAME_SEED');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1305, 1, 'Sobao', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1305, 7, 'Sobao', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1306, 7, 'Sobrasada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1310, 6, 'Soja, frita', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1312, 6, 'Soja, seca, cruda', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1313, 6, 'Soja, seca, remojada, hervida', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1320, 7, 'Té, infusión, con leche', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1330, 6, 'Tofu', 'SOYA_BEAN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1332, 7, 'Tomate frito', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1337, 1, 'Torta de aceite', 'GLUTEN');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1338, 7, 'Tortilla, a la francesa', 'EGG');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1341, 7, 'Trucha, ahumada', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1343, 12, 'Turrón, tipo Alicante', 'NUTS');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1366, 7, 'Yogur griego', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1367, 7, 'Yogur líquido, "tipo actimel"', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1368, 7, 'Yogur líquido, aromatizado sabor s/e', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1369, 7, 'Yogur líquido, con frutas s/e', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1370, 7, 'Yogur líquido, entero, con cereales', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1371, 7, 'Yogur líquido, natural, azucarado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1372, 7, 'Yogur, búlgaro', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1373, 7, 'Yogur, desnatado, aromatizado sabor s/e', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1374, 7, 'Yogur, desnatado, con cereales', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1375, 7, 'Yogur, desnatado, con cereales, manzana y ciruela', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1376, 7, 'Yogur, desnatado, con cereza y frambuesa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1377, 7, 'Yogur, desnatado, con ciruela, albaricoque y fibra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1378, 7, 'Yogur, desnatado, con fresa, grosella y fibra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1379, 7, 'Yogur, desnatado, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1380, 7, 'Yogur, desnatado, con frutas del bosque', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1381, 7, 'Yogur, desnatado, con frutas tropicales', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1382, 7, 'Yogur, desnatado, con manzana', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1383, 7, 'Yogur, desnatado, con melocotón y maracuyá', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1384, 7, 'Yogur, desnatado, con melocotón, frambuesa y fibra', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1385, 7, 'Yogur, desnatado, con piña y pomelo', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1386, 7, 'Yogur, desnatado, sabor natural', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1387, 7, 'Yogur, desnatado, sabor natural, azucarado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1388, 7, 'Yogur, desnatado, sabor vainilla', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1389, 7, 'Yogur, enriquecido, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1390, 7, 'Yogur, enriquecido, natural', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1391, 7, 'Yogur, enriquecido, natural, azucarado', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1392, 7, 'Yogur, enriquecido, natural, con nata', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1393, 7, 'Yogur, enriquecido, sabor, s/e', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1394, 7, 'Yogur, entero, con cereales y fresas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1395, 7, 'Yogur, entero, con fresas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1396, 7, 'Yogur, entero, con frutas del bosque', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1397, 7, 'Yogur, líquido, desnatado, natural', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1398, 7, 'Yogur, líquido, entero, con fresas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1399, 7, 'Yogur, líquido, entero, con frutas', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1400, 7, 'Yogur, líquido, entero, sabor fresa', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1401, 7, 'Yogur, líquido, entero, sabor fresa y plátano', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1402, 7, 'Yogur, líquido, entero, sabor frutas del bosque', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1403, 7, 'Yogur, líquido, entero, sabor piña y coco', 'LACTOSE');
+INSERT INTO INGREDIENT_ALLERGIC (id_ingredient, id_allergenic, ingrediente, allergen) VALUES (1404, 13, 'Zamburiñas', 'MOLLUSK');
 -- END SQL STATEMENTS DATE --> 19/10/2024

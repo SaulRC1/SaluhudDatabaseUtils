@@ -4,6 +4,7 @@ import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import jakarta.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,10 @@ public interface SaluhudAdminAllergenicRepository extends JpaRepository<Allergen
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Allergenic i WHERE i.name = :name")
     Allergenic findByName(@Param("name") String name);
+    
+    @Lock(LockModeType.OPTIMISTIC)
+    @Query("SELECT a FROM Allergenic a JOIN a.ingredients i WHERE i.id = :ingredientId")
+    Set<Allergenic> findByIngredientId(@Param("ingredientId") Long ingredientId);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)

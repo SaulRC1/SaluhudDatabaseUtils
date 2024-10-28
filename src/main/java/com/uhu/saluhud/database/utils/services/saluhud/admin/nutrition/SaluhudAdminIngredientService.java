@@ -1,6 +1,8 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
+import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
+import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminAllergenicRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminIngredientRepository;
 import jakarta.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Service class for managing ingredients.
@@ -22,6 +26,9 @@ public class SaluhudAdminIngredientService {
 
     @Autowired
     private SaluhudAdminIngredientRepository ingredientRepository;
+    
+    @Autowired
+    private SaluhudAdminAllergenicRepository allergenicRepository;
 
     private static final Logger logger = Logger.getLogger(SaluhudAdminIngredientService.class.getName());
 
@@ -191,6 +198,24 @@ public class SaluhudAdminIngredientService {
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error deleting ingredient", e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Finds allergens associated with a given ingredient.
+     *
+     * @param ingredient The ingredient for which to find allergens.
+     * @return A set of allergens associated with the ingredient.
+     */
+    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient) {
+        Set<Allergenic> allergenics = new HashSet<>();
+        try {
+            allergenics = allergenicRepository.findByIngredientId(ingredient.getId());
+            return allergenics;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error getting allergens for ingredient", e);
             throw e;
         }
     }

@@ -66,7 +66,7 @@ public class Ingredient implements Serializable
                 CascadeType.PERSIST, CascadeType.MERGE
             })
     @JoinTable(
-            name = "INGREDIENT_ALLERGENIC",
+            name = "INGREDIENT_ALLERGIC",
             joinColumns = @JoinColumn(name = "id_ingredient"),
             inverseJoinColumns = @JoinColumn(name = "id_allergenic")
     )

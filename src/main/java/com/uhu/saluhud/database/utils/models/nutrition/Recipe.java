@@ -35,15 +35,13 @@ public class Recipe implements Serializable
 
     @Column(name = "name", nullable = false)
     @NotBlank
-    @Size(min = 2, max = 60)
+    @Size(min = 2, max = 200)
     private String name;
 
     @Column(name = "description")
-    @Size(min = 2, max = 250)
     private String description;
 
     @Column(name = "ingredients_description")
-    @Size(min = 2, max = 250)
     private String ingredientsDescription;
 
     @ManyToMany(fetch = FetchType.EAGER,

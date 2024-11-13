@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +34,10 @@ public class RecipeElaborationStep implements Serializable
     @Column(name = "step_number", nullable = false)
     @NotNull
     private int stepNumber;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_recipe", nullable = false)
+    private Recipe recipe; 
     
     @Version
     @Column(name = "entity_version")
@@ -62,15 +68,18 @@ public class RecipeElaborationStep implements Serializable
     
     /**
      * This is a parameterized constructor for the class. It takes, the
-     * step description and the step number
+     * step description, the step number and his recipe.
      *
      * @param stepDescription The description of the Step
      * @param stepNumber The number of the Step
+     * @param recipe The recipe which the step belongs to
      */
-    public RecipeElaborationStep(String stepDescription, int stepNumber)
+    public RecipeElaborationStep(String stepDescription, int stepNumber,
+            Recipe recipe)
     {
         this.stepDescription = stepDescription;
         this.stepNumber = stepNumber;
+        this.recipe = recipe;
     }
 
     /**
@@ -121,6 +130,26 @@ public class RecipeElaborationStep implements Serializable
     public void setStepNumber(int stepNumber)
     {
         this.stepNumber = stepNumber;
+    }
+
+    /**
+     * Getter for the parameter "recipe"
+     * 
+     * @return the recipe which the step belongs to
+     */
+    public Recipe getRecipe()
+    {
+        return recipe;
+    }
+
+    /**
+     * Setter for the parameter "recipe"
+     * 
+     * @param recipe the new recipe which the step belongs to
+     */
+    public void setRecipe(Recipe recipe)
+    {
+        this.recipe = recipe;
     }
 
     public Long getVersion()

@@ -80,7 +80,7 @@ public class OpenAIClient
                     .model("gpt-4o-mini")
                     .messages(messages)
                     .maxTokens(8500)
-                    .temperature(0.7)
+                    .temperature(0.0)
                     .build();
 
             ChatCompletionResult result = service.createChatCompletion(chatCompletionRequest);

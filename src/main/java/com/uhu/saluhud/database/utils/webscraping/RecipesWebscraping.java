@@ -4,14 +4,16 @@ import com.uhu.saluhud.database.utils.models.nutrition.Allergenic;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
+import com.uhu.saluhud.database.utils.models.nutrition.RecipeIngredient;
+import com.uhu.saluhud.database.utils.models.nutrition.RecipeIngredientId;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,7 +66,10 @@ public class RecipesWebscraping
      */
     public List<Recipe> getRecipesWebscraping() throws InterruptedException, IOException, ParseException
     {
+
         List<Recipe> recipes = new ArrayList<>();
+        List<RecipeIngredient> recipesIngredients = new ArrayList<>();
+        List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
 
         this.driver.get("https://www.alimentosdespana.es/es/estrategia-alimentos-espana/aprovecha-los-alimentos/recetas");
         driver.manage().window().maximize();
@@ -106,6 +111,7 @@ public class RecipesWebscraping
                 recipe.setName(nombreReceta.getText());
                 recipe.setIngredientsDescription(ingredientes.getText());
 
+                // Extraer la descripcion de la receta
                 String descripcion = "";
                 int x = 0;
                 while (x < pasos.size() && !pasos.get(x).getText().equals("")) {
@@ -113,20 +119,6 @@ public class RecipesWebscraping
                     x++;
                 }
                 recipe.setDescription(descripcion);
-
-                // Normalizar ingredientes
-                List<Ingredient> normalizedIngredients = new ArrayList<>();
-
-                // Agrupar ingredientes de la receta
-                Map<String, Integer> ingredientMap = new HashMap<>();
-                for (String ingredientText : ingredientes.getText().split("\n")) {
-                    Matcher matcher = Pattern.compile("^(\\d+)\\s+(.*)").matcher(ingredientText);
-                    String ingredientName = matcher.find() ? matcher.group(2) : ingredientText;
-                    Integer quantity = matcher.find() ? Integer.valueOf(matcher.group(1)) : 1;
-
-                    // Agrupar ingredientes
-                    ingredientMap.put(ingredientName, ingredientMap.getOrDefault(ingredientName, 0) + quantity);
-                }
 
                 // Crear el contexto con la lista de ingredientes en la base de datos
                 StringBuilder contextBuilder = new StringBuilder("Aqui tienes la lista de ingredientes de mi base de datos: ");
@@ -141,10 +133,14 @@ public class RecipesWebscraping
 
                 // Crear el prompt para la API con el contexto y los ingredientes de la receta
                 StringBuilder promptBuilder = new StringBuilder(contextBuilder)
-                        .append("\n\n Para cada uno de los siguientes ingredientes, busca si coincide con alguno de la lista anterior que te pasé. Si existe una versión parecida o una variante, indica siempre que sí coincide aunque no sea exacta. No tengas en cuenta las cantidades en las comparaciones. Contesta solo con si o no: ");
+                        .append("\n\n Para cada uno de los ingredientes que te paso al final, "
+                                + "busca si coincide con alguno de la lista anterior que te pasé. "
+                                + "Si existe una versión parecida o una variante, considéralo como válido, aunque no sea exacto. "
+                                + "Normaliza el nombre del ingrediente de la receta que te venga, al nombre que coincida en la lista de ingredientes que te pasé"
+                                + "Por ejemplo: azúcar, coincidiría con azúcar blanca."
+                                + "Dame solo como respuesta la lista final de ingredientes normalizados por cada receta, nada más ");
 
-                // Agregar todos los ingredientes de la receta al prompt en una sola línea
-                for (String ingredientName : ingredientMap.keySet()) {
+                for (String ingredientName : ingredientes.getText().split("\n")) {
                     promptBuilder.append(ingredientName).append(", ");
                 }
 
@@ -161,42 +157,129 @@ public class RecipesWebscraping
                 // Procesar la respuesta de la API
                 System.out.println("API Response: " + apiResponse);
 
-                // Procesar cada ingrediente de acuerdo a la respuesta
-                for (Map.Entry<String, Integer> entry : ingredientMap.entrySet()) {
-                    String ingredientName = entry.getKey();
-                    int quantity = entry.getValue();
+                // Patrón para encontrar cantidad y unidad
+                //^\\s*-?\\s*(\\d+(?:\\.\\d+)?)?\\s*(gramos|½|¾|g|ml|litros|tazas|cucharadas|unidades|restos|vaso|Vaso|kg|mL)?\\s*(.*)$$
+                Pattern pattern = Pattern.compile("^\\s*-?\\s*(\\d+\\s+\\d+/\\d+|\\d+/\\d+|[½¼¾]|\\d+\\.?\\d*)?\\s*(vaso|Vaso|vasito|Restos|gramos|ml|litros|tazas|cucharadas|unidades|restos|kg|mL|L|g)?\\s*(?:de\\s)?(.+)$");
+                String[] ingredients = apiResponse.split("\n");
+                for (String ingredient : ingredients) {
+                    Matcher matcher = pattern.matcher(ingredient.trim());
+                    if (matcher.find()) {
+                        String quantityStr = matcher.group(1);
+                        BigDecimal quantity = BigDecimal.ZERO;
+                        if (quantityStr != null && !quantityStr.isEmpty()) {
+                            if (quantityStr.equals("½") || quantityStr.equals("1/2")) {
+                                quantity = new BigDecimal("0.5");
+                            } else if (quantityStr.equals("¼") || quantityStr.equals("1/4")) {
+                                quantity = new BigDecimal("0.25");
+                            } else if (quantityStr.equals("¾") || quantityStr.equals("3/4")) {
+                                quantity = new BigDecimal("0.75");
+                            } else if (quantityStr.contains("/")) {
+                                String[] fractionParts;
 
-                    // Revisar si la respuesta contiene "yes" para el ingrediente
-                    if (apiResponse.equalsIgnoreCase("yes")) {
-                        Ingredient ingredient = ingredientService.getIngredientByName(ingredientName);
-                        if (ingredient != null) {
-                            // Agregar el ingrediente a la lista según la cantidad
-                            for (int j = 0; j < quantity; j++) {
-                                normalizedIngredients.add(ingredient);
+                                if (quantityStr.contains(" ")) {
+                                    fractionParts = quantityStr.split(" ")[1].split("/");
+                                    quantity = new BigDecimal(fractionParts[0]).divide(new BigDecimal(fractionParts[1]), 2, RoundingMode.HALF_UP);
+                                } else {
+                                    fractionParts = quantityStr.split("/");
+                                    quantity = new BigDecimal(fractionParts[0]).divide(new BigDecimal(fractionParts[1]), 2, RoundingMode.HALF_UP);
+                                }
+                            } else {
+                                quantity = new BigDecimal(quantityStr);
                             }
+                        }
 
-                            // Agregar alérgenos asociados
-                            Set<Allergenic> allergenics = ingredientService.getAllergensForIngredient(ingredient);
+                        String unitOfMeasure = matcher.group(2);
+                        if (unitOfMeasure == null || unitOfMeasure.trim().isEmpty()) {
+                            unitOfMeasure = "unidad";  // Asignar "unidad" por defecto si no se encuentra unidad
+                        }
+
+                        String ingredientName = matcher.group(3).trim();
+                        // Eliminar la preposición "de" si está al principio del nombre
+                        if (ingredientName.startsWith("de ")) {
+                            ingredientName = ingredientName.substring(3).trim(); // Eliminar "de "
+                        }
+                        // Convertir la primera letra del nombre del ingrediente a mayúscula
+                        ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
+
+                        //Casos especiales
+                        if (ingredientName.equalsIgnoreCase("berenjenas")) {
+                            ingredientName = "Berenjena";
+                        }
+                        if (ingredientName.equalsIgnoreCase("huevo") || ingredientName.equalsIgnoreCase("huevos")) {
+                            ingredientName = "Huevo de gallina fresco";
+                        }
+                        if (ingredientName.equalsIgnoreCase("huevos de gallina, enteros, crudos") || ingredientName.equalsIgnoreCase("Huevo de gallina, entero, crudo")) {
+                            ingredientName = "Huevo de gallina fresco";
+                        }
+                        if (ingredientName.equalsIgnoreCase("pimiento rojo") || ingredientName.equalsIgnoreCase("pimiento verde")) {
+                            ingredientName = "Pimiento rojo, crudo";
+                        }
+                        if (ingredientName.equalsIgnoreCase("cebolleta")) {
+                            ingredientName = "Cebolla";
+                        }
+                        if (ingredientName.equalsIgnoreCase("rape")) {
+                            ingredientName = "Rape, crudo";
+                        }
+                        if (ingredientName.equalsIgnoreCase("agua")) {
+                            ingredientName = "Agua de la red";
+                        }
+                        if (ingredientName.equalsIgnoreCase("diente de ajo") || ingredientName.equalsIgnoreCase("dientes de ajo")) {
+                            ingredientName = "Ajo";
+                        }
+                        if (ingredientName.equalsIgnoreCase("yogur, líquido, entero, natural") || ingredientName.equalsIgnoreCase("yogur, líquido, entero, sabor natural")) {
+                            ingredientName = "Yogur líquido, natural, azucarado";
+                        }
+                        if (ingredientName.equalsIgnoreCase("mantequilla") || ingredientName.equalsIgnoreCase("mantequilla (no está en la lista, se omite)")) {
+                            ingredientName = "Mantequilla salada";
+                        }
+                        if (ingredientName.equalsIgnoreCase("Y medio de harina de trigo")) {
+                            ingredientName = "Harina de trigo";
+                        }
+                        if (ingredientName.equalsIgnoreCase("Vaso de almendra, cruda")) {
+                            ingredientName = "Almendra, cruda";
+                        }
+                        if (ingredientName.equalsIgnoreCase("1 ½ vaso de harina de trigo")) {
+                            ingredientName = "Harina de trigo";
+                        }
+                        if (ingredientName.equalsIgnoreCase("restos de patata")) {
+                            ingredientName = "Patata, cruda";
+                        }
+
+                        System.out.println("Quantity: " + quantity);
+                        System.out.println("Unidad: " + unitOfMeasure);
+                        System.out.println("Nombre: " + ingredientName);
+
+                        Ingredient ingredientObj = ingredientService.getIngredientByName(ingredientName);
+                        if (ingredientObj != null) {
+                            // Crear el RecipeIngredient y agregarlo
+                            RecipeIngredientId recipeIngredientId = new RecipeIngredientId();
+                            RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredientObj, recipe.getName(),
+                                    ingredientObj.getName(), quantity, unitOfMeasure);
+                            recipeIngredient.setId(recipeIngredientId);
+
+                            Set<Allergenic> allergenics = ingredientService.getAllergensForIngredient(ingredientObj);
                             recipe.setAllergenics(allergenics);
+
+                            recipesIngredients.add(recipeIngredient);
+                        } else {
+                            System.out.println("Ingrediente no encontrado");
                         }
                     }
                 }
 
-                // Asignar los ingredientes normalizados a la receta
-                recipe.setIngredients(normalizedIngredients);
+                recipe.setRecipeIngredients(recipesIngredients);
 
                 // Guardar los pasos de elaboración
-                List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
                 for (int stepIndex = 0; stepIndex < pasos.size(); stepIndex++) {
                     RecipeElaborationStep step = new RecipeElaborationStep();
                     step.setStepNumber(stepIndex + 1);
                     step.setStepDescription(pasos.get(stepIndex).getText());
+                    step.setRecipe(recipe);
                     elaborationSteps.add(step);
                 }
                 recipe.setElaborationSteps(elaborationSteps);
 
                 // Agregar la receta a la lista
-                recipe.setIngredients(normalizedIngredients);
                 recipes.add(recipe);
                 o++;
 
@@ -205,7 +288,12 @@ public class RecipesWebscraping
                 Thread.sleep(2000);
                 recetasLinks = driver.findElements(By.xpath("/html/body/main/div[2]//div//a[@title='Ver más']"));
             }
+
         }
+
+        //generateRecipeIngredientSQL(recipesIngredients);
+        //generateRecipeElaborationStepSQL(recipes);
+
         openAIClient.shutdown();
         driver.quit();
         return recipes;
@@ -225,6 +313,39 @@ public class RecipesWebscraping
                         recipe.getName(), recipe.getDescription(), recipe.getIngredientsDescription()
                 );
                 writer.write(sqlRecipe);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(IngredientsWebscraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void generateRecipeIngredientSQL(List<RecipeIngredient> recipesIngredients)
+    {
+        try (FileWriter writer = new FileWriter("recipesIngredients.sql")) {
+            for (RecipeIngredient recipeIngredient : recipesIngredients) {
+                String sqlRecipe = String.format(
+                        "INSERT INTO RECIPE_INGREDIENT (recipe_name, ingredient_name, quantity, unit) VALUES ('%s', '%s', '%s', '%s');\n",
+                        recipeIngredient.getRecipeName(), recipeIngredient.getIngredientName(), recipeIngredient.getQuantity().toString(), recipeIngredient.getUnit()
+                );
+                writer.write(sqlRecipe);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(IngredientsWebscraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void generateRecipeElaborationStepSQL(List<Recipe> recipes)
+    {
+        try (FileWriter writer = new FileWriter("recipesElaborationStep.sql")) {
+            for (Recipe recipe : recipes) {
+                List<RecipeElaborationStep> steps = recipe.getElaborationSteps();
+                for (RecipeElaborationStep step : steps) {
+                    String sqlRecipe = String.format(
+                            "INSERT INTO RECIPE_ELABORATION_STEP (step_number, step_description, id_recipe) VALUES ('%s', '%s', '%s');\n",
+                            step.getStepNumber(), step.getStepDescription(), recipe.getId()
+                    );
+                    writer.write(sqlRecipe);
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(IngredientsWebscraping.class.getName()).log(Level.SEVERE, null, ex);

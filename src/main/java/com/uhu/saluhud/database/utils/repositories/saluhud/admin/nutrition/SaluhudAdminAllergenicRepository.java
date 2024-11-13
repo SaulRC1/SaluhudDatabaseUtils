@@ -35,7 +35,7 @@ public interface SaluhudAdminAllergenicRepository extends JpaRepository<Allergen
     
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT a FROM Allergenic a JOIN a.ingredients i WHERE i.id = :ingredientId")
-    Set<Allergenic> findByIngredientId(@Param("ingredientId") Long ingredientId);
+    Set<Allergenic> findByIngredientId(@Param("ingredientId") long ingredientId);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)

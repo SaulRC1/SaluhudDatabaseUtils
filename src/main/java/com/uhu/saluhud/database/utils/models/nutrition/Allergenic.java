@@ -3,6 +3,7 @@ package com.uhu.saluhud.database.utils.models.nutrition;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class Allergenic implements Serializable
     @NotBlank
     private String name;
 
-    @ManyToMany(mappedBy = "allergens")
+    @ManyToMany(mappedBy = "allergens", fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
 
     @Version
@@ -136,4 +137,28 @@ public class Allergenic implements Serializable
         this.ingredients = ingredients;
     }
 
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Allergenic other = (Allergenic) obj;
+        return this.id == other.id;
+    }
+    
 }

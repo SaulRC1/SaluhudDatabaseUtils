@@ -7,8 +7,10 @@ import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAd
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.models.nutrition.RecipeElaborationStep;
-import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminAllergenicService;
+import com.uhu.saluhud.database.utils.models.nutrition.RecipeIngredient;
+import com.uhu.saluhud.database.utils.models.nutrition.RecipeIngredientId;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,53 +31,64 @@ import org.springframework.util.Assert;
  * @author Juan Alberto Dominguez Vazquez
  */
 @DataJpaTest
-@TestPropertySource(locations = { "classpath:datasources/saluhud-admin-datasource.properties" })
+@TestPropertySource(locations = {"classpath:datasources/saluhud-admin-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
 @ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
-public class SaluhudRecipeElaborationStepsTest {
+public class SaluhudRecipeElaborationStepsTest
+{
 
     @Autowired
     private SaluhudAdminRecipeElaborationStepService recipeElaborationStepService;
-    
+
     @Autowired
     private SaluhudAdminRecipeService recipeService;
-    
+
     @Autowired
     private SaluhudAdminIngredientService ingredientService;
-    
-    @Autowired
-    private SaluhudAdminAllergenicService allergenicService;
-    
+
     @Test
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
     @Rollback
-    public void testRecipeElaborationStepsTestCRUD() {
-
+    public void testRecipeElaborationStepsTestCRUD()
+    {
         List<RecipeElaborationStep> elaborationSteps = new ArrayList<>();
-        List<Ingredient> ingredients = new ArrayList<>();
+        List<RecipeIngredient> recipeIngredients = new ArrayList<>();
         Set<Allergenic> allergenics = new HashSet<>();
 
-        Ingredient harina = new Ingredient("Harina", 364, 10, 73, 1);
-        Ingredient huevo = new Ingredient("Huevo", 68, 6, 0, 5);
-        Allergenic leche = new Allergenic("Leche");
-        RecipeElaborationStep batirHuevos = new RecipeElaborationStep("Batir los huevos bien, a mano o con la batidora durante 5 min", 1);
+        Ingredient ingredient1 = ingredientService.getIngredientByName("Huevo de gallina fresco");
+        Ingredient ingredient2 = ingredientService.getIngredientByName("Leche de vaca, entera");
 
-        ingredientService.saveIngredient(harina);
-        ingredientService.saveIngredient(huevo);
-        allergenicService.saveAllergenic(leche);
+        allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient1));
+        allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient2));
 
-        ingredients.add(huevo);
-        ingredients.add(harina);
-        allergenics.add(leche);
+        Recipe Bizcocho = new Recipe("Bizcocho", "Bizcocho de limón al horno", "Huevos, harina, sal, azucar, agua, aceite", 0);
+
+        RecipeIngredientId recipeIngredientId1 = new RecipeIngredientId();
+        RecipeIngredientId recipeIngredientId2 = new RecipeIngredientId();
+
+        RecipeIngredient recipeIngredient = new RecipeIngredient(Bizcocho, ingredient1, Bizcocho.getName(), ingredient1.getName(), BigDecimal.valueOf(150), "g");
+        RecipeIngredient recipeIngredient2 = new RecipeIngredient(Bizcocho, ingredient2, Bizcocho.getName(), ingredient2.getName(), BigDecimal.valueOf(1), "l");
+
+        recipeIngredients.add(recipeIngredient);
+        recipeIngredients.add(recipeIngredient2);
+
+        Bizcocho.setAllergenics(allergenics);
+
+        RecipeElaborationStep batirHuevos = new RecipeElaborationStep("Batir los huevos bien, a mano o con la batidora durante 5 min", 1, Bizcocho);
         elaborationSteps.add(batirHuevos);
+        Bizcocho.setElaborationSteps(elaborationSteps);
 
-        Recipe Bizcocho = new Recipe("Bizcocho", "Bizcocho de limón al horno", "Huevos, harina, sal, azucar, agua, aceite", ingredients, allergenics, elaborationSteps);
-
-        recipeElaborationStepService.saveRecipeElaborationStep(batirHuevos);
+        recipeIngredient.setId(recipeIngredientId1);
+        recipeIngredient2.setId(recipeIngredientId2);
+        Bizcocho.setRecipeIngredients(recipeIngredients);
         recipeService.saveRecipe(Bizcocho);
-        
+
+        System.out.println("Id: " + Bizcocho.getId());
+
         Assert.isTrue(this.recipeElaborationStepService.findAllSteps().contains(batirHuevos), "");
         Assert.isTrue(this.recipeService.findAllRecipes().contains(Bizcocho), "");
+        Assert.isTrue(this.recipeService.getRecipeByName("Bizcocho").getFirst().getId() == Bizcocho.getId(), "");
+        System.out.println("Kcal: " + Bizcocho.getKilocalories());
     }
 }

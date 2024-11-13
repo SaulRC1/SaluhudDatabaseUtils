@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
@@ -43,33 +44,26 @@ public class Recipe implements Serializable
 
     @Column(name = "ingredients_description")
     private String ingredientsDescription;
+    
+    @Column(name = "kilocalories")
+    private int kilocalories;
 
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade =
-            {
-                CascadeType.PERSIST, CascadeType.MERGE
-            })
-    @JoinTable(name = "RECIPE_INGREDIENT",
-            joinColumns = @JoinColumn(name = "id_recipe"),
-            inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
-    private List<Ingredient> ingredients;
-
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade =
-            {
-                CascadeType.PERSIST, CascadeType.MERGE
+            cascade
+            = {
+                CascadeType.MERGE
             })
     @JoinTable(name = "RECIPE_ALLERGENIC",
             joinColumns = @JoinColumn(name = "id_recipe"),
             inverseJoinColumns = @JoinColumn(name = "id_allergenic"))
     private Set<Allergenic> allergenics;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "RECIPE_RECIPE_ELABORATION_STEP",
-            joinColumns = @JoinColumn(name = "id_recipe"),
-            inverseJoinColumns = @JoinColumn(name = "id_elaboration_step"))
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<RecipeIngredient> recipeIngredients;
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RecipeElaborationStep> elaborationSteps;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -91,21 +85,24 @@ public class Recipe implements Serializable
      * @param description The description of the recipe
      * @param ingredientsDescription The description of all ingredients of the
      * recipe
-     * @param ingredients The list of all ingredients of the recipe
      * @param allergenics The set of all allergenics of the recipe
      * @param elaborationSteps The list of all steps of the recipe
+     * @param recipeIngredients 
+     * @param kilocalories 
      */
     public Recipe(long id, String name, String description,
-            String ingredientsDescription, List<Ingredient> ingredients,
-            Set<Allergenic> allergenics, List<RecipeElaborationStep> elaborationSteps)
+            String ingredientsDescription,
+            Set<Allergenic> allergenics, List<RecipeElaborationStep> elaborationSteps,
+            List<RecipeIngredient> recipeIngredients, int kilocalories)
     {
         this.id = id;
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;
-        this.ingredients = ingredients;
         this.allergenics = allergenics;
         this.elaborationSteps = elaborationSteps;
+        this.recipeIngredients = recipeIngredients;
+        this.kilocalories = kilocalories;
     }
 
     /**
@@ -116,20 +113,15 @@ public class Recipe implements Serializable
      * @param description The description of the recipe
      * @param ingredientsDescription The description of all ingredients of the
      * recipe
-     * @param ingredients The list of all ingredients of the recipe
-     * @param allergenics The set of all allergenics of the recipe
-     * @param elabotarionSteps The list of all steps of the recipe
+     * @param kilocalories
      */
-    public Recipe(String name, String description,
-            String ingredientsDescription, List<Ingredient> ingredients,
-            Set<Allergenic> allergenics, List<RecipeElaborationStep> elabotarionSteps)
+    public Recipe(String name, String description, String ingredientsDescription,
+            int kilocalories)
     {
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;
-        this.ingredients = ingredients;
-        this.allergenics = allergenics;
-        this.elaborationSteps = elabotarionSteps;
+        this.kilocalories = kilocalories;
     }
 
     /**
@@ -172,15 +164,6 @@ public class Recipe implements Serializable
         return ingredientsDescription;
     }
 
-    /**
-     * Getter for the parameter "ingredients"
-     *
-     * @return The list of ingredients of the recipe
-     */
-    public List<Ingredient> getIngredients()
-    {
-        return ingredients;
-    }
 
     /**
      * Getter for the parameter "allergenics"
@@ -233,15 +216,6 @@ public class Recipe implements Serializable
         this.ingredientsDescription = ingredientsDescription;
     }
 
-    /**
-     * Setter for the parameter "ingredients"
-     *
-     * @param ingredients The new list of ingredients of the recipe
-     */
-    public void setIngredients(List<Ingredient> ingredients)
-    {
-        this.ingredients = ingredients;
-    }
 
     /**
      * Setter for the parameter "allergenics"
@@ -263,6 +237,42 @@ public class Recipe implements Serializable
         this.elaborationSteps = elaborationSteps;
     }
 
+    /**
+     *
+     * @return
+     */
+    public List<RecipeIngredient> getRecipeIngredients()
+    {
+        return recipeIngredients;
+    }
+
+    /**
+     *
+     * @param recipeIngredients
+     */
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients)
+    {
+        this.recipeIngredients = recipeIngredients;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getKilocalories()
+    {
+        return kilocalories;
+    }
+
+    /**
+     *
+     * @param kilocalories
+     */
+    public void setKilocalories(int kilocalories)
+    {
+        this.kilocalories = kilocalories;
+    }
+
     public Long getVersion()
     {
         return version;
@@ -272,5 +282,5 @@ public class Recipe implements Serializable
     {
         this.version = version;
     }
-    
+
 }

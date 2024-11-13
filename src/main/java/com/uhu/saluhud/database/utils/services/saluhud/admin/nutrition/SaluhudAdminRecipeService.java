@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition;
 
-import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
+import com.uhu.saluhud.database.utils.models.nutrition.RecipeIngredient;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -19,14 +19,16 @@ import jakarta.validation.Valid;
  */
 @Service
 @Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
-public class SaluhudAdminRecipeService {
+public class SaluhudAdminRecipeService
+{
 
     @Autowired
     private SaluhudAdminRecipeRepository recipeRepository;
 
     private static final Logger logger = Logger.getLogger(SaluhudAdminRecipeService.class.getName());
 
-    public List<Recipe> findAllRecipes() {
+    public List<Recipe> findAllRecipes()
+    {
         return this.recipeRepository.findAll();
     }
 
@@ -37,7 +39,12 @@ public class SaluhudAdminRecipeService {
      * @return The saved recipe.
      */
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
-    public Recipe saveRecipe(@Valid Recipe recipe) {
+    public Recipe saveRecipe(@Valid Recipe recipe)
+    {       
+        if (recipe.getKilocalories() == 0) {
+            int totalKilocalories = calculateRecipeKcal(recipe);
+            recipe.setKilocalories(totalKilocalories);
+        }
         return recipeRepository.save(recipe);
     }
 
@@ -47,7 +54,8 @@ public class SaluhudAdminRecipeService {
      * @param recipe The recipe to update.
      */
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
-    public void updateRecipe(@Valid Recipe recipe) {
+    public void updateRecipe(@Valid Recipe recipe)
+    {
         try {
             Optional<Recipe> result = this.recipeRepository.findById(recipe.getId());
 
@@ -62,16 +70,16 @@ public class SaluhudAdminRecipeService {
                 if (!recipe.getIngredientsDescription().isBlank()) {
                     existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
                 }
-                if (!recipe.getIngredients().isEmpty()) {
-                    existingRecipe.setIngredients(recipe.getIngredients());
-                }
                 if (!recipe.getAllergenics().isEmpty()) {
                     existingRecipe.setAllergenics(recipe.getAllergenics());
                 }
                 if (!recipe.getElaborationSteps().isEmpty()) {
                     existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
                 }
-
+                if (recipe.getKilocalories() == 0) {
+                    int totalKilocalories = calculateRecipeKcal(recipe);
+                    existingRecipe.setKilocalories(totalKilocalories);
+                }
                 this.recipeRepository.save(existingRecipe);
             }
         } catch (Exception e) {
@@ -86,7 +94,8 @@ public class SaluhudAdminRecipeService {
      * @param recipe The recipe receta to delete.
      */
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
-    public void deleteRecipe(@Valid Recipe recipe) {
+    public void deleteRecipe(@Valid Recipe recipe)
+    {
         try {
             if (this.recipeRepository.existsById(recipe.getId())) {
                 this.recipeRepository.delete(recipe);
@@ -103,7 +112,8 @@ public class SaluhudAdminRecipeService {
      * @param id
      * @return
      */
-    public Recipe getRecipeById(long id) {
+    public Recipe getRecipeById(long id)
+    {
         Recipe selectedRecipe;
         try {
             selectedRecipe = this.recipeRepository.findOne(id);
@@ -125,7 +135,8 @@ public class SaluhudAdminRecipeService {
      * @param name The name of the recipes.
      * @return The recipes found, if any.
      */
-    public List<Recipe> getRecipeByName(String name) {
+    public List<Recipe> getRecipeByName(String name)
+    {
         List<Recipe> selectedRecipes;
         try {
             selectedRecipes = this.recipeRepository.findByName(name);
@@ -142,34 +153,14 @@ public class SaluhudAdminRecipeService {
     }
 
     /**
-     * Finds recipes containing a specific ingredient.
-     *
-     * @param ingredient The specific ingredient.
-     * @return List of recipes containing the ingredient.
-     */
-    public List<Recipe> findByIngredient(@Valid Ingredient ingredient) {
-        return recipeRepository.findByIngredient(ingredient);
-    }
-
-    /**
      * Finds recipes containing a specific allergenic.
      *
      * @param allergenId The ID of the allergenic.
      * @return List of recipes containing the allergenic.
      */
-    public List<Recipe> findByAllergenic(Long allergenId) {
+    public List<Recipe> findByAllergenic(Long allergenId)
+    {
         return recipeRepository.findByAllergenic(allergenId);
-    }
-
-    /**
-     * Finds recipes containing a keyword in the ingredients description.
-     *
-     * @param keyword The keyword to search for.
-     * @return List of recipes containing the keyword in the ingredients
-     * description.
-     */
-    public List<Recipe> findByIngredientsDescriptionContaining(String keyword) {
-        return recipeRepository.findByIngredientsDescriptionContaining(keyword);
     }
 
     /**
@@ -178,27 +169,33 @@ public class SaluhudAdminRecipeService {
      * @param keyword The keyword to search for.
      * @return List of recipes containing the keyword in the description.
      */
-    public List<Recipe> findByDescriptionContaining(String keyword) {
+    public List<Recipe> findByDescriptionContaining(String keyword)
+    {
         return recipeRepository.findByDescriptionContaining(keyword);
     }
 
-    /**
-     * Finds recipes whose ingredients have a maximum number of kilocalories.
-     *
-     * @param maxKilocalories The maximum number of kilocalories.
-     * @return List of recipes that meet the criteria.
-     */
-    public List<Recipe> findByIngredientMaxKilocalories(int maxKilocalories) {
-        return recipeRepository.findByIngredientMaxKilocalories(maxKilocalories);
-    }
+    public int calculateRecipeKcal(@Valid Recipe recipe)
+    {
+        int totalKilocalories = 0;
+        for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
+            int kcalPer100Units = recipeIngredient.getIngredient().getKilocalories(); // kcal por 100 g/ml
+            double quantity = recipeIngredient.getQuantity().doubleValue();
+            String unit = recipeIngredient.getUnit();
 
-    /**
-     * Finds recipes whose ingredients have a minimum amount of protein.
-     *
-     * @param minProteinAmount The minimum amount of protein.
-     * @return List of recipes that meet the criteria.
-     */
-    public List<Recipe> findByIngredientMinProteinAmount(int minProteinAmount) {
-        return recipeRepository.findByIngredientMinProteinAmount(minProteinAmount);
+            // Cálculo ajustado de kilocalorías según la unidad
+            double kcalForIngredient = 0;
+            if ("g".equalsIgnoreCase(unit) || "ml".equalsIgnoreCase(unit)) {
+                // Si está en gramos o mililitros, dividimos por 100 y multiplicamos por la cantidad
+                kcalForIngredient = (kcalPer100Units / 100.0) * quantity;
+            } else if ("kg".equalsIgnoreCase(unit) || "l".equalsIgnoreCase(unit)) {
+                // Si está en kilogramos o litros, multiplicamos por 10 (que equivale a 1000/100)
+                kcalForIngredient = kcalPer100Units * (quantity * 10);
+            } else {
+                throw new IllegalArgumentException("Unidad no soportada: " + unit);
+            }
+
+            totalKilocalories += kcalForIngredient;
+        }
+        return totalKilocalories;
     }
 }

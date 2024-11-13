@@ -11,11 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 import org.hibernate.validator.constraints.Range;
 
@@ -63,7 +65,7 @@ public class Ingredient implements Serializable
     @ManyToMany(fetch = FetchType.EAGER,
             cascade
             = {
-                CascadeType.PERSIST, CascadeType.MERGE
+                CascadeType.MERGE
             })
     @JoinTable(
             name = "INGREDIENT_ALLERGIC",
@@ -71,6 +73,9 @@ public class Ingredient implements Serializable
             inverseJoinColumns = @JoinColumn(name = "id_allergenic")
     )
     private Set<Allergenic> allergens;
+
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<RecipeIngredient> recipeIngredients;
 
     @Version
     @Column(name = "entity_version")
@@ -263,6 +268,24 @@ public class Ingredient implements Serializable
      *
      * @return
      */
+    public List<RecipeIngredient> getRecipeIngredients()
+    {
+        return recipeIngredients;
+    }
+
+    /**
+     *
+     * @param recipeIngredients
+     */
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients)
+    {
+        this.recipeIngredients = recipeIngredients;
+    }
+
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString()
     {
@@ -281,22 +304,20 @@ public class Ingredient implements Serializable
         return hash;
     }
 
-    /**
-     *
-     * @param obj
-     * @return
-     */
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Ingredient)) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Ingredient other = (Ingredient) obj;
-        if (this.id != other.id) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Ingredient other = (Ingredient) obj;
+        return this.id == other.id;
     }
 
     /**

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminIngredientRepository;
 import jakarta.validation.Valid;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -210,7 +209,7 @@ public class SaluhudAdminIngredientService {
      */
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
     public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient) {
-        Set<Allergenic> allergenics = new HashSet<>();
+        Set<Allergenic> allergenics;
         try {
             allergenics = allergenicRepository.findByIngredientId(ingredient.getId());
             return allergenics;

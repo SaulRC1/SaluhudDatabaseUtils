@@ -29,7 +29,7 @@ public interface SaluhudAdminIngredientRepository extends JpaRepository<Ingredie
     Ingredient findOne(@Param("id") long id);
     
     @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT i FROM Ingredient i WHERE i.name = :name")
+    @Query("SELECT i FROM Ingredient i WHERE i.name LIKE :name")
     Ingredient findByName(@Param("name") String name);
 
     @Lock(LockModeType.OPTIMISTIC)

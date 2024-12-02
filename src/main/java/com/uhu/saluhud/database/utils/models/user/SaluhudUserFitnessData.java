@@ -1,11 +1,13 @@
 package com.uhu.saluhud.database.utils.models.user;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.Size;
@@ -64,6 +66,9 @@ public class SaluhudUserFitnessData implements Serializable
     @Size(min = 2, max = 40)
     private String bodyMassIndex;
     
+    @OneToOne(mappedBy = "fitnessData", cascade = CascadeType.ALL)
+    private SaluhudUser saluhudUser;
+    
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -96,7 +101,49 @@ public class SaluhudUserFitnessData implements Serializable
      * @param dailyKilocaloriesObjective the daily kilocalorue objective for the
      * user
      * @param bodyMassIndex the body mass index for the user
+     * @param user the user where the information belongs to
      * 
+     */
+    public SaluhudUserFitnessData(double weight, double height, String biologicalSex,
+            int age, String bodyComposition, int recommendedDailyWaterLiters,
+            int recommendedSleepHours, int recommendedDailySteps,
+            int dailyKilocaloriesObjective, String bodyMassIndex, SaluhudUser user)
+    {
+        this.weight = weight;
+        this.height = height;
+        this.biologicalSex = biologicalSex;
+        this.age = age;
+        this.bodyComposition = bodyComposition;
+        this.recommendedDailyWaterLiters = recommendedDailyWaterLiters;
+        this.recommendedSleepHours = recommendedSleepHours;
+        this.recommendedDailySteps = recommendedDailySteps;
+        this.dailyKilocaloriesObjective = dailyKilocaloriesObjective;
+        this.bodyMassIndex = bodyMassIndex;
+        this.saluhudUser = user;
+    }
+    
+    /**
+     *
+     * This is a parameterized constructor for the class.It takes, the weight of
+     * the user, his height, his sex, his age, his body composition that is
+     * composed for fatMass, leanMass, boneMass, waterMass and muscleMass, the
+     * recommended daily water liters, the recommended sleep hours, the
+     * recommended daily steps, the daily kilocalorie objective, the body mass
+     * index calculated with in information of the user and the saluhud user
+     * which the information belongs to
+     *
+     * @param weight the weight of the user in kilograms
+     * @param height the height of the user in centimetres
+     * @param biologicalSex the sex of the user, woman or men
+     * @param age the age of the user
+     * @param bodyComposition the body composition of the user
+     * @param recommendedDailyWaterLiters the recommended daily water liters for
+     * the user
+     * @param recommendedSleepHours the recommended sleep hours for the user
+     * @param recommendedDailySteps the recommended daily steps for the user
+     * @param dailyKilocaloriesObjective the daily kilocalorue objective for the
+     * user
+     * @param bodyMassIndex the body mass index for the user
      */
     public SaluhudUserFitnessData(double weight, double height, String biologicalSex,
             int age, String bodyComposition, int recommendedDailyWaterLiters,
@@ -336,5 +383,25 @@ public class SaluhudUserFitnessData implements Serializable
     {
         this.version = version;
     }
-    
+
+    /**
+     * Getter for the parameter "saluhudUser"
+     * 
+     * @return the saluhud user
+     */
+    public SaluhudUser getSaluhudUser()
+    {
+        return saluhudUser;
+    }
+
+    /**
+     * Setter for the parameter "saluhudUser"
+     * 
+     * @param saluhudUser the new saluhudUser
+     */
+    public void setSaluhudUser(SaluhudUser saluhudUser)
+    {
+        this.saluhudUser = saluhudUser;
+    }
+   
 }

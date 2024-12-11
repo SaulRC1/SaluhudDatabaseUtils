@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.repositories.saluhud.admin.user;
 
-import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
+import com.uhu.saluhud.database.utils.models.user.SaluhudAdmin;
 import jakarta.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -22,46 +20,24 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, Long>
+public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudAdmin, Long>
 {
+  
     @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByEmailIgnoreCase(String email); //Emails are case insensitive
+    Optional<SaluhudAdmin> findByName(String name);
+
+    @Override
+    @Lock(LockModeType.OPTIMISTIC)
+    public <S extends SaluhudAdmin> List<S> findAll(Example<S> example, Sort sort);
+
+    @Override
+    @Lock(LockModeType.OPTIMISTIC)
+    public <S extends SaluhudAdmin> List<S> findAll(Example<S> example);
+
+    @Override
+    @Lock(LockModeType.OPTIMISTIC)
+    public SaluhudAdmin getReferenceById(Long id);
     
-    @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByUsername(String username);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByEmail(String email);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByEmailIgnoreCase(String email);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    Optional<SaluhudUser> findByPhoneNumber(String phoneNumber);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByPhoneNumber(String phoneNumber);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT u FROM SaluhudUser u WHERE u.fitnessData.id = :fitnessDataId")
-    List<SaluhudUser> findByFitnessDataId(@Param("fitnessDataId") long fitnessDataId);
-
-    @Lock(LockModeType.OPTIMISTIC)
-    @Query("SELECT p FROM SaluhudUser p WHERE p.phoneNumber > :phoneNumber")
-    List<SaluhudUser> findByPhoneNumberGreaterThan(@Param("phoneNumber") String phoneNumber);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> List<S> findAll(Example<S> example, Sort sort);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> List<S> findAll(Example<S> example);
-
-    @Override
-    @Lock(LockModeType.OPTIMISTIC)
-    public SaluhudUser getReferenceById(Long id);
-
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
@@ -72,15 +48,15 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAllInBatch(Iterable<SaluhudUser> entities);
+    public void deleteAllInBatch(Iterable<SaluhudAdmin> entities);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> List<S> saveAllAndFlush(Iterable<S> entities);
+    public <S extends SaluhudAdmin> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> S saveAndFlush(S entity);
+    public <S extends SaluhudAdmin> S saveAndFlush(S entity);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -88,19 +64,19 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public List<SaluhudUser> findAllById(Iterable<Long> ids);
+    public List<SaluhudAdmin> findAllById(Iterable<Long> ids);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public List<SaluhudUser> findAll();
+    public List<SaluhudAdmin> findAll();
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> List<S> saveAll(Iterable<S> entities);
-
+    public <S extends SaluhudAdmin> List<S> saveAll(Iterable<S> entities);
+    
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public List<SaluhudUser> findAll(Sort sort);
+    public List<SaluhudAdmin> findAll(Sort sort);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -108,7 +84,7 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public void deleteAll(Iterable<? extends SaluhudUser> entities);
+    public void deleteAll(Iterable<? extends SaluhudAdmin> entities);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -116,7 +92,7 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public void delete(SaluhudUser entity);
+    public void delete(SaluhudAdmin entity);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
@@ -132,34 +108,34 @@ public interface SaluhudAdminUserRepository extends JpaRepository<SaluhudUser, L
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public Optional<SaluhudUser> findById(Long id);
+    public Optional<SaluhudAdmin> findById(Long id);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> S save(S entity);
+    public <S extends SaluhudAdmin> S save(S entity);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public Page<SaluhudUser> findAll(Pageable pageable);
+    public Page<SaluhudAdmin> findAll(Pageable pageable);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
+    public <S extends SaluhudAdmin, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> boolean exists(Example<S> example);
+    public <S extends SaluhudAdmin> boolean exists(Example<S> example);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> long count(Example<S> example);
+    public <S extends SaluhudAdmin> long count(Example<S> example);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> Page<S> findAll(Example<S> example, Pageable pageable);
+    public <S extends SaluhudAdmin> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)
-    public <S extends SaluhudUser> Optional<S> findOne(Example<S> example);
-
+    public <S extends SaluhudAdmin> Optional<S> findOne(Example<S> example);
+      
 }

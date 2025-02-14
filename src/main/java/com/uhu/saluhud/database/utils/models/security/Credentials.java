@@ -1,5 +1,6 @@
 package com.uhu.saluhud.database.utils.models.security;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
@@ -15,9 +16,11 @@ public class Credentials
     }
 
     @Size(min = 5, max = 32)
+    @NotBlank
     private String username;
     
     @Size(min = 5, max = 32)
+    @NotBlank
     private String password;
 
     

@@ -2,6 +2,7 @@ package com.uhu.saluhud.database.utils.services.saluhud.admin.security;
 
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.security.UserAccountRepository;
 import com.uhu.saluhud.database.utils.models.security.UserAccount;
+import com.uhu.saluhud.database.utils.security.PasswordEncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service
-@Transactional
+@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
 public class LoginService implements UserDetailsService
 {
 
@@ -34,7 +35,6 @@ public class LoginService implements UserDetailsService
 
         // Ensure authorities are initialized
         Assert.notNull(result.getAuthorities(), "User authorities must not be null");
-        //result.getAuthorities().size(); // Force initialization of authorities
 
         return result;
     }

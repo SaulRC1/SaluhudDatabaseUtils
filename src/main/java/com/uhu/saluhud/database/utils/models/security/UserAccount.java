@@ -1,11 +1,13 @@
 package com.uhu.saluhud.database.utils.models.security;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.CollectionTable;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +20,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
@@ -50,13 +54,13 @@ public class UserAccount implements UserDetails
     //database
     private String rawPassword;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_account_authorities", joinColumns = @JoinColumn(name = "user_account_id"))
     @Column(name = "authority")
     @NotNull
     @Valid
     private Collection<Authority> authorities;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -143,9 +147,11 @@ public class UserAccount implements UserDetails
     }
 
     @Override
-    public Collection<Authority> getAuthorities()
+    public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        return this.authorities;
+        return authorities.stream()
+                .map(authority -> new SimpleGrantedAuthority("ROLE_" + authority.getAuthority()))
+                .toList();
     }
 
     public void setAuthorities(final Collection<Authority> authorities)
@@ -206,7 +212,7 @@ public class UserAccount implements UserDetails
     {
         this.id = id;
     }
-    
+
     /**
      *
      * @return

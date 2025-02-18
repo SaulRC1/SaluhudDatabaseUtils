@@ -93,6 +93,16 @@ public class RecipeElaborationStep implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id The id of the Step
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Getter fot the parameter "stepDescription"
      *
      * @return The description of the Step

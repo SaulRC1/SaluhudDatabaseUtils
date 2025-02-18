@@ -214,6 +214,16 @@ public class Ingredient implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     *
+     * @param id The id of an ingredient
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Setter for the parameter "name"
      *
      * @param name The new name of the ingredient
@@ -238,7 +248,7 @@ public class Ingredient implements Serializable
      *
      * @param proteinAmount The new amount of proteins of an ingredient
      */
-    public void setProtein_amount(int proteinAmount)
+    public void setProteinAmount(int proteinAmount)
     {
         this.proteinAmount = proteinAmount;
     }
@@ -249,7 +259,7 @@ public class Ingredient implements Serializable
      * @param carbohydratesAmount The new amount of carbohydrates of an
      * ingredient
      */
-    public void setCarbohydrates_amount(int carbohydratesAmount)
+    public void setCarbohydratesAmount(int carbohydratesAmount)
     {
         this.carbohydratesAmount = carbohydratesAmount;
     }
@@ -259,7 +269,7 @@ public class Ingredient implements Serializable
      *
      * @param fatAmount The new amount of fats of an ingredient
      */
-    public void setFat_amount(int fatAmount)
+    public void setFatAmount(int fatAmount)
     {
         this.fatAmount = fatAmount;
     }

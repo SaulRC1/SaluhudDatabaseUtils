@@ -73,6 +73,16 @@ public class WeightHistorical implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the new id of the weight historical
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }   
+
+    /**
      * Getter for the parameter "entries"
      *
      * @return the list of weight entries

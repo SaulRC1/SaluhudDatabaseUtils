@@ -77,6 +77,16 @@ public class SaluhudAdmin implements Serializable
     }  
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the id of the user
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      *
      * @return
      */

@@ -166,13 +166,13 @@ public class SaluhudAdminIngredientService {
                     existingIngredient.setKilocalories(ingredient.getKilocalories());
                 }
                 if (ingredient.getProteinAmount() > 0) {
-                    existingIngredient.setProtein_amount(ingredient.getProteinAmount());
+                    existingIngredient.setProteinAmount(ingredient.getProteinAmount());
                 }
                 if (ingredient.getCarbohydratesAmount() > 0) {
-                    existingIngredient.setCarbohydrates_amount(ingredient.getCarbohydratesAmount());
+                    existingIngredient.setCarbohydratesAmount(ingredient.getCarbohydratesAmount());
                 }
                 if (ingredient.getFatAmount() > 0) {
-                    existingIngredient.setFat_amount(ingredient.getFatAmount());
+                    existingIngredient.setFatAmount(ingredient.getFatAmount());
                 }
 
                 this.ingredientRepository.save(existingIngredient);

@@ -134,6 +134,11 @@ public class Recipe implements Serializable
         return id;
     }
 
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
     /**
      * Getter for the parameter "name"
      *

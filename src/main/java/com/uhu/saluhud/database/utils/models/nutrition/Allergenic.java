@@ -80,6 +80,16 @@ public class Allergenic implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id The id of the Allergenic
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Getter for the parameter "name"
      *
      * @return The name of the Allergenic
@@ -129,7 +139,7 @@ public class Allergenic implements Serializable
 
     /**
      * Setter for the parameters "ingredients"
-     * 
+     *
      * @param ingredients the new list of ingredients that contain the allergen
      */
     public void setIngredients(List<Ingredient> ingredients)
@@ -160,5 +170,5 @@ public class Allergenic implements Serializable
         final Allergenic other = (Allergenic) obj;
         return this.id == other.id;
     }
-    
+
 }

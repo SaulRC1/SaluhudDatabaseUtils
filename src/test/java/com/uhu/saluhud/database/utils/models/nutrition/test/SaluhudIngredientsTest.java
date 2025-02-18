@@ -49,7 +49,7 @@ public class SaluhudIngredientsTest
         Ingredient ingredientSelectedByName = ingredientService.getIngredientByName("Huevo");
         assertEquals(ingredientSelectedByName.getName(), "Huevo");
 
-        harina.setCarbohydrates_amount(75);
+        harina.setCarbohydratesAmount(75);
         ingredientService.updateIngredient(harina);
         Assert.isTrue(harina.getCarbohydratesAmount() == 75, "");
     }

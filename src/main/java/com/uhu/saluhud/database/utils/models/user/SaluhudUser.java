@@ -25,7 +25,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "saluhud_user")
-public class SaluhudUser implements Serializable {
+public class SaluhudUser implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +41,7 @@ public class SaluhudUser implements Serializable {
 
     @Column(name = "password", nullable = false)
     private String password;
-    
+
     @NotBlank
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\\-_]).{8,32}$")
     @Size(min = 8, max = 32)
@@ -48,13 +49,13 @@ public class SaluhudUser implements Serializable {
     //The raw password without any hashing/encryption, it will only be used for
     //validation of the real password before encypting and persisting it into the
     //database
-    private String rawPassword; 
+    private String rawPassword;
 
     @Column(name = "email", nullable = false, unique = true)
     @NotBlank
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
     @Size(min = 6, max = 200) //Minimum possible size is of 6 characters taking
-                              //into account the regular expression  
+    //into account the regular expression  
     private String email;
 
     @Column(name = "name", nullable = false)
@@ -87,7 +88,8 @@ public class SaluhudUser implements Serializable {
     /**
      * This a default constructor for the class, with no parameters
      */
-    public SaluhudUser() {
+    public SaluhudUser()
+    {
     }
 
     /**
@@ -99,7 +101,8 @@ public class SaluhudUser implements Serializable {
      * @param email the email of the user
      * @param name the name of the user
      */
-    public SaluhudUser(String username, String rawPassword, String email, String name) {
+    public SaluhudUser(String username, String rawPassword, String email, String name)
+    {
         this.username = username;
         this.rawPassword = rawPassword;
         this.email = email;
@@ -118,7 +121,8 @@ public class SaluhudUser implements Serializable {
      * @param phoneNumber the phone number of the user
      */
     public SaluhudUser(String username, String rawPassword, String email,
-            String name, String surname, String phoneNumber) {
+            String name, String surname, String phoneNumber)
+    {
         this.username = username;
         this.rawPassword = rawPassword;
         this.email = email;
@@ -141,7 +145,8 @@ public class SaluhudUser implements Serializable {
      * @param userFitnessData the fitness data of the user
      */
     public SaluhudUser(String username, String rawPassword, String email,
-            String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData) {
+            String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData)
+    {
         this.username = username;
         this.rawPassword = rawPassword;
         this.email = email;
@@ -156,8 +161,19 @@ public class SaluhudUser implements Serializable {
      *
      * @return the id of the user
      */
-    public long getId() {
+    public long getId()
+    {
         return id;
+    }
+
+    /**
+     * Setter for the parameter "id"
+     *
+     * @param id the id of the user
+     */
+    public void setId(long id)
+    {
+        this.id = id;
     }
 
     /**
@@ -165,7 +181,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the username of the user
      */
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
@@ -174,7 +191,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param username the new username
      */
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
@@ -183,7 +201,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the password of the user
      */
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
@@ -192,7 +211,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param password the new password
      */
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
 
@@ -201,7 +221,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the email of the user
      */
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
@@ -210,7 +231,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param email the new email of the user
      */
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 
@@ -219,7 +241,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the fitness data of the user
      */
-    public SaluhudUserFitnessData getFitnessData() {
+    public SaluhudUserFitnessData getFitnessData()
+    {
         return fitnessData;
     }
 
@@ -228,7 +251,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param fitnessData the fitness data of the user
      */
-    public void setFitnessData(SaluhudUserFitnessData fitnessData) {
+    public void setFitnessData(SaluhudUserFitnessData fitnessData)
+    {
         this.fitnessData = fitnessData;
     }
 
@@ -237,7 +261,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the name of the user
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -246,7 +271,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the surname of the user
      */
-    public String getSurname() {
+    public String getSurname()
+    {
         return surname;
     }
 
@@ -255,7 +281,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return the phone number of the user
      */
-    public String getPhoneNumber() {
+    public String getPhoneNumber()
+    {
         return phoneNumber;
     }
 
@@ -264,7 +291,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param name the new name of the user
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -273,7 +301,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param surname the new surname of the user
      */
-    public void setSurname(String surname) {
+    public void setSurname(String surname)
+    {
         this.surname = surname;
     }
 
@@ -282,7 +311,8 @@ public class SaluhudUser implements Serializable {
      *
      * @param phoneNumber the new phone number of the user
      */
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber)
+    {
         this.phoneNumber = phoneNumber;
     }
 
@@ -290,7 +320,8 @@ public class SaluhudUser implements Serializable {
      *
      * @return
      */
-    public Long getVersion() {
+    public Long getVersion()
+    {
         return version;
     }
 
@@ -298,12 +329,14 @@ public class SaluhudUser implements Serializable {
      *
      * @param version
      */
-    public void setVersion(Long version) {
+    public void setVersion(Long version)
+    {
         this.version = version;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) {
             return true;
         }
@@ -315,14 +348,15 @@ public class SaluhudUser implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id);
     }
 
     /**
      * Returns the raw password (the password without any encryption). It will
      * return null if the entity has been retrieved from the database.
-     * 
+     *
      * @return the password without any encryption or null
      */
     public String getRawPassword()
@@ -332,8 +366,8 @@ public class SaluhudUser implements Serializable {
 
     /**
      * Sets the raw password of this user (the password without any encryption)
-     * 
-     * @param rawPassword User's password without any encryption 
+     *
+     * @param rawPassword User's password without any encryption
      */
     public void setRawPassword(String rawPassword)
     {

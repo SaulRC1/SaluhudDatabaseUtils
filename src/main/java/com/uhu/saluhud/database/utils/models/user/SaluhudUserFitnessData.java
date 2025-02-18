@@ -273,6 +273,16 @@ public class SaluhudUserFitnessData implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the id of the user fitness data
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Setter for the parameter "weight"
      *
      * @param weight the new weight of the user

@@ -73,6 +73,16 @@ public class SleepHistorical implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the id the of sleep historical
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Getter for the parameter "entries"
      *
      * @return the sleep historical of the user

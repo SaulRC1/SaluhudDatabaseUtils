@@ -97,6 +97,16 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the id of the daily steps entry
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Getter for the parameter "entryDate"
      *
      * @return the entry date

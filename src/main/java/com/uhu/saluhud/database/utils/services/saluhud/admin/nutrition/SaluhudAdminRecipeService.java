@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.nutrition.SaluhudAdminRecipeRepository;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashSet;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service class for managing recipes.
@@ -40,7 +45,7 @@ public class SaluhudAdminRecipeService
      */
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
     public Recipe saveRecipe(@Valid Recipe recipe)
-    {       
+    {
         if (recipe.getKilocalories() == 0) {
             int totalKilocalories = calculateRecipeKcal(recipe);
             recipe.setKilocalories(totalKilocalories);
@@ -56,11 +61,23 @@ public class SaluhudAdminRecipeService
     @Transactional(transactionManager = "saluhudAdminTransactionManager")
     public void updateRecipe(@Valid Recipe recipe)
     {
+        System.out.println("Intentando actualizar la receta con ID: " + recipe.getId());
         try {
             Optional<Recipe> result = this.recipeRepository.findById(recipe.getId());
 
             if (result.isPresent()) {
                 Recipe existingRecipe = result.get();
+
+                if (recipe.getAllergenics() == null) {
+                    recipe.setAllergenics(new HashSet<>());
+                }
+                if (recipe.getElaborationSteps() == null) {
+                    recipe.setElaborationSteps(new ArrayList<>());
+                }
+                if (recipe.getRecipeIngredients() == null) {
+                    recipe.setRecipeIngredients(new ArrayList<>());
+                }
+
                 if (!recipe.getName().isBlank()) {
                     existingRecipe.setName(recipe.getName());
                 }
@@ -71,6 +88,7 @@ public class SaluhudAdminRecipeService
                     existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
                 }
                 if (!recipe.getAllergenics().isEmpty()) {
+                    existingRecipe.getAllergenics().clear();
                     existingRecipe.setAllergenics(recipe.getAllergenics());
                 }
                 if (!recipe.getElaborationSteps().isEmpty()) {
@@ -197,5 +215,11 @@ public class SaluhudAdminRecipeService
             totalKilocalories += kcalForIngredient;
         }
         return totalKilocalories;
+    }
+
+    public Page<Recipe> getRecipes(int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return recipeRepository.findAll(pageable);
     }
 }

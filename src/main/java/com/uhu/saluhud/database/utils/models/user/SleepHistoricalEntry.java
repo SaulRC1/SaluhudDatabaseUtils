@@ -100,6 +100,16 @@ public class SleepHistoricalEntry implements Serializable
     }
 
     /**
+     * Setter for the parameter "id"
+     * 
+     * @param id the id of the daily steps entry
+     */
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    /**
      * Getter for the parameter "entryDate"
      *
      * @return the entry date
@@ -198,11 +208,31 @@ public class SleepHistoricalEntry implements Serializable
         return sleepHistorical;
     }
 
+    /**
+     * Setter for the parameter "sleepHistorical"
+     * 
+     * @param sleepHistorical the sleep historical of the user
+     */
+    public void setSleepHistorical(SleepHistorical sleepHistorical)
+    {
+        this.sleepHistorical = sleepHistorical;
+    }
+
+    /**
+     * Getter for the parameter "version"
+     * 
+     * @return the version of the entry
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Setter for the parameter "version"
+     * 
+     * @param version the new version of the entry
+     */
     public void setVersion(Long version)
     {
         this.version = version;

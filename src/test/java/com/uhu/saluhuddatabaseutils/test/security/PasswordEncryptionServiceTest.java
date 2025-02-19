@@ -19,7 +19,7 @@ import org.springframework.test.context.TestPropertySource;
 @DataJpaTest
 @TestPropertySource(locations = { "classpath:datasources/saluhud-administration-portal-datasource.properties" })
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@ComponentScan(basePackages = "com.uhu.saluhud.database.utils.security")
+@ComponentScan(basePackages = "com.uhu.saluhuddatabaseutils.security")
 @ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
 public class PasswordEncryptionServiceTest
 {

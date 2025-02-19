@@ -47,11 +47,11 @@ properties =
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages =
 {
-    "com.uhu.saluhud.database.utils.repositories.saluhud.user.user",
-    "com.uhu.saluhud.database.utils.security",
-    "com.uhu.saluhud.database.utils.services.saluhud.user.user",
-    "com.uhu.saluhud.database.utils.repositories.saluhud.admin.user",
-    "com.uhu.saluhud.database.utils.services.saluhud.admin.user"
+    "com.uhu.saluhuddatabaseutils.repositories.mobileapp.user",
+    "com.uhu.saluhuddatabaseutils.security",
+    "com.uhu.saluhuddatabaseutils.services.mobileapp.user",
+    "com.uhu.saluhuddatabaseutils.repositories.administrationportal.user",
+    "com.uhu.saluhuddatabaseutils.services.administrationportal.user"
 })
 /*@ContextConfiguration(classes = {
     SaluhudMobileAppDataSourceConfig.class,

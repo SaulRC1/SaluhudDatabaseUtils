@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages
         = {
-            "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition"
+            "com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition"
         })
 public class RecipesWebscrapingTest
 {

@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration(proxyBeanMethods = false)
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.uhu.saluhud.database.utils.repositories.saluhud.admin",
+        basePackages = "com.uhu.saluhuddatabaseutils.repositories.administrationportal",
         entityManagerFactoryRef = "saluhudAdministrationPortalEntityManagerFactory",
         transactionManagerRef = "saluhudAdministrationPortalTransactionManager"
 )
@@ -63,7 +63,7 @@ public class SaluhudAdministrationPortalDataSourceConfig
                 = new LocalContainerEntityManagerFactoryBean();
 
         saluhudAdministrationPortalEntityManagerFactoryBean.setDataSource(buildSaluhudAdministrationPortalDataSource());
-        saluhudAdministrationPortalEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
+        saluhudAdministrationPortalEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhuddatabaseutils.models");
         saluhudAdministrationPortalEntityManagerFactoryBean.setPersistenceUnitName("saluhud_administration_portal_persistence_unit");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();

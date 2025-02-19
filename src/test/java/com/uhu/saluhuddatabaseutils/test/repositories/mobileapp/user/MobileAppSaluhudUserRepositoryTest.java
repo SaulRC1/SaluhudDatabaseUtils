@@ -24,8 +24,8 @@ import com.uhu.saluhuddatabaseutils.repositories.mobileapp.user.MobileAppSaluhud
 @TestPropertySource(locations = {"classpath:datasources/saluhud-mobile-app-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
-    "com.uhu.saluhud.database.utils.repositories.saluhud.user.user",
-    "com.uhu.saluhud.database.utils.security"
+    "com.uhu.saluhuddatabaseutils.repositories.mobileapp.user",
+    "com.uhu.saluhuddatabaseutils.security"
 })
 @ContextConfiguration(classes = SaluhudMobileAppDataSourceConfig.class)
 public class MobileAppSaluhudUserRepositoryTest 

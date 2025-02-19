@@ -28,8 +28,8 @@ import org.springframework.util.Assert;
 @TestPropertySource(locations = {"classpath:datasources/saluhud-administration-portal-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
-    "com.uhu.saluhud.database.utils.services.saluhud.admin.user",
-    "com.uhu.saluhud.database.utils.security"
+    "com.uhu.saluhuddatabaseutils.services.administrationportal.user",
+    "com.uhu.saluhuddatabaseutils.security"
 })
 @ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
 public class AdministrationPortalSaluhudAdminTest {

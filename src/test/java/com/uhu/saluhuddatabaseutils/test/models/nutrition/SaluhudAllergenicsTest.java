@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 @DataJpaTest
 @TestPropertySource(locations = { "classpath:datasources/saluhud-administration-portal-datasource.properties" })
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
+@ComponentScan(basePackages = "com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition")
 @ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
 public class SaluhudAllergenicsTest {
 

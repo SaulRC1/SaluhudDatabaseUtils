@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration(proxyBeanMethods = false)
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.uhu.saluhud.database.utils.repositories.saluhud.user",
+        basePackages = "com.uhu.saluhuddatabaseutils.repositories.mobileapp",
         entityManagerFactoryRef = "saluhudMobileAppEntityManagerFactory",
         transactionManagerRef = "saluhudMobileAppTransactionManager"
 )
@@ -43,7 +43,7 @@ public class SaluhudMobileAppDataSourceConfig
                 = new LocalContainerEntityManagerFactoryBean();
 
         saluhudMobileAppEntityManagerFactoryBean.setDataSource(buildSaluhudMobileAppDataSource());
-        saluhudMobileAppEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
+        saluhudMobileAppEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhuddatabaseutils.models");
         saluhudMobileAppEntityManagerFactoryBean.setPersistenceUnitName("saluhud_mobile_app_persistence_unit");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();

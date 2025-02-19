@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminRecipeElaborationStepService {
 
     @Autowired
@@ -39,7 +39,7 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         this.recipeElaborationStepRepository.save(step);
     }
@@ -49,7 +49,7 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         try {
             Optional<RecipeElaborationStep> result = this.recipeElaborationStepRepository.findById(step.getId());
@@ -77,7 +77,7 @@ public class SaluhudAdminRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         try {
             if (this.recipeElaborationStepRepository.existsById(step.getId())) {

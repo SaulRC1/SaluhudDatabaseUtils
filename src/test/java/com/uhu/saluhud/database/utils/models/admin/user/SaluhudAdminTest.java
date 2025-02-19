@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.models.admin.user;
 
-import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.security.Authority;
 import com.uhu.saluhud.database.utils.models.security.UserAccount;
 import com.uhu.saluhud.database.utils.models.user.SaluhudAdmin;
@@ -25,13 +25,13 @@ import org.springframework.util.Assert;
  * @author Juan Alberto Dominguez Vazquez
  */
 @DataJpaTest
-@TestPropertySource(locations = {"classpath:datasources/saluhud-admin-datasource.properties"})
+@TestPropertySource(locations = {"classpath:datasources/saluhud-administration-portal-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
     "com.uhu.saluhud.database.utils.services.saluhud.admin.user",
     "com.uhu.saluhud.database.utils.security"
 })
-@ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
+@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
 public class SaluhudAdminTest {
 
     @Autowired
@@ -41,7 +41,7 @@ public class SaluhudAdminTest {
     private PasswordEncryptionService passwordEncryptionService;
     
     @Test
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     @Rollback
     public void testUserCRUD() {
         

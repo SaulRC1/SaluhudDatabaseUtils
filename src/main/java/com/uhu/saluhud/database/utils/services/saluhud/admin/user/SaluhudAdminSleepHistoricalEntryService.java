@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminSleepHistoricalEntryService {
 
     @Autowired
@@ -112,7 +112,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             sleepHistoricalEntryRepository.save(entry);
@@ -127,7 +127,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             Optional<SleepHistoricalEntry> result = sleepHistoricalEntryRepository.findById(entry.getId());
@@ -152,7 +152,7 @@ public class SaluhudAdminSleepHistoricalEntryService {
      *
      * @param entry The SleepHistoricalEntry entity to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteSleepHistoricalEntry(@Valid SleepHistoricalEntry entry) {
         try {
             if (this.sleepHistoricalEntryRepository.existsById(entry.getId())) {

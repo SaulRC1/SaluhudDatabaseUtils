@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.models.nutrition.test;
 
-import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.nutrition.Ingredient;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,10 +20,10 @@ import org.springframework.util.Assert;
  * @author Juan Alberto Dominguez Vazquez
  */
 @DataJpaTest
-@TestPropertySource(locations = {"classpath:datasources/saluhud-admin-datasource.properties"})
+@TestPropertySource(locations = {"classpath:datasources/saluhud-administration-portal-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = "com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition")
-@ContextConfiguration(classes = SaluhudAdminDataSourceConfig.class)
+@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
 public class SaluhudIngredientsTest
 {
 
@@ -31,7 +31,7 @@ public class SaluhudIngredientsTest
     private SaluhudAdminIngredientService ingredientService;
 
     @Test
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     @Rollback
     public void testIngredientCRUD()
     {

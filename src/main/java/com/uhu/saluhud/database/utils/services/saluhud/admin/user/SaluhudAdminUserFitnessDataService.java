@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminUserFitnessDataService {
 
     @Autowired
@@ -133,7 +133,7 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             this.fitnessDataRepository.save(fitnessData);
@@ -148,7 +148,7 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             Optional<SaluhudUserFitnessData> result = this.fitnessDataRepository.findById(fitnessData.getId());
@@ -179,7 +179,7 @@ public class SaluhudAdminUserFitnessDataService {
      *
      * @param fitnessData The fitness data to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteFitnessData(@Valid SaluhudUserFitnessData fitnessData) {
         try {
             if (this.fitnessDataRepository.existsById(fitnessData.getId())) {

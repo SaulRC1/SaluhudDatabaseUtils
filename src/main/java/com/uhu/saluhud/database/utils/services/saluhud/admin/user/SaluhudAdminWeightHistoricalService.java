@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminWeightHistoricalService {
 
     @Autowired
@@ -102,7 +102,7 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             this.weightHistoricalRepository.save(weightHistorical);
@@ -117,7 +117,7 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             Optional<WeightHistorical> result = this.weightHistoricalRepository.findById(weightHistorical.getId());
@@ -140,7 +140,7 @@ public class SaluhudAdminWeightHistoricalService {
      *
      * @param weightHistorical The weight historical record to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteWeightHistorical(@Valid WeightHistorical weightHistorical) {
         try {
             if (this.weightHistoricalRepository.existsById(weightHistorical.getId())) {

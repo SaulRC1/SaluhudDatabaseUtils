@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.test.repositories.saluhud.user.user;
 
-import com.uhu.saluhud.database.utils.datasource.SaluhudUserDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudMobileAppDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
 import com.uhu.saluhud.database.utils.repositories.saluhud.user.user.SaluhudUserUserRepository;
 import com.uhu.saluhud.database.utils.security.PasswordEncryptionService;
@@ -21,13 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Saúl Rodríguez Naranjo
  */
 @DataJpaTest
-@TestPropertySource(locations = {"classpath:datasources/saluhud-user-datasource.properties"})
+@TestPropertySource(locations = {"classpath:datasources/saluhud-mobile-app-datasource.properties"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
     "com.uhu.saluhud.database.utils.repositories.saluhud.user.user",
     "com.uhu.saluhud.database.utils.security"
 })
-@ContextConfiguration(classes = SaluhudUserDataSourceConfig.class)
+@ContextConfiguration(classes = SaluhudMobileAppDataSourceConfig.class)
 public class SaluhudUserUserRepositoryTest 
 {
     private static Logger logger = Logger.getLogger(SaluhudUserUserRepositoryTest.class.getName());
@@ -39,7 +39,7 @@ public class SaluhudUserUserRepositoryTest
     private PasswordEncryptionService passwordEncryptionService;
     
     @Test
-    @Transactional(transactionManager = "saluhudUserTransactionManager")
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
     @Rollback
     public void test_saving_saluhud_user_with_valid_data()
     {

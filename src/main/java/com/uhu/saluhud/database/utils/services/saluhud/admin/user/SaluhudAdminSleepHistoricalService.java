@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminSleepHistoricalService {
 
     @Autowired
@@ -109,7 +109,7 @@ public class SaluhudAdminSleepHistoricalService {
      *
      * @param sleepHistorical The SleepHistorical to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveSleepHistorical(@Valid SleepHistorical sleepHistorical) {
         sleepHistoricalRepository.save(sleepHistorical);
     }
@@ -119,7 +119,7 @@ public class SaluhudAdminSleepHistoricalService {
      *
      * @param sleepHistorical The SleepHistorical to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateSleepHistorical(@Valid SleepHistorical sleepHistorical) {
         try {
             Optional<SleepHistorical> result = this.sleepHistoricalRepository.findById(sleepHistorical.getId());
@@ -142,7 +142,7 @@ public class SaluhudAdminSleepHistoricalService {
      *
      * @param sleepHistorical The SleepHistorical to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteSleepHistorical(@Valid SleepHistorical sleepHistorical) {
         try {
             if (this.sleepHistoricalRepository.existsById(sleepHistorical.getId())) {

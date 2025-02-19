@@ -20,7 +20,7 @@ import java.util.Set;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminIngredientService {
 
     @Autowired
@@ -142,7 +142,7 @@ public class SaluhudAdminIngredientService {
      *
      * @param ingredient The ingredient to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveIngredient(@Valid Ingredient ingredient) {
         this.ingredientRepository.save(ingredient);
     }
@@ -152,7 +152,7 @@ public class SaluhudAdminIngredientService {
      *
      * @param ingredient The ingredient to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateIngredient(@Valid Ingredient ingredient) {
         try {
             Optional<Ingredient> result = this.ingredientRepository.findById(ingredient.getId());
@@ -188,7 +188,7 @@ public class SaluhudAdminIngredientService {
      *
      * @param ingredient The ingredient to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteIngredient(@Valid Ingredient ingredient) {
         try {
             if (this.ingredientRepository.existsById(ingredient.getId())) {
@@ -207,7 +207,7 @@ public class SaluhudAdminIngredientService {
      * @param ingredient The ingredient for which to find allergens.
      * @return A set of allergens associated with the ingredient.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient) {
         Set<Allergenic> allergenics;
         try {

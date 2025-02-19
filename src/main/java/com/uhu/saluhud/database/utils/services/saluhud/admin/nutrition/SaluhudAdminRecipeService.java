@@ -23,7 +23,7 @@ import org.springframework.data.domain.Pageable;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminRecipeService
 {
 
@@ -43,7 +43,7 @@ public class SaluhudAdminRecipeService
      * @param recipe The recipe to save.
      * @return The saved recipe.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public Recipe saveRecipe(@Valid Recipe recipe)
     {
         if (recipe.getKilocalories() == 0) {
@@ -58,7 +58,7 @@ public class SaluhudAdminRecipeService
      *
      * @param recipe The recipe to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateRecipe(@Valid Recipe recipe)
     {
         System.out.println("Intentando actualizar la receta con ID: " + recipe.getId());
@@ -111,7 +111,7 @@ public class SaluhudAdminRecipeService
      *
      * @param recipe The recipe receta to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteRecipe(@Valid Recipe recipe)
     {
         try {

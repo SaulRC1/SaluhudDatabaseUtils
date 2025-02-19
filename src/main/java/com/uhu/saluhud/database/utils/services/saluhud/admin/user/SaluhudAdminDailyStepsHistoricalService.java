@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminDailyStepsHistoricalService {
 
     @Autowired
@@ -29,7 +29,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      *
      * @param dailyStepsHistorical El historico de pasos diarios a guardar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveDailyStepsHistorical(@Valid DailyStepsHistorical dailyStepsHistorical) {
         this.dailyStepsHistoricalRepository.save(dailyStepsHistorical);
     }
@@ -39,7 +39,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      *
      * @param dailyStepsHistorical El historico de pasos diarios a actualizar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateDailyStepsHistorical(@Valid DailyStepsHistorical dailyStepsHistorical) {
         try {
             Optional<DailyStepsHistorical> result;
@@ -64,7 +64,7 @@ public class SaluhudAdminDailyStepsHistoricalService {
      *
      * @param dailyStepsHistorical El historico de pasos diarios a eliminar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteDailyStepsHistorical(@Valid DailyStepsHistorical dailyStepsHistorical) {
         try {
             if (this.dailyStepsHistoricalRepository.existsById(dailyStepsHistorical.getId())) {

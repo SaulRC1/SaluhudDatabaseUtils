@@ -28,48 +28,48 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "com.uhu.saluhud.database.utils.repositories.saluhud.user",
-        entityManagerFactoryRef = "saluhudUserEntityManagerFactory",
-        transactionManagerRef = "saluhudUserTransactionManager"
+        entityManagerFactoryRef = "saluhudMobileAppEntityManagerFactory",
+        transactionManagerRef = "saluhudMobileAppTransactionManager"
 )
-@PropertySource("classpath:datasources/saluhud-user-datasource.properties")
-public class SaluhudUserDataSourceConfig
+@PropertySource("classpath:datasources/saluhud-mobile-app-datasource.properties")
+public class SaluhudMobileAppDataSourceConfig
 {
-    private static final Logger logger = Logger.getLogger(SaluhudUserDataSourceConfig.class.getName());
+    private static final Logger logger = Logger.getLogger(SaluhudMobileAppDataSourceConfig.class.getName());
     
-    @Bean(name = "saluhudUserEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean saluhudUserEntityManagerFactory()
+    @Bean(name = "saluhudMobileAppEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean saluhudMobileAppEntityManagerFactory()
     {
-        LocalContainerEntityManagerFactoryBean saluhudUserEntityManagerFactoryBean
+        LocalContainerEntityManagerFactoryBean saluhudMobileAppEntityManagerFactoryBean
                 = new LocalContainerEntityManagerFactoryBean();
 
-        saluhudUserEntityManagerFactoryBean.setDataSource(buildSaluhudUserDataSource());
-        saluhudUserEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
-        saluhudUserEntityManagerFactoryBean.setPersistenceUnitName("saluhud_user_persistence_unit");
+        saluhudMobileAppEntityManagerFactoryBean.setDataSource(buildSaluhudMobileAppDataSource());
+        saluhudMobileAppEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
+        saluhudMobileAppEntityManagerFactoryBean.setPersistenceUnitName("saluhud_mobile_app_persistence_unit");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 
-        saluhudUserEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+        saluhudMobileAppEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         
-        return saluhudUserEntityManagerFactoryBean;
+        return saluhudMobileAppEntityManagerFactoryBean;
     }
 
-    @Bean(name = "saluhudUserTransactionManager")
-    public PlatformTransactionManager saluhudUserTransactionManager(
-            @Qualifier("saluhudUserEntityManagerFactory") LocalContainerEntityManagerFactoryBean saluhudUserEntityManagerFactory)
+    @Bean(name = "saluhudMobileAppTransactionManager")
+    public PlatformTransactionManager saluhudMobileAppTransactionManager(
+            @Qualifier("saluhudMobileAppEntityManagerFactory") LocalContainerEntityManagerFactoryBean saluhudMobileAppEntityManagerFactory)
     {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(saluhudUserEntityManagerFactory.getObject());
+        jpaTransactionManager.setEntityManagerFactory(saluhudMobileAppEntityManagerFactory.getObject());
 
         return jpaTransactionManager;
     }
 
-    private DataSource buildSaluhudUserDataSource()
+    private DataSource buildSaluhudMobileAppDataSource()
     {
         try
         {
             Properties saluhudUserDataSourceProperties = new Properties();
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream stream = loader.getResourceAsStream("datasources/saluhud-user-datasource.properties");
+            InputStream stream = loader.getResourceAsStream("datasources/saluhud-mobile-app-datasource.properties");
             saluhudUserDataSourceProperties.load(stream);
             
             String url = (String) saluhudUserDataSourceProperties.get("spring.datasource.url");
@@ -77,9 +77,9 @@ public class SaluhudUserDataSourceConfig
             String password = (String) saluhudUserDataSourceProperties.get("spring.datasource.password");
             String driver = (String) saluhudUserDataSourceProperties.get("spring.datasource.driver-class-name");
             
-            logger.log(Level.INFO, "Saluhud User DataSource URL: {0}", url);
-            logger.log(Level.INFO, "Saluhud User DataSource Username: {0}", username);
-            logger.log(Level.INFO, "Saluhud User DataSource Driver: {0}", driver);
+            logger.log(Level.INFO, "Saluhud Mobile App DataSource URL: {0}", url);
+            logger.log(Level.INFO, "Saluhud Mobile App DataSource Username: {0}", username);
+            logger.log(Level.INFO, "Saluhud Mobile App DataSource Driver: {0}", driver);
             
             DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create().type(HikariDataSource.class);
             dataSourceBuilder.driverClassName(driver);
@@ -91,7 +91,7 @@ public class SaluhudUserDataSourceConfig
             
         } catch (IOException ex)
         {
-            Logger.getLogger(SaluhudUserDataSourceConfig.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            Logger.getLogger(SaluhudMobileAppDataSourceConfig.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
         
         return null;

@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminAllergenicService {
 
     @Autowired
@@ -34,7 +34,7 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic The allergenic to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveAllergenic(@Valid Allergenic allergenic) {
         this.allergenicRepository.save(allergenic);
     }
@@ -44,7 +44,7 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic the allergenic that is going to be update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateAllergenic(@Valid Allergenic allergenic) {
         try {
             Optional<Allergenic> result = this.allergenicRepository.findById(allergenic.getId());
@@ -68,7 +68,7 @@ public class SaluhudAdminAllergenicService {
      *
      * @param allergenic the allergenic to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteAllergenic(@Valid Allergenic allergenic) {
         try {
             if (this.allergenicRepository.existsById(allergenic.getId())) {

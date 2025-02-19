@@ -1,6 +1,6 @@
 package com.uhu.saluhud.database.utils.webscraping.test;
 
-import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.nutrition.Recipe;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.nutrition.SaluhudAdminIngredientService;
 import com.uhu.saluhud.database.utils.webscraping.RecipesWebscraping;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @SpringBootTest(classes
         = {
-            SaluhudAdminDataSourceConfig.class
+            SaluhudAdministrationPortalDataSourceConfig.class
         })
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages
@@ -38,7 +38,7 @@ public class RecipesWebscrapingTest
     @Autowired
     private SaluhudAdminIngredientService ingredientService;
 
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     @Rollback
     @Test
     void testGetRecipesWebscraping() throws IOException

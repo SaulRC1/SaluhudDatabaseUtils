@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 //By default all methods will have readonly = true since most methods will be read-only
-@Transactional(readOnly = true, transactionManager = "saluhudUserTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudMobileAppTransactionManager")
 public class SaluhudUserUserService 
 {
     
@@ -32,7 +32,7 @@ public class SaluhudUserUserService
     @Autowired
     private PasswordEncryptionService passwordEncryptionService;
     
-    @Transactional(transactionManager = "saluhudUserTransactionManager")
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
     public <S extends SaluhudUser> S saveUser(@Valid S user)
     { 
         //Encrypt user's raw password before persisting into the database

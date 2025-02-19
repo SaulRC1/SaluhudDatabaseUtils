@@ -1,7 +1,7 @@
 package com.uhu.saluhud.database.utils.test.services.saluhud.user.user;
 
-import com.uhu.saluhud.database.utils.datasource.SaluhudAdminDataSourceConfig;
-import com.uhu.saluhud.database.utils.datasource.SaluhudUserDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudAdministrationPortalDataSourceConfig;
+import com.uhu.saluhud.database.utils.datasource.SaluhudMobileAppDataSourceConfig;
 import com.uhu.saluhud.database.utils.models.user.SaluhudUser;
 import com.uhu.saluhud.database.utils.services.saluhud.admin.user.SaluhudAdminUserService;
 import com.uhu.saluhud.database.utils.services.saluhud.user.user.SaluhudUserUserService;
@@ -30,8 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 //@RunWith(SpringRunner.class)
 @SpringBootTest(classes =
 {
-    SaluhudUserDataSourceConfig.class,
-    SaluhudAdminDataSourceConfig.class
+    SaluhudMobileAppDataSourceConfig.class,
+    SaluhudAdministrationPortalDataSourceConfig.class
 })
 /*@TestPropertySource(locations =
 {
@@ -54,8 +54,8 @@ properties =
     "com.uhu.saluhud.database.utils.services.saluhud.admin.user"
 })
 /*@ContextConfiguration(classes = {
-    SaluhudUserDataSourceConfig.class,
-    SaluhudAdminDataSourceConfig.class
+    SaluhudMobileAppDataSourceConfig.class,
+    SaluhudAdministrationPortalDataSourceConfig.class
 })*/
 //@Transactional
 public class SaluhudUserUserServiceTest
@@ -92,7 +92,7 @@ public class SaluhudUserUserServiceTest
     @Test
     //To properly rollback all changes to the database when the test finishes,
     //it is needed to explicitly declare @Transactional in the test case
-    @Transactional(transactionManager = "saluhudUserTransactionManager") 
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager") 
     @Rollback
     public void test_save_saluhud_user_with_valid_data()
     {

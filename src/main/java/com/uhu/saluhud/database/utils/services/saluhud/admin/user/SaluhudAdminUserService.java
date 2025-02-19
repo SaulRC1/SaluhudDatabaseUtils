@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminUserService {
 
     @Autowired
@@ -77,7 +77,7 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveUser(@Valid SaluhudAdmin user) {
         try {         
             saluhudUserRepository.save(user);
@@ -92,7 +92,7 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateUser(@Valid SaluhudAdmin user) {
         try {
             Optional<SaluhudAdmin> result = saluhudUserRepository.findById(user.getId());
@@ -114,7 +114,7 @@ public class SaluhudAdminUserService {
      *
      * @param user the user to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteUser(@Valid SaluhudAdmin user) {
         try {
             if (this.saluhudUserRepository.existsById(user.getId())) {

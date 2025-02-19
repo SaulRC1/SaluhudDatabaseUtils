@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminDailyStepsHistoricalEntryService {
 
     @Autowired
@@ -31,7 +31,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      *
      * @param dailyStepsHistoricalEntry La entrada de pasos diarios a guardar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         this.dailyStepsHistoricalEntryRepository.save(dailyStepsHistoricalEntry);
     }
@@ -42,7 +42,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param dailyStepsHistoricalEntry La entrada de pasos diarios a
      * actualizar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         try {
             Optional<DailyStepsHistoricalEntry> result;
@@ -70,7 +70,7 @@ public class SaluhudAdminDailyStepsHistoricalEntryService {
      * @param dailyStepsHistoricalEntry La entrada del historico de pasos
      * diarios a eliminar.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteDailyStepsHistorical(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
         try {
             if (this.dailyStepsHistoricalEntryRepository.existsById(dailyStepsHistoricalEntry.getId())) {

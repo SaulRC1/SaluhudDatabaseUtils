@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
-@Transactional(readOnly = true, transactionManager = "saluhudAdminTransactionManager")
+@Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
 public class SaluhudAdminWeightHistoricalEntryService {
 
     @Autowired
@@ -120,7 +120,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to save.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             this.weightHistoricalEntryRepository.save(weightHistoricalEntry);
@@ -135,7 +135,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to update.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void updateWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             Optional<WeightHistoricalEntry> result = this.weightHistoricalEntryRepository.findById(weightHistoricalEntry.getId());
@@ -160,7 +160,7 @@ public class SaluhudAdminWeightHistoricalEntryService {
      *
      * @param weightHistoricalEntry The weight historical entry to delete.
      */
-    @Transactional(transactionManager = "saluhudAdminTransactionManager")
+    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteWeightHistoricalEntry(@Valid WeightHistoricalEntry weightHistoricalEntry) {
         try {
             if (this.weightHistoricalEntryRepository.existsById(weightHistoricalEntry.getId())) {

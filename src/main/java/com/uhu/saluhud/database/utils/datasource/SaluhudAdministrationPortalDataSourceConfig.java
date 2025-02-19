@@ -33,13 +33,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "com.uhu.saluhud.database.utils.repositories.saluhud.admin",
-        entityManagerFactoryRef = "saluhudAdminEntityManagerFactory",
-        transactionManagerRef = "saluhudAdminTransactionManager"
+        entityManagerFactoryRef = "saluhudAdministrationPortalEntityManagerFactory",
+        transactionManagerRef = "saluhudAdministrationPortalTransactionManager"
 )
-@PropertySource("classpath:datasources/saluhud-admin-datasource.properties")
-public class SaluhudAdminDataSourceConfig
+@PropertySource("classpath:datasources/saluhud-administration-portal-datasource.properties")
+public class SaluhudAdministrationPortalDataSourceConfig
 {
-    private static Logger logger = Logger.getLogger(SaluhudAdminDataSourceConfig.class.getName());
+    private static Logger logger = Logger.getLogger(SaluhudAdministrationPortalDataSourceConfig.class.getName());
     /*@Primary
     @Bean(name = "saluhudAdminDataSourceProperties")
     @ConfigurationProperties("spring.datasource")
@@ -56,44 +56,44 @@ public class SaluhudAdminDataSourceConfig
         return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }*/
     @Primary
-    @Bean(name = "saluhudAdminEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean saluhudAdminEntityManagerFactory()
+    @Bean(name = "saluhudAdministrationPortalEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean saluhudAdministrationPortalEntityManagerFactory()
     {
-        LocalContainerEntityManagerFactoryBean saluhudAdminEntityManagerFactoryBean
+        LocalContainerEntityManagerFactoryBean saluhudAdministrationPortalEntityManagerFactoryBean
                 = new LocalContainerEntityManagerFactoryBean();
 
-        saluhudAdminEntityManagerFactoryBean.setDataSource(buildSaluhudAdminDataSource());
-        saluhudAdminEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
-        saluhudAdminEntityManagerFactoryBean.setPersistenceUnitName("saluhud_admin_persistence_unit");
+        saluhudAdministrationPortalEntityManagerFactoryBean.setDataSource(buildSaluhudAdministrationPortalDataSource());
+        saluhudAdministrationPortalEntityManagerFactoryBean.setPackagesToScan("com.uhu.saluhud.database.utils.models");
+        saluhudAdministrationPortalEntityManagerFactoryBean.setPersistenceUnitName("saluhud_administration_portal_persistence_unit");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 
-        saluhudAdminEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+        saluhudAdministrationPortalEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
 
         /*Map<String,String> props = new HashMap<>();
         props.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
         saluhudAdminEntityManagerFactoryBean.setJpaPropertyMap(props);*/
         
-        return saluhudAdminEntityManagerFactoryBean;
+        return saluhudAdministrationPortalEntityManagerFactoryBean;
     }
 
     //@Primary
-    @Bean(name = "saluhudAdminTransactionManager")
-    public PlatformTransactionManager saluhudAdminTransactionManager()
+    @Bean(name = "saluhudAdministrationPortalTransactionManager")
+    public PlatformTransactionManager saluhudAdministrationPortalTransactionManager()
     {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(saluhudAdminEntityManagerFactory().getObject());
+        jpaTransactionManager.setEntityManagerFactory(saluhudAdministrationPortalEntityManagerFactory().getObject());
 
         return jpaTransactionManager;
     }
 
-    private DataSource buildSaluhudAdminDataSource()
+    private DataSource buildSaluhudAdministrationPortalDataSource()
     {
         try
         {
             Properties saluhudAdminDataSourceProperties = new Properties();
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream stream = loader.getResourceAsStream("datasources/saluhud-admin-datasource.properties");
+            InputStream stream = loader.getResourceAsStream("datasources/saluhud-administration-portal-datasource.properties");
             saluhudAdminDataSourceProperties.load(stream);
             
             String url = (String) saluhudAdminDataSourceProperties.get("spring.datasource.url");
@@ -101,9 +101,9 @@ public class SaluhudAdminDataSourceConfig
             String password = (String) saluhudAdminDataSourceProperties.get("spring.datasource.password");
             String driver = (String) saluhudAdminDataSourceProperties.get("spring.datasource.driver-class-name");
             
-            logger.log(Level.INFO, "Saluhud Admin DataSource URL: {0}", url);
-            logger.log(Level.INFO, "Saluhud Admin DataSource Username: {0}", username);
-            logger.log(Level.INFO, "Saluhud Admin DataSource Driver: {0}", driver);
+            logger.log(Level.INFO, "Saluhud Administration Portal DataSource URL: {0}", url);
+            logger.log(Level.INFO, "Saluhud Administration Portal DataSource Username: {0}", username);
+            logger.log(Level.INFO, "Saluhud Administration Portal DataSource Driver: {0}", driver);
             
             DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create().type(HikariDataSource.class);
             dataSourceBuilder.driverClassName(driver);
@@ -115,7 +115,7 @@ public class SaluhudAdminDataSourceConfig
             
         } catch (IOException ex)
         {
-            Logger.getLogger(SaluhudAdminDataSourceConfig.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SaluhudAdministrationPortalDataSourceConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return null;

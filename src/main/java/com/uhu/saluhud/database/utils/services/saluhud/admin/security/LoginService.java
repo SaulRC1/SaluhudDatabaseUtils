@@ -2,14 +2,15 @@ package com.uhu.saluhud.database.utils.services.saluhud.admin.security;
 
 import com.uhu.saluhud.database.utils.repositories.saluhud.admin.security.UserAccountRepository;
 import com.uhu.saluhud.database.utils.models.security.UserAccount;
-import com.uhu.saluhud.database.utils.security.PasswordEncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -21,13 +22,16 @@ public class LoginService implements UserDetailsService
 
     @Autowired
     private UserAccountRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException
     {
         Assert.notNull(username, "Username must not be null");
 
-        UserDetails result = userRepository.findByUsername(username);
+        UserAccount result = userRepository.findByUsername(username);
 
         if (result == null) {
             throw new UsernameNotFoundException("User not found: " + username);
@@ -55,5 +59,9 @@ public class LoginService implements UserDetailsService
         Assert.isTrue(result.getId() != 0, "UserAccount ID must be non-zero");
 
         return result;
+    }
+    
+    public boolean matchPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword); // Compara contraseñas
     }
 }

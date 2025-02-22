@@ -26,6 +26,9 @@ public interface MobileAppSaluhudUserRepository extends JpaRepository<SaluhudUse
     @Lock(LockModeType.OPTIMISTIC)
     boolean existsByEmailIgnoreCase(String email); //Emails are case insensitive
     
+    @Lock(LockModeType.OPTIMISTIC)
+    public boolean existsByUsername(String username);
+    
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> S save(S entity);

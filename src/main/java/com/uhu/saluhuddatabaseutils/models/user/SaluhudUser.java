@@ -373,4 +373,22 @@ public class SaluhudUser implements Serializable
     {
         this.rawPassword = rawPassword;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SaluhudUser{");
+        sb.append("id=").append(id);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", rawPassword=").append(rawPassword);
+        sb.append(", email=").append(email);
+        sb.append(", name=").append(name);
+        sb.append(", surname=").append(surname);
+        sb.append(", phoneNumber=").append(phoneNumber);
+        sb.append(", version=").append(version);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -48,4 +48,14 @@ public class MobileAppSaluhudUserService
         return saluhudUserRepository.findAll();
     }
     
+    public boolean existsById(long id)
+    {
+        return saluhudUserRepository.existsById(id);
+    }
+    
+    public boolean existsByUsername(String username)
+    {
+        return saluhudUserRepository.existsByUsername(username);
+    }
+    
 }

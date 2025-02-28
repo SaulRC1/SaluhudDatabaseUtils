@@ -43,7 +43,7 @@ public class AdministrationPortalRecipeService
      * @param recipe The recipe to save.
      * @return The saved recipe.
      */
-    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
+    @Transactional(readOnly = false, transactionManager = "saluhudAdministrationPortalTransactionManager")
     public Recipe saveRecipe(@Valid Recipe recipe)
     {
         if (recipe.getKilocalories() == 0) {

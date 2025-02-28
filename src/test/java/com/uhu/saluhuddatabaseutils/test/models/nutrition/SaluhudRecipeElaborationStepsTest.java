@@ -67,8 +67,8 @@ public class SaluhudRecipeElaborationStepsTest
         RecipeIngredientId recipeIngredientId1 = new RecipeIngredientId();
         RecipeIngredientId recipeIngredientId2 = new RecipeIngredientId();
 
-        RecipeIngredient recipeIngredient = new RecipeIngredient(Bizcocho, ingredient1, Bizcocho.getName(), ingredient1.getName(), BigDecimal.valueOf(150), "g");
-        RecipeIngredient recipeIngredient2 = new RecipeIngredient(Bizcocho, ingredient2, Bizcocho.getName(), ingredient2.getName(), BigDecimal.valueOf(1), "l");
+        RecipeIngredient recipeIngredient = new RecipeIngredient(Bizcocho, ingredient1, BigDecimal.valueOf(150), "g");
+        RecipeIngredient recipeIngredient2 = new RecipeIngredient(Bizcocho, ingredient2, BigDecimal.valueOf(1), "l");
 
         recipeIngredients.add(recipeIngredient);
         recipeIngredients.add(recipeIngredient2);

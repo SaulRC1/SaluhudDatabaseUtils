@@ -13,6 +13,9 @@ import jakarta.validation.Valid;
 import java.util.Set;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalAllergenicRepository;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalIngredientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service class for managing ingredients.
@@ -21,11 +24,12 @@ import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.
  */
 @Service
 @Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
-public class AdministrationPortalIngredientService {
+public class AdministrationPortalIngredientService
+{
 
     @Autowired
     private AdministrationPortalIngredientRepository ingredientRepository;
-    
+
     @Autowired
     private AdministrationPortalAllergenicRepository allergenicRepository;
 
@@ -36,8 +40,29 @@ public class AdministrationPortalIngredientService {
      *
      * @return A list of all ingredients.
      */
-    public List<Ingredient> findAllIngredients() {
+    public List<Ingredient> findAllIngredients()
+    {
         return this.ingredientRepository.findAll();
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Ingredient findById(long id)
+    {
+        return this.ingredientRepository.findOne(id);
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public Ingredient findByName(String name)
+    {
+        return this.ingredientRepository.findByName(name);
     }
 
     /**
@@ -46,7 +71,8 @@ public class AdministrationPortalIngredientService {
      * @param id The ID of the ingredient.
      * @return The ingredient if found, or null if not found.
      */
-    public Ingredient getIngredientById(long id) {
+    public Ingredient getIngredientById(long id)
+    {
         Ingredient selectedIngredient;
         try {
             selectedIngredient = this.ingredientRepository.findById(id).orElse(null);
@@ -63,7 +89,8 @@ public class AdministrationPortalIngredientService {
      * @param name The name of the ingredient.
      * @return The ingredient if found, or null if not found.
      */
-    public Ingredient getIngredientByName(String name) {
+    public Ingredient getIngredientByName(String name)
+    {
         Ingredient selectedIngredient;
         try {
             selectedIngredient = this.ingredientRepository.findByName(name);
@@ -81,7 +108,8 @@ public class AdministrationPortalIngredientService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByMaxKilocalories(int maxKilocalories) {
+    public List<Ingredient> findByMaxKilocalories(int maxKilocalories)
+    {
         return ingredientRepository.findByMaxKilocalories(maxKilocalories);
     }
 
@@ -91,7 +119,8 @@ public class AdministrationPortalIngredientService {
      * @param minProteinAmount The minimum amount of protein.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByMinProteinAmount(int minProteinAmount) {
+    public List<Ingredient> findByMinProteinAmount(int minProteinAmount)
+    {
         return ingredientRepository.findByMinProteinAmount(minProteinAmount);
     }
 
@@ -101,7 +130,8 @@ public class AdministrationPortalIngredientService {
      * @param minCarbohydratesAmount The minimum amount of carbohydrates.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByMinCarbohydratesAmount(int minCarbohydratesAmount) {
+    public List<Ingredient> findByMinCarbohydratesAmount(int minCarbohydratesAmount)
+    {
         return ingredientRepository.findByMinCarbohydratesAmount(minCarbohydratesAmount);
     }
 
@@ -111,7 +141,8 @@ public class AdministrationPortalIngredientService {
      * @param minFatAmount The minimum amount of fat.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByMinFatAmount(int minFatAmount) {
+    public List<Ingredient> findByMinFatAmount(int minFatAmount)
+    {
         return ingredientRepository.findByMinFatAmount(minFatAmount);
     }
 
@@ -122,7 +153,8 @@ public class AdministrationPortalIngredientService {
      * @param maxKilocalories The maximum number of kilocalories.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByKilocaloriesRange(int minKilocalories, int maxKilocalories) {
+    public List<Ingredient> findByKilocaloriesRange(int minKilocalories, int maxKilocalories)
+    {
         return ingredientRepository.findByKilocaloriesRange(minKilocalories, maxKilocalories);
     }
 
@@ -133,7 +165,8 @@ public class AdministrationPortalIngredientService {
      * @param maxProtein The maximum amount of protein.
      * @return A list of ingredients that meet the criteria.
      */
-    public List<Ingredient> findByProteinRange(int minProtein, int maxProtein) {
+    public List<Ingredient> findByProteinRange(int minProtein, int maxProtein)
+    {
         return ingredientRepository.findByProteinRange(minProtein, maxProtein);
     }
 
@@ -143,7 +176,8 @@ public class AdministrationPortalIngredientService {
      * @param ingredient The ingredient to save.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void saveIngredient(@Valid Ingredient ingredient) {
+    public void saveIngredient(@Valid Ingredient ingredient)
+    {
         this.ingredientRepository.save(ingredient);
     }
 
@@ -153,7 +187,8 @@ public class AdministrationPortalIngredientService {
      * @param ingredient The ingredient to update.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void updateIngredient(@Valid Ingredient ingredient) {
+    public void updateIngredient(@Valid Ingredient ingredient)
+    {
         try {
             Optional<Ingredient> result = this.ingredientRepository.findById(ingredient.getId());
 
@@ -189,7 +224,8 @@ public class AdministrationPortalIngredientService {
      * @param ingredient The ingredient to delete.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void deleteIngredient(@Valid Ingredient ingredient) {
+    public void deleteIngredient(@Valid Ingredient ingredient)
+    {
         try {
             if (this.ingredientRepository.existsById(ingredient.getId())) {
                 this.ingredientRepository.delete(ingredient);
@@ -200,7 +236,7 @@ public class AdministrationPortalIngredientService {
             throw e;
         }
     }
-    
+
     /**
      * Finds allergens associated with a given ingredient.
      *
@@ -208,7 +244,8 @@ public class AdministrationPortalIngredientService {
      * @return A set of allergens associated with the ingredient.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient) {
+    public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient)
+    {
         Set<Allergenic> allergenics;
         try {
             allergenics = allergenicRepository.findByIngredientId(ingredient.getId());
@@ -217,5 +254,32 @@ public class AdministrationPortalIngredientService {
             logger.log(Level.SEVERE, "Error getting allergens for ingredient", e);
             throw e;
         }
+    }
+
+    /**
+     * Recupera una página de ingredientes almacenados en el repositorio.
+     *
+     * @param page el número de página a recuperar (comenzando desde 0).
+     * @param size la cantidad de elementos por página.
+     * @return un objeto {@link Page} que contiene una lista paginada de
+     * {@link Ingredient}.
+     */
+    public Page<Ingredient> getIngredients(int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return ingredientRepository.findAll(pageable);
+    }
+
+    /**
+     *
+     * @param name
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<Ingredient> searchByName(String name, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return ingredientRepository.findByNameContainingIgnoreCase(name, pageable);
     }
 }

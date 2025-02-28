@@ -253,8 +253,7 @@ public class RecipesWebscraping
                         if (ingredientObj != null) {
                             // Crear el RecipeIngredient y agregarlo
                             RecipeIngredientId recipeIngredientId = new RecipeIngredientId();
-                            RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredientObj, recipe.getName(),
-                                    ingredientObj.getName(), quantity, unitOfMeasure);
+                            RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredientObj, quantity, unitOfMeasure);
                             recipeIngredient.setId(recipeIngredientId);
 
                             Set<Allergenic> allergenics = ingredientService.getAllergensForIngredient(ingredientObj);
@@ -293,7 +292,6 @@ public class RecipesWebscraping
 
         //generateRecipeIngredientSQL(recipesIngredients);
         //generateRecipeElaborationStepSQL(recipes);
-
         openAIClient.shutdown();
         driver.quit();
         return recipes;
@@ -325,7 +323,7 @@ public class RecipesWebscraping
             for (RecipeIngredient recipeIngredient : recipesIngredients) {
                 String sqlRecipe = String.format(
                         "INSERT INTO RECIPE_INGREDIENT (recipe_name, ingredient_name, quantity, unit) VALUES ('%s', '%s', '%s', '%s');\n",
-                        recipeIngredient.getRecipeName(), recipeIngredient.getIngredientName(), recipeIngredient.getQuantity().toString(), recipeIngredient.getUnit()
+                        recipeIngredient.getQuantity().toString(), recipeIngredient.getUnit()
                 );
                 writer.write(sqlRecipe);
             }

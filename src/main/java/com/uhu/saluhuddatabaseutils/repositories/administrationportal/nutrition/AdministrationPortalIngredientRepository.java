@@ -55,6 +55,9 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.proteinAmount BETWEEN :minProtein AND :maxProtein")
     List<Ingredient> findByProteinRange(@Param("minProtein") int minProtein, @Param("maxProtein") int maxProtein);
+    
+    @Lock(LockModeType.OPTIMISTIC)
+    Page<Ingredient> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
     @Override
     @Lock(LockModeType.OPTIMISTIC)

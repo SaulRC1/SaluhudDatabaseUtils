@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,12 +35,6 @@ public class RecipeIngredient implements Serializable
     @JoinColumn(name = "id_ingredient")
     private Ingredient ingredient;
 
-    @Column(name = "recipe_name", length = 200)
-    private String recipeName;
-
-    @Column(name = "ingredient_name", length = 200)
-    private String ingredientName;
-
     @Column(name = "quantity", precision = 6, scale = 2)
     private BigDecimal quantity;
 
@@ -63,20 +58,15 @@ public class RecipeIngredient implements Serializable
      * @param id
      * @param recipe
      * @param ingredient
-     * @param recipeName
-     * @param ingredientName
      * @param quantity
      * @param unit
      */
     public RecipeIngredient(RecipeIngredientId id, Recipe recipe, Ingredient ingredient,
-            String recipeName, String ingredientName, BigDecimal quantity,
-            String unit)
+            BigDecimal quantity, String unit)
     {
         this.id = id;
         this.recipe = recipe;
         this.ingredient = ingredient;
-        this.recipeName = recipeName;
-        this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
     }
@@ -85,20 +75,37 @@ public class RecipeIngredient implements Serializable
      *
      * @param recipe
      * @param ingredient
-     * @param recipeName
-     * @param ingredientName
      * @param quantity
      * @param unit
      */
-    public RecipeIngredient(Recipe recipe, Ingredient ingredient, String recipeName,
-            String ingredientName, BigDecimal quantity, String unit)
+    public RecipeIngredient(Recipe recipe, Ingredient ingredient,
+            BigDecimal quantity, String unit)
     {
         this.recipe = recipe;
         this.ingredient = ingredient;
-        this.recipeName = recipeName;
-        this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
+    }
+
+    @Transient
+    public Long getIngredientId()
+    {
+        return ingredient != null ? ingredient.getId() : null;
+    }
+
+    public void setIngredientId(Long id)
+    {
+        if (id != null) {
+            if (this.id == null) {
+                this.id = new RecipeIngredientId();
+            }
+            // Configuramos la parte del ID compuesta para el ingrediente
+            this.id.setIdIngredient(id);
+            if (this.ingredient == null) {
+                this.ingredient = new Ingredient();
+            }
+            this.ingredient.setId(id);
+        }
     }
 
     /**
@@ -153,42 +160,6 @@ public class RecipeIngredient implements Serializable
     public void setIngredient(Ingredient ingredient)
     {
         this.ingredient = ingredient;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getRecipeName()
-    {
-        return recipeName;
-    }
-
-    /**
-     *
-     * @param recipeName
-     */
-    public void setRecipeName(String recipeName)
-    {
-        this.recipeName = recipeName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getIngredientName()
-    {
-        return ingredientName;
-    }
-
-    /**
-     *
-     * @param ingredientName
-     */
-    public void setIngredientName(String ingredientName)
-    {
-        this.ingredientName = ingredientName;
     }
 
     /**
@@ -278,16 +249,11 @@ public class RecipeIngredient implements Serializable
         return Objects.equals(this.id, other.id);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString()
     {
-        return "RecipeIngredient{" + "id=" + id + ", recipe=" + recipe + ", "
-                + "ingredient=" + ingredient + ", recipeName=" + recipeName
-                + ", ingredientName=" + ingredientName + ", quantity=" + quantity
+        return "RecipeIngredient{" + "id=" + id + ", recipe=" + recipe
+                + ", ingredient=" + ingredient + ", quantity=" + quantity
                 + ", unit=" + unit + ", version=" + version + '}';
     }
 

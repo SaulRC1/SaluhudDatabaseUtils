@@ -4,11 +4,13 @@ import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
@@ -66,7 +68,7 @@ public class SaluhudUserFitnessData implements Serializable
     @Size(min = 2, max = 40)
     private String bodyMassIndex;
     
-    @OneToOne(mappedBy = "fitnessData", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "fitnessData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SaluhudUser saluhudUser;
     
     @Version

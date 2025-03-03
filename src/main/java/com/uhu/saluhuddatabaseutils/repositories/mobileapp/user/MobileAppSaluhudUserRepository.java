@@ -23,26 +23,25 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MobileAppSaluhudUserRepository extends JpaRepository<SaluhudUser, Long>
 {
-    @Lock(LockModeType.OPTIMISTIC)
-    boolean existsByEmailIgnoreCase(String email); //Emails are case insensitive
+    public boolean existsByEmailIgnoreCase(String email); //Emails are case insensitive
     
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsByUsername(String username);
+    
+    public boolean existsByPhoneNumber(String phoneNumber);
+    
+    public Optional<SaluhudUser> findByUsername(String username);
     
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public SaluhudUser getReferenceById(Long id);
 
     @Override
@@ -58,11 +57,9 @@ public interface MobileAppSaluhudUserRepository extends JpaRepository<SaluhudUse
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<SaluhudUser> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<SaluhudUser> findAll();
 
     @Override
@@ -70,43 +67,33 @@ public interface MobileAppSaluhudUserRepository extends JpaRepository<SaluhudUse
     public <S extends SaluhudUser> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<SaluhudUser> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<SaluhudUser> findById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<SaluhudUser> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> Optional<S> findOne(Example<S> example);
     
 }

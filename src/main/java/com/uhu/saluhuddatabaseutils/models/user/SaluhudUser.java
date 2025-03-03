@@ -4,6 +4,7 @@ import java.io.Serializable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -75,7 +76,7 @@ public class SaluhudUser implements Serializable
     @Pattern(regexp = "^\\+(\\d{1,3}|\\d{1,3}-\\d{1,3})\\s\\d{4,32}$")
     private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "SALUHUD_USER_SALUHUD_USER_FITNESS_DATA",
             joinColumns = @JoinColumn(name = "id_saluhud_user"),
             inverseJoinColumns = @JoinColumn(name = "id_user_fitness_data"))

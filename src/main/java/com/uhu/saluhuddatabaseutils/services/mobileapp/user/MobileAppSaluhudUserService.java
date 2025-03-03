@@ -14,6 +14,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhuddatabaseutils.repositories.mobileapp.user.MobileAppSaluhudUserRepository;
+import java.util.Optional;
 
 /**
  * Service class for operations regarding {@link SaluhudUser}.
@@ -58,4 +59,18 @@ public class MobileAppSaluhudUserService
         return saluhudUserRepository.existsByUsername(username);
     }
     
+    public boolean existsByEmailIgnoreCase(String email)
+    {
+        return saluhudUserRepository.existsByEmailIgnoreCase(email);
+    }
+    
+    public boolean existsByPhoneNumber(String phoneNumber)
+    {
+        return saluhudUserRepository.existsByPhoneNumber(phoneNumber);
+    }
+    
+    public Optional<SaluhudUser> findByUsername(String username)
+    {
+        return saluhudUserRepository.findByUsername(username);
+    }
 }

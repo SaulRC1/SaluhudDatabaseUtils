@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalRecipeElaborationStepRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service class for managing recipe elaboration steps.
@@ -39,7 +42,7 @@ public class AdministrationPortalRecipeElaborationStepService {
      *
      * @param step The recipe elaboration step to save.
      */
-    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
+    @Transactional(readOnly = false, transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveRecipeElaborationStep(@Valid RecipeElaborationStep step) {
         this.recipeElaborationStepRepository.save(step);
     }
@@ -123,5 +126,19 @@ public class AdministrationPortalRecipeElaborationStepService {
             logger.log(Level.SEVERE, "Error getting recipe elaboration step by step number", e);
             throw e;
         }
+    }
+    
+    /**
+     * Recupera una página de pasos de recetas almacenados en el repositorio.
+     *
+     * @param page el número de página a recuperar (comenzando desde 0).
+     * @param size la cantidad de elementos por página.
+     * @return un objeto {@link Page} que contiene una lista paginada de
+     * {@link RecipeElaborationStep}.
+     */
+    public Page<RecipeElaborationStep> getElaborationSteps(int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return recipeElaborationStepRepository.findAll(pageable);
     }
 }

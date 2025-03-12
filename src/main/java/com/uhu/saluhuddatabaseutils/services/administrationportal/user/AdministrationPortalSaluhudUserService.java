@@ -1,7 +1,6 @@
 package com.uhu.saluhuddatabaseutils.services.administrationportal.user;
 
-import com.uhu.saluhuddatabaseutils.models.user.SaluhudAdmin;
-import com.uhu.saluhuddatabaseutils.security.PasswordEncryptionService;
+import com.uhu.saluhuddatabaseutils.models.user.SaluhudUser;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.Valid;
-import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.AdministrationPortalSaluhudAdminRepository;
+import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.AdministrationPortalSaluhudUserRepository;
 
 /**
  *
@@ -18,24 +17,21 @@ import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.Admin
  */
 @Service
 @Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
-public class AdministrationPortalSaluhudAdminService {
+public class AdministrationPortalSaluhudUserService {
 
     @Autowired
-    private AdministrationPortalSaluhudAdminRepository saluhudAdminRepository;
+    private AdministrationPortalSaluhudUserRepository saluhudUserRepository;
     
-    @Autowired
-    private PasswordEncryptionService passwordEncryptionService;
-
-    private static final Logger logger = Logger.getLogger(AdministrationPortalSaluhudAdminService.class.getName());
+    private static final Logger logger = Logger.getLogger(AdministrationPortalSaluhudUserService.class.getName());
 
     /**
      * Retrieve all SaluhudUsers.
      *
      * @return a list of all users.
      */
-    public List<SaluhudAdmin> findAllUsers() {
+    public List<SaluhudUser> findAllUsers() {
         try {
-            return saluhudAdminRepository.findAll();
+            return saluhudUserRepository.findAll();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding all users", e);
             throw e;
@@ -48,9 +44,9 @@ public class AdministrationPortalSaluhudAdminService {
      * @param id the ID of the user to find.
      * @return the found user, or null if not found.
      */
-    public SaluhudAdmin getUserById(long id) {
+    public SaluhudUser getUserById(long id) {
         try {
-            return saluhudAdminRepository.findById(id).orElseThrow();
+            return saluhudUserRepository.findById(id).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by ID", e);
             throw e;
@@ -63,9 +59,9 @@ public class AdministrationPortalSaluhudAdminService {
      * @param name the name of the user to find.
      * @return the found user, or null if not found.
      */
-    public SaluhudAdmin getUserByName(String name) {
+    public SaluhudUser getUserByName(String name) {
         try {
-            return saluhudAdminRepository.findByName(name).orElseThrow();
+            return saluhudUserRepository.findByName(name).orElseThrow();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error finding user by username", e);
             throw e;
@@ -78,9 +74,9 @@ public class AdministrationPortalSaluhudAdminService {
      * @param user the user to save.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void saveUser(@Valid SaluhudAdmin user) {
+    public void saveUser(@Valid SaluhudUser user) {
         try {         
-            saluhudAdminRepository.save(user);
+            saluhudUserRepository.save(user);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error saving user", e);
             throw e;
@@ -93,15 +89,13 @@ public class AdministrationPortalSaluhudAdminService {
      * @param user the user to update.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void updateUser(@Valid SaluhudAdmin user) {
+    public void updateUser(@Valid SaluhudUser user) {
         try {
-            Optional<SaluhudAdmin> result = saluhudAdminRepository.findById(user.getId());
+            Optional<SaluhudUser> result = saluhudUserRepository.findById(user.getId());
 
             if (result.isPresent()) {
-                SaluhudAdmin existingUser = result.get();
-                existingUser.setUserAccount(user.getUserAccount());
-
-                saluhudAdminRepository.save(existingUser);
+                SaluhudUser existingUser = result.get();
+                saluhudUserRepository.save(existingUser);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error updating user", e);
@@ -115,10 +109,10 @@ public class AdministrationPortalSaluhudAdminService {
      * @param user the user to delete.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void deleteUser(@Valid SaluhudAdmin user) {
+    public void deleteUser(@Valid SaluhudUser user) {
         try {
-            if (this.saluhudAdminRepository.existsById(user.getId())) {
-                saluhudAdminRepository.delete(user);
+            if (this.saluhudUserRepository.existsById(user.getId())) {
+                saluhudUserRepository.delete(user);
             }
 
         } catch (Exception e) {

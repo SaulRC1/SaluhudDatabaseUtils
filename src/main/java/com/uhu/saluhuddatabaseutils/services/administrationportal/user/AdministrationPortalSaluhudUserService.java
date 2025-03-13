@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.Valid;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.AdministrationPortalSaluhudUserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -119,5 +122,19 @@ public class AdministrationPortalSaluhudUserService {
             logger.log(Level.SEVERE, "Error deleting user", e);
             throw e;
         }
+    }
+    
+    /**
+     * Recupera una página usuarios almacenados en el repositorio.
+     *
+     * @param page el número de página a recuperar (comenzando desde 0).
+     * @param size la cantidad de elementos por página.
+     * @return un objeto {@link Page} que contiene una lista paginada de
+     * {@link SaluhudUser}.
+     */
+    public Page<SaluhudUser> getUsers(int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findAll(pageable);
     }
 }

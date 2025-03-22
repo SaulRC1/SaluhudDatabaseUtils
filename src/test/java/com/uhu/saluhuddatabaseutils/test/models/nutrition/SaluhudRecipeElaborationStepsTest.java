@@ -56,8 +56,8 @@ public class SaluhudRecipeElaborationStepsTest
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
         Set<Allergenic> allergenics = new HashSet<>();
 
-        Ingredient ingredient1 = ingredientService.getIngredientByName("Huevo de gallina fresco");
-        Ingredient ingredient2 = ingredientService.getIngredientByName("Leche de vaca, entera");
+        Ingredient ingredient1 = ingredientService.findByName("Huevo de gallina fresco");
+        Ingredient ingredient2 = ingredientService.findByName("Leche de vaca, entera");
 
         allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient1));
         allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient2));

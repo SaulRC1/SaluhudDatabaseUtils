@@ -3,7 +3,7 @@ package com.uhu.saluhuddatabaseutils.test.services.mobileapp.user;
 import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.datasource.SaluhudMobileAppDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUser;
-import com.uhu.saluhuddatabaseutils.services.administrationportal.user.AdministrationPortalSaluhudAdminService;
+import com.uhu.saluhuddatabaseutils.services.administrationportal.user.AdministrationPortalSaluhudUserService;
 import com.uhu.saluhuddatabaseutils.services.mobileapp.user.MobileAppSaluhudUserService;
 import jakarta.validation.ConstraintViolationException;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class MobileAppSaluhudUserServiceTest
     private MobileAppSaluhudUserService mobileAppSaluhudUserService;
 
     @Autowired
-    private AdministrationPortalSaluhudAdminService administrationPortalSaluhudAdminService;
+    private AdministrationPortalSaluhudUserService administrationPortalSaluhudUserService;
     
     private final List<SaluhudUser> previouslyPersistedUsers = new ArrayList<>();
 
@@ -76,13 +76,13 @@ public class MobileAppSaluhudUserServiceTest
     /*@AfterEach
     public void deleteTestDataFromDB()
     {
-        List<SaluhudUser> allUsers = administrationPortalSaluhudAdminService.findAllUsers();
+        List<SaluhudUser> allUsers = administrationPortalSaluhudUserService.findAllUsers();
 
         for (SaluhudUser previouslyPersistedUser : previouslyPersistedUsers)
         {
             if(allUsers.contains(previouslyPersistedUser))
             {
-                administrationPortalSaluhudAdminService.deleteUser(previouslyPersistedUser);
+                administrationPortalSaluhudUserService.deleteUser(previouslyPersistedUser);
             }
 
             previouslyPersistedUsers.remove(previouslyPersistedUser);

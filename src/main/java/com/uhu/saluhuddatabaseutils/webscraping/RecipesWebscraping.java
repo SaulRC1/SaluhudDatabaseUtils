@@ -249,7 +249,7 @@ public class RecipesWebscraping
                         System.out.println("Unidad: " + unitOfMeasure);
                         System.out.println("Nombre: " + ingredientName);
 
-                        Ingredient ingredientObj = ingredientService.getIngredientByName(ingredientName);
+                        Ingredient ingredientObj = ingredientService.findByName(ingredientName);
                         if (ingredientObj != null) {
                             // Crear el RecipeIngredient y agregarlo
                             RecipeIngredientId recipeIngredientId = new RecipeIngredientId();

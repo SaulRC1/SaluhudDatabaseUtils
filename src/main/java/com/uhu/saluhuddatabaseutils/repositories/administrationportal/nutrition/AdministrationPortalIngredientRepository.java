@@ -24,51 +24,42 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdministrationPortalIngredientRepository extends JpaRepository<Ingredient, Long> {
     
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.id = :id")
     Ingredient findOne(@Param("id") long id);
     
-    @Lock(LockModeType.OPTIMISTIC)
+    @Query("SELECT i FROM Ingredient i WHERE i.name LIKE :name")
+    Page<Ingredient> findByNamePageable(@Param("name") String name, Pageable pageable);
+    
     @Query("SELECT i FROM Ingredient i WHERE i.name LIKE :name")
     Ingredient findByName(@Param("name") String name);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.kilocalories < :maxKilocalories")
-    List<Ingredient> findByMaxKilocalories(@Param("maxKilocalories") int maxKilocalories);
+    Page<Ingredient> findByMaxKilocalories(@Param("maxKilocalories") int maxKilocalories, Pageable pageable);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.proteinAmount >= :minProteinAmount")
-    List<Ingredient> findByMinProteinAmount(@Param("minProteinAmount") int minProteinAmount);
+    Page<Ingredient> findByMinProteinAmount(@Param("minProteinAmount") int minProteinAmount, Pageable pageable);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.carbohydratesAmount >= :minCarbohydratesAmount")
-    List<Ingredient> findByMinCarbohydratesAmount(@Param("minCarbohydratesAmount") int minCarbohydratesAmount);
+    Page<Ingredient> findByMinCarbohydratesAmount(@Param("minCarbohydratesAmount") int minCarbohydratesAmount, Pageable pageable);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.fatAmount >= :minFatAmount")
-    List<Ingredient> findByMinFatAmount(@Param("minFatAmount") int minFatAmount);
+    Page<Ingredient> findByMinFatAmount(@Param("minFatAmount") int minFatAmount, Pageable pageable);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.kilocalories BETWEEN :minKilocalories AND :maxKilocalories")
-    List<Ingredient> findByKilocaloriesRange(@Param("minKilocalories") int minKilocalories, @Param("maxKilocalories") int maxKilocalories);
+    Page<Ingredient> findByKilocaloriesRange(@Param("minKilocalories") int minKilocalories, @Param("maxKilocalories") int maxKilocalories, Pageable pageable);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Ingredient i WHERE i.proteinAmount BETWEEN :minProtein AND :maxProtein")
-    List<Ingredient> findByProteinRange(@Param("minProtein") int minProtein, @Param("maxProtein") int maxProtein);
+    Page<Ingredient> findByProteinRange(@Param("minProtein") int minProtein, @Param("maxProtein") int maxProtein, Pageable pageable);
     
-    @Lock(LockModeType.OPTIMISTIC)
     Page<Ingredient> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Ingredient getReferenceById(Long id);
 
     @Override
@@ -96,11 +87,9 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Ingredient> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Ingredient> findAll();
 
     @Override
@@ -108,7 +97,6 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public <S extends Ingredient> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Ingredient> findAll(Sort sort);
 
     @Override
@@ -132,15 +120,12 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public void deleteById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<Ingredient> findById(Long id);
 
     @Override
@@ -148,27 +133,21 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public <S extends Ingredient> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<Ingredient> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> Optional<S> findOne(Example<S> example);
     
 }

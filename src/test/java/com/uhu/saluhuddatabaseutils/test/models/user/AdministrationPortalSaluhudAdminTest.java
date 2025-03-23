@@ -44,19 +44,17 @@ public class AdministrationPortalSaluhudAdminTest {
         SaluhudUser admin = new SaluhudUser();
         admin.setName("Juan Alberto");
         admin.setEmail("correoDePrueba@gmail.com");
-        admin.setRawPassword("Testpassword9#");
         admin.setUsername("Juan2k");
 
-        String encryptedPassword = passwordEncryptionService.encryptPassword(admin.getRawPassword());      
+        String encryptedPassword = passwordEncryptionService.encryptPassword("Testpassword9#");      
         admin.setPassword(encryptedPassword);
         
         SaluhudUser admin2 = new SaluhudUser();
         admin2.setName("Saul");
         admin2.setEmail("correoDePrueba2@gmail.com");
-        admin2.setRawPassword("Testpassword8#");
         admin2.setUsername("SaulRC1");
         
-        String encryptedPassword2 = passwordEncryptionService.encryptPassword(admin2.getRawPassword());      
+        String encryptedPassword2 = passwordEncryptionService.encryptPassword("Testpassword8#");      
         admin2.setPassword(encryptedPassword2);
 
         saluhudUserService.saveUser(admin);      

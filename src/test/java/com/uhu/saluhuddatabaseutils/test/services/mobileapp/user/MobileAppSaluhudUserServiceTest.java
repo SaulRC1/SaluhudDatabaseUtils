@@ -98,7 +98,7 @@ public class MobileAppSaluhudUserServiceTest
     {
         SaluhudUser saluhudUser = new SaluhudUser("FitnessUserTest", "Testpassword9#", "test_user@gmail.com", "Fitness", "User", "+34 677868989");
 
-        mobileAppSaluhudUserService.saveUser(saluhudUser);
+        mobileAppSaluhudUserService.registerSaluhudUser(saluhudUser);
 
         //previouslyPersistedUsers.add(saluhudUser);
 

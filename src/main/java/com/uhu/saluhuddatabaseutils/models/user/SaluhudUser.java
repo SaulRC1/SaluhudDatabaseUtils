@@ -41,16 +41,8 @@ public class SaluhudUser implements Serializable
     private String username;
 
     @Column(name = "password", nullable = false)
-    private String password;
-
     @NotBlank
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\\-_]).{8,32}$")
-    @Size(min = 8, max = 32)
-    @Transient //This raw password will be not persisted
-    //The raw password without any hashing/encryption, it will only be used for
-    //validation of the real password before encypting and persisting it into the
-    //database
-    private String rawPassword;
+    private String password;
 
     @Column(name = "email", nullable = false, unique = true)
     @NotBlank
@@ -66,14 +58,14 @@ public class SaluhudUser implements Serializable
     private String name;
 
     @Column(name = "surname", nullable = true)
-    @Size(min = 1, max = 200)
-    @Pattern(regexp = "^[a-zA-Zà-üÀ-Ü\\s]+$")
+    @Size(max = 200)
+    @Pattern(regexp = "^[a-zA-Zà-üÀ-Ü\\s]*$")
     private String surname;
 
     @Column(name = "phone_number", nullable = true, unique = true)
     //This pattern accepts phone number having the following format: +34 xxxx or
     //+1-939 xxxx (being x any possible number)
-    @Pattern(regexp = "^\\+(\\d{1,3}|\\d{1,3}-\\d{1,3})\\s\\d{4,32}$")
+    @Pattern(regexp = "^(\\+(\\d{1,3}|\\d{1,3}-\\d{1,3})\\s\\d{4,32})?$")
     private String phoneNumber;
 
     @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -98,14 +90,14 @@ public class SaluhudUser implements Serializable
      * username, his password and his email.
      *
      * @param username the username used to logging in the app
-     * @param rawPassword The raw password of the user (without any encryption)
+     * @param password The password of the user
      * @param email the email of the user
      * @param name the name of the user
      */
-    public SaluhudUser(String username, String rawPassword, String email, String name)
+    public SaluhudUser(String username, String password, String email, String name)
     {
         this.username = username;
-        this.rawPassword = rawPassword;
+        this.password = password;
         this.email = email;
         this.name = name;
     }
@@ -115,17 +107,17 @@ public class SaluhudUser implements Serializable
      * username, his password, his email, name, surname and phone number.
      *
      * @param username the username used to logging in the app
-     * @param rawPassword the raw password of the user (without any encryption)
+     * @param password the password of the user
      * @param email the email of the user
      * @param name the name of the user
      * @param surname the surname of the user
      * @param phoneNumber the phone number of the user
      */
-    public SaluhudUser(String username, String rawPassword, String email,
+    public SaluhudUser(String username, String password, String email,
             String name, String surname, String phoneNumber)
     {
         this.username = username;
-        this.rawPassword = rawPassword;
+        this.password = password;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -138,18 +130,18 @@ public class SaluhudUser implements Serializable
      * data.
      *
      * @param username the username used to logging in the app
-     * @param rawPassword the raw password of the user (without any encryption)
+     * @param password the password of the user
      * @param email the email of the user
      * @param name the name of the user
      * @param surname the surname of the user
      * @param phoneNumber the phone number of the user
      * @param userFitnessData the fitness data of the user
      */
-    public SaluhudUser(String username, String rawPassword, String email,
+    public SaluhudUser(String username, String password, String email,
             String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData)
     {
         this.username = username;
-        this.rawPassword = rawPassword;
+        this.password = password;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -354,27 +346,6 @@ public class SaluhudUser implements Serializable
         return Objects.hash(id);
     }
 
-    /**
-     * Returns the raw password (the password without any encryption). It will
-     * return null if the entity has been retrieved from the database.
-     *
-     * @return the password without any encryption or null
-     */
-    public String getRawPassword()
-    {
-        return rawPassword;
-    }
-
-    /**
-     * Sets the raw password of this user (the password without any encryption)
-     *
-     * @param rawPassword User's password without any encryption
-     */
-    public void setRawPassword(String rawPassword)
-    {
-        this.rawPassword = rawPassword;
-    }
-
     @Override
     public String toString()
     {
@@ -383,7 +354,6 @@ public class SaluhudUser implements Serializable
         sb.append("id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", rawPassword=").append(rawPassword);
         sb.append(", email=").append(email);
         sb.append(", name=").append(name);
         sb.append(", surname=").append(surname);

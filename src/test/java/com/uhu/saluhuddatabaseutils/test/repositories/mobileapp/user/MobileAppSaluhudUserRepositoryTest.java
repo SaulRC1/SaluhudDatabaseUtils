@@ -45,7 +45,7 @@ public class MobileAppSaluhudUserRepositoryTest
     {
         SaluhudUser saluhudUser = new SaluhudUser("FitnessUserTest", "Testpassword9#", "test_user@gmail.com", "Fitness", "User", "+34 677868989");
         
-        String encryptedPassword = passwordEncryptionService.encryptPassword(saluhudUser.getRawPassword());
+        String encryptedPassword = passwordEncryptionService.encryptPassword(saluhudUser.getPassword());
         
         saluhudUser.setPassword(encryptedPassword);
         

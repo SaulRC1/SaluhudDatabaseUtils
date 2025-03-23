@@ -33,11 +33,19 @@ public class MobileAppSaluhudUserService
     @Autowired
     private PasswordEncryptionService passwordEncryptionService;
     
+    /**
+     * Registers a new {@link SaluhudUser} into the database. This method will assume
+     * that the user's password is not encrypted and thus encrypt it before persisting
+     * it into the database.
+     * 
+     * @param user The user to be registered.
+     * @return The registered user.
+     */
     @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
-    public <S extends SaluhudUser> S saveUser(@Valid S user)
+    public SaluhudUser registerSaluhudUser(@Valid SaluhudUser user)
     { 
         //Encrypt user's raw password before persisting into the database
-        String encryptedPassword = passwordEncryptionService.encryptPassword(user.getRawPassword());
+        String encryptedPassword = passwordEncryptionService.encryptPassword(user.getPassword());
         
         user.setPassword(encryptedPassword);
         
@@ -66,6 +74,11 @@ public class MobileAppSaluhudUserService
     
     public boolean existsByPhoneNumber(String phoneNumber)
     {
+        if(phoneNumber == null || phoneNumber.isBlank())
+        {
+            return false;
+        }
+        
         return saluhudUserRepository.existsByPhoneNumber(phoneNumber);
     }
     

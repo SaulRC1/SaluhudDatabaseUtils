@@ -222,4 +222,29 @@ public class AdministrationPortalRecipeService
         Pageable pageable = PageRequest.of(page, size);
         return recipeRepository.findAll(pageable);
     }
+    
+    public Page<Recipe> searchByName(String name, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return recipeRepository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    public Page<Recipe> searchByMaxKilocalories(int maxKilocalories, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return recipeRepository.findByKilocaloriesLessThanEqual(maxKilocalories, pageable);
+    }
+
+    public Page<Recipe> searchByIngredient(Long ingredientId, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return recipeRepository.findByIngredientId(ingredientId, pageable);
+    }
+
+    public Page<Recipe> searchByAllergenicExclusion(Long allergenicId, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return recipeRepository.findByAllergenicExclusion(allergenicId, pageable);
+    }
+    
+    public Page<Recipe> searchByAllergenic(Long allergenicId, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return recipeRepository.findByAllergenic(allergenicId, pageable);
+    }
 }

@@ -22,34 +22,58 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface AdministrationPortalRecipeRepository extends JpaRepository<Recipe, Long> {
+public interface AdministrationPortalRecipeRepository extends JpaRepository<Recipe, Long>
+{
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Recipe i WHERE i.id = :id")
     Recipe findOne(@Param("id") long id);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM Recipe i WHERE i.name = :name")
     List<Recipe> findByName(@Param("name") String name);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r JOIN r.allergenics a WHERE a.id = :allergenId")
     List<Recipe> findByAllergenic(@Param("allergenId") Long allergenId);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT r FROM Recipe r WHERE r.description LIKE %:keyword%")
     List<Recipe> findByDescriptionContaining(@Param("keyword") String keyword);
 
+    // Buscar por nombre
+    Page<Recipe> findByNameContainingIgnoreCase(String name, Pageable pageable);
+    
+    // Buscar por calorías máximas
+    Page<Recipe> findByKilocaloriesLessThanEqual(int maxKilocalories, Pageable pageable);
+    
+    // Buscar recetas que contengan un ingrediente específico
+    @Query("""
+        SELECT r FROM Recipe r 
+        JOIN r.recipeIngredients ri 
+        WHERE ri.ingredient.id = :ingredientId
+    """)
+    Page<Recipe> findByIngredientId(@Param("ingredientId") Long ingredientId, Pageable pageable);
+
+    // Buscar recetas que NO contengan un alérgeno específico
+    @Query("""
+        SELECT r FROM Recipe r 
+        LEFT JOIN r.allergenics a
+        WHERE a.id IS NULL OR a.id <> :allergenicId
+    """)
+    Page<Recipe> findByAllergenicExclusion(@Param("allergenicId") Long allergenicId, Pageable pageable);
+
+    // Buscar recetas que contengan un alérgeno específico
+    @Query("""
+        SELECT r FROM Recipe r 
+        JOIN r.allergenics a
+        WHERE a.id = :allergenicId
+    """)
+    Page<Recipe> findByAllergenic(@Param("allergenicId") Long allergenicId, Pageable pageable);
+
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Recipe getReferenceById(Long id);
 
     @Override
@@ -73,15 +97,12 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public <S extends Recipe> S saveAndFlush(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Recipe> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Recipe> findAll();
 
     @Override
@@ -89,7 +110,6 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public <S extends Recipe> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<Recipe> findAll(Sort sort);
 
     @Override
@@ -113,15 +133,12 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public void deleteById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<Recipe> findById(Long id);
 
     @Override
@@ -129,27 +146,21 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public <S extends Recipe> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<Recipe> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> Optional<S> findOne(Example<S> example);
-    
+
 }

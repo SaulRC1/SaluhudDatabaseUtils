@@ -210,4 +210,84 @@ public class AdministrationPortalSaluhudUserService
         return saluhudUserRepository.existsByPhoneNumber(phoneNumber);
     }
 
+    /**
+     * Searches for users whose username contains the specified keyword,
+     * ignoring case sensitivity.
+     *
+     * @param username the partial or full username to search for.
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of users per page.
+     * @return a {@link Page} containing a paginated list of {@link SaluhudUser}
+     * that match the search criteria.
+     */
+    public Page<SaluhudUser> searchByUsername(String username, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findByUsernameContainingIgnoreCase(username, pageable);
+    }
+
+    /**
+     * Searches for users whose email contains the specified keyword, ignoring
+     * case sensitivity.
+     *
+     * @param email the partial or full email to search for.
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of users per page.
+     * @return a {@link Page} containing a paginated list of {@link SaluhudUser}
+     * that match the search criteria.
+     */
+    public Page<SaluhudUser> searchByEmail(String email, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findByEmailContainingIgnoreCase(email, pageable);
+    }
+
+    /**
+     * Searches for users whose name contains the specified keyword, ignoring
+     * case sensitivity.
+     *
+     * @param name the partial or full name to search for.
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of users per page.
+     * @return a {@link Page} containing a paginated list of {@link SaluhudUser}
+     * that match the search criteria.
+     */
+    public Page<SaluhudUser> searchByName(String name, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    /**
+     * Searches for users whose surname contains the specified keyword, ignoring
+     * case sensitivity.
+     *
+     * @param surname the partial or full surname to search for.
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of users per page.
+     * @return a {@link Page} containing a paginated list of {@link SaluhudUser}
+     * that match the search criteria.
+     */
+    public Page<SaluhudUser> searchBySurname(String surname, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findBySurnameContainingIgnoreCase(surname, pageable);
+    }
+
+    /**
+     * Searches for users whose phone number contains the specified sequence of
+     * digits.
+     *
+     * @param phoneNumber the partial or full phone number to search for.
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of users per page.
+     * @return a {@link Page} containing a paginated list of {@link SaluhudUser}
+     * that match the search criteria.
+     */
+    public Page<SaluhudUser> searchByPhoneNumber(String phoneNumber, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return saluhudUserRepository.findByPhoneNumberContaining(phoneNumber, pageable);
+    }
+
 }

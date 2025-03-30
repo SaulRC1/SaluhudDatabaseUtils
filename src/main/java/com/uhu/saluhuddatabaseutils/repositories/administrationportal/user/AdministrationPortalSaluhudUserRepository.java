@@ -119,5 +119,14 @@ public interface AdministrationPortalSaluhudUserRepository extends JpaRepository
     boolean existsByEmail(String email);
 
     boolean existsByPhoneNumber(String phoneNumber);
+    
+    Page<SaluhudUser> findByUsernameContainingIgnoreCase(String username, Pageable pageable);
 
+    Page<SaluhudUser> findByEmailContainingIgnoreCase(String email, Pageable pageable);
+
+    Page<SaluhudUser> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+    Page<SaluhudUser> findBySurnameContainingIgnoreCase(String surname, Pageable pageable);
+
+    Page<SaluhudUser> findByPhoneNumberContaining(String phoneNumber, Pageable pageable);
 }

@@ -15,14 +15,15 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 /**
- * This is the Saluhud administrator repository to implement basic CRUD operations
+ * This is the Saluhud administrator repository to implement basic CRUD
+ * operations
  *
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
 public interface AdministrationPortalSaluhudUserRepository extends JpaRepository<SaluhudUser, Long>
 {
-  
+
     Optional<SaluhudUser> findByName(String name);
 
     @Override
@@ -33,7 +34,7 @@ public interface AdministrationPortalSaluhudUserRepository extends JpaRepository
 
     @Override
     public SaluhudUser getReferenceById(Long id);
-    
+
     @Override
     public void deleteAllInBatch();
 
@@ -63,7 +64,7 @@ public interface AdministrationPortalSaluhudUserRepository extends JpaRepository
     @Override
     @Lock(LockModeType.OPTIMISTIC)
     public <S extends SaluhudUser> List<S> saveAll(Iterable<S> entities);
-    
+
     @Override
     public List<SaluhudUser> findAll(Sort sort);
 
@@ -112,5 +113,11 @@ public interface AdministrationPortalSaluhudUserRepository extends JpaRepository
 
     @Override
     public <S extends SaluhudUser> Optional<S> findOne(Example<S> example);
-      
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByPhoneNumber(String phoneNumber);
+
 }

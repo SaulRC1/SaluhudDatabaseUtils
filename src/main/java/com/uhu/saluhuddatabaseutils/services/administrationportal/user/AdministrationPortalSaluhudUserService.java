@@ -10,126 +10,162 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.Valid;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.AdministrationPortalSaluhudUserRepository;
+import java.util.NoSuchElementException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 /**
- *
- * @author Juan Alberto Dominguez Vazquez
+ * Service class for managing users in the Saluhud Administration Portal.
+ * Provides methods for retrieving, creating, updating, and deleting users.
  */
 @Service
 @Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
-public class AdministrationPortalSaluhudUserService {
+public class AdministrationPortalSaluhudUserService
+{
 
     @Autowired
     private AdministrationPortalSaluhudUserRepository saluhudUserRepository;
-    
+
     private static final Logger logger = Logger.getLogger(AdministrationPortalSaluhudUserService.class.getName());
 
     /**
-     * Retrieve all SaluhudUsers.
+     * Retrieves a list of all users stored in the repository.
      *
-     * @return a list of all users.
+     * @return a {@link List} containing all {@link SaluhudUser} instances.
+     * @throws RuntimeException if an error occurs while retrieving users.
      */
-    public List<SaluhudUser> findAllUsers() {
-        try {
+    public List<SaluhudUser> findAllUsers()
+    {
+        try
+        {
             return saluhudUserRepository.findAll();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error finding all users", e);
             throw e;
         }
     }
 
     /**
-     * Find a user by their ID.
+     * Retrieves a user by their unique identifier.
      *
-     * @param id the ID of the user to find.
-     * @return the found user, or null if not found.
+     * @param id the unique ID of the user to retrieve.
+     * @return the {@link SaluhudUser} if found.
+     * @throws NoSuchElementException if no user with the given ID exists.
+     * @throws RuntimeException if an error occurs while retrieving the user.
      */
-    public SaluhudUser getUserById(long id) {
-        try {
+    public SaluhudUser getUserById(long id)
+    {
+        try
+        {
             return saluhudUserRepository.findById(id).orElseThrow();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error finding user by ID", e);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error finding user by ID: " + id, e);
             throw e;
         }
     }
 
     /**
-     * Find a user by their name.
+     * Retrieves a user by their name.
      *
-     * @param name the name of the user to find.
-     * @return the found user, or null if not found.
+     * @param name the name of the user to retrieve.
+     * @return the {@link SaluhudUser} if found.
+     * @throws NoSuchElementException if no user with the given name exists.
+     * @throws RuntimeException if an error occurs while retrieving the user.
      */
-    public SaluhudUser getUserByName(String name) {
-        try {
+    public SaluhudUser getUserByName(String name)
+    {
+        try
+        {
             return saluhudUserRepository.findByName(name).orElseThrow();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error finding user by username", e);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error finding user by name: " + name, e);
             throw e;
         }
     }
 
     /**
-     * Save a new SaluhudUser.
+     * Saves a new user to the repository.
      *
-     * @param user the user to save.
+     * @param user the {@link SaluhudUser} object to be saved.
+     * @throws IllegalArgumentException if the user is invalid.
+     * @throws RuntimeException if an error occurs while saving the user.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void saveUser(@Valid SaluhudUser user) {
-        try {         
+    public void saveUser(@Valid SaluhudUser user)
+    {
+        try
+        {
             saluhudUserRepository.save(user);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error saving user", e);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error saving user: " + user, e);
             throw e;
         }
     }
 
     /**
-     * Update an existing SaluhudUser.
+     * Updates an existing user in the repository.
      *
-     * @param user the user to update.
+     * @param user the {@link SaluhudUser} object containing updated
+     * information.
+     * @throws NoSuchElementException if the user does not exist.
+     * @throws IllegalArgumentException if the user is invalid.
+     * @throws RuntimeException if an error occurs while updating the user.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void updateUser(@Valid SaluhudUser user) {
-        try {
+    public void updateUser(@Valid SaluhudUser user)
+    {
+        try
+        {
             Optional<SaluhudUser> result = saluhudUserRepository.findById(user.getId());
 
-            if (result.isPresent()) {
+            if (result.isPresent())
+            {
                 SaluhudUser existingUser = result.get();
                 saluhudUserRepository.save(existingUser);
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error updating user", e);
+
+        } catch (NoSuchElementException e)
+        {
+            logger.log(Level.SEVERE, "Error updating user: " + user, e);
             throw e;
         }
     }
 
     /**
-     * Delete a SaluhudUser.
+     * Deletes a user from the repository.
      *
-     * @param user the user to delete.
+     * @param user the {@link SaluhudUser} object to delete.
+     * @throws NoSuchElementException if the user does not exist.
+     * @throws RuntimeException if an error occurs while deleting the user.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void deleteUser(@Valid SaluhudUser user) {
-        try {
-            if (this.saluhudUserRepository.existsById(user.getId())) {
+    public void deleteUser(@Valid SaluhudUser user)
+    {
+        try
+        {
+            if (saluhudUserRepository.existsById(user.getId()))
+            {
                 saluhudUserRepository.delete(user);
             }
 
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error deleting user", e);
+        } catch (NoSuchElementException e)
+        {
+            logger.log(Level.SEVERE, "Error deleting user: " + user, e);
             throw e;
         }
     }
-    
+
     /**
-     * Recupera una página usuarios almacenados en el repositorio.
+     * Retrieves a page of users stored in the repository.
      *
-     * @param page el número de página a recuperar (comenzando desde 0).
-     * @param size la cantidad de elementos por página.
-     * @return un objeto {@link Page} que contiene una lista paginada de
+     * @param page the page number to retrieve (starting from 0).
+     * @param size the number of elements per page.
+     * @return a {@link Page} object containing a paginated list of
      * {@link SaluhudUser}.
      */
     public Page<SaluhudUser> getUsers(int page, int size)
@@ -137,4 +173,41 @@ public class AdministrationPortalSaluhudUserService {
         Pageable pageable = PageRequest.of(page, size);
         return saluhudUserRepository.findAll(pageable);
     }
+
+    /**
+     * Checks if a user exists by their username.
+     *
+     * @param username the username to check.
+     * @return {@code true} if a user with the given username exists,
+     * {@code false} otherwise.
+     */
+    public boolean existsByUsername(String username)
+    {
+        return saluhudUserRepository.existsByUsername(username);
+    }
+
+    /**
+     * Checks if a user exists by their email.
+     *
+     * @param email the email to check.
+     * @return {@code true} if a user with the given email exists, {@code false}
+     * otherwise.
+     */
+    public boolean existsByEmail(String email)
+    {
+        return saluhudUserRepository.existsByEmail(email);
+    }
+
+    /**
+     * Checks if a user exists by their phone number.
+     *
+     * @param phoneNumber the phone number to check.
+     * @return {@code true} if a user with the given phone number exists,
+     * {@code false} otherwise.
+     */
+    public boolean existsByPhoneNumber(String phoneNumber)
+    {
+        return saluhudUserRepository.existsByPhoneNumber(phoneNumber);
+    }
+
 }

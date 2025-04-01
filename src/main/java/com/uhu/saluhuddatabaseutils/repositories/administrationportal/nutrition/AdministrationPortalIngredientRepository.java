@@ -52,6 +52,8 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     Page<Ingredient> findByProteinRange(@Param("minProtein") int minProtein, @Param("maxProtein") int maxProtein, Pageable pageable);
     
     Page<Ingredient> findByNameContainingIgnoreCase(String name, Pageable pageable);
+    
+    Page<Ingredient> findByNameStartingWithIgnoreCase(String name, Pageable pageable);
 
     @Override
     public <S extends Ingredient> List<S> findAll(Example<S> example, Sort sort);

@@ -18,7 +18,11 @@ import org.springframework.data.domain.Pageable;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalRecipeRepository;
 
 /**
- * Service class for managing recipes.
+ * Service class for managing recipes. This service provides
+ * methods to perform CRUD (Create, Read, Update, Delete) operations on recipe, 
+ * such as saving, updating, deleting, and retrieving recipes.
+ * It also supports pagination for fetching large lists of recipes applying
+ * certains types of filters.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -32,6 +36,12 @@ public class AdministrationPortalRecipeService
 
     private static final Logger logger = Logger.getLogger(AdministrationPortalRecipeService.class.getName());
 
+    /**
+     * Finds all recipes. This method retrieves all recipes
+     * stored in the repository.
+     *
+     * @return A list of all recipes.
+     */
     public List<Recipe> findAllRecipes()
     {
         return this.recipeRepository.findAll();
@@ -46,7 +56,8 @@ public class AdministrationPortalRecipeService
     @Transactional(readOnly = false, transactionManager = "saluhudAdministrationPortalTransactionManager")
     public Recipe saveRecipe(@Valid Recipe recipe)
     {
-        if (recipe.getKilocalories() == 0) {
+        if (recipe.getKilocalories() == 0)
+        {
             int totalKilocalories = calculateRecipeKcal(recipe);
             recipe.setKilocalories(totalKilocalories);
         }
@@ -62,45 +73,57 @@ public class AdministrationPortalRecipeService
     public void updateRecipe(@Valid Recipe recipe)
     {
         System.out.println("Intentando actualizar la receta con ID: " + recipe.getId());
-        try {
+        try
+        {
             Optional<Recipe> result = this.recipeRepository.findById(recipe.getId());
 
-            if (result.isPresent()) {
+            if (result.isPresent())
+            {
                 Recipe existingRecipe = result.get();
 
-                if (recipe.getAllergenics() == null) {
+                if (recipe.getAllergenics() == null)
+                {
                     recipe.setAllergenics(new HashSet<>());
                 }
-                if (recipe.getElaborationSteps() == null) {
+                if (recipe.getElaborationSteps() == null)
+                {
                     recipe.setElaborationSteps(new ArrayList<>());
                 }
-                if (recipe.getRecipeIngredients() == null) {
+                if (recipe.getRecipeIngredients() == null)
+                {
                     recipe.setRecipeIngredients(new ArrayList<>());
                 }
 
-                if (!recipe.getName().isBlank()) {
+                if (!recipe.getName().isBlank())
+                {
                     existingRecipe.setName(recipe.getName());
                 }
-                if (!recipe.getDescription().isBlank()) {
+                if (!recipe.getDescription().isBlank())
+                {
                     existingRecipe.setDescription(recipe.getDescription());
                 }
-                if (!recipe.getIngredientsDescription().isBlank()) {
+                if (!recipe.getIngredientsDescription().isBlank())
+                {
                     existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
                 }
-                if (!recipe.getAllergenics().isEmpty()) {
+                if (!recipe.getAllergenics().isEmpty())
+                {
                     existingRecipe.getAllergenics().clear();
                     existingRecipe.setAllergenics(recipe.getAllergenics());
                 }
-                if (!recipe.getElaborationSteps().isEmpty()) {
+                if (!recipe.getElaborationSteps().isEmpty())
+                {
                     existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
                 }
-                if (recipe.getKilocalories() == 0) {
+                if (recipe.getKilocalories() == 0)
+                {
                     int totalKilocalories = calculateRecipeKcal(recipe);
                     existingRecipe.setKilocalories(totalKilocalories);
                 }
                 this.recipeRepository.save(existingRecipe);
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error updating Recipe", e);
             throw e;
         }
@@ -114,34 +137,43 @@ public class AdministrationPortalRecipeService
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteRecipe(@Valid Recipe recipe)
     {
-        try {
-            if (this.recipeRepository.existsById(recipe.getId())) {
+        try
+        {
+            if (this.recipeRepository.existsById(recipe.getId()))
+            {
                 this.recipeRepository.delete(recipe);
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error deleting recipe", e);
             throw e;
         }
     }
 
     /**
+     * Retrieves a recipe by its ID.
      *
-     * @param id
-     * @return
+     * @param id The ID of the recipe.
+     * @return The recipe if found, otherwise null.
      */
     public Recipe getRecipeById(long id)
     {
         Recipe selectedRecipe;
-        try {
+        try
+        {
             selectedRecipe = this.recipeRepository.findOne(id);
-            if (selectedRecipe == null) {
+            if (selectedRecipe == null)
+            {
                 return null;
-            } else {
+            }
+            else
+            {
                 return selectedRecipe;
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error getting recipe by ID", e);
             throw e;
         }
@@ -156,15 +188,20 @@ public class AdministrationPortalRecipeService
     public List<Recipe> getRecipeByName(String name)
     {
         List<Recipe> selectedRecipes;
-        try {
+        try
+        {
             selectedRecipes = this.recipeRepository.findByName(name);
-            if (selectedRecipes == null) {
+            if (selectedRecipes == null)
+            {
                 return null;
-            } else {
+            }
+            else
+            {
                 return selectedRecipes;
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error getting recipe by name", e);
             throw e;
         }
@@ -192,24 +229,46 @@ public class AdministrationPortalRecipeService
         return recipeRepository.findByDescriptionContaining(keyword);
     }
 
+    /**
+     * Calculates the total kilocalories of a recipe based on its ingredients
+     * and their quantities.
+     *
+     * The calculation takes into account the unit of measurement (grams,
+     * milliliters, kilograms, liters) and adjusts the kilocalories accordingly.
+     * The recipe's total kilocalories are calculated by summing the
+     * kilocalories for each ingredient.
+     *
+     * @param recipe The recipe whose kilocalories are to be calculated. The
+     * recipe should contain a list of ingredients with their quantities and
+     * units.
+     * @return The total kilocalories of the recipe.
+     * @throws IllegalArgumentException if an unsupported unit (other than "g",
+     * "ml", "kg", "l") is provided.
+     */
     public int calculateRecipeKcal(@Valid Recipe recipe)
     {
         int totalKilocalories = 0;
-        for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
-            int kcalPer100Units = recipeIngredient.getIngredient().getKilocalories(); // kcal por 100 g/ml
+        for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients())
+        {
+            int kcalPer100Units = recipeIngredient.getIngredient().getKilocalories(); // kcal per 100 g/ml
             double quantity = recipeIngredient.getQuantity().doubleValue();
             String unit = recipeIngredient.getUnit();
 
-            // Cálculo ajustado de kilocalorías según la unidad
+            // Adjusted calculation based on the unit of measurement
             double kcalForIngredient = 0;
-            if ("g".equalsIgnoreCase(unit) || "ml".equalsIgnoreCase(unit)) {
-                // Si está en gramos o mililitros, dividimos por 100 y multiplicamos por la cantidad
+            if ("g".equalsIgnoreCase(unit) || "ml".equalsIgnoreCase(unit))
+            {
+                // For grams or milliliters, divide by 100 and multiply by the quantity
                 kcalForIngredient = (kcalPer100Units / 100.0) * quantity;
-            } else if ("kg".equalsIgnoreCase(unit) || "l".equalsIgnoreCase(unit)) {
-                // Si está en kilogramos o litros, multiplicamos por 10 (que equivale a 1000/100)
+            }
+            else if ("kg".equalsIgnoreCase(unit) || "l".equalsIgnoreCase(unit))
+            {
+                // For kilograms or liters, multiply by 10 (equivalent to 1000/100)
                 kcalForIngredient = kcalPer100Units * (quantity * 10);
-            } else {
-                throw new IllegalArgumentException("Unidad no soportada: " + unit);
+            }
+            else
+            {
+                throw new IllegalArgumentException("Unsupported unit: " + unit);
             }
 
             totalKilocalories += kcalForIngredient;
@@ -217,33 +276,86 @@ public class AdministrationPortalRecipeService
         return totalKilocalories;
     }
 
+    /**
+     * Retrieves a paginated list of recipes.
+     *
+     * @param page The page number.
+     * @param size The number of recipes per page.
+     * @return A paginated list of recipes.
+     */
     public Page<Recipe> getRecipes(int page, int size)
     {
         Pageable pageable = PageRequest.of(page, size);
         return recipeRepository.findAll(pageable);
     }
-    
-    public Page<Recipe> searchByName(String name, int page, int pageSize) {
+
+    /**
+     * Searches for recipes by name, paginated.
+     *
+     * @param name The name or partial name of the recipe.
+     * @param page The page number.
+     * @param pageSize The number of recipes per page.
+     * @return A paginated list of recipes matching the name.
+     */
+    public Page<Recipe> searchByName(String name, int page, int pageSize)
+    {
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByNameContainingIgnoreCase(name, pageable);
     }
 
-    public Page<Recipe> searchByMaxKilocalories(int maxKilocalories, int page, int pageSize) {
+    /**
+     * Searches for recipes with a maximum kilocalories value, paginated.
+     *
+     * @param maxKilocalories The maximum kilocalories.
+     * @param page The page number.
+     * @param pageSize The number of recipes per page.
+     * @return A paginated list of recipes that have kilocalories below or equal
+     * to the specified value.
+     */
+    public Page<Recipe> searchByMaxKilocalories(int maxKilocalories, int page, int pageSize)
+    {
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByKilocaloriesLessThanEqual(maxKilocalories, pageable);
     }
 
-    public Page<Recipe> searchByIngredient(Long ingredientId, int page, int pageSize) {
+    /**
+     * Searches for recipes that contain a specific ingredient, paginated.
+     *
+     * @param ingredientId The ID of the ingredient.
+     * @param page The page number.
+     * @param pageSize The number of recipes per page.
+     * @return A paginated list of recipes containing the ingredient.
+     */
+    public Page<Recipe> searchByIngredient(Long ingredientId, int page, int pageSize)
+    {
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByIngredientId(ingredientId, pageable);
     }
 
-    public Page<Recipe> searchByAllergenicExclusion(Long allergenicId, int page, int pageSize) {
+    /**
+     * Searches for recipes that exclude a specific allergenic, paginated.
+     *
+     * @param allergenicId The ID of the allergenic.
+     * @param page The page number.
+     * @param pageSize The number of recipes per page.
+     * @return A paginated list of recipes that do not contain the allergenic.
+     */
+    public Page<Recipe> searchByAllergenicExclusion(Long allergenicId, int page, int pageSize)
+    {
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByAllergenicExclusion(allergenicId, pageable);
     }
-    
-    public Page<Recipe> searchByAllergenic(Long allergenicId, int page, int pageSize) {
+
+    /**
+     * Searches for recipes that contain a specific allergenic, paginated.
+     *
+     * @param allergenicId The ID of the allergenic.
+     * @param page The page number.
+     * @param pageSize The number of recipes per page.
+     * @return A paginated list of recipes containing the allergenic.
+     */
+    public Page<Recipe> searchByAllergenic(Long allergenicId, int page, int pageSize)
+    {
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByAllergenic(allergenicId, pageable);
     }

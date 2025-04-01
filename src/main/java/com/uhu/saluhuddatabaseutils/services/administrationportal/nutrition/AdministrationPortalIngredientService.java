@@ -18,7 +18,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service class for managing ingredients.
+ * Service class for managing ingredients in the administration portal. Provides
+ * methods for retrieving, searching, saving, updating, and deleting
+ * ingredients. Also supports filtering ingredients by nutritional values and
+ * retrieving allergens associated with an ingredient.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -36,9 +39,9 @@ public class AdministrationPortalIngredientService
     private static final Logger logger = Logger.getLogger(AdministrationPortalIngredientService.class.getName());
 
     /**
-     * Finds all ingredients.
+     * Retrieves all ingredients.
      *
-     * @return A list of all ingredients.
+     * @return A list of all available ingredients.
      */
     public List<Ingredient> findAllIngredients()
     {
@@ -46,10 +49,10 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Find an ingredient by his ID
-     * 
-     * @param id the id of the ingredient
-     * @return an ingredient if exists
+     * Finds an ingredient by its ID.
+     *
+     * @param id The ID of the ingredient.
+     * @return The ingredient if found, otherwise null.
      */
     public Ingredient findById(long id)
     {
@@ -57,10 +60,10 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Find an ingredient by his name
+     * Finds an ingredient by its name.
      *
-     * @param name the name of the ingredient
-     * @return the ingredient if exists
+     * @param name The name of the ingredient.
+     * @return The ingredient if found, otherwise null.
      */
     public Ingredient findByName(String name)
     {
@@ -68,53 +71,52 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Gets an ingredient by its ID.
+     * Retrieves an ingredient by its ID, handling potential errors.
      *
      * @param id The ID of the ingredient.
-     * @return The ingredient if found, or null if not found.
+     * @return The ingredient if found, otherwise null.
      */
     public Ingredient getIngredientById(long id)
     {
-        Ingredient selectedIngredient;
         try
         {
-            selectedIngredient = this.ingredientRepository.findById(id).orElse(null);
-            return selectedIngredient;
+            return this.ingredientRepository.findById(id).orElse(null);
         } catch (Exception e)
         {
-            logger.log(Level.SEVERE, "Error getting ingredient by ID", e);
+            logger.log(Level.SEVERE, "Error retrieving ingredient by ID", e);
             throw e;
         }
     }
 
     /**
-     * Finds an ingredient by its name.
+     * Finds an ingredient by its name with pagination support.
      *
      * @param name The name of the ingredient.
-     * @param pageable
-     * @return The ingredient if found, or null if not found.
+     * @param pageable Pagination parameters.
+     * @return A paginated list of matching ingredients.
      */
     public Page<Ingredient> getIngredientByName(String name, Pageable pageable)
     {
-        Page<Ingredient> selectedIngredient;
         try
         {
-            selectedIngredient = this.ingredientRepository.findByNamePageable(name, pageable);
-            return selectedIngredient;
+            return this.ingredientRepository.findByNamePageable(name, pageable);
         } catch (Exception e)
         {
-            logger.log(Level.SEVERE, "Error getting ingredient by name", e);
+            logger.log(Level.SEVERE, "Error retrieving ingredient by name", e);
             throw e;
         }
     }
 
     /**
-     * Finds ingredients with kilocalories less than or equal to a specific
+     * Finds ingredients with kilocalories less than or equal to a specified
      * value.
      *
-     * @param maxKilocalories The maximum number of kilocalories.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param maxKilocalories The maximum kilocalories allowed for the
+     * ingredients.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have kilocalories less than
+     * or equal to the specified value.
      */
     public Page<Ingredient> findByMaxKilocalories(int maxKilocalories, Pageable pageable)
     {
@@ -122,11 +124,15 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Finds ingredients with a minimum amount of protein.
+     * Finds ingredients with a minimum amount of protein greater than or equal
+     * to a specified value.
      *
-     * @param minProteinAmount The minimum amount of protein.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param minProteinAmount The minimum amount of protein (in grams) that the
+     * ingredients should contain.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have protein content greater
+     * than or equal to the specified value.
      */
     public Page<Ingredient> findByMinProteinAmount(int minProteinAmount, Pageable pageable)
     {
@@ -134,11 +140,15 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Finds ingredients with a minimum amount of carbohydrates.
+     * Finds ingredients with a minimum amount of carbohydrates greater than or
+     * equal to a specified value.
      *
-     * @param minCarbohydratesAmount The minimum amount of carbohydrates.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param minCarbohydratesAmount The minimum amount of carbohydrates (in
+     * grams) that the ingredients should contain.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have carbohydrates content
+     * greater than or equal to the specified value.
      */
     public Page<Ingredient> findByMinCarbohydratesAmount(int minCarbohydratesAmount, Pageable pageable)
     {
@@ -146,11 +156,15 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Finds ingredients with a minimum amount of fat.
+     * Finds ingredients with a minimum amount of fat greater than or equal to a
+     * specified value.
      *
-     * @param minFatAmount The minimum amount of fat.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param minFatAmount The minimum amount of fat (in grams) that the
+     * ingredients should contain.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have fat content greater
+     * than or equal to the specified value.
      */
     public Page<Ingredient> findByMinFatAmount(int minFatAmount, Pageable pageable)
     {
@@ -160,10 +174,14 @@ public class AdministrationPortalIngredientService
     /**
      * Finds ingredients within a specific range of kilocalories.
      *
-     * @param minKilocalories The minimum number of kilocalories.
-     * @param maxKilocalories The maximum number of kilocalories.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param minKilocalories The minimum number of kilocalories that the
+     * ingredients should contain.
+     * @param maxKilocalories The maximum number of kilocalories that the
+     * ingredients should contain.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have kilocalories within the
+     * specified range.
      */
     public Page<Ingredient> findByKilocaloriesRange(int minKilocalories, int maxKilocalories, Pageable pageable)
     {
@@ -171,12 +189,16 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Finds ingredients within a specific range of protein.
+     * Finds ingredients within a specific range of protein content.
      *
-     * @param minProtein The minimum amount of protein.
-     * @param maxProtein The maximum amount of protein.
-     * @param pageable
-     * @return A list of ingredients that meet the criteria.
+     * @param minProtein The minimum amount of protein (in grams) that the
+     * ingredients should contain.
+     * @param maxProtein The maximum amount of protein (in grams) that the
+     * ingredients should contain.
+     * @param pageable Pagination parameters to control the result set (page
+     * number, size, etc.).
+     * @return A paginated list of ingredients that have protein content within
+     * the specified range.
      */
     public Page<Ingredient> findByProteinRange(int minProtein, int maxProtein, Pageable pageable)
     {
@@ -195,7 +217,7 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Updates an existing ingredient.
+     * Updates an existing ingredient with new values if present.
      *
      * @param ingredient The ingredient to update.
      */
@@ -229,7 +251,6 @@ public class AdministrationPortalIngredientService
                 {
                     existingIngredient.setFatAmount(ingredient.getFatAmount());
                 }
-
                 this.ingredientRepository.save(existingIngredient);
             }
         } catch (Exception e)
@@ -240,7 +261,7 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Deletes an ingredient.
+     * Deletes an ingredient if it exists in the repository.
      *
      * @param ingredient The ingredient to delete.
      */
@@ -262,33 +283,30 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Finds allergens associated with a given ingredient.
+     * Retrieves allergens associated with a given ingredient.
      *
-     * @param ingredient The ingredient for which to find allergens.
-     * @return A set of allergens associated with the ingredient.
+     * @param ingredient The ingredient to check for allergens.
+     * @return A set of allergens linked to the ingredient.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public Set<Allergenic> getAllergensForIngredient(Ingredient ingredient)
     {
-        Set<Allergenic> allergenics;
         try
         {
-            allergenics = allergenicRepository.findByIngredientId(ingredient.getId());
-            return allergenics;
+            return allergenicRepository.findByIngredientId(ingredient.getId());
         } catch (Exception e)
         {
-            logger.log(Level.SEVERE, "Error getting allergens for ingredient", e);
+            logger.log(Level.SEVERE, "Error retrieving allergens for ingredient", e);
             throw e;
         }
     }
 
     /**
-     * Recupera una página de ingredientes almacenados en el repositorio.
+     * Retrieves a paginated list of ingredients.
      *
-     * @param page el número de página a recuperar (comenzando desde 0).
-     * @param size la cantidad de elementos por página.
-     * @return un objeto {@link Page} que contiene una lista paginada de
-     * {@link Ingredient}.
+     * @param page The page number to retrieve (starting from 0).
+     * @param size The number of items per page.
+     * @return A {@link Page} containing a list of {@link Ingredient}.
      */
     public Page<Ingredient> getIngredients(int page, int size)
     {
@@ -297,17 +315,33 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Search a paginable ingredient by his name ignoring case
+     * Searches for ingredients by name with case-insensitive matching and
+     * pagination.
      *
-     * @param name the name of the ingredient
-     * @param page the minimun number of pages to retrieve
-     * @param size maximum number of pages to retrieve
-     * @return an object {@link Page} that contains a paginable list of
-     * {@link Ingredient}
+     * @param name The name of the ingredient to search for.
+     * @param page The page number to retrieve (starting from 0).
+     * @param size The number of items per page.
+     * @return A {@link Page} containing a list of matching {@link Ingredient}.
      */
     public Page<Ingredient> searchByName(String name, int page, int size)
     {
         Pageable pageable = PageRequest.of(page, size);
         return ingredientRepository.findByNameContainingIgnoreCase(name, pageable);
     }
+
+    /**
+     * Searches for ingredients by starting name with case-insensitive matching and
+     * pagination.
+     *
+     * @param name The name of the ingredient to search for.
+     * @param page The page number to retrieve (starting from 0).
+     * @param size The number of items per page.
+     * @return A {@link Page} containing a list of matching {@link Ingredient}.
+     */
+    public Page<Ingredient> searchByStartName(String name, int page, int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return ingredientRepository.findByNameStartingWithIgnoreCase(name, pageable);
+    }
+
 }

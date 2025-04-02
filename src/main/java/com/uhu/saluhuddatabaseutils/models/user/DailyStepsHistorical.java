@@ -32,12 +32,12 @@ public class DailyStepsHistorical implements Serializable
 
     @OneToMany(mappedBy = "dailyStepsHistorical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DailyStepsHistoricalEntry> entries;
-    
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private SaluhudUser user;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -50,13 +50,12 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, a list of
-     * daily steps entries and the user which the historical belongs to
+     * Parameterized constructor for the class.
      *
-     * @param entries the list of daily steps entries
-     * @param user the user which the historical belongs to
+     * @param entries The list of daily steps entries.
+     * @param user The user to whom this historical record belongs.
      */
-    public DailyStepsHistorical(List<DailyStepsHistoricalEntry> entries, 
+    public DailyStepsHistorical(List<DailyStepsHistoricalEntry> entries,
             SaluhudUser user)
     {
         this.entries = entries;
@@ -64,9 +63,9 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Getter for the parameter "id"
+     * Gets the ID of the daily steps historical record.
      *
-     * @return the id the of daily steps historical
+     * @return The ID of the record.
      */
     public long getId()
     {
@@ -74,9 +73,9 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Setter for the parameter "id"
-     * 
-     * @param id the id the of daily steps historical
+     * Sets the ID of the daily steps historical record.
+     *
+     * @param id The new ID of the record.
      */
     public void setId(long id)
     {
@@ -84,9 +83,9 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Getter for the parameter "entries"
+     * Gets the list of daily steps entries.
      *
-     * @return the daily steps historical of the user
+     * @return The list of entries.
      */
     public List<DailyStepsHistoricalEntry> getEntries()
     {
@@ -94,9 +93,9 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Setter for the parameter "entries"
+     * Sets the list of daily steps entries.
      *
-     * @param entries the new daily steps historical of the user
+     * @param entries The new list of entries.
      */
     public void setEntries(List<DailyStepsHistoricalEntry> entries)
     {
@@ -104,9 +103,9 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Getter for the parameter "entries"
-     * 
-     * @return the user which the historical belongs to
+     * Gets the user to whom this historical record belongs.
+     *
+     * @return The associated user.
      */
     public SaluhudUser getUser()
     {
@@ -114,23 +113,33 @@ public class DailyStepsHistorical implements Serializable
     }
 
     /**
-     * Setter for the parameter "user"
-     * 
-     * @param user the new user which the historical belongs to
+     * Sets the user to whom this historical record belongs.
+     *
+     * @param user The new associated user.
      */
     public void setUser(SaluhudUser user)
     {
         this.user = user;
     }
 
+    /**
+     * Gets the version of the entity.
+     *
+     * @return The version number.
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Sets the version of the entity.
+     *
+     * @param version The new version number.
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

@@ -18,7 +18,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * This class represents the Saluhud administrators stored in the database
+ * This class represents the Saluhud administrators stored in the database. Each
+ * administrator is associated with a user account and has a name. The class
+ * supports versioning for optimistic locking and includes validation for
+ * fields.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -31,7 +34,7 @@ public class SaluhudAdmin implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    
+
     @Column(name = "name", nullable = false)
     @Size(min = 1, max = 200)
     @Pattern(regexp = "^[a-zA-Zà-üÀ-Ü\\s]+$")
@@ -47,15 +50,16 @@ public class SaluhudAdmin implements Serializable
     private Long version;
 
     /**
-     * This a default constructor for the class, with no parameters
+     * Default constructor for the SaluhudAdmin class. It does not initialize
+     * any fields.
      */
     public SaluhudAdmin()
     {
     }
 
-
     /**
-     * This is a parameterized constructor for the class.It takes, his user account.
+     * Parameterized constructor to create a new SaluhudAdmin instance with a
+     * given name and user account.
      *
      * @param name
      * @param userAccount the user account of the admin
@@ -67,19 +71,19 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
-     * Getter for the parameter "id"
+     * Gets the ID of the administrator.
      *
-     * @return the id of the user
+     * @return The ID of the administrator.
      */
     public long getId()
     {
         return id;
-    }  
+    }
 
     /**
-     * Setter for the parameter "id"
-     * 
-     * @param id the id of the user
+     * Sets the ID of the administrator.
+     *
+     * @param id The new ID for the administrator.
      */
     public void setId(long id)
     {
@@ -87,8 +91,9 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
+     * Gets the version of the entity for optimistic locking.
      *
-     * @return
+     * @return The version number of the entity.
      */
     public Long getVersion()
     {
@@ -96,8 +101,9 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
+     * Sets the version of the entity for optimistic locking.
      *
-     * @param version
+     * @param version The new version number of the entity.
      */
     public void setVersion(Long version)
     {
@@ -105,30 +111,34 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
-     * Getter for the parameter "name"
+     * Gets the name of the administrator.
      *
-     * @return the name of the user
+     * @return The name of the administrator.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
-     * Setter for the parameter "name"
+     * Sets the name of the administrator.
      *
-     * @param name the new name of the user
+     * @param name The new name for the administrator.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) {
+        if (this == o)
+        {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
+        {
             return false;
         }
         SaluhudAdmin that = (SaluhudAdmin) o;
@@ -142,8 +152,9 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
+     * Gets the user account associated with this administrator.
      *
-     * @return
+     * @return The user account associated with the administrator.
      */
     public UserAccount getUserAccount()
     {
@@ -151,8 +162,9 @@ public class SaluhudAdmin implements Serializable
     }
 
     /**
+     * Sets the user account associated with this administrator.
      *
-     * @param userAccount
+     * @param userAccount The new user account for the administrator.
      */
     public void setUserAccount(final UserAccount userAccount)
     {

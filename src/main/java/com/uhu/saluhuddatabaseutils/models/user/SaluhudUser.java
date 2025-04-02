@@ -12,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -20,7 +19,9 @@ import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
 /**
- * This class represents the Saluhud mobile app users stored in the database
+ * This class represents the Saluhud mobile app users stored in the database. It
+ * includes user details such as username, password, email, name, surname, and
+ * phone number. It also supports fitness data for the user.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -86,13 +87,13 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the
-     * username, his password and his email.
+     * Parameterized constructor to create a new SaluhudUser instance with a
+     * given username, password, email, and name.
      *
-     * @param username the username used to logging in the app
-     * @param password The password of the user
-     * @param email the email of the user
-     * @param name the name of the user
+     * @param username The username used to log in to the app.
+     * @param password The password of the user.
+     * @param email The email of the user.
+     * @param name The name of the user.
      */
     public SaluhudUser(String username, String password, String email, String name)
     {
@@ -103,15 +104,15 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the
-     * username, his password, his email, name, surname and phone number.
+     * Parameterized constructor to create a new SaluhudUser instance with a
+     * given username, password, email, name, surname, and phone number.
      *
-     * @param username the username used to logging in the app
-     * @param password the password of the user
-     * @param email the email of the user
-     * @param name the name of the user
-     * @param surname the surname of the user
-     * @param phoneNumber the phone number of the user
+     * @param username The username used to log in to the app.
+     * @param password The password of the user.
+     * @param email The email of the user.
+     * @param name The name of the user.
+     * @param surname The surname of the user.
+     * @param phoneNumber The phone number of the user.
      */
     public SaluhudUser(String username, String password, String email,
             String name, String surname, String phoneNumber)
@@ -125,17 +126,17 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the username,
-     * his password, his email, name, surname, phone number and his fitness
+     * Parameterized constructor to create a new SaluhudUser instance with a
+     * given username, password, email, name, surname, phone number, and fitness
      * data.
      *
-     * @param username the username used to logging in the app
-     * @param password the password of the user
-     * @param email the email of the user
-     * @param name the name of the user
-     * @param surname the surname of the user
-     * @param phoneNumber the phone number of the user
-     * @param userFitnessData the fitness data of the user
+     * @param username The username used to log in to the app.
+     * @param password The password of the user.
+     * @param email The email of the user.
+     * @param name The name of the user.
+     * @param surname The surname of the user.
+     * @param phoneNumber The phone number of the user.
+     * @param userFitnessData The fitness data associated with the user.
      */
     public SaluhudUser(String username, String password, String email,
             String name, String surname, String phoneNumber, SaluhudUserFitnessData userFitnessData)
@@ -150,9 +151,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "id"
+     * Gets the ID of the user.
      *
-     * @return the id of the user
+     * @return The ID of the user.
      */
     public long getId()
     {
@@ -160,9 +161,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "id"
+     * Sets the ID of the user.
      *
-     * @param id the id of the user
+     * @param id The new ID for the user.
      */
     public void setId(long id)
     {
@@ -170,9 +171,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "username"
+     * Gets the username of the user.
      *
-     * @return the username of the user
+     * @return The username of the user.
      */
     public String getUsername()
     {
@@ -180,9 +181,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "username"
+     * Sets the username of the user.
      *
-     * @param username the new username
+     * @param username The new username for the user.
      */
     public void setUsername(String username)
     {
@@ -190,9 +191,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "password"
+     * Gets the password of the user.
      *
-     * @return the password of the user
+     * @return The password of the user.
      */
     public String getPassword()
     {
@@ -200,9 +201,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "password"
+     * Sets the password of the user.
      *
-     * @param password the new password
+     * @param password The new password for the user.
      */
     public void setPassword(String password)
     {
@@ -210,9 +211,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "email"
+     * Gets the email of the user.
      *
-     * @return the email of the user
+     * @return The email of the user.
      */
     public String getEmail()
     {
@@ -220,9 +221,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "email"
+     * Sets the email of the user.
      *
-     * @param email the new email of the user
+     * @param email The new email for the user.
      */
     public void setEmail(String email)
     {
@@ -230,9 +231,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "fitnessData"
+     * Gets the fitness data of the user.
      *
-     * @return the fitness data of the user
+     * @return The fitness data associated with the user.
      */
     public SaluhudUserFitnessData getFitnessData()
     {
@@ -240,9 +241,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "fitnessData"
+     * Sets the fitness data of the user.
      *
-     * @param fitnessData the fitness data of the user
+     * @param fitnessData The new fitness data for the user.
      */
     public void setFitnessData(SaluhudUserFitnessData fitnessData)
     {
@@ -250,9 +251,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "name"
+     * Gets the name of the user.
      *
-     * @return the name of the user
+     * @return The name of the user.
      */
     public String getName()
     {
@@ -260,9 +261,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "surname"
+     * Gets the surname of the user.
      *
-     * @return the surname of the user
+     * @return The surname of the user.
      */
     public String getSurname()
     {
@@ -270,9 +271,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Getter for the parameter "phoneNumber"
+     * Gets the phone number of the user.
      *
-     * @return the phone number of the user
+     * @return The phone number of the user.
      */
     public String getPhoneNumber()
     {
@@ -280,9 +281,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "name"
+     * Sets the name of the user.
      *
-     * @param name the new name of the user
+     * @param name The new name for the user.
      */
     public void setName(String name)
     {
@@ -290,9 +291,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "surname"
+     * Sets the surname of the user.
      *
-     * @param surname the new surname of the user
+     * @param surname The new surname for the user.
      */
     public void setSurname(String surname)
     {
@@ -300,9 +301,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
-     * Setter for the parameter "phoneNumber"
+     * Sets the phone number of the user.
      *
-     * @param phoneNumber the new phone number of the user
+     * @param phoneNumber The new phone number for the user.
      */
     public void setPhoneNumber(String phoneNumber)
     {
@@ -310,8 +311,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
+     * Gets the version of the entity for optimistic locking.
      *
-     * @return
+     * @return The version number of the entity.
      */
     public Long getVersion()
     {
@@ -319,8 +321,9 @@ public class SaluhudUser implements Serializable
     }
 
     /**
+     * Sets the version of the entity for optimistic locking.
      *
-     * @param version
+     * @param version The new version number of the entity.
      */
     public void setVersion(Long version)
     {
@@ -330,10 +333,12 @@ public class SaluhudUser implements Serializable
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) {
+        if (this == o)
+        {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
+        {
             return false;
         }
         SaluhudUser that = (SaluhudUser) o;

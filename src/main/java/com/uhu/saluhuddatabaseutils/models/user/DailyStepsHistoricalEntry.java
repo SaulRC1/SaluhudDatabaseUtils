@@ -17,7 +17,8 @@ import jakarta.validation.constraints.NotNull;
 
 /**
  * This class represents one entry in the historical daily steps stored in the
- * database.
+ * database. Each entry records the date, the number of steps taken, the
+ * calories burned, and a step evaluation.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -52,7 +53,7 @@ public class DailyStepsHistoricalEntry implements Serializable
     @JoinColumn(name = "daily_steps_historical_id", nullable = false)
     @NotNull
     private DailyStepsHistorical dailyStepsHistorical;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -65,15 +66,14 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the entry
-     * date of the entry, the done steps, the kilocalories burned and the step
-     * evaluation
+     * Parameterized constructor for the class. It creates a new daily steps
+     * entry with the provided details.
      *
-     * @param entryDate the entry date
-     * @param doneSteps the done steps in the entry
-     * @param kiloCaloriesBurned the amount of kilocalories burned in the entry
-     * @param stepEvaluation the step evaluation of the entry
-     * @param dailyStepsHistorical
+     * @param entryDate The date of the entry.
+     * @param doneSteps The number of steps taken.
+     * @param kiloCaloriesBurned The number of kilocalories burned.
+     * @param stepEvaluation The evaluation of the steps taken.
+     * @param dailyStepsHistorical The historical record this entry belongs to.
      */
     public DailyStepsHistoricalEntry(LocalDate entryDate, int doneSteps,
             double kiloCaloriesBurned, HistoricalEvaluation stepEvaluation,
@@ -87,9 +87,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Getter for the parameter "id"
+     * Gets the ID of the daily steps entry.
      *
-     * @return the id of the daily steps entry
+     * @return The ID of the daily steps entry.
      */
     public long getId()
     {
@@ -97,9 +97,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Setter for the parameter "id"
-     * 
-     * @param id the id of the daily steps entry
+     * Sets the ID of the daily steps entry.
+     *
+     * @param id The new ID for the daily steps entry.
      */
     public void setId(long id)
     {
@@ -107,9 +107,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Getter for the parameter "entryDate"
+     * Gets the entry date for the daily steps.
      *
-     * @return the entry date
+     * @return The date of the daily steps entry.
      */
     public LocalDate getEntryDate()
     {
@@ -117,9 +117,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Setter for the parameter "entryDate"
+     * Sets the entry date for the daily steps.
      *
-     * @param entryDate the new entry date
+     * @param entryDate The new entry date.
      */
     public void setEntryDate(LocalDate entryDate)
     {
@@ -127,9 +127,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Getter for the parameter "doneSteps"
+     * Gets the number of steps taken for this entry.
      *
-     * @return the done steps of the entry
+     * @return The number of steps completed.
      */
     public int getDoneSteps()
     {
@@ -137,9 +137,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Setter for the parameter "doneSteps"
+     * Sets the number of steps taken for this entry.
      *
-     * @param doneSteps the new done steps of the entry
+     * @param doneSteps The new number of steps taken.
      */
     public void setDoneSteps(int doneSteps)
     {
@@ -147,9 +147,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Getter for the parameter "kilocaloriesBurned"
+     * Gets the number of kilocalories burned in this entry.
      *
-     * @return the kilocalories burned of the entry
+     * @return The amount of kilocalories burned.
      */
     public double getKiloCaloriesBurned()
     {
@@ -157,9 +157,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Setter for the parameter "kilocaloriesBurned"
+     * Sets the number of kilocalories burned in this entry.
      *
-     * @param kiloCaloriesBurned the new amount of kilocalories burned
+     * @param kiloCaloriesBurned The new amount of kilocalories burned.
      */
     public void setKiloCaloriesBurned(double kiloCaloriesBurned)
     {
@@ -167,9 +167,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Getter for the parameter "stepEvaluation"
+     * Gets the step evaluation for this entry.
      *
-     * @return the step evaluation of the entry
+     * @return The evaluation of the steps performed.
      */
     public HistoricalEvaluation getStepEvaluation()
     {
@@ -177,9 +177,9 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
-     * Setter for the parameter "stepEvaluation"
+     * Sets the step evaluation for this entry.
      *
-     * @param stepEvaluation the new step evaluation of the entry
+     * @param stepEvaluation The new evaluation of the steps taken.
      */
     public void setStepEvaluation(HistoricalEvaluation stepEvaluation)
     {
@@ -187,31 +187,43 @@ public class DailyStepsHistoricalEntry implements Serializable
     }
 
     /**
+     * Gets the historical record this entry belongs to.
      *
-     * @return
+     * @return The associated historical record.
      */
     public DailyStepsHistorical getDailyStepsHistorical()
     {
         return dailyStepsHistorical;
     }
-    
+
     /**
+     * Sets the historical record this entry belongs to.
      *
-     * @param dailyStepsHistorical
+     * @param dailyStepsHistorical The new historical record.
      */
     public void setDailyStepsHistorical(DailyStepsHistorical dailyStepsHistorical)
     {
         this.dailyStepsHistorical = dailyStepsHistorical;
     }
 
+    /**
+     * Gets the version of the entity.
+     *
+     * @return The version number.
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Sets the version of the entity.
+     *
+     * @param version The new version number.
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

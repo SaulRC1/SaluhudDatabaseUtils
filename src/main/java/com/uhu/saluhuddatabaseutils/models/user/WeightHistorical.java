@@ -32,12 +32,12 @@ public class WeightHistorical implements Serializable
 
     @OneToMany(mappedBy = "weightHistorical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WeightHistoricalEntry> entries;
-    
+
     @OneToOne
     @NotNull
     @JoinColumn(name = "user_id", nullable = false)
     private SaluhudUser user;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -64,7 +64,7 @@ public class WeightHistorical implements Serializable
 
     /**
      * Getter for the parameter "id"
-     * 
+     *
      * @return the id of the weight historical
      */
     public long getId()
@@ -74,13 +74,13 @@ public class WeightHistorical implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id the new id of the weight historical
      */
     public void setId(long id)
     {
         this.id = id;
-    }   
+    }
 
     /**
      * Getter for the parameter "entries"
@@ -104,7 +104,7 @@ public class WeightHistorical implements Serializable
 
     /**
      * Getter for the parameter "user"
-     * 
+     *
      * @return the user which the historical belongs to
      */
     public SaluhudUser getUser()
@@ -114,7 +114,7 @@ public class WeightHistorical implements Serializable
 
     /**
      * Setter for the parameter "user"
-     * 
+     *
      * @param user the new user which the historical belongs to
      */
     public void setUser(SaluhudUser user)
@@ -122,14 +122,24 @@ public class WeightHistorical implements Serializable
         this.user = user;
     }
 
+    /**
+     * Getter for the version field.
+     *
+     * @return the version of the entity
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Setter for the version field.
+     *
+     * @param version the new version of the entity
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

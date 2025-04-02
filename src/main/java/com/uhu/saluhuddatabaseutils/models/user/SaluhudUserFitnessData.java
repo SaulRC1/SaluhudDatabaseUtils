@@ -10,14 +10,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 /**
- * This class represents the fitness information of an user stored in the
- * database
+ * This class represents the fitness information of a user stored in the
+ * database. It includes attributes such as weight, height, biological sex, age,
+ * body composition, recommended daily water intake, sleep hours, daily steps,
+ * kilocalorie objective, and body mass index. The class is linked to the
+ * `SaluhudUser` entity, representing the user to which the fitness data
+ * belongs.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -67,10 +70,10 @@ public class SaluhudUserFitnessData implements Serializable
     @Column(name = "body_mass_index")
     @Size(min = 2, max = 40)
     private String bodyMassIndex;
-    
+
     @OneToOne(mappedBy = "fitnessData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SaluhudUser saluhudUser;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -104,7 +107,7 @@ public class SaluhudUserFitnessData implements Serializable
      * user
      * @param bodyMassIndex the body mass index for the user
      * @param user the user where the information belongs to
-     * 
+     *
      */
     public SaluhudUserFitnessData(double weight, double height, String biologicalSex,
             int age, String bodyComposition, int recommendedDailyWaterLiters,
@@ -123,7 +126,7 @@ public class SaluhudUserFitnessData implements Serializable
         this.bodyMassIndex = bodyMassIndex;
         this.saluhudUser = user;
     }
-    
+
     /**
      *
      * This is a parameterized constructor for the class.It takes, the weight of
@@ -276,7 +279,7 @@ public class SaluhudUserFitnessData implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id the id of the user fitness data
      */
     public void setId(long id)
@@ -386,11 +389,21 @@ public class SaluhudUserFitnessData implements Serializable
         this.bodyMassIndex = bodyMassIndex;
     }
 
+    /**
+     * Getter for the version field.
+     *
+     * @return the version of the entity
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Setter for the version field.
+     *
+     * @param version the new version of the entity
+     */
     public void setVersion(Long version)
     {
         this.version = version;
@@ -398,7 +411,7 @@ public class SaluhudUserFitnessData implements Serializable
 
     /**
      * Getter for the parameter "saluhudUser"
-     * 
+     *
      * @return the saluhud user
      */
     public SaluhudUser getSaluhudUser()
@@ -408,12 +421,12 @@ public class SaluhudUserFitnessData implements Serializable
 
     /**
      * Setter for the parameter "saluhudUser"
-     * 
+     *
      * @param saluhudUser the new saluhudUser
      */
     public void setSaluhudUser(SaluhudUser saluhudUser)
     {
         this.saluhudUser = saluhudUser;
     }
-   
+
 }

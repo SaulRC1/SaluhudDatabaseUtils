@@ -32,12 +32,12 @@ public class SleepHistorical implements Serializable
 
     @OneToMany(mappedBy = "sleepHistorical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SleepHistoricalEntry> entries;
-    
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private SaluhudUser user;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -50,8 +50,8 @@ public class SleepHistorical implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, a list of
-     * sleep entries
+     * This is a parameterized constructor for the class. It takes a list of
+     * sleep entries and the user associated with the historical data.
      *
      * @param entries the list of sleep historical entries
      * @param user the user which the historical belongs to
@@ -74,7 +74,7 @@ public class SleepHistorical implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id the id the of sleep historical
      */
     public void setId(long id)
@@ -104,7 +104,7 @@ public class SleepHistorical implements Serializable
 
     /**
      * Getter for the parameter "user"
-     * 
+     *
      * @return the user which the historical belongs to
      */
     public SaluhudUser getUser()
@@ -114,7 +114,7 @@ public class SleepHistorical implements Serializable
 
     /**
      * Setter for the parameter "user"
-     * 
+     *
      * @param user the new user which the historical belongs to
      */
     public void setUser(SaluhudUser user)
@@ -122,14 +122,24 @@ public class SleepHistorical implements Serializable
         this.user = user;
     }
 
+    /**
+     * Getter for the version field.
+     *
+     * @return the version of the entity
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Setter for the version field.
+     *
+     * @param version the new version of the entity
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

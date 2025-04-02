@@ -53,7 +53,7 @@ public class WeightHistoricalEntry implements Serializable
     @JoinColumn(name = "weight_historical_id", nullable = false)
     @NotNull
     private WeightHistorical weightHistorical;
-    
+
     @Version
     @Column(name = "entity_version")
     private Long version;
@@ -99,7 +99,7 @@ public class WeightHistoricalEntry implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id the id of the entry
      */
     public void setId(long id)
@@ -200,22 +200,33 @@ public class WeightHistoricalEntry implements Serializable
 
     /**
      * Setter for the parameter "weightHistorical"
-     * 
-     * @param weightHistorical the new weight historical which the entry belongs to
+     *
+     * @param weightHistorical the new weight historical which the entry belongs
+     * to
      */
     public void setWeightHistorical(WeightHistorical weightHistorical)
     {
         this.weightHistorical = weightHistorical;
     }
 
+    /**
+     * Getter for the version field.
+     *
+     * @return the version of the entity
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Setter for the version field.
+     *
+     * @param version the new version of the entity
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

@@ -15,6 +15,9 @@ import java.util.Objects;
 
 /**
  *
+ * Represents the relationship between a recipe and an ingredient, including the
+ * quantity and unit of measurement.
+ *
  * @author Juan Alberto Domínguez Vázquez
  */
 @Entity
@@ -46,7 +49,7 @@ public class RecipeIngredient implements Serializable
     private Long version;
 
     /**
-     *
+     * Default constructor.
      */
     public RecipeIngredient()
     {
@@ -54,12 +57,14 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
+     * Constructs a new RecipeIngredient with the specified details.
      *
-     * @param id
-     * @param recipe
-     * @param ingredient
-     * @param quantity
-     * @param unit
+     * @param id The composite key identifying the recipe-ingredient
+     * relationship.
+     * @param recipe The recipe associated with this ingredient.
+     * @param ingredient The ingredient used in the recipe.
+     * @param quantity The quantity of the ingredient.
+     * @param unit The unit of measurement.
      */
     public RecipeIngredient(RecipeIngredientId id, Recipe recipe, Ingredient ingredient,
             BigDecimal quantity, String unit)
@@ -72,11 +77,12 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
+     * Constructs a new RecipeIngredient without specifying an ID.
      *
-     * @param recipe
-     * @param ingredient
-     * @param quantity
-     * @param unit
+     * @param recipe The recipe associated with this ingredient.
+     * @param ingredient The ingredient used in the recipe.
+     * @param quantity The quantity of the ingredient.
+     * @param unit The unit of measurement.
      */
     public RecipeIngredient(Recipe recipe, Ingredient ingredient,
             BigDecimal quantity, String unit)
@@ -87,21 +93,34 @@ public class RecipeIngredient implements Serializable
         this.unit = unit;
     }
 
+    /**
+     * Gets the ID of the ingredient.
+     *
+     * @return The ingredient ID, or null if not set.
+     */
     @Transient
     public Long getIngredientId()
     {
         return ingredient != null ? ingredient.getId() : null;
     }
 
+    /**
+     * Sets the ingredient ID and updates the associated ingredient reference.
+     *
+     * @param id The new ingredient ID.
+     */
     public void setIngredientId(Long id)
     {
-        if (id != null) {
-            if (this.id == null) {
+        if (id != null)
+        {
+            if (this.id == null)
+            {
                 this.id = new RecipeIngredientId();
             }
             // Configuramos la parte del ID compuesta para el ingrediente
             this.id.setIdIngredient(id);
-            if (this.ingredient == null) {
+            if (this.ingredient == null)
+            {
                 this.ingredient = new Ingredient();
             }
             this.ingredient.setId(id);
@@ -109,8 +128,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The composite ID of this RecipeIngredient.
      */
     public RecipeIngredientId getId()
     {
@@ -118,8 +136,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param id
+     * @param id The new composite ID for this RecipeIngredient.
      */
     public void setId(RecipeIngredientId id)
     {
@@ -127,8 +144,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The recipe associated with this ingredient.
      */
     public Recipe getRecipe()
     {
@@ -136,8 +152,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param recipe
+     * @param recipe The new recipe for this RecipeIngredient.
      */
     public void setRecipe(Recipe recipe)
     {
@@ -145,8 +160,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The ingredient associated with this RecipeIngredient.
      */
     public Ingredient getIngredient()
     {
@@ -154,8 +168,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param ingredient
+     * @param ingredient The new ingredient for this RecipeIngredient.
      */
     public void setIngredient(Ingredient ingredient)
     {
@@ -163,8 +176,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The quantity of the ingredient in the recipe.
      */
     public BigDecimal getQuantity()
     {
@@ -172,8 +184,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param quantity
+     * @param quantity The new quantity of the ingredient.
      */
     public void setQuantity(BigDecimal quantity)
     {
@@ -181,8 +192,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The unit of measurement for the quantity.
      */
     public String getUnit()
     {
@@ -190,8 +200,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param unit
+     * @param unit The new unit of measurement.
      */
     public void setUnit(String unit)
     {
@@ -199,8 +208,7 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The version number of the entity.
      */
     public Long getVersion()
     {
@@ -208,18 +216,13 @@ public class RecipeIngredient implements Serializable
     }
 
     /**
-     *
-     * @param version
+     * @param version The new version value.
      */
     public void setVersion(Long version)
     {
         this.version = version;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int hashCode()
     {
@@ -228,21 +231,19 @@ public class RecipeIngredient implements Serializable
         return hash;
     }
 
-    /**
-     *
-     * @param obj
-     * @return
-     */
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj) {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final RecipeIngredient other = (RecipeIngredient) obj;

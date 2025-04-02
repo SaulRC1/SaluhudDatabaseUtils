@@ -20,9 +20,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- *
- * This class represents the recipes stored in the database, composed of a list
- * of ingredients.
+ * Represents a recipe stored in the database, composed of a list of
+ * ingredients, allergens, and preparation steps. Each recipe contains a name,
+ * description, ingredient details, and nutritional information such as
+ * kilocalories.
  */
 @Entity
 @Table(name = "recipe")
@@ -44,13 +45,14 @@ public class Recipe implements Serializable
 
     @Column(name = "ingredients_description")
     private String ingredientsDescription;
-    
+
     @Column(name = "kilocalories")
     private int kilocalories;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade
-            = {
+            =
+            {
                 CascadeType.MERGE
             })
     @JoinTable(name = "RECIPE_ALLERGENIC",
@@ -77,18 +79,16 @@ public class Recipe implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the id, the
-     * name, the description and the ingredients description of a Recipe
+     * Parameterized constructor.
      *
-     * @param id The id of the recipe
-     * @param name The name of the recipe
-     * @param description The description of the recipe
-     * @param ingredientsDescription The description of all ingredients of the
-     * recipe
-     * @param allergenics The set of all allergenics of the recipe
-     * @param elaborationSteps The list of all steps of the recipe
-     * @param recipeIngredients 
-     * @param kilocalories 
+     * @param id The unique identifier for the recipe.
+     * @param name The name of the recipe.
+     * @param description A description of the recipe.
+     * @param ingredientsDescription A detailed description of the ingredients.
+     * @param allergenics A set of allergens present in the recipe.
+     * @param elaborationSteps A list of preparation steps for the recipe.
+     * @param recipeIngredients A list of ingredients used in the recipe.
+     * @param kilocalories The total kilocalories of the recipe.
      */
     public Recipe(long id, String name, String description,
             String ingredientsDescription,
@@ -106,14 +106,12 @@ public class Recipe implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the
-     * name, the description and the ingredients description of a Recipe
+     * Constructor for creating a recipe without allergens and preparation steps.
      *
-     * @param name The name of the recipe
-     * @param description The description of the recipe
-     * @param ingredientsDescription The description of all ingredients of the
-     * recipe
-     * @param kilocalories
+     * @param name The name of the recipe.
+     * @param description A description of the recipe.
+     * @param ingredientsDescription A detailed description of the ingredients.
+     * @param kilocalories The total kilocalories of the recipe.
      */
     public Recipe(String name, String description, String ingredientsDescription,
             int kilocalories)
@@ -134,6 +132,11 @@ public class Recipe implements Serializable
         return id;
     }
 
+    /**
+     * Sets the ID of the recipe.
+     *
+     * @param id The unique identifier to set.
+     */
     public void setId(long id)
     {
         this.id = id;
@@ -168,7 +171,6 @@ public class Recipe implements Serializable
     {
         return ingredientsDescription;
     }
-
 
     /**
      * Getter for the parameter "allergenics"
@@ -221,7 +223,6 @@ public class Recipe implements Serializable
         this.ingredientsDescription = ingredientsDescription;
     }
 
-
     /**
      * Setter for the parameter "allergenics"
      *
@@ -243,8 +244,7 @@ public class Recipe implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The list of ingredients used in the recipe.
      */
     public List<RecipeIngredient> getRecipeIngredients()
     {
@@ -252,8 +252,9 @@ public class Recipe implements Serializable
     }
 
     /**
+     * Sets the ingredients of the recipe.
      *
-     * @param recipeIngredients
+     * @param recipeIngredients The new list of ingredients.
      */
     public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients)
     {
@@ -261,8 +262,7 @@ public class Recipe implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The total kilocalories of the recipe.
      */
     public int getKilocalories()
     {
@@ -270,19 +270,28 @@ public class Recipe implements Serializable
     }
 
     /**
+     * Sets the kilocalories of the recipe.
      *
-     * @param kilocalories
+     * @param kilocalories The new kilocalories value.
      */
     public void setKilocalories(int kilocalories)
     {
         this.kilocalories = kilocalories;
     }
 
+    /**
+     * @return The version number of the entity.
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Sets the version of the entity.
+     *
+     * @param version The new version number.
+     */
     public void setVersion(Long version)
     {
         this.version = version;

@@ -64,7 +64,8 @@ public class Ingredient implements Serializable
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade
-            = {
+            =
+            {
                 CascadeType.MERGE
             })
     @JoinTable(
@@ -317,13 +318,16 @@ public class Ingredient implements Serializable
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj) {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Ingredient other = (Ingredient) obj;
@@ -331,8 +335,7 @@ public class Ingredient implements Serializable
     }
 
     /**
-     *
-     * @return
+     * @return The version number of the entity.
      */
     public Long getVersion()
     {
@@ -340,8 +343,9 @@ public class Ingredient implements Serializable
     }
 
     /**
+     * Sets the version of the entity.
      *
-     * @param version
+     * @param version The new version number.
      */
     public void setVersion(Long version)
     {

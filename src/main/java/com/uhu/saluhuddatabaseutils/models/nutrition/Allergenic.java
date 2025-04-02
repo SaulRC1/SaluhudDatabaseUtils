@@ -46,11 +46,10 @@ public class Allergenic implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the id and
-     * the name of an Allergenic
+     * Constructs an Allergenic with an ID and name.
      *
-     * @param id The id of the Allergenic
-     * @param name The name of the Allergenic
+     * @param id The unique identifier of the allergen.
+     * @param name The name of the allergen.
      */
     public Allergenic(long id, String name)
     {
@@ -59,10 +58,9 @@ public class Allergenic implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class.It takes, the name of
-     * an Allergenic
+     * Constructs an Allergenic with a specified name.
      *
-     * @param name The name of the Allergenic
+     * @param name The name of the allergen.
      */
     public Allergenic(String name)
     {
@@ -81,7 +79,7 @@ public class Allergenic implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id The id of the Allergenic
      */
     public void setId(long id)
@@ -110,8 +108,9 @@ public class Allergenic implements Serializable
     }
 
     /**
+     * Gets the version of the entity.
      *
-     * @return
+     * @return The version number of the entity.
      */
     public Long getVersion()
     {
@@ -119,8 +118,9 @@ public class Allergenic implements Serializable
     }
 
     /**
+     * Sets the version of the entity.
      *
-     * @param version
+     * @param version The new version number of the entity.
      */
     public void setVersion(Long version)
     {
@@ -128,9 +128,9 @@ public class Allergenic implements Serializable
     }
 
     /**
-     * Getter for the parameters "ingredients"
+     * Gets the list of ingredients that contain the allergen.
      *
-     * @return the ingredients that contain the allergen
+     * @return A list of ingredients associated with this allergen.
      */
     public List<Ingredient> getIngredients()
     {
@@ -138,9 +138,10 @@ public class Allergenic implements Serializable
     }
 
     /**
-     * Setter for the parameters "ingredients"
+     * Sets the list of ingredients that contain the allergen.
      *
-     * @param ingredients the new list of ingredients that contain the allergen
+     * @param ingredients The new list of ingredients associated with this
+     * allergen.
      */
     public void setIngredients(List<Ingredient> ingredients)
     {
@@ -158,13 +159,16 @@ public class Allergenic implements Serializable
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj) {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Allergenic other = (Allergenic) obj;

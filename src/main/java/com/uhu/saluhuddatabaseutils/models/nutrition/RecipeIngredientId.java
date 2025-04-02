@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * Represents the composite primary key for the RecipeIngredient entity. This
+ * class is marked as @Embeddable to be used as an embedded ID.
  *
  * @author Juan Alberto Domínguez Vázquez
  */
@@ -20,7 +22,7 @@ public class RecipeIngredientId implements Serializable
     private long idRecipe;
 
     /**
-     *
+     * Default constructor.
      */
     public RecipeIngredientId()
     {
@@ -28,9 +30,11 @@ public class RecipeIngredientId implements Serializable
     }
 
     /**
+     * Constructs a new RecipeIngredientId with the specified ingredient and
+     * recipe IDs.
      *
-     * @param idIngredient
-     * @param idRecipe
+     * @param idIngredient The ID of the ingredient.
+     * @param idRecipe The ID of the recipe.
      */
     public RecipeIngredientId(long idIngredient, long idRecipe)
     {
@@ -39,8 +43,9 @@ public class RecipeIngredientId implements Serializable
     }
 
     /**
+     * Gets the ingredient ID.
      *
-     * @return
+     * @return The ingredient ID.
      */
     public long getIdIngredient()
     {
@@ -48,8 +53,9 @@ public class RecipeIngredientId implements Serializable
     }
 
     /**
+     * Sets the ingredient ID.
      *
-     * @param idIngredient
+     * @param idIngredient The new ingredient ID.
      */
     public void setIdIngredient(long idIngredient)
     {
@@ -57,8 +63,9 @@ public class RecipeIngredientId implements Serializable
     }
 
     /**
+     * Gets the recipe ID.
      *
-     * @return
+     * @return The recipe ID.
      */
     public long getIdRecipe()
     {
@@ -66,18 +73,15 @@ public class RecipeIngredientId implements Serializable
     }
 
     /**
+     * Sets the recipe ID.
      *
-     * @param idRecipe
+     * @param idRecipe The new recipe ID.
      */
     public void setIdRecipe(long idRecipe)
     {
         this.idRecipe = idRecipe;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int hashCode()
     {
@@ -87,34 +91,29 @@ public class RecipeIngredientId implements Serializable
         return hash;
     }
 
-    /**
-     *
-     * @param obj
-     * @return
-     */
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj) {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final RecipeIngredientId other = (RecipeIngredientId) obj;
-        if (!Objects.equals(this.idIngredient, other.idIngredient)) {
+        if (!Objects.equals(this.idIngredient, other.idIngredient))
+        {
             return false;
         }
         return Objects.equals(this.idRecipe, other.idRecipe);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString()
     {

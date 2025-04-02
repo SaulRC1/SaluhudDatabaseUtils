@@ -15,7 +15,11 @@ import jakarta.validation.constraints.NotNull;
 
 /**
  *
- * This class represent one step of the proccess of elaboration of the recipe
+ * Represents a single step in the process of elaborating a recipe. Each step
+ * contains a description, a sequence number, and is linked to a specific
+ * recipe.
+ *
+ * @author Juan Alberto Domínguez Vázquez
  */
 @Entity
 @Table(name = "recipe_elaboration_step")
@@ -34,15 +38,15 @@ public class RecipeElaborationStep implements Serializable
     @Column(name = "step_number", nullable = false)
     @NotNull
     private int stepNumber;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_recipe", nullable = false)
-    private Recipe recipe; 
-    
+    private Recipe recipe;
+
     @Version
     @Column(name = "entity_version")
     private Long version;
-    
+
     /**
      * This a default constructor for the class, with no parameters
      */
@@ -52,12 +56,12 @@ public class RecipeElaborationStep implements Serializable
     }
 
     /**
-     * This is a parameterized constructor for the class. It takes, the id, the
-     * step description and the step number
+     * Constructs a new RecipeElaborationStep with an ID, step description, and
+     * step number.
      *
-     * @param id The id of the Step
-     * @param stepDescription The description of the Step
-     * @param stepNumber The number of the Step
+     * @param id The unique identifier of the step.
+     * @param stepDescription The description of the step.
+     * @param stepNumber The sequence number of the step.
      */
     public RecipeElaborationStep(long id, String stepDescription, int stepNumber)
     {
@@ -65,14 +69,14 @@ public class RecipeElaborationStep implements Serializable
         this.stepDescription = stepDescription;
         this.stepNumber = stepNumber;
     }
-    
+
     /**
-     * This is a parameterized constructor for the class. It takes, the
-     * step description, the step number and his recipe.
+     * Constructs a new RecipeElaborationStep with a step description, step
+     * number, and an associated recipe.
      *
-     * @param stepDescription The description of the Step
-     * @param stepNumber The number of the Step
-     * @param recipe The recipe which the step belongs to
+     * @param stepDescription The description of the step.
+     * @param stepNumber The sequence number of the step.
+     * @param recipe The recipe to which this step belongs.
      */
     public RecipeElaborationStep(String stepDescription, int stepNumber,
             Recipe recipe)
@@ -94,7 +98,7 @@ public class RecipeElaborationStep implements Serializable
 
     /**
      * Setter for the parameter "id"
-     * 
+     *
      * @param id The id of the Step
      */
     public void setId(long id)
@@ -144,7 +148,7 @@ public class RecipeElaborationStep implements Serializable
 
     /**
      * Getter for the parameter "recipe"
-     * 
+     *
      * @return the recipe which the step belongs to
      */
     public Recipe getRecipe()
@@ -154,7 +158,7 @@ public class RecipeElaborationStep implements Serializable
 
     /**
      * Setter for the parameter "recipe"
-     * 
+     *
      * @param recipe the new recipe which the step belongs to
      */
     public void setRecipe(Recipe recipe)
@@ -162,14 +166,22 @@ public class RecipeElaborationStep implements Serializable
         this.recipe = recipe;
     }
 
+    /**
+     * @return The version number of the entity.
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Sets the version of the entity.
+     *
+     * @param version The new version number.
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
-    
+
 }

@@ -16,6 +16,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
+ * This class is responsible for scraping ingredients data from a website using
+ * Selenium WebDriver. It retrieves information about ingredients such as name,
+ * kilocalories, fats, carbs, and proteins, and generates SQL insert statements
+ * to store the data in a database.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -24,7 +28,11 @@ public class IngredientsWebscraping
 
     private final WebDriver driver;
 
-    // Constructor por defecto que crea un nuevo WebDriver
+    /**
+     * Default constructor that initializes the WebDriver with ChromeDriver. It
+     * sets up Selenium WebDriver with the necessary options to avoid
+     * certificate errors.
+     */
     public IngredientsWebscraping()
     {
         // Configuración de Selenium WebDriver
@@ -34,6 +42,15 @@ public class IngredientsWebscraping
         this.driver = new ChromeDriver(options);
     }
 
+    /**
+     * Scrapes the ingredients data from the website and returns a list of
+     * ingredients. It extracts information such as name, kilocalories, fats,
+     * carbs, and proteins for each ingredient.
+     *
+     * @return A list of Ingredient objects containing the scraped data.
+     * @throws IOException If an I/O error occurs during the process.
+     * @throws InterruptedException If the thread is interrupted during sleep.
+     */
     public List<Ingredient> getIngredientsWebscraping() throws IOException, InterruptedException
     {
         //Conectamos con la url deseada
@@ -64,7 +81,8 @@ public class IngredientsWebscraping
         List<Ingredient> listIngredients = new ArrayList<>();
 
         // Iterar sobre cada fila de la tabla (cada ingrediente)
-        for (int i = 1; i < ingredientRows.size(); i++) {
+        for (int i = 1; i < ingredientRows.size(); i++)
+        {
             WebElement row = ingredientRows.get(i);
 
             // Hacer clic en el ingrediente
@@ -79,18 +97,23 @@ public class IngredientsWebscraping
 
             int kilocalories = 0, fats = 0, carbs = 0, proteins = 0;
 
-            if (isElementPresent(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/h4[1]"))) {
+            if (isElementPresent(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/h4[1]")))
+            {
 
                 if (name.matches("Cabrito lechal,.*")
                         || name.matches("Carne de cerdo de capa blanca.*")
-                        || name.matches("Cordero l.*")) {
+                        || name.matches("Cordero l.*"))
+                {
 
                     // Extraer grasas
                     WebElement fatElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[3]/tr/td[2]"));
                     String fatsStr = fatElement.getText();
-                    if (fatsStr.equals("traza")) {
+                    if (fatsStr.equals("traza"))
+                    {
                         fats = 0;
-                    } else {
+                    }
+                    else
+                    {
                         fats = (int) Double.parseDouble(fatsStr);
                     }
 
@@ -102,7 +125,8 @@ public class IngredientsWebscraping
                     Pattern pattern = Pattern.compile("\\s*\\((\\d+)\\)\\s*");
                     Matcher matcher = pattern.matcher(calories);
                     String kilocaloriesStr = null;
-                    if (matcher.find()) {
+                    if (matcher.find())
+                    {
                         kilocaloriesStr = matcher.group(1); // Obtiene el número entre paréntesis
                         System.out.println("Kilocalorias: " + kilocaloriesStr);
                     }
@@ -111,59 +135,85 @@ public class IngredientsWebscraping
                     //Extraer proteinas
                     WebElement proteinElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[4]/tr/td[2]"));
                     String proteinsStr = proteinElement.getText();
-                    if (proteinsStr.equals("traza")) {
+                    if (proteinsStr.equals("traza"))
+                    {
                         proteins = 0;
-                    } else {
+                    }
+                    else
+                    {
                         proteins = (int) Double.parseDouble(proteinsStr);
                     }
 
                     // Extraer carbohidratos
                     WebElement carbsElement;
                     if (name.matches("Cabrito lechal,.*")
-                            || name.matches("Cordero lechal, costillar, asado")) {
+                            || name.matches("Cordero lechal, costillar, asado"))
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[8]/tr/td[2]"));
-                    } else if (name.matches("Cordero lechal, costillar, crudo")
+                    }
+                    else if (name.matches("Cordero lechal, costillar, crudo")
                             || name.matches("Cordero lechal, espalda, crudo")
                             || name.matches("Cordero lechal, pierna, crudo")
-                            || name.matches("Cordero ligero.*")) {
+                            || name.matches("Cordero ligero.*"))
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[7]/tr/td[2]"));
-                    } else {
+                    }
+                    else
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[9]/tr/td[2]"));
                     }
                     String carbsStr = carbsElement.getText();
-                    if (carbsStr.equals("traza")) {
+                    if (carbsStr.equals("traza"))
+                    {
                         carbs = 0;
-                    } else {
+                    }
+                    else
+                    {
                         carbs = (int) Double.parseDouble(carbsStr);
                     }
 
-                } else if (name.equals("")) {
+                }
+                else if (name.equals(""))
+                {
                     System.out.println("Datos no disponibles para el ingrediente: " + name);
-                } else {
+                }
+                else
+                {
                     // Extraer grasas
                     WebElement fatElement;
-                    if (name.equalsIgnoreCase("Zumo de uva")) {
+                    if (name.equalsIgnoreCase("Zumo de uva"))
+                    {
                         fatElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody/tr[5]/td[2]"));
-                    } else {
+                    }
+                    else
+                    {
                         fatElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[4]/tr/td[2]"));
                     }
 
                     String fatsStr = fatElement.getText();
-                    if (fatsStr.equals("traza") || fatsStr.equals("-")) {
+                    if (fatsStr.equals("traza") || fatsStr.equals("-"))
+                    {
                         fats = 0;
-                    } else {
+                    }
+                    else
+                    {
                         fats = (int) Double.parseDouble(fatsStr);
                     }
 
                     // Extraer calorías
                     WebElement caloriesElement;
-                    if (name.equalsIgnoreCase("Nispero, conserva en su jugo")) {
+                    if (name.equalsIgnoreCase("Nispero, conserva en su jugo"))
+                    {
                         caloriesElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[1]/tr[4]/td[2]"));
                         kilocalories = 0;
-                    } else if (name.equalsIgnoreCase("Zumo de uva")) {
+                    }
+                    else if (name.equalsIgnoreCase("Zumo de uva"))
+                    {
                         caloriesElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody/tr[4]/td[2]"));
                         kilocalories = 0;
-                    } else {
+                    }
+                    else
+                    {
                         caloriesElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[3]/tr/td[2]"));
                         String calories = caloriesElement.getText();
                         System.out.println("Valor sin parsear: " + calories);
@@ -171,7 +221,8 @@ public class IngredientsWebscraping
                         Pattern pattern = Pattern.compile("\\s*\\((\\d+)\\)\\s*");
                         Matcher matcher = pattern.matcher(calories);
                         String kilocaloriesStr = null;
-                        if (matcher.find()) {
+                        if (matcher.find())
+                        {
                             kilocaloriesStr = matcher.group(1); // Obtiene el número entre paréntesis
                             System.out.println("Kilocalorias: " + kilocaloriesStr);
                         }
@@ -180,15 +231,21 @@ public class IngredientsWebscraping
 
                     // Extraer proteínas
                     WebElement proteinElement;
-                    if (name.equalsIgnoreCase("Zumo de uva")) {
+                    if (name.equalsIgnoreCase("Zumo de uva"))
+                    {
                         proteinElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody/tr[6]/td[2]"));
-                    } else {
+                    }
+                    else
+                    {
                         proteinElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[5]/tr/td[2]"));
                     }
                     String proteinsStr = proteinElement.getText();
-                    if (proteinsStr.equals("traza") || proteinsStr.equals("-")) {
+                    if (proteinsStr.equals("traza") || proteinsStr.equals("-"))
+                    {
                         proteins = 0;
-                    } else {
+                    }
+                    else
+                    {
                         proteins = (int) Double.parseDouble(proteinsStr);
                     }
 
@@ -199,19 +256,29 @@ public class IngredientsWebscraping
                             || name.equalsIgnoreCase("Menta, fresca")
                             || name.equalsIgnoreCase("Mousse de yogur, con frutas")
                             || name.equalsIgnoreCase("Mousse de yogur, natural")
-                            || name.equalsIgnoreCase("Seitán")) {
+                            || name.equalsIgnoreCase("Seitán"))
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[8]/tr/td[2]"));
-                    } else if (name.equalsIgnoreCase("Nispero, conserva en su jugo")) {
+                    }
+                    else if (name.equalsIgnoreCase("Nispero, conserva en su jugo"))
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[1]/tr[10]/td[2]"));
-                    } else if (name.equalsIgnoreCase("Zumo de uva")) {
+                    }
+                    else if (name.equalsIgnoreCase("Zumo de uva"))
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody/tr[10]/td[2]"));
-                    } else {
+                    }
+                    else
+                    {
                         carbsElement = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table[3]/tbody[9]/tr/td[2]"));
                     }
                     String carbsStr = carbsElement.getText();
-                    if (carbsStr.equals("traza") || carbsStr.equals("-")) {
+                    if (carbsStr.equals("traza") || carbsStr.equals("-"))
+                    {
                         carbs = 0;
-                    } else {
+                    }
+                    else
+                    {
                         carbs = (int) Double.parseDouble(carbsStr);
                     }
                 }
@@ -230,7 +297,9 @@ public class IngredientsWebscraping
                 ingredientsTable = driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/table/tbody"));
                 ingredientRows = ingredientsTable.findElements(By.tagName("tr"));
 
-            } else {
+            }
+            else
+            {
                 System.out.println("Datos no disponibles para el ingrediente: " + name);
             }
         }
@@ -244,32 +313,46 @@ public class IngredientsWebscraping
     }
 
     /**
+     * Generates an SQL file containing insert statements for the given list of
+     * ingredients. The SQL file will insert the ingredients data into a
+     * database table.
      *
-     * @param ingredients
+     * @param ingredients A list of Ingredient objects to be converted into SQL
+     * insert statements.
      */
     public void generateIngredientSQL(List<Ingredient> ingredients)
     {
         // Escribir datos en archivo SQL
-        try (FileWriter writer = new FileWriter("ingredients.sql")) {
-            for (Ingredient ingredient : ingredients) {
+        try (FileWriter writer = new FileWriter("ingredients.sql"))
+        {
+            for (Ingredient ingredient : ingredients)
+            {
                 String sql = String.format(
                         "INSERT INTO INGREDIENT (name, kilocalories, protein_amount, carbohydrates_amount, fat_amount) VALUES ('%s', %d, %d, %d, %d);\n",
                         ingredient.getName(), ingredient.getKilocalories(), ingredient.getProteinAmount(), ingredient.getCarbohydratesAmount(), ingredient.getFatAmount()
                 );
                 writer.write(sql);
             }
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(IngredientsWebscraping.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // Verificar si un elemento está presente en la página
+    /**
+     * Checks if an element is present in the current page.
+     *
+     * @param by The locator for the element to check.
+     * @return True if the element is present, false otherwise.
+     */
     private boolean isElementPresent(By by)
     {
-        try {
+        try
+        {
             driver.findElement(by);
             return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoSuchElementException e)
+        {
             return false;
         }
     }

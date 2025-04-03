@@ -14,12 +14,16 @@ import jakarta.validation.Valid;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.user.AdministrationPortalDailyStepsHistoricalEntryRepository;
 
 /**
+ * Service class responsible for managing daily step historical entries.
+ * Provides functionality to save, update, delete, and retrieve daily step
+ * historical data.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
 @Service
 @Transactional(readOnly = true, transactionManager = "saluhudAdministrationPortalTransactionManager")
-public class AdministrationPortalDailyStepsHistoricalEntryService {
+public class AdministrationPortalDailyStepsHistoricalEntryService
+{
 
     @Autowired
     private AdministrationPortalDailyStepsHistoricalEntryRepository dailyStepsHistoricalEntryRepository;
@@ -27,28 +31,33 @@ public class AdministrationPortalDailyStepsHistoricalEntryService {
     private static final Logger logger = Logger.getLogger(AdministrationPortalDailyStepsHistoricalEntryService.class.getName());
 
     /**
-     * Guarda una nueva entrada de pasos diarios.
+     * Saves a new daily steps historical entry.
      *
-     * @param dailyStepsHistoricalEntry La entrada de pasos diarios a guardar.
+     * @param dailyStepsHistoricalEntry The daily steps historical entry to
+     * save.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void saveDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
+    public void saveDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry)
+    {
         this.dailyStepsHistoricalEntryRepository.save(dailyStepsHistoricalEntry);
     }
 
     /**
-     * Actualiza una entrada de pasos diarios existente.
+     * Updates an existing daily steps historical entry.
      *
-     * @param dailyStepsHistoricalEntry La entrada de pasos diarios a
-     * actualizar.
+     * @param dailyStepsHistoricalEntry The daily steps historical entry to
+     * update.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void updateDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
-        try {
+    public void updateDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry)
+    {
+        try
+        {
             Optional<DailyStepsHistoricalEntry> result;
             result = this.dailyStepsHistoricalEntryRepository.findById(dailyStepsHistoricalEntry.getId());
 
-            if (result.isPresent()) {
+            if (result.isPresent())
+            {
                 DailyStepsHistoricalEntry existingDailyStepsEntry = result.get();
                 existingDailyStepsEntry.setDailyStepsHistorical(dailyStepsHistoricalEntry.getDailyStepsHistorical());
                 existingDailyStepsEntry.setDoneSteps(dailyStepsHistoricalEntry.getDoneSteps());
@@ -58,104 +67,114 @@ public class AdministrationPortalDailyStepsHistoricalEntryService {
 
                 this.dailyStepsHistoricalEntryRepository.save(existingDailyStepsEntry);
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error updating DailyStepsHistoricalEntry", e);
             throw e; // Re-throw the exception to trigger rollback
         }
     }
 
     /**
-     * Elimina una entrada de pasos diarios.
+     * Deletes a daily steps historical entry.
      *
-     * @param dailyStepsHistoricalEntry La entrada del historico de pasos
-     * diarios a eliminar.
+     * @param dailyStepsHistoricalEntry The daily steps historical entry to
+     * delete.
      */
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
-    public void deleteDailyStepsHistorical(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry) {
-        try {
-            if (this.dailyStepsHistoricalEntryRepository.existsById(dailyStepsHistoricalEntry.getId())) {
+    public void deleteDailyStepsHistorical(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry)
+    {
+        try
+        {
+            if (this.dailyStepsHistoricalEntryRepository.existsById(dailyStepsHistoricalEntry.getId()))
+            {
                 this.dailyStepsHistoricalEntryRepository.delete(dailyStepsHistoricalEntry);
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error deleting DailyStepsHistoricalEntry", e);
             throw e;
         }
     }
 
     /**
-     * Encuentra entradas por un rango de fechas.
+     * Finds entries within a specific date range.
      *
-     * @param startDate La fecha de inicio.
-     * @param endDate La fecha de fin.
-     * @return Lista de entradas en el rango de fechas especificado.
+     * @param startDate The start date.
+     * @param endDate The end date.
+     * @return A list of entries within the specified date range.
      */
-    public List<DailyStepsHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
+    public List<DailyStepsHistoricalEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate)
+    {
         return dailyStepsHistoricalEntryRepository.findEntriesByDateRange(startDate, endDate);
     }
 
     /**
-     * Encuentra entradas por evaluación de pasos.
+     * Finds entries by step evaluation.
      *
-     * @param evaluation La evaluación de pasos.
-     * @return Lista de entradas con la evaluación especificada.
+     * @param evaluation The step evaluation.
+     * @return A list of entries with the specified evaluation.
      */
-    public List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(@Valid HistoricalEvaluation evaluation) {
+    public List<DailyStepsHistoricalEntry> findEntriesByStepEvaluation(@Valid HistoricalEvaluation evaluation)
+    {
         return dailyStepsHistoricalEntryRepository.findEntriesByStepEvaluation(evaluation);
     }
 
     /**
-     * Encuentra el total de pasos en un rango de fechas.
+     * Finds the total steps within a specified date range.
      *
-     * @param startDate La fecha de inicio.
-     * @param endDate La fecha de fin.
-     * @return El total de pasos en el rango de fechas especificado.
+     * @param startDate The start date.
+     * @param endDate The end date.
+     * @return The total steps within the specified date range.
      */
-    public int findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate) {
+    public int findTotalStepsInDateRange(LocalDate startDate, LocalDate endDate)
+    {
         return dailyStepsHistoricalEntryRepository.findTotalStepsInDateRange(startDate, endDate);
     }
 
     /**
-     * Encuentra el total de calorías quemadas en un rango de fechas.
+     * Finds the total calories burned within a specified date range.
      *
-     * @param startDate La fecha de inicio.
-     * @param endDate La fecha de fin.
-     * @return El total de calorías quemadas en el rango de fechas especificado.
+     * @param startDate The start date.
+     * @param endDate The end date.
+     * @return The total calories burned within the specified date range.
      */
-    public double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate) {
+    public double findTotalCaloriesBurnedInDateRange(LocalDate startDate, LocalDate endDate)
+    {
         return dailyStepsHistoricalEntryRepository.findTotalCaloriesBurnedInDateRange(startDate, endDate);
     }
 
     /**
-     * Encuentra entradas por ID de historial de pasos diarios.
+     * Finds entries by daily steps historical ID.
      *
-     * @param historicalId El ID del historial de pasos diarios.
-     * @return Lista de entradas para el historial especificado.
+     * @param historicalId The ID of the daily steps historical record.
+     * @return A list of entries associated with the specified historical ID.
      */
-    public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(long historicalId) {
+    public List<DailyStepsHistoricalEntry> findEntriesByDailyStepsHistoricalId(long historicalId)
+    {
         return dailyStepsHistoricalEntryRepository.findEntriesByDailyStepsHistoricalId(historicalId);
     }
 
     /**
-     * Encuentra entradas con un número de pasos mayor a un valor especificado.
+     * Finds entries where the number of steps is greater than a specified
+     * value.
      *
-     * @param steps El número de pasos mínimo.
-     * @return Lista de entradas con un número de pasos mayor al valor
-     * especificado.
+     * @param steps The minimum number of steps.
+     * @return A list of entries with steps greater than the specified value.
      */
-    public List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(int steps) {
+    public List<DailyStepsHistoricalEntry> findEntriesWithStepsGreaterThan(int steps)
+    {
         return dailyStepsHistoricalEntryRepository.findEntriesWithStepsGreaterThan(steps);
     }
 
     /**
-     * Encuentra todas las entradas históricas de pasos diarios por nombre de
-     * usuario.
+     * Finds all daily steps historical entries by username.
      *
-     * @param username El nombre de usuario.
-     * @return Lista de entradas históricas de pasos diarios para el usuario
-     * especificado.
+     * @param username The username.
+     * @return A list of daily steps historical entries for the specified user.
      */
-    public List<DailyStepsHistoricalEntry> findAllByUserUsername(String username) {
+    public List<DailyStepsHistoricalEntry> findAllByUserUsername(String username)
+    {
         return dailyStepsHistoricalEntryRepository.findAllByUserUsername(username);
     }
 }

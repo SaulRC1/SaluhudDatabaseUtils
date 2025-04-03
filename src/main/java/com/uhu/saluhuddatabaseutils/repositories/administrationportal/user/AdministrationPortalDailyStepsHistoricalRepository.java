@@ -23,50 +23,40 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaRepository<DailyStepsHistorical, Long> {
+public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaRepository<DailyStepsHistorical, Long>
+{
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d WHERE d.user.id = :userId")
     List<DailyStepsHistorical> findAllByUserId(@Param("userId") long userId);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d WHERE SIZE(d.entries) >= :minEntries")
     List<DailyStepsHistorical> findAllWithMinEntries(@Param("minEntries") int minEntries);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT d FROM DailyStepsHistorical d JOIN FETCH d.entries WHERE d.user.id = :userId")
     List<DailyStepsHistorical> findAllWithEntriesByUserId(@Param("userId") long userId);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT COUNT(d) FROM DailyStepsHistorical d WHERE d.user.id = :userId")
     int countByUserId(@Param("userId") long userId);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public DailyStepsHistorical getReferenceById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllByIdInBatch(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch(Iterable<DailyStepsHistorical> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
@@ -74,35 +64,27 @@ public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaR
     public <S extends DailyStepsHistorical> S saveAndFlush(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<DailyStepsHistorical> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<DailyStepsHistorical> findAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<DailyStepsHistorical> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll(Iterable<? extends DailyStepsHistorical> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllById(Iterable<? extends Long> ids);
 
     @Override
@@ -114,15 +96,12 @@ public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaR
     public void deleteById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<DailyStepsHistorical> findById(Long id);
 
     @Override
@@ -130,27 +109,21 @@ public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaR
     public <S extends DailyStepsHistorical> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<DailyStepsHistorical> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends DailyStepsHistorical> Optional<S> findOne(Example<S> example);
-    
+
 }

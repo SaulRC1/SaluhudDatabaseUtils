@@ -24,51 +24,41 @@ import org.springframework.stereotype.Repository;
  * @author Juan Alberto Domínguez Vázquez
  */
 @Repository
-public interface AdministrationPortalWeightHistoricalEntryRepository extends JpaRepository<WeightHistoricalEntry, Long> {
+public interface AdministrationPortalWeightHistoricalEntryRepository extends JpaRepository<WeightHistoricalEntry, Long>
+{
 
-    @Lock(LockModeType.OPTIMISTIC)
     List<WeightHistoricalEntry> findByWeightHistoricalId(long weightHistoricalId);
 
-    @Lock(LockModeType.OPTIMISTIC)
     List<WeightHistoricalEntry> findByEntryDate(LocalDate entryDate);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT e FROM WeightHistoricalEntry e WHERE e.weightHistorical.id = :weightHistoricalId AND e.entryDate BETWEEN :startDate AND :endDate")
     List<WeightHistoricalEntry> findByDateRangeAndWeightHistoricalId(
             @Param("weightHistoricalId") long weightHistoricalId,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT e FROM WeightHistoricalEntry e WHERE e.weightHistorical.id = :weightHistoricalId ORDER BY e.entryDate DESC")
     WeightHistoricalEntry findMostRecentEntryByWeightHistoricalId(@Param("weightHistoricalId") long weightHistoricalId);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public WeightHistoricalEntry getReferenceById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllByIdInBatch(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch(Iterable<WeightHistoricalEntry> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
@@ -76,35 +66,27 @@ public interface AdministrationPortalWeightHistoricalEntryRepository extends Jpa
     public <S extends WeightHistoricalEntry> S saveAndFlush(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<WeightHistoricalEntry> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<WeightHistoricalEntry> findAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<WeightHistoricalEntry> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll(Iterable<? extends WeightHistoricalEntry> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllById(Iterable<? extends Long> ids);
 
     @Override
@@ -116,15 +98,12 @@ public interface AdministrationPortalWeightHistoricalEntryRepository extends Jpa
     public void deleteById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<WeightHistoricalEntry> findById(Long id);
 
     @Override
@@ -132,27 +111,21 @@ public interface AdministrationPortalWeightHistoricalEntryRepository extends Jpa
     public <S extends WeightHistoricalEntry> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<WeightHistoricalEntry> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends WeightHistoricalEntry> Optional<S> findOne(Example<S> example);
-    
+
 }

@@ -8,7 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 /**
- * Configuration class for defining and configuring 
+ * Configuration class for defining and configuring different
+ * {@link PasswordEncoder} beans. This class provides beans for BCrypt and
+ * PBKDF2 password encoding algorithms.
  *
  * @author Saúl Rodríguez Naranjo
  */
@@ -16,6 +18,15 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 public class PasswordEncoderConfig
 {
 
+    /**
+     * Bean definition for {@link BCryptPasswordEncoder}. This encoder uses the
+     * BCrypt hashing algorithm to encode passwords. It is marked as the primary
+     * bean, which means it will be used by default when multiple encoders are
+     * available.
+     *
+     * @return a {@link PasswordEncoder} implementation using the BCrypt
+     * algorithm
+     */
     @Bean
     @Primary
     public PasswordEncoder bcryptPasswordEncoder()
@@ -23,6 +34,13 @@ public class PasswordEncoderConfig
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Bean definition for {@link Pbkdf2PasswordEncoder}. This encoder uses the
+     * PBKDF2 hashing algorithm with specified parameters for password encoding.
+     *
+     * @return a {@link PasswordEncoder} implementation using the PBKDF2
+     * algorithm
+     */
     @Bean
     public PasswordEncoder pbkdf2PasswordEncoder()
     {

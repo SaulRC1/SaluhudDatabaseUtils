@@ -77,19 +77,15 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public Recipe getReferenceById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllByIdInBatch(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch(Iterable<Recipe> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
@@ -106,22 +102,18 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
     public List<Recipe> findAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Recipe> List<S> saveAll(Iterable<S> entities);
 
     @Override
     public List<Recipe> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll(Iterable<? extends Recipe> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllById(Iterable<? extends Long> ids);
 
     @Override

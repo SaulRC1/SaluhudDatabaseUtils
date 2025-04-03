@@ -24,40 +24,31 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdministrationPortalRecipeElaborationStepRepository extends JpaRepository<RecipeElaborationStep, Long> {
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM RecipeElaborationStep i WHERE i.id = :id")
     RecipeElaborationStep findOne(@Param("id") long id);
 
-    @Lock(LockModeType.OPTIMISTIC)
     @Query("SELECT i FROM RecipeElaborationStep i WHERE i.stepNumber = :stepNumber")
     RecipeElaborationStep findByStepNumber(@Param("stepNumber") int stepNumber);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> List<S> findAll(Example<S> example, Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> List<S> findAll(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public RecipeElaborationStep getReferenceById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllByIdInBatch(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch(Iterable<RecipeElaborationStep> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
@@ -65,35 +56,27 @@ public interface AdministrationPortalRecipeElaborationStepRepository extends Jpa
     public <S extends RecipeElaborationStep> S saveAndFlush(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void flush();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<RecipeElaborationStep> findAllById(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<RecipeElaborationStep> findAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public List<RecipeElaborationStep> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll(Iterable<? extends RecipeElaborationStep> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllById(Iterable<? extends Long> ids);
 
     @Override
@@ -105,15 +88,12 @@ public interface AdministrationPortalRecipeElaborationStepRepository extends Jpa
     public void deleteById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public long count();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean existsById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Optional<RecipeElaborationStep> findById(Long id);
 
     @Override
@@ -121,27 +101,21 @@ public interface AdministrationPortalRecipeElaborationStepRepository extends Jpa
     public <S extends RecipeElaborationStep> S save(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public Page<RecipeElaborationStep> findAll(Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> boolean exists(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> long count(Example<S> example);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> Page<S> findAll(Example<S> example, Pageable pageable);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends RecipeElaborationStep> Optional<S> findOne(Example<S> example);
     
 }

@@ -65,19 +65,15 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public Ingredient getReferenceById(Long id);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllByIdInBatch(Iterable<Long> ids);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllInBatch(Iterable<Ingredient> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> List<S> saveAllAndFlush(Iterable<S> entities);
 
     @Override
@@ -85,7 +81,6 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public <S extends Ingredient> S saveAndFlush(S entity);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void flush();
 
     @Override
@@ -95,22 +90,18 @@ public interface AdministrationPortalIngredientRepository extends JpaRepository<
     public List<Ingredient> findAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public <S extends Ingredient> List<S> saveAll(Iterable<S> entities);
 
     @Override
     public List<Ingredient> findAll(Sort sort);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll();
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAll(Iterable<? extends Ingredient> entities);
 
     @Override
-    @Lock(LockModeType.OPTIMISTIC)
     public void deleteAllById(Iterable<? extends Long> ids);
 
     @Override

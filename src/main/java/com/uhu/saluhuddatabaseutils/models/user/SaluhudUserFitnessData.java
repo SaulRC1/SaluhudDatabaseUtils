@@ -45,6 +45,7 @@ public class SaluhudUserFitnessData implements Serializable
     private String biologicalSex;
 
     @Column(name = "age")
+    @Range(min = 16, max = 110)
     private int age;
 
     @Column(name = "body_composition")

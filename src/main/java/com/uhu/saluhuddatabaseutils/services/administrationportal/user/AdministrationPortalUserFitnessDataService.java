@@ -209,7 +209,7 @@ public class AdministrationPortalUserFitnessDataService
      *
      * @param fitnessData The fitness data to delete.
      */
-    @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
+    @Transactional(readOnly = false, transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void deleteFitnessData(@Valid SaluhudUserFitnessData fitnessData)
     {
         try

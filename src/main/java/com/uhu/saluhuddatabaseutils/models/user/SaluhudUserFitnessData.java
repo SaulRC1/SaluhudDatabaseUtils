@@ -1,6 +1,5 @@
 package com.uhu.saluhuddatabaseutils.models.user;
 
-import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -72,7 +71,7 @@ public class SaluhudUserFitnessData implements Serializable
     @Size(min = 2, max = 40)
     private String bodyMassIndex;
 
-    @OneToOne(mappedBy = "fitnessData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "fitnessData", fetch = FetchType.LAZY)
     private SaluhudUser saluhudUser;
 
     @Version

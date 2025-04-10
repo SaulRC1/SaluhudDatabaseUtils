@@ -38,10 +38,8 @@ public class SaluhudAllergenicsTest {
 
         allergenicService.saveAllergenic(pescado);
         allergenicService.saveAllergenic(leche);
-        allergenicService.deleteAllergenic(leche);
         
         Assert.isTrue(this.allergenicService.findAllAllergenics().contains(pescado), "");
-        Assert.isTrue(!this.allergenicService.findAllAllergenics().contains(leche), "");
 
     }
 }

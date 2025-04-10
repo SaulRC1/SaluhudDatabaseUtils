@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -70,9 +69,7 @@ public class SaluhudUser implements Serializable
     private String phoneNumber;
 
     @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "SALUHUD_USER_SALUHUD_USER_FITNESS_DATA",
-            joinColumns = @JoinColumn(name = "id_saluhud_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_user_fitness_data"))
+    @JoinColumn(name = "id_user_fitness_data")
     private SaluhudUserFitnessData fitnessData;
 
     @Version

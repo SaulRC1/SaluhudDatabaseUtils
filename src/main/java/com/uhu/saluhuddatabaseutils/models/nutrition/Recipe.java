@@ -35,15 +35,15 @@ public class Recipe implements Serializable
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name_key", nullable = false)
     @NotBlank
     @Size(min = 2, max = 200)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description_key")
     private String description;
 
-    @Column(name = "ingredients_description")
+    @Column(name = "ingredients_description_key")
     private String ingredientsDescription;
 
     @Column(name = "kilocalories")

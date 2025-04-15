@@ -37,7 +37,7 @@ public class Ingredient implements Serializable
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name_key", unique = true, nullable = false)
     @NotBlank
     @Size(min = 2, max = 60)
     private String name;

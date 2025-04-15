@@ -41,7 +41,7 @@ public class RecipeIngredient implements Serializable
     @Column(name = "quantity", precision = 6, scale = 2)
     private BigDecimal quantity;
 
-    @Column(name = "unit", length = 20)
+    @Column(name = "unit_key", length = 20)
     private String unit;
 
     @Version

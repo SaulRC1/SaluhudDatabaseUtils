@@ -31,7 +31,7 @@ public class RecipeElaborationStep implements Serializable
     @Column(name = "id")
     private long id;
 
-    @Column(name = "step_description", nullable = false)
+    @Column(name = "step_description_key", nullable = false)
     @NotBlank
     private String stepDescription;
 

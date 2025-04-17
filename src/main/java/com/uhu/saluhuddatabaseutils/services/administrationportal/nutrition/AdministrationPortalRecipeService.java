@@ -18,11 +18,10 @@ import org.springframework.data.domain.Pageable;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalRecipeRepository;
 
 /**
- * Service class for managing recipes. This service provides
- * methods to perform CRUD (Create, Read, Update, Delete) operations on recipe, 
- * such as saving, updating, deleting, and retrieving recipes.
- * It also supports pagination for fetching large lists of recipes applying
- * certains types of filters.
+ * Service class for managing recipes. This service provides methods to perform
+ * CRUD (Create, Read, Update, Delete) operations on recipe, such as saving,
+ * updating, deleting, and retrieving recipes. It also supports pagination for
+ * fetching large lists of recipes applying certains types of filters.
  *
  * @author Juan Alberto Dominguez Vazquez
  */
@@ -37,8 +36,8 @@ public class AdministrationPortalRecipeService
     private static final Logger logger = Logger.getLogger(AdministrationPortalRecipeService.class.getName());
 
     /**
-     * Finds all recipes. This method retrieves all recipes
-     * stored in the repository.
+     * Finds all recipes. This method retrieves all recipes stored in the
+     * repository.
      *
      * @return A list of all recipes.
      */
@@ -106,20 +105,20 @@ public class AdministrationPortalRecipeService
                 {
                     existingRecipe.setIngredientsDescription(recipe.getIngredientsDescription());
                 }
-                if (!recipe.getAllergenics().isEmpty())
+                existingRecipe.getAllergenics().clear();
+                if (recipe.getAllergenics() != null)
                 {
-                    existingRecipe.getAllergenics().clear();
-                    existingRecipe.setAllergenics(recipe.getAllergenics());
+                    existingRecipe.getAllergenics().addAll(recipe.getAllergenics());
                 }
                 if (!recipe.getElaborationSteps().isEmpty())
                 {
                     existingRecipe.setElaborationSteps(recipe.getElaborationSteps());
                 }
-                if (recipe.getKilocalories() == 0)
-                {
-                    int totalKilocalories = calculateRecipeKcal(recipe);
-                    existingRecipe.setKilocalories(totalKilocalories);
-                }
+
+                existingRecipe.setKilocalories(recipe.getKilocalories() > 0
+                        ? recipe.getKilocalories()
+                        : calculateRecipeKcal(recipe));
+
                 this.recipeRepository.save(existingRecipe);
             }
         } catch (Exception e)

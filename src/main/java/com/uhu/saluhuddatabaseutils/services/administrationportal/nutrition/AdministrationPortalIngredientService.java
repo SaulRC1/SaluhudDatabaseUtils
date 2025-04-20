@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import java.util.Set;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalAllergenicRepository;
 import com.uhu.saluhuddatabaseutils.repositories.administrationportal.nutrition.AdministrationPortalIngredientRepository;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -251,6 +252,18 @@ public class AdministrationPortalIngredientService
                 {
                     existingIngredient.setFatAmount(ingredient.getFatAmount());
                 }
+                if (ingredient.getAllergens() != null)
+                {
+                    Set<Allergenic> managedAllergens = ingredient.getAllergens().stream()
+                            .map(a -> allergenicRepository.findById(a.getId()))
+                            .filter(Optional::isPresent)
+                            .map(Optional::get)
+                            .collect(Collectors.toSet());
+
+                    existingIngredient.getAllergens().clear();
+                    existingIngredient.getAllergens().addAll(managedAllergens);
+                }
+
                 this.ingredientRepository.save(existingIngredient);
             }
         } catch (Exception e)
@@ -330,8 +343,8 @@ public class AdministrationPortalIngredientService
     }
 
     /**
-     * Searches for ingredients by starting name with case-insensitive matching and
-     * pagination.
+     * Searches for ingredients by starting name with case-insensitive matching
+     * and pagination.
      *
      * @param name The name of the ingredient to search for.
      * @param page The page number to retrieve (starting from 0).

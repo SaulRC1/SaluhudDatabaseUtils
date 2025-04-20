@@ -38,8 +38,11 @@ public class SaluhudAllergenicsTest {
 
         allergenicService.saveAllergenic(pescado);
         allergenicService.saveAllergenic(leche);
+        leche.setName("leche de vaca");
+        allergenicService.updateAllergenic(leche);
         
         Assert.isTrue(this.allergenicService.findAllAllergenics().contains(pescado), "");
+        Assert.isTrue(this.allergenicService.findById(leche.getId()).getName().equalsIgnoreCase("leche de vaca"), "");
 
     }
 }

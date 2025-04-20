@@ -39,10 +39,10 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
 
     // Buscar por nombre
     Page<Recipe> findByNameContainingIgnoreCase(String name, Pageable pageable);
-    
+
     // Buscar por calorías máximas
     Page<Recipe> findByKilocaloriesLessThanEqual(int maxKilocalories, Pageable pageable);
-    
+
     // Buscar recetas que contengan un ingrediente específico
     @Query("""
         SELECT r FROM Recipe r 
@@ -53,9 +53,11 @@ public interface AdministrationPortalRecipeRepository extends JpaRepository<Reci
 
     // Buscar recetas que NO contengan un alérgeno específico
     @Query("""
-        SELECT r FROM Recipe r 
-        LEFT JOIN r.allergenics a
-        WHERE a.id IS NULL OR a.id <> :allergenicId
+    SELECT r FROM Recipe r 
+    WHERE NOT EXISTS (
+        SELECT 1 FROM r.allergenics a 
+        WHERE a.id = :allergenicId
+        )
     """)
     Page<Recipe> findByAllergenicExclusion(@Param("allergenicId") Long allergenicId, Pageable pageable);
 

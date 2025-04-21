@@ -30,7 +30,7 @@ public class Allergenic implements Serializable
     @NotBlank
     private String name;
 
-    @ManyToMany(mappedBy = "allergens", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "allergens", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 
     @Version

@@ -137,6 +137,24 @@ public class AdministrationPortalSleepHistoricalEntryService
     {
         try
         {
+            if (entry.getHoursSlept() * 60 + entry.getMinutesSlept() < 360)
+            {
+                entry.setSleepEvaluation(HistoricalEvaluation.FAILED);
+            }
+            else if (entry.getHoursSlept() * 60 + entry.getMinutesSlept() >= 360
+                    && entry.getHoursSlept() * 60 + entry.getMinutesSlept() < 420)
+            {
+                entry.setSleepEvaluation(HistoricalEvaluation.MINIMUM);
+            }
+            else if (entry.getHoursSlept() * 60 + entry.getMinutesSlept() >= 420
+                    && entry.getHoursSlept() * 60 + entry.getMinutesSlept() < 480)
+            {
+                entry.setSleepEvaluation(HistoricalEvaluation.WELL);
+            }
+            else
+            {
+                entry.setSleepEvaluation(HistoricalEvaluation.EXCELLENT);
+            }
             sleepHistoricalEntryRepository.save(entry);
         } catch (Exception e)
         {
@@ -163,7 +181,24 @@ public class AdministrationPortalSleepHistoricalEntryService
                 existingEntry.setEntryDate(entry.getEntryDate());
                 existingEntry.setHoursSlept(entry.getHoursSlept());
                 existingEntry.setMinutesSlept(entry.getMinutesSlept());
-                existingEntry.setSleepEvaluation(entry.getSleepEvaluation());
+                if (existingEntry.getHoursSlept() * 60 + existingEntry.getMinutesSlept() < 360)
+                {
+                    existingEntry.setSleepEvaluation(HistoricalEvaluation.FAILED);
+                }
+                else if (existingEntry.getHoursSlept() * 60 + existingEntry.getMinutesSlept() >= 360
+                        && existingEntry.getHoursSlept() * 60 + existingEntry.getMinutesSlept() < 420)
+                {
+                    existingEntry.setSleepEvaluation(HistoricalEvaluation.MINIMUM);
+                }
+                else if (existingEntry.getHoursSlept() * 60 + existingEntry.getMinutesSlept() >= 420
+                        && existingEntry.getHoursSlept() * 60 + existingEntry.getMinutesSlept() < 480)
+                {
+                    existingEntry.setSleepEvaluation(HistoricalEvaluation.WELL);
+                }
+                else
+                {
+                    existingEntry.setSleepEvaluation(HistoricalEvaluation.EXCELLENT);
+                }
 
                 sleepHistoricalEntryRepository.save(existingEntry);
             }

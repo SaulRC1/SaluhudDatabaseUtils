@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
 public interface AdministrationPortalSleepHistoricalRepository extends JpaRepository<SleepHistorical, Long>
 {
 
-    @Query("SELECT s FROM SleepHistorical s WHERE s.user = :userId")
+    @Query("SELECT s FROM SleepHistorical s WHERE s.user.id = :userId")
     SleepHistorical findByUserId(@Param("userId") long userId);
 
     @Query("SELECT s FROM SleepHistorical s JOIN s.entries e WHERE e.entryDate BETWEEN :startDate AND :endDate")

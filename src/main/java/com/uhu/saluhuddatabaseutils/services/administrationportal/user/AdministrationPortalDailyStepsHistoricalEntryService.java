@@ -39,7 +39,32 @@ public class AdministrationPortalDailyStepsHistoricalEntryService
     @Transactional(transactionManager = "saluhudAdministrationPortalTransactionManager")
     public void saveDailyStepsHistoricalEntry(@Valid DailyStepsHistoricalEntry dailyStepsHistoricalEntry)
     {
-        this.dailyStepsHistoricalEntryRepository.save(dailyStepsHistoricalEntry);
+        try
+        {
+            if (dailyStepsHistoricalEntry.getDoneSteps() < 2500)
+            {
+                dailyStepsHistoricalEntry.setStepEvaluation(HistoricalEvaluation.FAILED);
+            }
+            else if (dailyStepsHistoricalEntry.getDoneSteps() >= 2500
+                    && dailyStepsHistoricalEntry.getDoneSteps() < 4000)
+            {
+                dailyStepsHistoricalEntry.setStepEvaluation(HistoricalEvaluation.MINIMUM);
+            }
+            else if (dailyStepsHistoricalEntry.getDoneSteps() >= 4000
+                    && dailyStepsHistoricalEntry.getDoneSteps() < 7000)
+            {
+                dailyStepsHistoricalEntry.setStepEvaluation(HistoricalEvaluation.WELL);
+            }
+            else
+            {
+                dailyStepsHistoricalEntry.setStepEvaluation(HistoricalEvaluation.EXCELLENT);
+            }
+            this.dailyStepsHistoricalEntryRepository.save(dailyStepsHistoricalEntry);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error saving SleepHistoricalEntry", e);
+            throw e;
+        }
     }
 
     /**
@@ -63,7 +88,24 @@ public class AdministrationPortalDailyStepsHistoricalEntryService
                 existingDailyStepsEntry.setDoneSteps(dailyStepsHistoricalEntry.getDoneSteps());
                 existingDailyStepsEntry.setEntryDate(dailyStepsHistoricalEntry.getEntryDate());
                 existingDailyStepsEntry.setKiloCaloriesBurned(dailyStepsHistoricalEntry.getKiloCaloriesBurned());
-                existingDailyStepsEntry.setStepEvaluation(dailyStepsHistoricalEntry.getStepEvaluation());
+                if (existingDailyStepsEntry.getDoneSteps() < 2500)
+                {
+                    existingDailyStepsEntry.setStepEvaluation(HistoricalEvaluation.FAILED);
+                }
+                else if (existingDailyStepsEntry.getDoneSteps() >= 2500
+                        && existingDailyStepsEntry.getDoneSteps() < 4000)
+                {
+                    existingDailyStepsEntry.setStepEvaluation(HistoricalEvaluation.MINIMUM);
+                }
+                else if (existingDailyStepsEntry.getDoneSteps() >= 4000
+                        && existingDailyStepsEntry.getDoneSteps() < 7000)
+                {
+                    existingDailyStepsEntry.setStepEvaluation(HistoricalEvaluation.WELL);
+                }
+                else
+                {
+                    existingDailyStepsEntry.setStepEvaluation(HistoricalEvaluation.EXCELLENT);
+                }
 
                 this.dailyStepsHistoricalEntryRepository.save(existingDailyStepsEntry);
             }

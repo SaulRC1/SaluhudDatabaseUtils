@@ -62,7 +62,7 @@ public class SaluhudRecipeElaborationStepsTest
         allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient1));
         allergenics.addAll(ingredientService.getAllergensForIngredient(ingredient2));
 
-        Recipe Bizcocho = new Recipe("Bizcocho", "Bizcocho de limón al horno", "Huevos, harina, sal, azucar, agua, aceite", 0);
+        Recipe Bizcocho = new Recipe("Bizcocho", "Bizcocho de limón al horno", "Huevos, harina, sal, azucar, agua, aceite", 0, "");
 
         RecipeIngredientId recipeIngredientId1 = new RecipeIngredientId();
         RecipeIngredientId recipeIngredientId2 = new RecipeIngredientId();

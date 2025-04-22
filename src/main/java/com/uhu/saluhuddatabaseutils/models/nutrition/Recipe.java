@@ -48,6 +48,9 @@ public class Recipe implements Serializable
 
     @Column(name = "kilocalories")
     private int kilocalories;
+    
+    @Column(name = "image_source", nullable = false)
+    private String imageSource;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade
@@ -89,11 +92,12 @@ public class Recipe implements Serializable
      * @param elaborationSteps A list of preparation steps for the recipe.
      * @param recipeIngredients A list of ingredients used in the recipe.
      * @param kilocalories The total kilocalories of the recipe.
+     * @param imageSource The recipe image URL or URI.
      */
     public Recipe(long id, String name, String description,
             String ingredientsDescription,
             Set<Allergenic> allergenics, List<RecipeElaborationStep> elaborationSteps,
-            List<RecipeIngredient> recipeIngredients, int kilocalories)
+            List<RecipeIngredient> recipeIngredients, int kilocalories, String imageSource)
     {
         this.id = id;
         this.name = name;
@@ -103,6 +107,7 @@ public class Recipe implements Serializable
         this.elaborationSteps = elaborationSteps;
         this.recipeIngredients = recipeIngredients;
         this.kilocalories = kilocalories;
+        this.imageSource = imageSource;
     }
 
     /**
@@ -112,14 +117,16 @@ public class Recipe implements Serializable
      * @param description A description of the recipe.
      * @param ingredientsDescription A detailed description of the ingredients.
      * @param kilocalories The total kilocalories of the recipe.
+     * @param imageSource The recipe image URL or URI.
      */
     public Recipe(String name, String description, String ingredientsDescription,
-            int kilocalories)
+            int kilocalories, String imageSource)
     {
         this.name = name;
         this.description = description;
         this.ingredientsDescription = ingredientsDescription;
         this.kilocalories = kilocalories;
+        this.imageSource = imageSource;
     }
 
     /**
@@ -297,4 +304,23 @@ public class Recipe implements Serializable
         this.version = version;
     }
 
+    /**
+     * Returns this recipe's image source URL/URI.
+     * 
+     * @return this recipe's image source URL/URI.
+     */
+    public String getImageSource()
+    {
+        return imageSource;
+    }
+
+    /**
+     * Sets this recipe's image source URL/URI.
+     * 
+     * @param imageSource The recipe image URL or URI.
+     */
+    public void setImageSource(String imageSource)
+    {
+        this.imageSource = imageSource;
+    }
 }

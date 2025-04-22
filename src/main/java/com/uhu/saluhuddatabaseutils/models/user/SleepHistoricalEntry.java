@@ -38,12 +38,12 @@ public class SleepHistoricalEntry implements Serializable
 
     @Column(name = "hours_slept", nullable = false)
     @NotNull
-    @Range(min = 5, max = 15)
+    @Range(min = 1, max = 15)
     private int hoursSlept;
 
     @Column(name = "minutes_slept", nullable = false)
     @NotNull
-    @Range(min = 300, max = 900)
+    @Range(min = 0, max = 59)
     private double minutesSlept;
 
     @Enumerated(EnumType.STRING)

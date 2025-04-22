@@ -128,6 +128,23 @@ public class AdministrationPortalSleepHistoricalEntryService
     }
 
     /**
+     *
+     * @param id
+     * @return
+     */
+    public SleepHistoricalEntry findSleepHistoricalEntryById(long id)
+    {
+        try
+        {
+            return this.sleepHistoricalEntryRepository.findSleepHistoricalEntryById(id);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error finding the entry", e);
+            throw e;
+        }
+    }
+
+    /**
      * Saves a new sleep historical entry.
      *
      * @param entry The sleep historical entry to be saved.

@@ -42,6 +42,8 @@ public interface AdministrationPortalSleepHistoricalEntryRepository extends JpaR
 
     @Query("SELECT SUM(s.minutesSlept) FROM SleepHistoricalEntry s WHERE s.entryDate BETWEEN :startDate AND :endDate")
     double findTotalMinutesSleptInDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    
+    SleepHistoricalEntry findSleepHistoricalEntryById(long id);
 
     @Override
     public <S extends SleepHistoricalEntry> List<S> findAll(Example<S> example, Sort sort);

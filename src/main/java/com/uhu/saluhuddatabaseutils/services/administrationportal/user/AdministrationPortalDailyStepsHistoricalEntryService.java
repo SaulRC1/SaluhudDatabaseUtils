@@ -112,7 +112,7 @@ public class AdministrationPortalDailyStepsHistoricalEntryService
         } catch (Exception e)
         {
             logger.log(Level.SEVERE, "Error updating DailyStepsHistoricalEntry", e);
-            throw e; // Re-throw the exception to trigger rollback
+            throw e;
         }
     }
 
@@ -218,5 +218,24 @@ public class AdministrationPortalDailyStepsHistoricalEntryService
     public List<DailyStepsHistoricalEntry> findAllByUserUsername(String username)
     {
         return dailyStepsHistoricalEntryRepository.findAllByUserUsername(username);
+    }
+    
+    /**
+     * Retrieves a daily steps historical entry by its ID.
+     *
+     * @param id The ID of the daily steps historical entry.
+     * @return The daily steps historical entry with the given ID, or null if not
+     * found.
+     */
+    public DailyStepsHistoricalEntry getDailyStepsHistoricalEntryById(long id)
+    {
+        try
+        {
+            return dailyStepsHistoricalEntryRepository.findDailyStepsHistoricalEntryById(id);
+        } catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error retrieving SleepHistoricalEntry by ID", e);
+            throw e;
+        }
     }
 }

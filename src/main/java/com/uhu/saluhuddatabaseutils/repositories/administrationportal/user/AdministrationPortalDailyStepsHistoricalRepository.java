@@ -25,7 +25,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdministrationPortalDailyStepsHistoricalRepository extends JpaRepository<DailyStepsHistorical, Long>
 {
-
+    @Query("SELECT s FROM DailyStepsHistorical s WHERE s.user.id = :userId")
+    DailyStepsHistorical findByUserId(@Param("userId") long userId);
+    
     @Query("SELECT d FROM DailyStepsHistorical d WHERE d.user.id = :userId")
     List<DailyStepsHistorical> findAllByUserId(@Param("userId") long userId);
 

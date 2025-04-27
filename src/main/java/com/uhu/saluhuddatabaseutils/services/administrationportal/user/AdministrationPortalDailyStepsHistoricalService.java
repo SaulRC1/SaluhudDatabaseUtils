@@ -159,4 +159,15 @@ public class AdministrationPortalDailyStepsHistoricalService
     {
         return dailyStepsHistoricalRepository.countByUserId(userId);
     }
+
+    /**
+     * Finds a daily steps historical record associated with a specific user.
+     *
+     * @param userId The ID of the user.
+     * @return The daily steps historical record for the specified user.
+     */
+    public DailyStepsHistorical findByUserId(long userId)
+    {
+        return dailyStepsHistoricalRepository.findByUserId(userId);
+    }
 }

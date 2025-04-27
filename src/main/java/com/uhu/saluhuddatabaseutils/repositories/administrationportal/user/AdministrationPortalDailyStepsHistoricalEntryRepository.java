@@ -48,6 +48,8 @@ public interface AdministrationPortalDailyStepsHistoricalEntryRepository extends
 
     @Query("SELECT e FROM DailyStepsHistoricalEntry e WHERE e.dailyStepsHistorical.user.username = :username")
     List<DailyStepsHistoricalEntry> findAllByUserUsername(@Param("username") String username);
+    
+    public DailyStepsHistoricalEntry findDailyStepsHistoricalEntryById(long id);
 
     @Override
     public <S extends DailyStepsHistoricalEntry> List<S> findAll(Example<S> example, Sort sort);

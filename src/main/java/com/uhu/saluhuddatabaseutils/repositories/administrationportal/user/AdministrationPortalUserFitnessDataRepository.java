@@ -28,7 +28,7 @@ public interface AdministrationPortalUserFitnessDataRepository extends JpaReposi
 
     List<SaluhudUserFitnessData> findByBiologicalSex(String biologicalSex);
 
-    List<SaluhudUserFitnessData> findByBodyMassIndex(String bodyMassIndex);
+    List<SaluhudUserFitnessData> findByBodyMassIndex(double bodyMassIndex);
 
     @Query("SELECT f FROM SaluhudUserFitnessData f WHERE f.weight BETWEEN :minWeight AND :maxWeight")
     List<SaluhudUserFitnessData> findByWeightRange(@Param("minWeight") double minWeight, @Param("maxWeight") double maxWeight);

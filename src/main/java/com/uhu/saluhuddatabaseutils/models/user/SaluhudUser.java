@@ -68,7 +68,7 @@ public class SaluhudUser implements Serializable
     @Pattern(regexp = "^(\\+(\\d{1,3}|\\d{1,3}-\\d{1,3})\\s\\d{4,32})?$")
     private String phoneNumber;
 
-    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user_fitness_data")
     private SaluhudUserFitnessData fitnessData;
 

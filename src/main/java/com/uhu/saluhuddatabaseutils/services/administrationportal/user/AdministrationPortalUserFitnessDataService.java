@@ -82,7 +82,7 @@ public class AdministrationPortalUserFitnessDataService
      * @param bodyMassIndex The body mass index to search for.
      * @return A list of fitness data records matching the specified BMI.
      */
-    public List<SaluhudUserFitnessData> findFitnessDataByBodyMassIndex(String bodyMassIndex)
+    public List<SaluhudUserFitnessData> findFitnessDataByBodyMassIndex(double bodyMassIndex)
     {
         try
         {

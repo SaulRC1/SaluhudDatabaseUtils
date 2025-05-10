@@ -1,8 +1,10 @@
 package com.uhu.saluhuddatabaseutils.services.mobileapp.user;
 
+import com.uhu.saluhuddatabaseutils.models.user.BiologicalSex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUser;
+import com.uhu.saluhuddatabaseutils.models.user.SaluhudUserFitnessData;
 import com.uhu.saluhuddatabaseutils.security.PasswordEncryptionService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.validation.ConstraintViolation;
@@ -85,5 +87,18 @@ public class MobileAppSaluhudUserService
     public Optional<SaluhudUser> findByUsername(String username)
     {
         return saluhudUserRepository.findByUsername(username);
+    }
+    
+    public Optional<SaluhudUserFitnessData> getSaluhudUserFitnessData(String username)
+    {
+        Optional<SaluhudUser> saluhudUserOptional = this.saluhudUserRepository.findByUsername(username);
+        
+        return saluhudUserOptional.map(SaluhudUser::getFitnessData);
+    }
+    
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
+    public SaluhudUser updateSaluhudUser(@Valid SaluhudUser saluhudUser)
+    {
+        return saluhudUserRepository.save(saluhudUser);
     }
 }

@@ -2,6 +2,8 @@ package com.uhu.saluhuddatabaseutils.models.user;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
@@ -34,22 +37,27 @@ public class SaluhudUserFitnessData implements Serializable
     private long id;
 
     @Column(name = "weight")
+    @DecimalMin("0")
     private double weight;
 
     @Column(name = "height")
+    @DecimalMin("0")
     private double height;
 
     @Column(name = "biological_sex")
-    @Size(min = 2, max = 40)
-    private String biologicalSex;
+    @Convert(converter = BiologicalSexConverter.class)
+    private BiologicalSex biologicalSex;
 
     @Column(name = "age")
     @Range(min = 16, max = 110)
     private int age;
 
-    @Column(name = "body_composition")
-    @Size(min = 2, max = 40)
-    private String bodyComposition;
+    @Embedded
+    private BodyComposition bodyComposition;
+    
+    @Column(name = "activity_factor")
+    @Convert(converter = HarrisBenedictBMRActivityFactorConverter.class)
+    private HarrisBenedictBMRActivityFactor activityFactor;
 
     @Column(name = "recommended_daily_water_liters")
     @Range(min = 2, max = 6)
@@ -68,8 +76,8 @@ public class SaluhudUserFitnessData implements Serializable
     private int dailyKilocaloriesObjective;
 
     @Column(name = "body_mass_index")
-    @Size(min = 2, max = 40)
-    private String bodyMassIndex;
+    @DecimalMin("0")
+    private double bodyMassIndex;
 
     @OneToOne(mappedBy = "fitnessData", fetch = FetchType.LAZY)
     private SaluhudUser saluhudUser;
@@ -107,12 +115,13 @@ public class SaluhudUserFitnessData implements Serializable
      * user
      * @param bodyMassIndex the body mass index for the user
      * @param user the user where the information belongs to
-     *
+     * @param activityFactor The Harris-Benedict activity factor.
      */
-    public SaluhudUserFitnessData(double weight, double height, String biologicalSex,
-            int age, String bodyComposition, int recommendedDailyWaterLiters,
+    public SaluhudUserFitnessData(double weight, double height, BiologicalSex biologicalSex,
+            int age, BodyComposition bodyComposition, int recommendedDailyWaterLiters,
             int recommendedSleepHours, int recommendedDailySteps,
-            int dailyKilocaloriesObjective, String bodyMassIndex, SaluhudUser user)
+            int dailyKilocaloriesObjective, double bodyMassIndex, SaluhudUser user,
+            HarrisBenedictBMRActivityFactor activityFactor)
     {
         this.weight = weight;
         this.height = height;
@@ -125,6 +134,7 @@ public class SaluhudUserFitnessData implements Serializable
         this.dailyKilocaloriesObjective = dailyKilocaloriesObjective;
         this.bodyMassIndex = bodyMassIndex;
         this.saluhudUser = user;
+        this.activityFactor = activityFactor;
     }
 
     /**
@@ -150,10 +160,10 @@ public class SaluhudUserFitnessData implements Serializable
      * user
      * @param bodyMassIndex the body mass index for the user
      */
-    public SaluhudUserFitnessData(double weight, double height, String biologicalSex,
-            int age, String bodyComposition, int recommendedDailyWaterLiters,
+    public SaluhudUserFitnessData(double weight, double height, BiologicalSex biologicalSex,
+            int age, BodyComposition bodyComposition, int recommendedDailyWaterLiters,
             int recommendedSleepHours, int recommendedDailySteps,
-            int dailyKilocaloriesObjective, String bodyMassIndex)
+            int dailyKilocaloriesObjective, double bodyMassIndex)
     {
         this.weight = weight;
         this.height = height;
@@ -202,7 +212,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @return the biological sex of the user
      */
-    public String getBiologicalSex()
+    public BiologicalSex getBiologicalSex()
     {
         return biologicalSex;
     }
@@ -222,7 +232,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @return the body composition of the user
      */
-    public String getBodyComposition()
+    public BodyComposition getBodyComposition()
     {
         return bodyComposition;
     }
@@ -272,7 +282,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @return the body mass index for the user
      */
-    public String getBodyMassIndex()
+    public double getBodyMassIndex()
     {
         return bodyMassIndex;
     }
@@ -312,7 +322,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @param biologicalSex the new biological sex of the user
      */
-    public void setBiologicalSex(String biologicalSex)
+    public void setBiologicalSex(BiologicalSex biologicalSex)
     {
         this.biologicalSex = biologicalSex;
     }
@@ -332,7 +342,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @param bodyComposition the new body composition of the user
      */
-    public void setBodyComposition(String bodyComposition)
+    public void setBodyComposition(BodyComposition bodyComposition)
     {
         this.bodyComposition = bodyComposition;
     }
@@ -384,7 +394,7 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @param bodyMassIndex the new body mass index for the user
      */
-    public void setBodyMassIndex(String bodyMassIndex)
+    public void setBodyMassIndex(double bodyMassIndex)
     {
         this.bodyMassIndex = bodyMassIndex;
     }
@@ -429,4 +439,13 @@ public class SaluhudUserFitnessData implements Serializable
         this.saluhudUser = saluhudUser;
     }
 
+    public HarrisBenedictBMRActivityFactor getActivityFactor()
+    {
+        return activityFactor;
+    }
+
+    public void setActivityFactor(HarrisBenedictBMRActivityFactor activityFactor)
+    {
+        this.activityFactor = activityFactor;
+    }
 }

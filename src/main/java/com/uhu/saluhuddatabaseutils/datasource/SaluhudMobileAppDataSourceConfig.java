@@ -72,7 +72,20 @@ public class SaluhudMobileAppDataSourceConfig
             InputStream stream = loader.getResourceAsStream("datasources/saluhud-mobile-app-datasource.properties");
             saluhudUserDataSourceProperties.load(stream);
             
-            String url = (String) saluhudUserDataSourceProperties.get("spring.datasource.url");
+            String databaseHost = System.getenv(DataSourceEnvironmentVariables.DATABASE_HOST.getEnvironmentVariableName());
+            String databasePort = System.getenv(DataSourceEnvironmentVariables.DATABASE_PORT.getEnvironmentVariableName());
+            
+            String url = null;
+            
+            if(databaseHost != null && !databaseHost.isBlank() && databasePort != null && !databasePort.isBlank())
+            {
+                url = "jdbc:postgresql://" + databaseHost + ":" + databasePort + "/saluhud";
+            }
+            else
+            {
+                url = (String) saluhudUserDataSourceProperties.get("spring.datasource.url");
+            }
+            
             String username = (String) saluhudUserDataSourceProperties.get("spring.datasource.username");
             String password = (String) saluhudUserDataSourceProperties.get("spring.datasource.password");
             String driver = (String) saluhudUserDataSourceProperties.get("spring.datasource.driver-class-name");

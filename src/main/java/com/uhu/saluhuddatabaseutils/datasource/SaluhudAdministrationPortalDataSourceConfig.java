@@ -96,7 +96,20 @@ public class SaluhudAdministrationPortalDataSourceConfig
             InputStream stream = loader.getResourceAsStream("datasources/saluhud-administration-portal-datasource.properties");
             saluhudAdminDataSourceProperties.load(stream);
             
-            String url = (String) saluhudAdminDataSourceProperties.get("spring.datasource.url");
+            String databaseHost = System.getenv(DataSourceEnvironmentVariables.DATABASE_HOST.getEnvironmentVariableName());
+            String databasePort = System.getenv(DataSourceEnvironmentVariables.DATABASE_PORT.getEnvironmentVariableName());
+            
+            String url = null;
+            
+            if(databaseHost != null && !databaseHost.isBlank() && databasePort != null && !databasePort.isBlank())
+            {
+                url = "jdbc:postgresql://" + databaseHost + ":" + databasePort + "/saluhud";
+            }
+            else
+            {
+                url = (String) saluhudAdminDataSourceProperties.get("spring.datasource.url");
+            }
+
             String username = (String) saluhudAdminDataSourceProperties.get("spring.datasource.username");
             String password = (String) saluhudAdminDataSourceProperties.get("spring.datasource.password");
             String driver = (String) saluhudAdminDataSourceProperties.get("spring.datasource.driver-class-name");

@@ -1,19 +1,12 @@
 package com.uhu.saluhuddatabaseutils.services.mobileapp.user;
 
-import com.uhu.saluhuddatabaseutils.models.user.BiologicalSex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUser;
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUserFitnessData;
 import com.uhu.saluhuddatabaseutils.security.PasswordEncryptionService;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
-import jakarta.validation.ValidationException;
-import jakarta.validation.Validator;
 import java.util.List;
-import java.util.Set;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import com.uhu.saluhuddatabaseutils.repositories.mobileapp.user.MobileAppSaluhudUserRepository;
 import java.util.Optional;

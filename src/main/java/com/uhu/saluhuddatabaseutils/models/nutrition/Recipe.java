@@ -63,10 +63,10 @@ public class Recipe implements Serializable
             inverseJoinColumns = @JoinColumn(name = "id_allergenic"))
     private Set<Allergenic> allergenics;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<RecipeIngredient> recipeIngredients;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RecipeElaborationStep> elaborationSteps;
 
     @Version

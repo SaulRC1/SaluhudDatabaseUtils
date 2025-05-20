@@ -8,6 +8,7 @@ import com.uhu.saluhuddatabaseutils.repositories.mobileapp.nutrition.MobileAppRe
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -140,5 +141,10 @@ public class MobileAppRecipeService
         }).toList();
 
         return filteredRecipes;
+    }
+    
+    public Optional<Recipe> findById(Long id)
+    {
+        return this.mobileAppRecipeRepository.findById(id);
     }
 }

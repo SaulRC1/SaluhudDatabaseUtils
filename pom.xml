@@ -41,6 +41,13 @@
             <scope>test</scope>
         </dependency>
         
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.18.0</version>
+            <scope>test</scope>
+        </dependency>
+        
         <!-- https://mvnrepository.com/artifact/io.hypersistence/hypersistence-utils-hibernate-63 -->
         <dependency>
             <groupId>io.hypersistence</groupId>

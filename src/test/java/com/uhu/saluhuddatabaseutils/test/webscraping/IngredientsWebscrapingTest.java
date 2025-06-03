@@ -1,19 +1,16 @@
 package com.uhu.saluhuddatabaseutils.test.webscraping;
 
-import com.uhu.saluhuddatabaseutils.models.nutrition.Ingredient;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseTest;
 import com.uhu.saluhuddatabaseutils.webscraping.IngredientsWebscraping;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author juald
  */
-public class IngredientsWebscrapingTest {
+public class IngredientsWebscrapingTest extends BaseTest {
 
     private IngredientsWebscraping ingredientsWebscraping;
 

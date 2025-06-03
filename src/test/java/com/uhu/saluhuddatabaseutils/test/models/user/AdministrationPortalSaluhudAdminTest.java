@@ -4,12 +4,14 @@ import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSo
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUser;
 import com.uhu.saluhuddatabaseutils.security.PasswordEncryptionService;
 import com.uhu.saluhuddatabaseutils.services.administrationportal.user.AdministrationPortalSaluhudUserService;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseAdministrationPortalJpaTest;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -20,15 +22,7 @@ import org.springframework.util.Assert;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-@DataJpaTest
-@TestPropertySource(locations = {"classpath:datasources/saluhud-administration-portal-datasource.properties"})
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ComponentScan(basePackages = {
-    "com.uhu.saluhuddatabaseutils.services.administrationportal.user",
-    "com.uhu.saluhuddatabaseutils.security"
-})
-@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
-public class AdministrationPortalSaluhudAdminTest {
+public class AdministrationPortalSaluhudAdminTest extends BaseAdministrationPortalJpaTest {
 
     @Autowired
     private AdministrationPortalSaluhudUserService saluhudUserService;

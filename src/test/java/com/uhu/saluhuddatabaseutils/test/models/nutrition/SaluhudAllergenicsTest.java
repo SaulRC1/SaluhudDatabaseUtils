@@ -1,17 +1,11 @@
 package com.uhu.saluhuddatabaseutils.test.models.nutrition;
 
-import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.models.nutrition.Allergenic;
 import com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition.AdministrationPortalAllergenicService;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseAdministrationPortalJpaTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -19,12 +13,7 @@ import org.springframework.util.Assert;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-@DataJpaTest
-@TestPropertySource(locations = { "classpath:datasources/saluhud-administration-portal-datasource.properties" })
-@AutoConfigureTestDatabase(replace = Replace.NONE)
-@ComponentScan(basePackages = "com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition")
-@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
-public class SaluhudAllergenicsTest {
+public class SaluhudAllergenicsTest extends BaseAdministrationPortalJpaTest {
 
     @Autowired
     private AdministrationPortalAllergenicService allergenicService;

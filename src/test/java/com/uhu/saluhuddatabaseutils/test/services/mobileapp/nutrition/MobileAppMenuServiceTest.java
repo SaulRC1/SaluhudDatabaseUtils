@@ -4,6 +4,7 @@ import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSo
 import com.uhu.saluhuddatabaseutils.datasource.SaluhudMobileAppDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.models.nutrition.Menu;
 import com.uhu.saluhuddatabaseutils.services.mobileapp.nutrition.MobileAppMenuService;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseTest;
 import com.uhu.saluhuddatabaseutils.test.configuration.GeneralTestConfiguration;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Saúl Rodríguez Naranjo
  */
-@SpringBootTest(classes =
+/*@SpringBootTest(classes =
 {
     SaluhudMobileAppDataSourceConfig.class,
     SaluhudAdministrationPortalDataSourceConfig.class,
@@ -33,8 +35,8 @@ import org.springframework.transaction.annotation.Transactional;
     "com.uhu.saluhuddatabaseutils.services.mobileapp.user",
     "com.uhu.saluhuddatabaseutils.security",
     "com.uhu.saluhuddatabaseutils.localization"
-})
-public class MobileAppMenuServiceTest 
+})*/
+public class MobileAppMenuServiceTest extends BaseTest
 {
     @Autowired
     private MobileAppMenuService mobileAppMenuService;

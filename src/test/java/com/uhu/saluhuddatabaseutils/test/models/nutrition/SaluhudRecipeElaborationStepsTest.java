@@ -1,6 +1,5 @@
 package com.uhu.saluhuddatabaseutils.test.models.nutrition;
 
-import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.models.nutrition.Allergenic;
 import com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition.AdministrationPortalRecipeService;
 import com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition.AdministrationPortalRecipeElaborationStepService;
@@ -10,6 +9,7 @@ import com.uhu.saluhuddatabaseutils.models.nutrition.RecipeElaborationStep;
 import com.uhu.saluhuddatabaseutils.models.nutrition.RecipeIngredient;
 import com.uhu.saluhuddatabaseutils.models.nutrition.RecipeIngredientId;
 import com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition.AdministrationPortalIngredientService;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseAdministrationPortalJpaTest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,12 +17,7 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -30,12 +25,7 @@ import org.springframework.util.Assert;
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-@DataJpaTest
-@TestPropertySource(locations = {"classpath:datasources/saluhud-administration-portal-datasource.properties"})
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ComponentScan(basePackages = "com.uhu.saluhuddatabaseutils.services.administrationportal.nutrition")
-@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
-public class SaluhudRecipeElaborationStepsTest
+public class SaluhudRecipeElaborationStepsTest extends BaseAdministrationPortalJpaTest
 {
 
     @Autowired

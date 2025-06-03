@@ -192,7 +192,7 @@ public class AdministrationPortalUserFitnessDataService
                 existingData.setRecommendedDailyWaterLiters(fitnessData.getRecommendedDailyWaterLiters());
                 existingData.setRecommendedSleepHours(fitnessData.getRecommendedSleepHours());
                 existingData.setRecommendedDailySteps(fitnessData.getRecommendedDailySteps());
-                existingData.setDailyKilocaloriesObjective(fitnessData.getDailyKilocaloriesObjective());
+                existingData.setMaintenanceDailyKilocalories(fitnessData.getMaintenanceDailyKilocalories());
                 existingData.setBodyMassIndex(fitnessData.getBodyMassIndex());
 
                 this.fitnessDataRepository.save(existingData);

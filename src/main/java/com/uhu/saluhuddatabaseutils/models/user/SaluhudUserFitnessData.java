@@ -13,7 +13,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 
 /**
@@ -71,9 +71,18 @@ public class SaluhudUserFitnessData implements Serializable
     @Range(min = 5000, max = 100000)
     private int recommendedDailySteps;
 
-    @Column(name = "daily_kilocalories_objective")
+    @Column(name = "maintenance_daily_kilocalories")
     @Range(min = 1500, max = 5000)
-    private int dailyKilocaloriesObjective;
+    private int maintenanceDailyKilocalories;
+    
+    @Column(name = "fitness_target_recommended_kilocalories", nullable = false)
+    @Range(min = 1500, max = 5000)
+    private int fitnessTargetRecommendedKilocalories;
+    
+    @Column(name = "fitness_target", nullable = false)
+    @Convert(converter = FitnessTargetEnumConverter.class)
+    @NotNull
+    private FitnessTargetEnum fitnessTarget;
 
     @Column(name = "body_mass_index")
     @DecimalMin("0")
@@ -131,7 +140,7 @@ public class SaluhudUserFitnessData implements Serializable
         this.recommendedDailyWaterLiters = recommendedDailyWaterLiters;
         this.recommendedSleepHours = recommendedSleepHours;
         this.recommendedDailySteps = recommendedDailySteps;
-        this.dailyKilocaloriesObjective = dailyKilocaloriesObjective;
+        this.maintenanceDailyKilocalories = dailyKilocaloriesObjective;
         this.bodyMassIndex = bodyMassIndex;
         this.saluhudUser = user;
         this.activityFactor = activityFactor;
@@ -173,7 +182,7 @@ public class SaluhudUserFitnessData implements Serializable
         this.recommendedDailyWaterLiters = recommendedDailyWaterLiters;
         this.recommendedSleepHours = recommendedSleepHours;
         this.recommendedDailySteps = recommendedDailySteps;
-        this.dailyKilocaloriesObjective = dailyKilocaloriesObjective;
+        this.maintenanceDailyKilocalories = dailyKilocaloriesObjective;
         this.bodyMassIndex = bodyMassIndex;
     }
 
@@ -272,9 +281,9 @@ public class SaluhudUserFitnessData implements Serializable
      *
      * @return the daily kilocalorie objective for the user
      */
-    public int getDailyKilocaloriesObjective()
+    public int getMaintenanceDailyKilocalories()
     {
-        return dailyKilocaloriesObjective;
+        return maintenanceDailyKilocalories;
     }
 
     /**
@@ -379,14 +388,14 @@ public class SaluhudUserFitnessData implements Serializable
     }
 
     /**
-     * Setter for the parameter "dailyKilocaloriesObjective"
+     * Setter for the parameter "maintenanceDailyKilocalories"
      *
-     * @param dailyKilocaloriesObjective the new daily kilocalorie objective for
+     * @param maintenanceDailyKilocalories the new daily kilocalorie objective for
      * the user
      */
-    public void setDailyKilocaloriesObjective(int dailyKilocaloriesObjective)
+    public void setMaintenanceDailyKilocalories(int maintenanceDailyKilocalories)
     {
-        this.dailyKilocaloriesObjective = dailyKilocaloriesObjective;
+        this.maintenanceDailyKilocalories = maintenanceDailyKilocalories;
     }
 
     /**
@@ -447,5 +456,25 @@ public class SaluhudUserFitnessData implements Serializable
     public void setActivityFactor(HarrisBenedictBMRActivityFactor activityFactor)
     {
         this.activityFactor = activityFactor;
+    }
+
+    public int getFitnessTargetRecommendedKilocalories()
+    {
+        return fitnessTargetRecommendedKilocalories;
+    }
+
+    public void setFitnessTargetRecommendedKilocalories(int fitnessTargetRecommendedKilocalories)
+    {
+        this.fitnessTargetRecommendedKilocalories = fitnessTargetRecommendedKilocalories;
+    }
+
+    public FitnessTargetEnum getFitnessTarget()
+    {
+        return fitnessTarget;
+    }
+
+    public void setFitnessTarget(FitnessTargetEnum fitnessTarget)
+    {
+        this.fitnessTarget = fitnessTarget;
     }
 }

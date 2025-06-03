@@ -2,6 +2,7 @@ package com.uhu.saluhuddatabaseutils.service.fitness;
 
 import com.uhu.saluhuddatabaseutils.models.user.BiologicalSex;
 import com.uhu.saluhuddatabaseutils.models.user.BodyComposition;
+import com.uhu.saluhuddatabaseutils.models.user.FitnessTargetEnum;
 import com.uhu.saluhuddatabaseutils.models.user.HarrisBenedictBMRActivityFactor;
 import com.uhu.saluhuddatabaseutils.models.user.SaluhudUserFitnessData;
 import java.math.BigDecimal;
@@ -41,11 +42,12 @@ public class SaluhudUserFitnessDataService
      * @param activityFactor The person's Harris-Benedict activity factor given 
      * its lifestyle.
      * @param bodyComposition The person's body composition.
+     * @param fitnessTarget The person's fitness target.
      * @return {@link SaluhudUserFitnessData} instance with the given data.
      */
     public SaluhudUserFitnessData buildSaluhudUserFitnessData(float weight, float height, 
             int age, BiologicalSex biologicalSex, HarrisBenedictBMRActivityFactor activityFactor, 
-            BodyComposition bodyComposition)
+            BodyComposition bodyComposition, FitnessTargetEnum fitnessTarget)
     {
         SaluhudUserFitnessData fitnessData = new SaluhudUserFitnessData();
         fitnessData.setAge(age);
@@ -54,10 +56,13 @@ public class SaluhudUserFitnessDataService
         fitnessData.setWeight(weight);
         fitnessData.setBodyComposition(bodyComposition);
         fitnessData.setActivityFactor(activityFactor);
+        fitnessData.setFitnessTarget(fitnessTarget);
         
-        fitnessData.setDailyKilocaloriesObjective(
+        fitnessData.setMaintenanceDailyKilocalories(
                 harrisBenedictBMRCalculator.calculateDailyEnergyExpenditure(weight, 
                         height, age, biologicalSex, activityFactor));
+        
+        fitnessData.setFitnessTargetRecommendedKilocalories(fitnessData.getMaintenanceDailyKilocalories() + 300);
         
         fitnessData.setRecommendedDailySteps(dailyStepsCalculator.calculateDailySteps(activityFactor));
         fitnessData.setRecommendedDailyWaterLiters((int) Math.round(waterIntakeCalculator.calculateDailyWaterIntake(weight, activityFactor)));

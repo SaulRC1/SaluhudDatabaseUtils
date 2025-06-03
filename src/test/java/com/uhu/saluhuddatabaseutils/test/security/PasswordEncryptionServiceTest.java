@@ -2,6 +2,7 @@ package com.uhu.saluhuddatabaseutils.test.security;
 
 import com.uhu.saluhuddatabaseutils.datasource.SaluhudAdministrationPortalDataSourceConfig;
 import com.uhu.saluhuddatabaseutils.security.PasswordEncryptionService;
+import com.uhu.saluhuddatabaseutils.test.configuration.BaseTest;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
@@ -16,12 +18,7 @@ import org.springframework.test.context.TestPropertySource;
  *
  * @author juald
  */
-@DataJpaTest
-@TestPropertySource(locations = { "classpath:datasources/saluhud-administration-portal-datasource.properties" })
-@AutoConfigureTestDatabase(replace = Replace.NONE)
-@ComponentScan(basePackages = "com.uhu.saluhuddatabaseutils.security")
-@ContextConfiguration(classes = SaluhudAdministrationPortalDataSourceConfig.class)
-public class PasswordEncryptionServiceTest
+public class PasswordEncryptionServiceTest extends BaseTest
 {
     @Autowired
     private PasswordEncryptionService passwordEncryptionService;

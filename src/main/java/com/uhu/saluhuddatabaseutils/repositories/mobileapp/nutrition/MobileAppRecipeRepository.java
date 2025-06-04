@@ -43,5 +43,9 @@ public interface MobileAppRecipeRepository extends JpaRepository<Recipe, Long>
     Page<Recipe> findAllWithFilters(@Param("minKcal") int minimumKilocalories, 
             @Param("maxKcal") int maximumKilocalories, Pageable pageable);
 
+    @Query("SELECT r FROM Recipe r ORDER BY r.kilocalories DESC")
+    Page<Recipe> findMostKaloricRecipes(Pageable pageable);
     
+    @Query("SELECT r FROM Recipe r ORDER BY r.kilocalories ASC")
+    Page<Recipe> findLessKaloricRecipes(Pageable pageable);
 }

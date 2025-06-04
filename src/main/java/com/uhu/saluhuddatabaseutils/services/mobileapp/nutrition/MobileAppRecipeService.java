@@ -147,4 +147,32 @@ public class MobileAppRecipeService
     {
         return this.mobileAppRecipeRepository.findById(id);
     }
+    
+    public List<Recipe> findMostKaloricRecipesPaginated(int page, int pageSize)
+    {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Recipe> recipesPaginated = this.mobileAppRecipeRepository.findMostKaloricRecipes(pageable);
+
+        if(recipesPaginated == null)
+        {
+            return Collections.emptyList();
+        }
+
+        return recipesPaginated.toList();
+    }
+    
+    public List<Recipe> findLessKaloricRecipesPaginated(int page, int pageSize)
+    {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Recipe> recipesPaginated = this.mobileAppRecipeRepository.findLessKaloricRecipes(pageable);
+
+        if(recipesPaginated == null)
+        {
+            return Collections.emptyList();
+        }
+
+        return recipesPaginated.toList();
+    }
 }

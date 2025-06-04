@@ -180,4 +180,19 @@ public class MobileAppMenuService
         
         this.mobileAppMenuRepository.saveAll(userMenus);
     }
+    
+    public Optional<Menu> findFavouriteMenuForUser(String username)
+    {
+        List<Menu> menuList = this.findByUsername(username);
+        
+        for (Menu menu : menuList)
+        {
+            if(menu.isFavourite())
+            {
+                return Optional.of(menu);
+            }
+        }
+        
+        return Optional.empty();
+    }
 }

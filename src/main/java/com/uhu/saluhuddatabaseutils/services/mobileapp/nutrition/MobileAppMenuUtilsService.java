@@ -3,9 +3,21 @@ package com.uhu.saluhuddatabaseutils.services.mobileapp.nutrition;
 import com.uhu.saluhuddatabaseutils.models.nutrition.Menu;
 import com.uhu.saluhuddatabaseutils.models.nutrition.MenuDay;
 import com.uhu.saluhuddatabaseutils.models.nutrition.MenuDayRecipe;
+import com.uhu.saluhuddatabaseutils.models.nutrition.Recipe;
 import com.uhu.saluhuddatabaseutils.models.nutrition.WeekDayEnum;
+import java.time.DayOfWeek;
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.DayOfWeek.SATURDAY;
+import static java.time.DayOfWeek.SUNDAY;
+import static java.time.DayOfWeek.THURSDAY;
+import static java.time.DayOfWeek.TUESDAY;
+import static java.time.DayOfWeek.WEDNESDAY;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 /**
@@ -72,5 +84,32 @@ public class MobileAppMenuUtilsService
         }
         
         return true;
+    }
+    
+    public Optional<MenuDayRecipe> getUpcomingRecipeForMenu(Menu menu)
+    {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        
+        DayOfWeek currentDayOfWeek = currentDateTime.getDayOfWeek();
+        
+        final WeekDayEnum currentWeekDay = WeekDayEnum.fromDayOfWeek(currentDayOfWeek);
+        
+        LocalTime currentTime = currentDateTime.toLocalTime();
+        
+        Optional<MenuDay> menuDayOptional = menu.getMenuDays().stream().filter(day -> day.getWeekDay() == currentWeekDay).findFirst();
+        
+        if(menuDayOptional.isEmpty())
+        {
+            return Optional.empty();
+        }
+        
+        MenuDay menuDay = menuDayOptional.get();
+        
+        Optional<MenuDayRecipe> upcomingRecipeOptional 
+                = menuDay.getMenuDayRecipes().stream().filter(menuDayRecipe -> 
+                        menuDayRecipe.getStartTime().isBefore(currentTime) 
+                                || menuDayRecipe.getEndTime().isAfter(currentTime)).findFirst();
+        
+        return upcomingRecipeOptional;
     }
 }

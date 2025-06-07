@@ -62,7 +62,18 @@ public class SaluhudUserFitnessDataService
                 harrisBenedictBMRCalculator.calculateDailyEnergyExpenditure(weight, 
                         height, age, biologicalSex, activityFactor));
         
-        fitnessData.setFitnessTargetRecommendedKilocalories(fitnessData.getMaintenanceDailyKilocalories() + 300);
+        switch(fitnessTarget)
+        {
+            case WEIGHT_GAIN:
+                fitnessData.setFitnessTargetRecommendedKilocalories(fitnessData.getMaintenanceDailyKilocalories() + 300);
+                break;
+            case MAINTENANCE:
+                fitnessData.setFitnessTargetRecommendedKilocalories(fitnessData.getMaintenanceDailyKilocalories());
+                break;
+            case WEIGHT_LOSS:
+                fitnessData.setFitnessTargetRecommendedKilocalories(fitnessData.getMaintenanceDailyKilocalories() - 300);
+                break;
+        }
         
         fitnessData.setRecommendedDailySteps(dailyStepsCalculator.calculateDailySteps(activityFactor));
         fitnessData.setRecommendedDailyWaterLiters((int) Math.round(waterIntakeCalculator.calculateDailyWaterIntake(weight, activityFactor)));

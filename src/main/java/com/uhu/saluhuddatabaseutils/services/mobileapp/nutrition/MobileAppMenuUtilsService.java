@@ -97,6 +97,8 @@ public class MobileAppMenuUtilsService
         
         MenuDay menuDay = menuDayOptional.get();
         
+        menuDay.getMenuDayRecipes().sort(Comparator.comparing(MenuDayRecipe::getStartTime));
+        
         Optional<MenuDayRecipe> upcomingRecipeOptional
                 = menuDay.getMenuDayRecipes().stream().filter(menuDayRecipe ->
                 {

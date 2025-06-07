@@ -97,10 +97,19 @@ public class MobileAppMenuUtilsService
         
         MenuDay menuDay = menuDayOptional.get();
         
-        Optional<MenuDayRecipe> upcomingRecipeOptional 
-                = menuDay.getMenuDayRecipes().stream().filter(menuDayRecipe -> 
-                        menuDayRecipe.getStartTime().isBefore(currentTime) 
-                                || menuDayRecipe.getEndTime().isAfter(currentTime)).findFirst();
+        Optional<MenuDayRecipe> upcomingRecipeOptional
+                = menuDay.getMenuDayRecipes().stream().filter(menuDayRecipe ->
+                {
+                    boolean isAfterOrEqualsStartTime
+                            = (menuDayRecipe.getStartTime().isBefore(currentTime)
+                            || menuDayRecipe.getStartTime().equals(currentTime));
+
+                    boolean isBeforeEndTime = menuDayRecipe.getEndTime().isAfter(currentTime);
+                    
+                    boolean isBeforeStartTime = menuDayRecipe.getStartTime().isAfter(currentTime);
+                    
+                    return isBeforeStartTime || (isAfterOrEqualsStartTime && isBeforeEndTime);
+                }).findFirst();
         
         return upcomingRecipeOptional;
     }

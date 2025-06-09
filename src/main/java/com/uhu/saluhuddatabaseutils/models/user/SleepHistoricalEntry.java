@@ -3,6 +3,7 @@ package com.uhu.saluhuddatabaseutils.models.user;
 import java.io.Serializable;
 import java.time.LocalDate;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -46,7 +47,7 @@ public class SleepHistoricalEntry implements Serializable
     @Range(min = 0, max = 59)
     private double minutesSlept;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = HistoricalEvaluationConverter.class)
     @Column(name = "sleep_evaluation", nullable = false)
     @NotNull
     private HistoricalEvaluation sleepEvaluation;
@@ -145,16 +146,6 @@ public class SleepHistoricalEntry implements Serializable
      * @param hoursSlept the number of hours slept
      */
     public void setHoursSlept(int hoursSlept) {
-        this.hoursSlept = hoursSlept;
-    }
-
-    /**
-     * Setter for the parameter "hoursSlept"
-     *
-     * @param hoursSlept the new amount of hours slept by the user
-     */
-    public void setDoneSteps(int hoursSlept)
-    {
         this.hoursSlept = hoursSlept;
     }
 

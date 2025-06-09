@@ -33,7 +33,8 @@ import org.springframework.context.annotation.ComponentScan;
     "com.uhu.saluhuddatabaseutils.services.administrationportal.security",
     "com.uhu.saluhuddatabaseutils.localization",
     "com.uhu.saluhuddatabaseutils.service",
-    "com.uhu.saluhuddatabaseutils.security"
+    "com.uhu.saluhuddatabaseutils.security",
+    "com.uhu.saluhuddatabaseutils.service.historical"
 })
 public abstract class BaseTest {
 

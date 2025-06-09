@@ -52,7 +52,8 @@ properties =
     "com.uhu.saluhuddatabaseutils.security",
     "com.uhu.saluhuddatabaseutils.services.mobileapp.user",
     "com.uhu.saluhuddatabaseutils.repositories.administrationportal.user",
-    "com.uhu.saluhuddatabaseutils.services.administrationportal.user"
+    "com.uhu.saluhuddatabaseutils.services.administrationportal.user",
+    "com.uhu.saluhuddatabaseutils.service.historical"
 })
 /*@ContextConfiguration(classes = {
     SaluhudMobileAppDataSourceConfig.class,

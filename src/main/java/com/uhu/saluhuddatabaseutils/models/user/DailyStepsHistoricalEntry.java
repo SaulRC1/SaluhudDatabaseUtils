@@ -3,6 +3,7 @@ package com.uhu.saluhuddatabaseutils.models.user;
 import java.io.Serializable;
 import java.time.LocalDate;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -44,7 +45,7 @@ public class DailyStepsHistoricalEntry implements Serializable
     @NotNull
     private double kiloCaloriesBurned;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = HistoricalEvaluationConverter.class)
     @Column(name = "steps_evaluation", nullable = false)
     @NotNull
     private HistoricalEvaluation stepEvaluation;

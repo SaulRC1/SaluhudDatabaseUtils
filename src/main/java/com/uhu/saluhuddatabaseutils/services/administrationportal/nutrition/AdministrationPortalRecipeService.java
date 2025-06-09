@@ -358,4 +358,9 @@ public class AdministrationPortalRecipeService
         Pageable pageable = PageRequest.of(page, pageSize);
         return recipeRepository.findByAllergenic(allergenicId, pageable);
     }
+
+    public Optional<Recipe> getRecipeById(Long id)
+    {
+        return recipeRepository.findById(id);
+    }
 }

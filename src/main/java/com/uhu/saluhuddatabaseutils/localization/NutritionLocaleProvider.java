@@ -10,10 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +27,7 @@ import org.springframework.stereotype.Component;
  */
 public class NutritionLocaleProvider
 {
+
     private static final Logger logger = Logger.getLogger(NutritionLocaleProvider.class.getName());
 
     private final List<Locale> supportedLocales;
@@ -57,7 +61,7 @@ public class NutritionLocaleProvider
                 recipesTranslationsBundlePath
             });
 
-            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipesTranslationsBundlePath), 
+            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipesTranslationsBundlePath),
                     StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader))
             {
 
@@ -81,7 +85,7 @@ public class NutritionLocaleProvider
                 ingredientsTranslationsBundlePath
             });
 
-            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(ingredientsTranslationsBundlePath), 
+            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(ingredientsTranslationsBundlePath),
                     StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader))
             {
 
@@ -105,7 +109,7 @@ public class NutritionLocaleProvider
                 recipeElaborationStepsTranslationsBundlePath
             });
 
-            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipeElaborationStepsTranslationsBundlePath), 
+            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipeElaborationStepsTranslationsBundlePath),
                     StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader))
             {
 
@@ -129,8 +133,7 @@ public class NutritionLocaleProvider
                 recipeIngredientTranslationsBundlePath
             });
 
-            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipeIngredientTranslationsBundlePath), StandardCharsets.UTF_8); 
-                    BufferedReader reader = new BufferedReader(inputStreamReader))
+            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(recipeIngredientTranslationsBundlePath), StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader))
             {
 
                 Properties recipeIngredientTranslationsBundle = new Properties();
@@ -143,7 +146,7 @@ public class NutritionLocaleProvider
             {
                 throw e;
             }
-            
+
             String allergenicTranslationsBundlePath = this.translationsRootFolder + File.separator
                     + ALLERGENIC_TRANSLATION_BUNDLE_PREFIX + "_" + supportedLocale.toLanguageTag() + ".properties";
 
@@ -152,9 +155,8 @@ public class NutritionLocaleProvider
                 supportedLocale.toLanguageTag(),
                 allergenicTranslationsBundlePath
             });
-            
-            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(allergenicTranslationsBundlePath), StandardCharsets.UTF_8); 
-                    BufferedReader reader = new BufferedReader(inputStreamReader))
+
+            try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(allergenicTranslationsBundlePath), StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader))
             {
 
                 Properties allergenicTranslationsBundle = new Properties();
@@ -218,4 +220,31 @@ public class NutritionLocaleProvider
     {
         return translationsRootFolder;
     }
+
+    public Optional<Long> getRecipeIdByTranslatedName(String translatedName, Locale locale)
+    {
+        Properties translationBundle = translationBundles.get(RECIPES_TRANSLATION_BUNDLE_PREFIX + "_" + locale.toLanguageTag());
+
+        if (translationBundle == null)
+        {
+            return Optional.empty();
+        }
+
+        for (String key : translationBundle.stringPropertyNames())
+        {
+            String value = translationBundle.getProperty(key);
+            if (value.equalsIgnoreCase(translatedName))
+            {
+                // Esperamos clave como: recipe.name.1 → extraer el ID
+                Matcher matcher = Pattern.compile("recipe\\.name\\.(\\d+)").matcher(key);
+                if (matcher.matches())
+                {
+                    return Optional.of(Long.valueOf(matcher.group(1)));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
 }

@@ -61,4 +61,10 @@ public class MobileAppSleepHistoricalService
         
         return this.mobileAppSleepHistoricalEntryRepository.save(entry);
     }
+    
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
+    public SleepHistorical save(SleepHistorical historical)
+    {
+        return this.mobileAppSleepHistoricalRepository.save(historical);
+    }
 }

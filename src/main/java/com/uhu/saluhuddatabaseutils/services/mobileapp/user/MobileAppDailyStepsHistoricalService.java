@@ -62,4 +62,10 @@ public class MobileAppDailyStepsHistoricalService
         
         return this.mobileAppDailyStepsHistoricalEntryRepository.save(entry);
     }
+    
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
+    public DailyStepsHistorical save(DailyStepsHistorical historical)
+    {
+        return this.mobileAppDailyStepsHistoricalRepository.save(historical);
+    }
 }

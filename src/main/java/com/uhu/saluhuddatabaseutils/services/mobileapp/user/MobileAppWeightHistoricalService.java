@@ -62,4 +62,10 @@ public class MobileAppWeightHistoricalService
         
         return this.mobileAppWeightHistoricalEntryRepository.save(entry);
     }
+    
+    @Transactional(transactionManager = "saluhudMobileAppTransactionManager")
+    public WeightHistorical save(WeightHistorical historical)
+    {
+        return this.mobileAppWeightHistoricalRepository.save(historical);
+    }
 }
